@@ -67,3 +67,11 @@ meili_db   = "~/.cache/stack-composer/meili"
 hybrid_k_dense  = 128
 hybrid_k_sparse = 256
 ```
+
+## Roadmap & Enhancements
+
+- **GraphRAG Integration:** Planned support for property-graph/knowledge-graph retrieval backends (see recent research: Hierarchical Lexical Graphs, GRAG, GFM-RAG).
+- **External Vector DBs:** Configurable connectors for managed Qdrant, Pinecone, and other cloud vector DBs.
+- **Modular Retrieval:** Users will be able to mix graph, vector, and keyword sources via configuration.
+
+See [architecture-questions.md](../Architecture%20&%20Component%20Guides/architecture-questions.md) for open questions and strategic direction.

@@ -13,3 +13,12 @@ Runs user-provided WebAssembly bundles in a Wasmtime sandbox.
 | `plugin.emit(msg)`    | Send UI notification   |
 
 Plugins live in `~/Library/Application Support/Stack Composer/plugins/`.
+
+## Roadmap & Enhancements
+
+- **Plugin Registry:** Planned OCI-based registry for plugin discovery, versioning, and provenance.
+- **Plugin Discovery UI:** In-app UI for listing, searching, and managing plugins.
+- **Security Templates & SDKs:** WASI Component Model-based SDKs and templates for secure plugin authoring.
+- **Sample Plugins:** To be provided with formal docs, CI, and credential-handling best practices.
+
+See [architecture-questions.md](../Architecture%20&%20Component%20Guides/architecture-questions.md) for open questions and strategic direction.

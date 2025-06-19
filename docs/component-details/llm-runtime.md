@@ -35,3 +35,11 @@ Config
 [llm]
 default_model = "phi-3:4bit"
 timeout_secs = 60
+
+## Roadmap & Enhancements
+
+- **Runtime Adapters:** Planned support for vLLM, Hugging Face TGI, and LM Studio as alternative LLM runtimes.
+- **Model Management UI:** UI for listing, downloading, switching, and updating models, inspired by Ollama and LM Studio.
+- **Model Registry:** Metadata and versioning for reproducibility and rolling updates.
+
+See [architecture-questions.md](../Architecture%20&%20Component%20Guides/architecture-questions.md) for open questions and strategic direction.

@@ -14,3 +14,11 @@ Parses briefs, chunks text, embeds vectors, and stores docs.
 ```rust
 enum IngestionMsg { AddFile(PathBuf), Shutdown }
 ```
+
+## Roadmap & Enhancements
+
+- **Distributed Ingestion:** Planned support for distributed/clustered ingestion in multi-node deployments.
+- **API Exposure:** REST/gRPC endpoints for remote or automated ingestion workflows.
+- **Format Extensibility:** Plugin-based support for new document types and custom chunking strategies.
+
+See [architecture-questions.md](../Architecture%20&%20Component%20Guides/architecture-questions.md) for open questions and strategic direction.

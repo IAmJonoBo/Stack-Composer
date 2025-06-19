@@ -41,3 +41,11 @@ Extension Hooks
 Implementation Guide
 
 Source files live in crates/orchestrator/. Unit tests mock an in-memory channel layer and use tokio::time::pause to test timers deterministically.
+
+## Roadmap & Enhancements
+
+- **Distributed Orchestration:** Planned support for multi-node orchestration and agent supervision (Kubernetes, sharding, etc.).
+- **API Surface Expansion:** REST/gRPC endpoints for remote orchestration and automation.
+- **Extensibility:** Dynamic agent/plugin registration and runtime configuration reloads.
+
+See [architecture-questions.md](../Architecture%20&%20Component%20Guides/architecture-questions.md) for open questions and strategic direction.

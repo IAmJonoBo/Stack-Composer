@@ -1,0 +1,12 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Remove AppleDouble files (._*)
+find . -type f -name '._*' -exec rm -f {} +
+# Remove .DS_Store files
+find . -type f -name '.DS_Store' -exec rm -f {} +
+# Remove macOS system directories
+find . -type d \( -name '.Spotlight-V100' -o -name '.Trashes' -o -name '.fseventsd' -o -name '.AppleDouble' -o -name '.TemporaryItems' -o -name '.DocumentRevisions-V100' \) -prune -exec rm -rf {} +
+
+# Run Trunk checks (optional, uncomment if desired)
+# pnpm trunk check

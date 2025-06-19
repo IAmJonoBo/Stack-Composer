@@ -1,5 +1,3 @@
-
-
 # Stack Composer
 
 *Design once, build anywhere – an offline‑first AI assistant that generates a full, production‑ready technology stack from any project brief.*
@@ -111,10 +109,10 @@ flowchart TD
 
 ## 🗺️  Roadmap
 
-- **v0.5** – MVP (GUI + CLI, RAG, report export)  
-- **v1.0** – Ontology auto‑update, plugin SDK, signed installers  
-- **v1.1** – Homebrew & Scoop channels, telemetry dashboard  
-- **v2.0** – Mobile (Tauri‑Mobile) & PWA clients, team collaboration
+* **v0.5** – MVP (GUI + CLI, RAG, report export)  
+* **v1.0** – Ontology auto‑update, plugin SDK, signed installers  
+* **v1.1** – Homebrew & Scoop channels, telemetry dashboard  
+* **v2.0** – Mobile (Tauri‑Mobile) & PWA clients, team collaboration
 
 ---
 
@@ -122,6 +120,19 @@ flowchart TD
 
 We welcome PRs!  See [`CONTRIBUTING.md`](CONTRIBUTING.md) to get started.  
 Please abide by our [Code of Conduct](CODE_OF_CONDUCT.md).
+
+---
+
+## 🧹  Git Pre-commit Hook
+
+To keep your repo clean of macOS dotfiles (AppleDouble, .DS_Store, etc.), a pre-commit hook script is provided:
+
+```bash
+cp scripts/pre-commit .git/hooks/pre-commit
+chmod +x .git/hooks/pre-commit
+```
+
+This will automatically delete unnecessary files before every commit. Re-run after cloning or if hooks are reset.
 
 ---
 

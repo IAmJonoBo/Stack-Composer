@@ -1,0 +1,11 @@
+#!/bin/bash
+# Pre-commit hook to remove AppleDouble and unnecessary dotfiles
+
+# Remove AppleDouble files (._*)
+find . -type f -name '._*' -exec rm -f {} +
+# Remove .DS_Store files
+find . -type f -name '.DS_Store' -exec rm -f {} +
+# Remove .Spotlight-V100, .Trashes, .fseventsd, .VolumeIcon.icns, .TemporaryItems, .DocumentRevisions-V100, .AppleDouble directories
+find . -type d \( -name '.Spotlight-V100' -o -name '.Trashes' -o -name '.fseventsd' -o -name '.AppleDouble' -o -name '.TemporaryItems' -o -name '.DocumentRevisions-V100' \) -prune -exec rm -rf {} +
+
+exit 0

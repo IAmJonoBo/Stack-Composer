@@ -54,8 +54,9 @@ For a full breakdown of the developer toolchain and how to get a reproducible, f
 
 ## 4  Boot-up checklist
 
-1. Install tool-chain
-   - Rust ≥ 1.79, Node ≥ 20, pnpm, Tauri CLI.
+1. Install all required tools (see [Toolchain & DX Pipeline](docs/toolchain.md) for install commands):
+   - Rust (rustup), Node.js (≥ v20), pnpm, just, tauri CLI, biome, vale, mdbook, cargo-nextest, stryker, cargo-audit, cargo-deny, cargo-udeps, wasmtime, trivy, nix (restart terminal after install), Qdrant (via Docker), Meilisearch, Renovate, gh (GitHub CLI)
+   - Qdrant is run via Docker for local development. Mutagen is a Rust library, not a CLI tool.
 
 2. Clone repo & run CI
 

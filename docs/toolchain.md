@@ -1,6 +1,31 @@
 # Toolchain & Developer Experience Pipeline
 
-Stack Composer already boasts a lean Rust + Tauri core, but we can push the developer-experience envelope by wiring a pipeline-wide toolchain that is opinionated, reproducible, and almost completely free/open-source. Below is an end-to-end proposal; each phase lists the “baseline” tool you have today and the upgrade(s) that add measurably better DX, with primary sources for every claim.
+## Tool Installation & Setup
+
+All required tools for Stack Composer are open source and can be installed on macOS using Homebrew, npm, and Docker:
+
+- **Rust**: [rustup.rs](https://rustup.rs/) (for cargo, clippy, etc.)
+- **Node.js**: [nodejs.org](https://nodejs.org/) (≥ v20)
+- **pnpm**: `brew install pnpm`
+- **just**: `brew install just`
+- **tauri CLI**: `npm install -g @tauri-apps/cli`
+- **biome**: `brew install biome`
+- **vale**: `brew install vale`
+- **mdbook**: `brew install mdbook`
+- **cargo-nextest**: `cargo install cargo-nextest`
+- **stryker**: `npm install -g stryker-cli`
+- **cargo-audit**: `cargo install cargo-audit`
+- **cargo-deny**: `cargo install cargo-deny`
+- **cargo-udeps**: `cargo install cargo-udeps`
+- **wasmtime**: `brew install wasmtime`
+- **trivy**: [install script](https://aquasecurity.github.io/trivy/v0.63.0/installation/)
+- **nix**: [install script](https://nixos.org/download.html) (restart terminal after install)
+- **Qdrant**: `docker run -d --name qdrant -p 6333:6333 qdrant/qdrant` (requires Docker)
+- **Meilisearch**: [install script](https://www.meilisearch.com/docs/learn/getting_started/installation)
+- **Renovate**: `npm install -g renovate`
+- **gh (GitHub CLI)**: `brew install gh`
+
+> **Note:** `mutagen` is a Rust library, not a CLI tool. Qdrant is run via Docker for local development.
 
 ---
 

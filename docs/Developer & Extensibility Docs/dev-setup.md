@@ -46,6 +46,24 @@ Stack Composer is designed for a reproducible, fast, and modern developer experi
 - VS Code is recommended (settings enable Copilot Chat, Vale lint-on-save, and workspace tasks)
 - Codespaces and Fleet are supported for cloud and JetBrains workflows
 
+## Python & Conda Workflows
+
+Stack Composer supports both the fully managed Dev Container workflow (recommended) and local Python/conda environments for maximum flexibility:
+
+- **Dev Container (Recommended):**
+
+  - Provides a reproducible, pre-configured environment with Python (latest) and all required tools.
+  - No changes are needed to your local Python or conda setup.
+  - Ideal for contributors who want a zero-setup experience or need to match CI exactly.
+
+- **Local Python/Conda:**
+  - You may use your own Python or conda environments outside the devcontainer.
+  - The `.conda` directory is used for local conda environments and is ignored by git.
+  - The devcontainer does not modify or require `.conda`.
+  - This allows advanced users to manage dependencies or use custom Python setups as needed.
+
+**Note:** Both workflows can coexist. The devcontainer will not interfere with your local `.conda` directory or Python environments. Choose the workflow that best fits your needs.
+
 ## More
 
 - For details on the full toolchain, see [Toolchain & DX Pipeline](toolchain.md)

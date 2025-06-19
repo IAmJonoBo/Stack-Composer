@@ -2,10 +2,21 @@
   "name": "stack-composer",
   "version": "0.1.0",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "lint": "biome check . && markdownlint docs/**/*.md && vale docs/",
+    "test": "vitest run",
+    "format": "biome format . && prettier --write .",
+    "prepare": "husky install"
+  },
   "devDependencies": {
     "@stryker-mutator/core": "^9.0.1",
-    "husky": "^8.0.3"
+    "husky": "^8.0.3",
+    "vitest": "latest",
+    "biome": "latest",
+    "markdownlint-cli": "latest",
+    "vale": "latest",
+    "prettier": "latest",
+    "trunk": "latest"
   },
   "dependencies": {
     "latest": "^0.2.0"

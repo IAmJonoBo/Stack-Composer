@@ -10,3 +10,4 @@ find . -type d \( -name '.Spotlight-V100' -o -name '.Trashes' -o -name '.fsevent
 
 # Run Trunk checks (optional, uncomment if desired)
 # pnpm trunk check
+pnpm lint && pnpm format && pnpm test

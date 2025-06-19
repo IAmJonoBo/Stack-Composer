@@ -7,11 +7,47 @@ This document describes the release process for Stack Composer.
 - Ensure your environment is set up as described in [dev-setup.md](../Developer%20&%20Extensibility%20Docs/dev-setup.md) and [toolchain.md](toolchain.md).
 - All releases must pass automated linting and tests (see [CONTRIBUTING.md](../CONTRIBUTING.md)).
 
-## Steps
+---
 
-- Follow the reproducible workflow outlined in the [README](../../README.md) and [dev-setup.md](../Developer%20&%20Extensibility%20Docs/dev-setup.md).
-- Use the provided automation scripts and CI/CD pipelines (to be documented).
-- Update the changelog and ensure all code is signed if required.
+## CI Build Matrix
+
+- Supported platforms: Rust ≥1.70, Ubuntu 22.04, macOS 13+, Windows 11 (WSL2 supported)
+- Matrix includes: Rust stable/nightly, Docker build, UI test suite
+- Example (GitHub Actions):
+
+```yaml
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        rust: [stable, nightly]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ matrix.rust }}
+      - run: cargo build --release
+```
+
+---
+
+## Release Automation
+
+- Version bump and changelog generation via semantic-release or PR labels
+- SBOM (`bom.json`) updated in CI
+- Artifacts signed with GPG in CI
+- Publish to GitHub Releases, DockerHub, crates.io as appropriate
+
+---
+
+## Rollback & Hotfix Workflow
+
+- To rollback: redeploy previous Git tag or release artifact
+- Hotfix: branch from last tag, patch, CI run, sign, redeploy, update changelog
+
+---
 
 ## Troubleshooting
 

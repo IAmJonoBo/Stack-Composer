@@ -1,6 +1,21 @@
 {
-  "sonarlint.connectedMode.project": {
-    "connectionId": "",
-    "projectKey": ""
-  }
+  // Formatting and linting
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always"
+  },
+  "biome.enable": true,
+  "biome.lint.enable": true,
+  "biome.format.enable": true,
+  "vale.enabled": true,
+  "vale.configPath": ".vale.ini",
+  "markdownlint": {
+    "config": ".markdownlint.json"
+  },
+  "prettier.configPath": ".prettierrc",
+  // Vitest integration
+  "vitest.commandLine": "pnpm vitest",
+  "vitest.enable": true,
+  // Recommended extensions
+  "extensions.ignoreRecommendations": false
 }

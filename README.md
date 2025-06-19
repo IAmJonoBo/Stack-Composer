@@ -1,142 +1,117 @@
-# Stack Composer
+# Stack Composer: End-to-End Project Brief
 
-_Design once, build anywhere – an offline‑first AI assistant that generates a full, production‑ready technology stack from any project brief._
-
-[![License: Apache‑2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
-[![Build](https://github.com/your‑org/stack‑composer/actions/workflows/ci.yml/badge.svg)](https://github.com/your‑org/stack‑composer/actions)
-[![Release](https://img.shields.io/github/v/release/your‑org/stack‑composer.svg)](https://github.com/your‑org/stack‑composer/releases)
+Below is a single, end-to-end project brief that gives any engineer (or team) everything they need to bootstrap → ship → evolve Stack Composer. It merges the architectural vision we have iterated on with industry-proven practices and concrete commands, and it references the most relevant primary sources so every claim is traceable.
 
 ---
 
-## ✨ Key Features
+## Executive snapshot
 
-| Capability                   | Summary                                                                                 |
-| ---------------------------- | --------------------------------------------------------------------------------------- |
-| **Local LLM Reasoning**      | Bundled 4‑bit `phi‑3` model via Ollama keeps your code & briefs private.                |
-| **Hybrid Retrieval (RAG)**   | Qdrant vectors + Meilisearch BM25 for lightning‑fast, licence‑aware evidence.           |
-| **Gap‑Analysis Agent**       | Automatically asks clarifying questions to close missing requirements.                  |
-| **Symbolic Planner**         | Optional Fast Downward / HTN module sequences multi‑stage build & deploy flows.         |
-| **WASI Plugin Sandbox**      | Extend behaviour safely with WebAssembly plugins, centrally curated & signed.           |
-| **Weekly Ontology Refresh**  | Scheduled crawler pulls new release notes, CVEs, and SPDX data — 100 % offline‑capable. |
-| **Cross‑Platform GUI & CLI** | Tauri shell + React UI; Rust CLI for pipelines and headless CI.                         |
+Stack Composer is a desktop-first, Rust + Tauri application that ingests a project brief (PDF, MD, DOCX, TXT), asks clarifying questions, and outputs a fully-reasoned technology stack, optional PDDL build-plan, and starter-repo scaffold.
+It stays local-first (Ollama-hosted 4-bit phi-3 model) yet can live-search the Web to keep recommendations current.
+Hybrid retrieval (Qdrant vectors + Meilisearch BM25) underpins RAG; Fast Downward/OPTIC add symbolic planning; Wasmtime hosts signed WASI plugins.
+All code ships under Apache-2.0 and relies only on licences compatible with commercial distribution.
+Weekly ontology refresh, opt-in local JSON telemetry, and ADR-driven governance keep the project healthy and future-proof.
 
 ---
 
-## 🚀 Quick Start
+## 1  Mission & scope
 
-```bash
-# macOS / Linux / Windows (PowerShell)
-curl -sSfL https://github.com/your-org/stack-composer/releases/latest/download/install.sh | bash
-stack-composer ingest examples/ecommerce-brief.md
-```
+### 1.1  Goals
 
-The app launches, asks you any missing questions, and generates a full tech‑stack report plus starter repo scaffold.
+- Automate stack design from any brief, regardless of domain or team size.
+- Run everywhere from entry-level laptops (4 GB RAM) to enterprise workstations.
+- Stay private by default: inference, search, and licence checks all work offline.
+- Remain extensible through a sandboxed plugin model and open standards.
 
----
+### 1.2  Non-goals
 
-## 🖥️ System Requirements
-
-- **CPU**: x86‑64 or Apple Silicon
-- **RAM**: 4 GB minimum (8 GB recommended for larger models)
-- **Disk**: ~2 GB for the default 4‑bit model + 500 MB for indexes
-- Runs on Windows 10+, macOS 11+, and modern Linux (glibc ≥ 2.31).
+- Cloud-only operation – online calls are optional, never required.
+- Deep mobile/Web clients in v0; they arrive in a future major version.
 
 ---
 
-## 📦 Installation
+## 2  Architecture (overview)
 
-| Platform                   | Command                                                                                                                |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| **Homebrew (macOS/Linux)** | `brew tap your‑org/tap && brew install stack‑composer`                                                                 |
-| **Scoop (Windows)**        | `scoop bucket add your‑org https://github.com/your‑org/scoop‑bucket.git && scoop install stack‑composer`               |
-| **Manual**                 | Download the `.dmg`, `.msi`, or AppImage from the [releases page](https://github.com/your‑org/stack‑composer/releases) |
-
-> **Note:** first launch downloads the default Ollama model if not present.
+See [Architecture Overview](docs/architecture-overview.md) for a detailed diagram, subsystem breakdown, and data flow.
 
 ---
 
-## 🛠️ Usage
+## 3  Key subsystems
 
-```bash
-# Launch GUI
-stack-composer
-
-# Headless: generate a tech stack JSON report
-stack-composer ingest brief.md --output stack.json
-```
-
-Add `--planner` to enable PDDL planning, or `--model phi-3-large` to pull a bigger model.
-
----
-
-## 🏗️ Architecture Overview
-
-```mermaid
-flowchart TD
-    subgraph Desktop
-        A[Tauri React UI] --> B((Rust Orchestrator))
-        B -->|REST| C>Ollama<br/>LLM Runtime]
-        B -->|gRPC| D[Fast Downward Planner]
-        B --> E[Qdrant Vector DB]
-        B --> F[Meilisearch Hybrid Search]
-        B --> G[[WASI Plugin Sandbox]]
-    end
-    H((Weekly Crawler)) --> E
-    H --> F
-```
+| Subsystem      | Tech                                 | Highlights                                 |
+|---------------|--------------------------------------|--------------------------------------------|
+| LLM runtime   | Ollama + phi-3 GGUF-4bit             | Local, hot-swappable; REST streaming.      |
+| Retrieval     | Qdrant (dense) + Meilisearch (BM25)  | Hybrid fusion improves precision & recall. |
+| Chunking      | SentencePiece, 256-token windows     | Proven sweet-spot for context reuse.       |
+| Planning      | Fast Downward / OPTIC                | Classical + temporal plan generation.      |
+| Telemetry     | OpenTelemetry file exporter (JSON)   | Opt-in, manual upload only.                |
+| Docs-as-Code  | mdBook + ADR repo                    | Write docs with same tools as code.        |
+| Governance    | Joel Parker Henderson ADR templates  | Decisions captured alongside code.         |
 
 ---
 
-## 🔌 Plugins
+## 4  Boot-up checklist
 
-1. Clone `plugins/hello-world`.
-2. `cargo wasi build --release`.
-3. Install via **Settings → Plugins → Add** or `stack-composer plugin install ./target/wasm32-wasi/release/hello.wasm`.
+1. Install tool-chain
+   - Rust ≥ 1.79, Node ≥ 20, pnpm, Tauri CLI.
 
----
+2. Clone repo & run CI
 
-## 📝 Documentation
+   ```sh
+   git clone https://github.com/your-org/stack-composer
+   cd stack-composer && pnpm install && cargo xtask ci
+   ```
 
-| Doc                             | Description                   |
-| ------------------------------- | ----------------------------- |
-| `docs/quickstart.md`            | 5‑minute guide                |
-| `docs/architecture-overview.md` | Deep dive diagrams            |
-| `docs/planner-integration.md`   | Using Fast Downward & OPTIC   |
-| `docs/plugin-sdk/`              | Develop WASI plugins          |
-| `adr/`                          | Architecture Decision Records |
+3. First launch – downloads default model if missing.
 
----
+4. Verify hybrid search – integration test seeds Qdrant/Meili with sample docs and asserts recall.
 
-## 🗺️ Roadmap
+5. Run end-to-end demo
 
-- **v0.5** – MVP (GUI + CLI, RAG, report export)
-- **v1.0** – Ontology auto‑update, plugin SDK, signed installers
-- **v1.1** – Homebrew & Scoop channels, telemetry dashboard
-- **v2.0** – Mobile (Tauri‑Mobile) & PWA clients, team collaboration
+   ```sh
+   stack-composer ingest examples/ecommerce.md --planner --output stack.json
+   open stack.json
+   ```
 
 ---
 
-## 🤝 Contributing
+## 5  Documentation maturity roadmap
 
-We welcome PRs! See [`CONTRIBUTING.md`](CONTRIBUTING.md) to get started.
-Please abide by our [Code of Conduct](CODE_OF_CONDUCT.md).
+| Tier | Deliverables                              | Rationale & sources                |
+|------|-------------------------------------------|------------------------------------|
+| T0   | README → Quick-Start → Arch Overview      | Converts visitors to users quickly |
+| T1   | Component docs, CONTRIBUTING, Code-of-Conduct | Unblocks contributors         |
+| T2   | Install & Config refs, ADR log            | Locks decisions while fresh        |
+| T3   | Ops guide, Telemetry & Security policies  | Ops excellence, compliance         |
+| T4   | Release process, Roadmap site             | Transparency for community growth  |
 
----
-
-## 🧹 Git Pre-commit Hook
-
-To keep your repo clean of macOS dotfiles (AppleDouble, .DS_Store, etc.), a pre-commit hook script is provided:
-
-```bash
-cp scripts/pre-commit .git/hooks/pre-commit
-chmod +x .git/hooks/pre-commit
-```
-
-This will automatically delete unnecessary files before every commit. Re-run after cloning or if hooks are reset.
+Great docs are the #1 predictor of OSS success – see Django’s origin story.
 
 ---
 
-## 🛡️ License
+## 6  Development workflow
 
-Copyright © 2025 **Your Organisation**.  
-Released under the **Apache License 2.0**. See [LICENSE](LICENSE) for details.
+1. Fork + branch + PR – protected main; PR triggers CI matrix (cargo tauri build, tests, mdBook lint).
+2. Write/Update ADR if decision impacts public API.
+3. Update matching component doc (docs-as-code philosophy).
+4. Review – at least one maintainer sign-off; Vale + markdownlint pass.
+5. Merge – squash commit; CI auto-publishes dry-run artefact.
+
+---
+
+## 7  Security & compliance
+
+- WASI capability tokens deny network/fs by default—plugin can only call declared host functions.
+- Licensing – local SPDX cache protects against incompatible dependencies.
+- GDPR mode – disables telemetry and purges temp search caches after report generation.
+
+---
+
+## 8  Risks & mitigations
+
+| Risk                | Impact                | Mitigation                                      |
+|---------------------|----------------------|-------------------------------------------------|
+| Large models > 4 GB RAM | App OOM on low-end | Ship 4-bit default; warn before model pull.      |
+| Planner GPL linkage | Licence contamination | Keep Fast Downward as subprocess (GPL exception) |
+| Plugin supply-chain | Malicious WASM        | Verify signature; enforce Wasmtime sandbox.      |
+| Ontology drift      | Out-dated stacks      | Weekly crawler, manual pin option.               |

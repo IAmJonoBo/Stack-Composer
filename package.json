@@ -4,6 +4,10 @@
   "private": true,
   "scripts": {},
   "devDependencies": {
-    "husky": "^8.0.0"
+    "@stryker-mutator/core": "^9.0.1",
+    "husky": "^8.0.3"
+  },
+  "dependencies": {
+    "latest": "^0.2.0"
   }
 }

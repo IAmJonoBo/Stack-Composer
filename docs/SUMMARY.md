@@ -3,6 +3,7 @@
 - [README](../README.md)
 - [Quick Start](quickstart.md)
 - [Architecture Overview](architecture-overview.md)
+- [Toolchain & DX Pipeline](toolchain.md)
 - [Component Details](component-details/README.md)
   - [Orchestrator](component-details/orchestrator.md)
   - [LLM Runtime Abstraction](component-details/llm-runtime.md)

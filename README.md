@@ -34,6 +34,8 @@ Weekly ontology refresh, opt-in local JSON telemetry, and ADR-driven governance 
 
 See [Architecture Overview](docs/architecture-overview.md) for a detailed diagram, subsystem breakdown, and data flow.
 
+For a full breakdown of the developer toolchain and how to get a reproducible, fast environment, see [Toolchain & DX Pipeline](docs/toolchain.md).
+
 ---
 
 ## 3  Key subsystems

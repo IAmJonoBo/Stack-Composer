@@ -1,0 +1,7 @@
+# Ignore all files for Vale except markdown
+linters:
+  - name: vale
+    ignore:
+      - '**'
+      - '!**/*.md'
+      - '!**/*.markdown'

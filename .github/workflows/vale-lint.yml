@@ -1,0 +1,25 @@
+# Vale Linting (CI)
+#
+# This workflow runs Vale on all markdown files in PRs and pushes.
+# To enable, uncomment the jobs section below.
+
+# name: Lint Docs (Vale)
+# on:
+#   pull_request:
+#     paths:
+#       - '**/*.md'
+#   push:
+#     paths:
+#       - '**/*.md'
+# jobs:
+#   vale:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: Install Vale
+#         run: |
+#           curl -fsSL https://github.com/errata-ai/vale/releases/latest/download/vale_Linux_amd64.tar.gz | tar -xz -C /usr/local/bin vale
+#       - name: Run Vale
+#         run: |
+#           vale --version
+#           vale .

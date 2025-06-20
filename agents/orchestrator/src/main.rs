@@ -16,20 +16,20 @@ async fn api_command(Json(payload): Json<Value>) -> Json<Value> {
         "ingestion" => run_ingestion()
             .await
             .map(|_| "ingestion ok")
-            .unwrap_or("ingestion error".into()),
+            .unwrap_or("ingestion error"),
         "retrieval" => run_retrieval()
             .await
             .map(|_| "retrieval ok")
-            .unwrap_or("retrieval error".into()),
+            .unwrap_or("retrieval error"),
         "critic" => run_critic()
             .await
             .map(|_| "critic ok")
-            .unwrap_or("critic error".into()),
+            .unwrap_or("critic error"),
         "telemetry" => run_telemetry()
             .await
             .map(|_| "telemetry ok")
-            .unwrap_or("telemetry error".into()),
-        _ => "unknown agent".into(),
+            .unwrap_or("telemetry error"),
+        _ => "unknown agent",
     };
     Json(serde_json::json!({ "status": result, "echo": payload }))
 }

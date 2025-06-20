@@ -10,3 +10,6 @@ members = [
   "rust-backend",
 ]
 resolver = "2"
+
+[build]
+target-dir = "~/.cargo-tauri"

@@ -83,4 +83,4 @@ my_rest_plugin = { url = "http://localhost:3000/run" }
 
 - See [Usage Guide](usage.md)
 - Review [Troubleshooting](troubleshooting.md)
-- Explore [Extensibility](../extensibility/README.md)
+- Explore [Extensibility](../extensibility/component-details.md)

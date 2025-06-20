@@ -73,6 +73,6 @@ flowchart TD
 
 **Next Steps:**
 
-- Explore the [AI Platform Overview](../ai-platform-overview.md)
+- Explore the [AI Platform Overview](../ai-platform-overview/ai-platform-overview.md)
 - Review [Component Details](../extensibility/component-details.md)
 - See [Operations Guide](../operations-security/ops-guide.md)

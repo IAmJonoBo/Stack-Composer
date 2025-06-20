@@ -3,7 +3,7 @@
 Stack Composer is designed with privacy in mind.
 
 - See [Developer Setup](../../developer-extensibility-docs/dev-setup.md) for details on telemetry configuration.
-- The toolchain ([toolchain](../../toolchain.md)) includes instructions for managing telemetry and privacy settings.
+- The toolchain ([toolchain](../toolchain.md)) includes instructions for managing telemetry and privacy settings.
 - Local JSON flow and GDPR toggles are documented in the relevant sections.
 
 ---

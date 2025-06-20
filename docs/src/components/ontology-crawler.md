@@ -42,7 +42,7 @@ weekly_crawler.run_crawl();
 
 See [Architecture Questions](../architecture/architecture-questions.md) for open questions and strategic direction.
 
-_See also: [Ontology/Knowledge Graph](../Architecture%20&%20Component%20Guides/architecture-questions.md)_
+_See also: [Ontology/Knowledge Graph](../architecture-and-component-guides/architecture-questions.md)_
 
 ## Weekly Ontology Crawler
 

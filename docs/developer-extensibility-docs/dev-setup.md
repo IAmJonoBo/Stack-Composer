@@ -1,6 +1,6 @@
 # Developer Setup & Environment
 
-Stack Composer is designed for a reproducible, fast, and modern developer experience. For the best results, use the pre-configured Dev Container or Nix environment, which provides all required tools and matches CI. See [Toolchain & DX Pipeline](toolchain.md) for a full breakdown of the tools and workflow.
+Stack Composer is designed for a reproducible, fast, and modern developer experience. For the best results, use the pre-configured Dev Container or Nix environment, which provides all required tools and matches CI. See [Toolchain & DX Pipeline](../src/toolchain.md) for a full breakdown of the tools and workflow.
 
 ## Required Tools
 
@@ -66,6 +66,6 @@ Stack Composer supports both the fully managed Dev Container workflow (recommend
 
 ## More
 
-- For details on the full toolchain, see [Toolchain & DX Pipeline](toolchain.md)
-- For architecture, see [Architecture Overview](architecture-overview.md)
-- For contributing, see [CONTRIBUTING.md](CONTRIBUTING.md)
+- For details on the full toolchain, see [Toolchain & DX Pipeline](../src/toolchain.md)
+- For architecture, see [Architecture Overview](../src/architecture/architecture-overview.md)
+- For contributing, see [CONTRIBUTING.md](../src/contributing/contributing.md)

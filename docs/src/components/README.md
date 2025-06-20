@@ -51,6 +51,6 @@ component, update its corresponding Markdown so the docs never trail the code._
 
 See also:
 
-- [AI Platform Overview](../ai-platform-overview.md)
-- [Architecture Overview](../architecture-overview.md)
+- [AI Platform Overview](../ai-platform-overview/ai-platform-overview.md)
+- [Architecture Overview](../architecture/architecture-overview.md)
 - [Planner Integration Guide](../ai-sub-system-docs/planner-integration.md)

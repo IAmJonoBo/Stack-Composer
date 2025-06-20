@@ -23,6 +23,30 @@ For a reproducible, fast, and modern developer experience, use the pre-configure
 
 > If you have issues with Nix, Docker, or any tool, see the troubleshooting sections in [dev-setup](../developer-extensibility-docs/dev-setup.md) or open an issue.
 
+### macOS-Specific Setup
+
+⚠️ **macOS developers must follow these additional steps** due to resource fork file issues with Tauri builds:
+
+1. **Set environment variables** (add to your shell profile):
+   ```bash
+   export COPYFILE_DISABLE=1
+   export COPY_EXTENDED_ATTRIBUTES_DISABLE=1
+   ```
+
+2. **Use platform-specific build commands**:
+   ```bash
+   # Regular development (all packages except Tauri)
+   cargo check --workspace
+   cargo build --workspace
+   
+   # Tauri development
+   ./build-tauri.sh
+   ```
+
+3. **Read the full troubleshooting guide**: [macOS Build Issues](../../MACOS_BUILD_ISSUES.md)
+
+**Why?** macOS creates resource fork files (`._*`) that cause Tauri's build script to fail with UTF-8 errors. The workspace excludes Tauri by default to prevent blocking regular development.
+
 ---
 
 ## Code Quality & Linting Workflow
@@ -64,7 +88,7 @@ All user-facing or architectural changes **must** include documentation updates.
 
 ## Community Guidelines
 
-- All contributors must follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+- All contributors must follow the [Code of Conduct](code-of-conduct.md).
 - Communication is primarily via GitHub Discussions; real-time chat is available via Slack/Discord (see README).
 - Quarterly community meetings are open to all; notes are posted in Discussions.
 
@@ -82,6 +106,6 @@ All user-facing or architectural changes **must** include documentation updates.
 
 **Next Steps:**
 
-- See [Contributing to Docs](contributing-to-docs.md)
-- Review [Code of Conduct](CODE_OF_CONDUCT.md)
+- See [Contributing to Docs](how-to-contribute-docs.md)
+- Review [Code of Conduct](code-of-conduct.md)
 - Explore [Community & Contribution Overview](README.md)

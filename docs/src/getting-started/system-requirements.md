@@ -21,4 +21,4 @@ This document lists the supported platforms, dependencies, and hardware requirem
 
 - For best results, use a machine with SSD storage and a modern multi-core CPU.
 - Containerized deployments are supported and recommended for production.
-- See [ops-guide.md](../../ops-guide.md) for cluster scaling and advanced deployment scenarios.
+- See [ops-guide.md](../operations/ops-guide.md) for cluster scaling and advanced deployment scenarios.

@@ -4,7 +4,7 @@ _The conversational, hybrid‑wizard user experience is central to Stack Compo
 “tell‑me‑what‑you‑need and I’ll build the stack” promise. This roadmap lays out
 the milestones for evolving that wizard from an MVP chat‑form blend (v 0.5) into
 a multimodal, collaborative design assistant (v 2.0+). Each feature is pegged
-to the sprint cadence defined in_ [`release-engineering/roadmap.md`](../../release-engineering/roadmap.md).
+to the sprint cadence defined in_ [`release-engineering/roadmap.md`](../release-engineering/roadmap.md).
 
 ---
 

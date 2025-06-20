@@ -181,4 +181,4 @@ See also:
 
 - [Retrieval Layer](../component-details/retrieval-layer.md)
 - [Planner Adapter](../component-details/planner-adapter.md)
-- [RL Critic](../component-details/rl-critic.md)
+- [RL Critic](../ai-sub-system-docs/rl-critic.md)

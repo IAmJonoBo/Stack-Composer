@@ -14,10 +14,10 @@ flowchart TD
 
 ## Key Guides
 
-- [Contributing](../CONTRIBUTING.md): How to contribute code or ideas.
-- [Contributing to Docs](../contributing-to-docs.md): Improve our documentation.
-- [Code of Conduct](../CODE_OF_CONDUCT.md): Community standards.
-- [Governance](../MAINTAINERS.md): Project governance and maintainers.
+- [Contributing](../contributing/contributing.md): How to contribute code or ideas.
+- [Contributing to Docs](how-to-contribute-docs.md): Improve our documentation.
+- [Code of Conduct](code-of-conduct.md): Community standards.
+- [Governance](MAINTAINERS.md): Project governance and maintainers.
 
 ---
 

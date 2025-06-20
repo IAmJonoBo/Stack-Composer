@@ -43,9 +43,9 @@ Weekly ontology refresh, opt-in local JSON telemetry, and ADR-driven governance 
 
 ## 2 Architecture (overview)
 
-See [Architecture Overview](docs/architecture-overview.md) for a detailed diagram, subsystem breakdown, and data flow.
+See [Architecture Overview](docs/src/architecture/architecture-overview.md) for a detailed diagram, subsystem breakdown, and data flow.
 
-For a full breakdown of the developer toolchain and how to get a reproducible, fast environment, see [Toolchain & DX Pipeline](docs/toolchain.md).
+For a full breakdown of the developer toolchain and how to get a reproducible, fast environment, see [Toolchain & DX Pipeline](docs/src/toolchain.md).
 
 ---
 
@@ -65,7 +65,7 @@ For a full breakdown of the developer toolchain and how to get a reproducible, f
 
 ## 4 Boot-up checklist
 
-1. Install all required tools (see [Toolchain & DX Pipeline](docs/toolchain.md) for install commands):
+1. Install all required tools (see [Toolchain & DX Pipeline](docs/src/toolchain.md) for install commands):
 
    - Rust (rustup), Node.js (≥ v20), pnpm, just, tauri CLI, biome, vale, mdbook, cargo-nextest, stryker, cargo-audit, cargo-deny, cargo-udeps, wasmtime, trivy, nix (restart terminal after install), Qdrant (via Docker), Meilisearch, Renovate, gh (GitHub CLI)
    - Qdrant is run via Docker for local development. Mutagen is a Rust library, not a CLI tool.
@@ -111,6 +111,25 @@ Great docs are the #1 predictor of OSS success – see Django’s origin story.
 3. Update matching component doc (docs-as-code philosophy).
 4. Review – at least one maintainer sign-off; Vale + markdownlint pass.
 5. Merge – squash commit; CI auto-publishes dry-run artefact.
+
+### 6.1 macOS Development Notes
+
+**⚠️ macOS developers:** Due to resource fork file issues with Tauri builds, use these commands:
+
+```bash
+# For regular development (all packages except Tauri)
+cargo check --workspace
+cargo build --workspace
+
+# For Tauri development
+./build-tauri.sh
+
+# Or set environment variables globally
+export COPYFILE_DISABLE=1
+export COPY_EXTENDED_ATTRIBUTES_DISABLE=1
+```
+
+See [macOS Build Issues](docs/MACOS_BUILD_ISSUES.md) for detailed troubleshooting.
 
 ---
 

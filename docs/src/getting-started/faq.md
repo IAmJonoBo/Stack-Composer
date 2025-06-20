@@ -30,7 +30,7 @@ A: Check [dev-setup.md](../developer-extensibility-docs/dev-setup.md#troubleshoo
 A: Drag & drop your brief into the app, or use the CLI for headless mode. See [Quick Start](quickstart.md).
 
 **Q: How do I add plugins?**  
-A: See the [Plugin SDK](../extensibility/plugin-sdk.md) and [Configuration](configuration.md) guides.
+A: See the [Plugin SDK](../extensibility/plugin-sdk.md) and [Configuration](../user-guides/configuration.md) guides.
 
 ---
 

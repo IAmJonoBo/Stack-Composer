@@ -14,9 +14,9 @@ flowchart TD
 
 ## Key Guides
 
-- [Architecture Overview](../architecture-overview.md): High-level system design.
-- [AI Platform Overview](../ai-platform-overview.md): AI subsystem details.
-- [Roadmap](../roadmap.md): Planned features and milestones.
+- [Architecture Overview](../architecture/architecture-overview.md): High-level system design.
+- [AI Platform Overview](../ai-platform-overview/ai-platform-overview.md): AI subsystem details.
+- [Roadmap](../release-engineering/roadmap.md): Planned features and milestones.
 - [ADRs](../adr/0000-template.md): Architectural decision records.
 - [Context](context.md)
 - [Containers](containers.md)
@@ -28,5 +28,5 @@ flowchart TD
 
 **Next Steps:**
 
-- Review [Operations & Security](../ops-guide.md) for deployment and security.
+- Review [Operations & Security](../operations/ops-guide.md) for deployment and security.
 - Explore [Extensibility](../plugin-sdk/README.md) for customization.

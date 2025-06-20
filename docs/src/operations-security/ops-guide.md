@@ -85,5 +85,5 @@ spec:
 **Next Steps:**
 
 - Review [Security Policy](security-policy.md)
-- See [Telemetry & Privacy](telemetry-privacy.md)
-- Explore [Release Process](release-process.md)
+- See [Telemetry & Privacy](../operations/telemetry-privacy.md)
+- Explore [Release Process](../release-engineering/release-process.md)

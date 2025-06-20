@@ -233,7 +233,7 @@ println!("Plugin said: {}", res);
 
 ## See Also
 
-- [Plugin Example](plugin-example.md): Concrete WASI plugin/extension example for Stack Composer extensibility.
+- [Plugin Example](../architecture/component-details/plugin-example.md): Concrete WASI plugin/extension example for Stack Composer extensibility.
 
 See also:
 

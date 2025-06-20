@@ -1,6 +1,6 @@
 # Operations Guide
 
-For reproducible local operations, see [Toolchain & DX Pipeline](../../toolchain.md) and [Developer Setup](../../developer-extensibility-docs/dev-setup.md) for Docker, Nix, and all required tools.
+For reproducible local operations, see [Toolchain & DX Pipeline](../toolchain.md) and [Developer Setup](../../developer-extensibility-docs/dev-setup.md) for Docker, Nix, and all required tools.
 
 - Qdrant runs via Docker for local development.
 - Use `trivy` for container and SBOM health/security checks.

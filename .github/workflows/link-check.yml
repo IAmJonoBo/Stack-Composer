@@ -1,0 +1,51 @@
+name: "Documentation Link Validation"
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'docs/**/*.md'
+      - '*.md'
+      - 'scripts/check-links.js'
+      - 'link-map.json'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'docs/**/*.md'
+      - '*.md'
+      - 'scripts/check-links.js'
+      - 'link-map.json'
+
+jobs:
+  check-links:
+    name: "Check Documentation Links"
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+          
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        
+      - name: Check documentation links
+        run: pnpm check-links
+        
+      - name: Report results
+        if: failure()
+        run: |
+          echo "❌ Documentation link check failed!"
+          echo "Some links in the documentation are broken."
+          echo "Please run 'pnpm check-links' locally to see details and fix them."
+          exit 1

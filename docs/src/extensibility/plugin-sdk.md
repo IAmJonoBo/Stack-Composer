@@ -284,7 +284,7 @@ Check the **Contributing** section for guidelines.
 
 ## 13. License
 
-The SDK is licensed under the [MIT License](LICENSE).
+The SDK is licensed under the [MIT License](../../LICENSE).
 
 ---
 

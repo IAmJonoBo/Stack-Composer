@@ -29,4 +29,4 @@ orchestrator.load_plugin("hello_plugin");
 orchestrator.call_plugin("greet", &[]);
 ```
 
-> See [Plugin Host](plugin-host.md) for API details and more extension points.
+> See [Plugin Host](../../components/plugin-host.md) for API details and more extension points.

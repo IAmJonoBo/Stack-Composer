@@ -185,5 +185,5 @@ Yes—Planner View in UI renders a Gantt when temporal data present.
 See also:
 
 - [Planner Integration](../architecture/planner-integration.md)
-- [RL Critic](../component-details/rl-critic.md)
+- [RL Critic](../ai-sub-system-docs/rl-critic.md)
 - [Orchestrator](../component-details/orchestrator.md)

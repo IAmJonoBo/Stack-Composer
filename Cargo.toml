@@ -6,10 +6,9 @@ members = [
   "agents/critic",
   "agents/telemetry",
   "agents/planner-adapter",
-  "src-tauri",
   "rust-backend",
 ]
+exclude = [
+  "src-tauri",
+]
 resolver = "2"
-
-[build]
-target-dir = "~/.cargo-tauri"

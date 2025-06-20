@@ -139,7 +139,7 @@ button. If none found, an **Install Ollama** prompt appears (shell installer).
 | Plugin quarantine             | Check `.sig` and trusted keys list.              |
 | High memory                   | Switch to 4‑bit model or disable RL‑Critic.      |
 
-More in [Troubleshooting](../troubleshooting.md).
+More in [Troubleshooting](troubleshooting.md).
 
 ---
 

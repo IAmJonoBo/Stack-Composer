@@ -3,7 +3,7 @@
 Stack Composer follows modern security best practices. All contributors and users should:
 
 - Review [Developer Setup](../../developer-extensibility-docs/dev-setup.md) for secure environment setup.
-- Use the latest toolchain as described in [Toolchain](../../toolchain.md).
+- Use the latest toolchain as described in [Toolchain](../toolchain.md).
 - Report vulnerabilities as described below.
 
 ---
@@ -13,7 +13,7 @@ Stack Composer follows modern security best practices. All contributors and user
 - All releases include a CycloneDX SBOM (`bom.json`) published with release assets.
 - SBOM is updated automatically in CI using `trivy` and `cargo-audit`.
 - Scan containers and dependencies before each release.
-- All plugins are scanned with `trivy` and `cargo-audit` before release (see [Plugin SDK](../../plugin-sdk/README.md)).
+- All plugins are scanned with `trivy` and `cargo-audit` before release (see [Plugin SDK](../extensibility/plugin-sdk.md)).
 
 ---
 
@@ -48,7 +48,7 @@ Stack Composer follows modern security best practices. All contributors and user
 
 ## Vulnerability Reporting
 
-- Please report security issues via GitHub Issues or the contact method in [CONTRIBUTING.md](../../contributing/contributing.md).
+- Please report security issues via GitHub Issues or the contact method in [CONTRIBUTING.md](../contributing/contributing.md).
 - Triage: Acknowledge within 24h, assess CVSS, and prioritize patches.
 - Patch timeline: Critical issues patched within 7 days; others as scheduled.
 - Disclosure: Coordinated with reporter; public advisories for high/critical issues.
@@ -68,4 +68,4 @@ Stack Composer follows modern security best practices. All contributors and user
 
 - For security-related setup issues, see [Developer Setup](../../developer-extensibility-docs/dev-setup.md#troubleshooting).
 
-_See also: [Plugin SDK](../../plugin-sdk/README.md), [Configuration Guide](../../configuration.md)_
+_See also: [Plugin SDK](../extensibility/plugin-sdk.md), [Configuration Guide](../configuration.md)_

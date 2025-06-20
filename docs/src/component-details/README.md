@@ -24,7 +24,7 @@ those pieces talk to each other at runtime.
 | 6   | **Stack Agent**        | [stack-agent.md](stack-agent.md)           | `agents/stack`           | Draft             |
 | 7   | **Report Agent**       | [report-agent.md](report-agent.md)         | `agents/report`          | Draft             |
 | 8   | **Planner Adapter**    | [planner-adapter.md](planner-adapter.md)   | `crates/planner-adapter` | **Spec Complete** |
-| 9   | **RL Critic**          | [rl-critic.md](rl-critic.md)               | `crates/critic`          | **Spec Complete** |
+| 9   | **RL Critic**          | [rl-critic.md](../ai-sub-system-docs/rl-critic.md)               | `crates/critic`          | **Spec Complete** |
 | 10  | **WASI Plugin Host**   | [plugin-host.md](plugin-host.md)           | `crates/plugin-host`     | Draft             |
 | 11  | **Ontology Crawler**   | [ontology-crawler.md](ontology-crawler.md) | `tasks/crawler`          | Draft             |
 | 12  | **Telemetry Pipeline** | [telemetry.md](telemetry.md)               | `crates/telemetry`       | Draft             |

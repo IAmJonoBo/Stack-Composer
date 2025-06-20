@@ -182,5 +182,5 @@ stack-composer telemetry purge
 See also:
 
 - [Plugin Host](plugin-host.md)
-- [Ops Guide](../ops-guide.md)
+- [Ops Guide](../operations/ops-guide.md)
 - [Orchestrator](orchestrator.md)

@@ -46,7 +46,12 @@ coverage/
 
 # Misc
 *.log
+
+# macOS AppleDouble files
 ._*
+.DS_Store
+.AppleDouble
+.LSOverride
 
 # Do not ignore source or test files!
 # !src/

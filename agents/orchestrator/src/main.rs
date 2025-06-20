@@ -7,7 +7,7 @@ use tokio::net::TcpListener;
 use critic::run as run_critic;
 use ingestion::run as run_ingestion;
 use retrieval::run as run_retrieval;
-use telemetry::run as run_telemetry;
+use stack_telemetry::run as run_telemetry;
 
 async fn api_command(Json(payload): Json<Value>) -> Json<Value> {
     // Example: dispatch to agent based on payload

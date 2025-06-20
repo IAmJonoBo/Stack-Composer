@@ -11,4 +11,4 @@ anyhow = "1"
 ingestion = { path = "../ingestion" }
 retrieval = { path = "../retrieval" }
 critic = { path = "../critic" }
-telemetry = { path = "../telemetry" }
+stack-telemetry = { path = "../telemetry" }

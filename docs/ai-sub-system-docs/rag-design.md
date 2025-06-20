@@ -1,6 +1,6 @@
 # RAG Design
 
-_Version 1.0 — last updated 2025‑06‑20_
+## Version 1.0 — last updated 2025-06-20
 
 Stack Composer’s RAG subsystem grounds every LLM answer in verifiable facts,
 ensuring transparent, licensable, and up‑to‑date recommendations. This document

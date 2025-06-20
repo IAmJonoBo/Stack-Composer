@@ -1,6 +1,6 @@
 # Installation Guide
 
-_Applies to Stack Composer ≥ 0.5.0_
+## Applies to Stack Composer ≥ 0.5.0
 
 This document shows how to install **Stack Composer** on macOS, Windows and Linux
 with or without package managers. For a five‑minute run‑through, see
@@ -14,9 +14,9 @@ with or without package managers. For a five‑minute run‑through, see
 | Resource | Minimum                                         | Recommended                      |
 | -------- | ----------------------------------------------- | -------------------------------- |
 | CPU      | x86‑64 or Apple Silicon                         | 4+ cores                         |
-| RAM      | 4 GB                                            |  8 GB+                           |
+| RAM      | 4 GB                                            | 8 GB+                            |
 | Disk     | 2 GB free                                       | 4 GB (allows larger GGUF models) |
-| OS       | Windows 10+, macOS 11+, Linux with glibc ≥ 2.31 |
+| OS       | Windows 10+, macOS 11+, Linux with glibc ≥ 2.31 | —                                |
 
 > **Note** – First launch downloads the default 4‑bit `phi‑3` model
 > (~1.9 GB) if Ollama cannot locate it locally. Ensure you have bandwidth or

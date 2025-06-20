@@ -1,6 +1,6 @@
 # Planner Integration
 
-_Version 1.0 — last updated 2025‑06‑20_
+## Version 1.0 — last updated 2025-06-20
 
 This document explains how **Stack Composer** invokes symbolic planners
 (**Fast Downward** and **OPTIC**) to turn high‑level requirements into an

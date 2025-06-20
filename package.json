@@ -33,7 +33,7 @@
 		"trunk": "latest",
 		"vitest": "latest",
 		"zod": "latest",
-		"vale": "latest"
+		"@types/node": "latest"
 	},
 	"dependencies": {
 		"@supabase/functions-js": "latest",

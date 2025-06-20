@@ -4,6 +4,22 @@ This guide describes how to configure Stack Composer, including plugin registrat
 
 ---
 
+## Configuration Flow
+
+```mermaid
+flowchart TD
+    A[Start] --> B{Choose Plugin Type}
+    B -- WASI --> C[Copy .wasm & .sig to plugins dir]
+    B -- REST --> D[Edit config file]
+    C --> E[Configure permissions]
+    D --> E
+    E --> F[Set runtime options]
+    F --> G[Enable telemetry (optional)]
+    G --> H[Save & Restart Stack Composer]
+```
+
+---
+
 ## 1. Plugin Registration
 
 ### WASI Plugins
@@ -14,7 +30,7 @@ Add WASI plugins by copying `.wasm` and `.sig` files to:
 ~/.local/share/stack-composer/plugins/
 ```
 
-Plugins are auto-discovered at startup. Only plugins with valid Ed25519 signatures (see [Plugin SDK](extensibility/plugin-sdk.md)) are loaded.
+Plugins are auto-discovered at startup. Only plugins with valid Ed25519 signatures (see [Plugin SDK](../extensibility/plugin-sdk.md)) are loaded.
 
 ### REST Plugins
 
@@ -58,17 +74,13 @@ hello_plugin = { enabled = true }
 my_rest_plugin = { url = "http://localhost:3000/run" }
 
 [security]
-trusted_keys = ["ed25519:...publickey..."]
-
-[telemetry]
-enabled = true
-retention_days = 30
-
-[llm]
-default_backend = "ollama"
-backends = ["vllm", "lmstudio", "huggingface", "ollama"]
+# ...
 ```
 
 ---
 
-_See also: [Plugin SDK](plugin-sdk/README.md), [Security Policy](security-policy.md), [Architecture Overview](architecture-overview.md)_
+**Next Steps:**
+
+- See [Usage Guide](usage.md)
+- Review [Troubleshooting](troubleshooting.md)
+- Explore [Extensibility](../extensibility/README.md)

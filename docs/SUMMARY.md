@@ -1,28 +1,48 @@
 # Summary
 
-- [README](../README.md)
-- [Quick Start](quickstart.md)
-- [Architecture Overview](architecture-overview.md)
-- [Toolchain & DX Pipeline](toolchain.md)
-- [Component Details](component-details/README.md)
-  - [Orchestrator](component-details/orchestrator.md)
-  - [LLM Runtime Abstraction](component-details/llm-runtime.md)
-  - [Retrieval Layer](component-details/retrieval-layer.md)
-  - [Ingestion Agent](component-details/ingestion-agent.md)
-  - [Gap Agent](component-details/gap-agent.md)
-  - [Stack Agent](component-details/stack-agent.md)
-  - [Report Agent](component-details/report-agent.md)
-  - [Planner Adapter](component-details/planner-adapter.md)
-  - [WASI Plugin Host](component-details/plugin-host.md)
-  - [Weekly Crawler](component-details/ontology-crawler.md)
-  - [Telemetry Pipeline](component-details/telemetry.md)
+- [Welcome](../README.md)
+
+## Getting Started
+
+- [Getting Started Overview](Getting Started Bundle/README.md)
+  - [Quick Start](Getting Started Bundle/quickstart.md)
+  - [System Requirements](Getting Started Bundle/system-requirements.md)
 - [Installation](installation.md)
-- [Configuration](configuration.md)
-- [Planner Integration](planner-integration.md)
-- [Retrieval Layer Guide](retrieval-layer.md)
-- [Plugin SDK](plugin-sdk/README.md)
-- [Operations Guide](ops-guide.md)
-- [Telemetry & Privacy](telemetry-privacy.md)
-- [Security Policy](security-policy.md)
-- [Release Process](release-process.md)
-- [Roadmap](roadmap.md)
+- [FAQ](faq.md)
+
+## User Guides
+
+- [User Guides Overview](user-guides/README.md)
+  - [Configuration](configuration.md)
+  - [Usage Guide](usage.md)
+  - [Troubleshooting](troubleshooting.md)
+
+## Extensibility
+
+- [Extensibility Overview](extensibility/README.md)
+  - [Plugin SDK](plugin-sdk/README.md)
+  - [Component Details](component-details/README.md)
+
+## Architecture & Roadmap
+
+- [Architecture & Roadmap Overview](architecture-roadmap/README.md)
+  - [Architecture Overview](architecture-overview.md)
+  - [AI Platform Overview](AI Platform Overview.md)
+  - [Roadmap](roadmap.md)
+  - [ADRs](adr/0000-template.md)
+
+## Operations & Security
+
+- [Operations & Security Overview](operations-security/README.md)
+  - [Operations Guide](ops-guide.md)
+  - [Telemetry & Privacy](telemetry-privacy.md)
+  - [Security Policy](security-policy.md)
+  - [Release Process](release-process.md)
+
+## Community & Contribution
+
+- [Community & Contribution Overview](community-contribution/README.md)
+  - [Contributing](CONTRIBUTING.md)
+  - [Contributing to Docs](contributing-to-docs.md)
+  - [Code of Conduct](CODE_OF_CONDUCT.md)
+  - [Governance](MAINTAINERS.md)

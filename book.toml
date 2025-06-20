@@ -1,0 +1,24 @@
+[book]
+title = "Stack Composer Documentation"
+author = ["Stack Composer Team"]
+description = "Comprehensive user, developer, and operator documentation for Stack Composer."
+multilingual = false
+src = "src"
+
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "navy"
+mathjax-support = false
+additional-css = ["custom.css"]
+
+[preprocessor.links]
+# Ensures all links are checked
+
+[output.html.search]
+enabled = true
+
+[output.html.fold]
+enabled = true
+
+[output.html.playground]
+enabled = false

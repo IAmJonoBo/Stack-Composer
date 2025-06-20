@@ -1,6 +1,22 @@
 # Plugin SDK
 
-A complete guide for extending **Stack Composer** with first‑class plugins. All examples compile on macOS, Linux and Windows and assume Rust 1.79+, Node 20+ and Wasmtime >= 1.0.
+A complete guide for extending **Stack Composer** with first‑class plugins. All examples compile on macOS, Linux and Windows and assume Rust 1.79+, Node 20+ and Wasmtime >= 1.0.
+
+---
+
+## Plugin Types & Lifecycle
+
+```mermaid
+flowchart TD
+    A[Start] --> B{Plugin Type}
+    B -- WASI --> C[Build Wasm Plugin]
+    B -- REST --> D[Build REST Service]
+    C --> E[Sign Plugin]
+    D --> E
+    E --> F[Register/Copy to plugins dir]
+    F --> G[Stack Composer Loads Plugin]
+    G --> H[Plugin Runs in Sandbox]
+```
 
 ---
 
@@ -10,7 +26,7 @@ This SDK **covers every officially‑supported integration style**, not just WAS
 
 | Plugin type          | Typical use                                          | Transport                | Runtime                           |
 | -------------------- | ---------------------------------------------------- | ------------------------ | --------------------------------- |
-| **WASI (preferred)** | Low‑latency extensions that need direct host calls   | Host ➜ `wasmtime` ➜ Wasm | Rust, Zig, TinyGo, AssemblyScript |
+| **WASI (preferred)** | Low‑latency extensions that need direct host calls   | Host → `wasmtime` → Wasm | Rust, Zig, TinyGo, AssemblyScript |
 | **REST / gRPC**      | Language‑agnostic micro‑services on localhost or LAN | HTTP 1.1 / HTTP 2        | Any language / container          |
 | **Future adapters**  | Experimental host functions, GraphRAG walkers, etc.  | TBD                      | To be defined via ADR             |
 
@@ -71,7 +87,7 @@ app.post('/run', (req, res) => {
 app.listen(3000, () => console.log('REST plugin running'));
 ```
 
-# Register the REST plugin in Stack Composer's config (see docs/configuration.md)
+### Register the REST plugin in Stack Composer's config (see docs/configuration.md)
 
 ---
 

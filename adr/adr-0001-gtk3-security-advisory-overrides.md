@@ -25,6 +25,7 @@
 ---
 
 ## References
+
 - [Upstream GTK-4 migration issue](https://github.com/tauri-apps/wry/issues/1474)
 - [RustSec advisories for GTK-3](https://rustsec.org/advisories/)
 - [Stack Composer Security Policy](../docs/src/operations/security-policy.md)

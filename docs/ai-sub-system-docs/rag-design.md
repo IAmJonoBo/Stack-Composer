@@ -98,8 +98,8 @@ Meilisearch BM25 (and BM25+vector) ─ kS=256 ─┘                ↑
 
 | Parameter      | Default     | Rationale                                |
 | -------------- | ----------- | ---------------------------------------- |
-| Dense *k_D*    | 128         | Fast on laptop SSDs, ~30 ms              |
-| Sparse *k_S*   | 256         | Higher recall for rare terms             |
+| Dense _k_D_    | 128         | Fast on laptop SSDs, ~30 ms              |
+| Sparse _k_S_   | 256         | Higher recall for rare terms             |
 | Fusion `λ`     | 0.5         | Equal weight dense / sparse              |
 | Max chunks     | 16          | Fits 128 k context at 4‑bit quantisation |
 | Wal checkpoint | 02:00 local | Avoids interactive hours                 |

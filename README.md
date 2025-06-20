@@ -14,23 +14,23 @@ Weekly ontology refresh, opt-in local JSON telemetry, and ADR-driven governance 
 
 ---
 
-## 1  Mission & scope
+## 1 Mission & scope
 
-### 1.1  Goals
+### 1.1 Goals
 
 - Automate stack design from any brief, regardless of domain or team size.
 - Run everywhere from entry-level laptops (4 GB RAM) to enterprise workstations.
 - Stay private by default: inference, search, and licence checks all work offline.
 - Remain extensible through a sandboxed plugin model and open standards.
 
-### 1.2  Non-goals
+### 1.2 Non-goals
 
 - Cloud-only operation – online calls are optional, never required.
 - Deep mobile/Web clients in v0; they arrive in a future major version.
 
 ---
 
-## 2  Architecture (overview)
+## 2 Architecture (overview)
 
 See [Architecture Overview](docs/architecture-overview.md) for a detailed diagram, subsystem breakdown, and data flow.
 
@@ -38,23 +38,24 @@ For a full breakdown of the developer toolchain and how to get a reproducible, f
 
 ---
 
-## 3  Key subsystems
+## 3 Key subsystems
 
-| Subsystem      | Tech                                 | Highlights                                 |
-|---------------|--------------------------------------|--------------------------------------------|
-| LLM runtime   | Ollama + phi-3 GGUF-4bit             | Local, hot-swappable; REST streaming.      |
-| Retrieval     | Qdrant (dense) + Meilisearch (BM25)  | Hybrid fusion improves precision & recall. |
-| Chunking      | SentencePiece, 256-token windows     | Proven sweet-spot for context reuse.       |
-| Planning      | Fast Downward / OPTIC                | Classical + temporal plan generation.      |
-| Telemetry     | OpenTelemetry file exporter (JSON)   | Opt-in, manual upload only.                |
-| Docs-as-Code  | mdBook + ADR repo                    | Write docs with same tools as code.        |
-| Governance    | Joel Parker Henderson ADR templates  | Decisions captured alongside code.         |
+| Subsystem    | Tech                                | Highlights                                 |
+| ------------ | ----------------------------------- | ------------------------------------------ |
+| LLM runtime  | Ollama + phi-3 GGUF-4bit            | Local, hot-swappable; REST streaming.      |
+| Retrieval    | Qdrant (dense) + Meilisearch (BM25) | Hybrid fusion improves precision & recall. |
+| Chunking     | SentencePiece, 256-token windows    | Proven sweet-spot for context reuse.       |
+| Planning     | Fast Downward / OPTIC               | Classical + temporal plan generation.      |
+| Telemetry    | OpenTelemetry file exporter (JSON)  | Opt-in, manual upload only.                |
+| Docs-as-Code | mdBook + ADR repo                   | Write docs with same tools as code.        |
+| Governance   | Joel Parker Henderson ADR templates | Decisions captured alongside code.         |
 
 ---
 
-## 4  Boot-up checklist
+## 4 Boot-up checklist
 
 1. Install all required tools (see [Toolchain & DX Pipeline](docs/toolchain.md) for install commands):
+
    - Rust (rustup), Node.js (≥ v20), pnpm, just, tauri CLI, biome, vale, mdbook, cargo-nextest, stryker, cargo-audit, cargo-deny, cargo-udeps, wasmtime, trivy, nix (restart terminal after install), Qdrant (via Docker), Meilisearch, Renovate, gh (GitHub CLI)
    - Qdrant is run via Docker for local development. Mutagen is a Rust library, not a CLI tool.
 
@@ -78,21 +79,21 @@ For a full breakdown of the developer toolchain and how to get a reproducible, f
 
 ---
 
-## 5  Documentation maturity roadmap
+## 5 Documentation maturity roadmap
 
-| Tier | Deliverables                              | Rationale & sources                |
-|------|-------------------------------------------|------------------------------------|
-| T0   | README → Quick-Start → Arch Overview      | Converts visitors to users quickly |
-| T1   | Component docs, CONTRIBUTING, Code-of-Conduct | Unblocks contributors         |
-| T2   | Install & Config refs, ADR log            | Locks decisions while fresh        |
-| T3   | Ops guide, Telemetry & Security policies  | Ops excellence, compliance         |
-| T4   | Release process, Roadmap site             | Transparency for community growth  |
+| Tier | Deliverables                                  | Rationale & sources                |
+| ---- | --------------------------------------------- | ---------------------------------- |
+| T0   | README → Quick-Start → Arch Overview          | Converts visitors to users quickly |
+| T1   | Component docs, CONTRIBUTING, Code-of-Conduct | Unblocks contributors              |
+| T2   | Install & Config refs, ADR log                | Locks decisions while fresh        |
+| T3   | Ops guide, Telemetry & Security policies      | Ops excellence, compliance         |
+| T4   | Release process, Roadmap site                 | Transparency for community growth  |
 
 Great docs are the #1 predictor of OSS success – see Django’s origin story.
 
 ---
 
-## 6  Development workflow
+## 6 Development workflow
 
 1. Fork + branch + PR – protected main; PR triggers CI matrix (cargo tauri build, tests, mdBook lint).
 2. Write/Update ADR if decision impacts public API.
@@ -102,7 +103,7 @@ Great docs are the #1 predictor of OSS success – see Django’s origin story.
 
 ---
 
-## 7  Security & compliance
+## 7 Security & compliance
 
 - WASI capability tokens deny network/fs by default—plugin can only call declared host functions.
 - Licensing – local SPDX cache protects against incompatible dependencies.
@@ -110,11 +111,25 @@ Great docs are the #1 predictor of OSS success – see Django’s origin story.
 
 ---
 
-## 8  Risks & mitigations
+## 8 Risks & mitigations
 
-| Risk                | Impact                | Mitigation                                      |
-|---------------------|----------------------|-------------------------------------------------|
-| Large models > 4 GB RAM | App OOM on low-end | Ship 4-bit default; warn before model pull.      |
-| Planner GPL linkage | Licence contamination | Keep Fast Downward as subprocess (GPL exception) |
-| Plugin supply-chain | Malicious WASM        | Verify signature; enforce Wasmtime sandbox.      |
-| Ontology drift      | Out-dated stacks      | Weekly crawler, manual pin option.               |
+| Risk                    | Impact                | Mitigation                                       |
+| ----------------------- | --------------------- | ------------------------------------------------ |
+| Large models > 4 GB RAM | App OOM on low-end    | Ship 4-bit default; warn before model pull.      |
+| Planner GPL linkage     | Licence contamination | Keep Fast Downward as subprocess (GPL exception) |
+| Plugin supply-chain     | Malicious WASM        | Verify signature; enforce Wasmtime sandbox.      |
+| Ontology drift          | Out-dated stacks      | Weekly crawler, manual pin option.               |
+
+---
+
+## AI-Guided Authoring & Scaffolding Vision
+
+Stack Composer is evolving into a fully AI-guided, end-to-end project authoring and scaffolding platform. See [docs/Architecture & Component Guides/ai-wizard-roadmap.md](docs/Architecture%20&%20Component%20Guides/ai-wizard-roadmap.md) for the full vision and phased implementation plan.
+
+- Hybrid conversational-form wizard for discovery and planning
+- Interactive tech stack exploration and “what-if” analysis
+- Real-time directory tree and scaffold preview (tree/graph views)
+- Chat-based copilot, rationale tooltips, and decision history
+- Context-aware recommendations, security risk surfacing, and best practice updates
+- One-click project generation, export, and cloud deployment hooks
+- Template projects, import/modernization, and project history

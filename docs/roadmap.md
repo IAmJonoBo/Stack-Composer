@@ -1,3 +1,12 @@
+# See Also
+
+- [AI Platform Overview](AI%20Platform%20Overview.md): High-level vision, navigation, and links to all major docs.
+- [AI Wizard Roadmap](Architecture%20&%20Component%20Guides/ai-wizard-roadmap.md): Phased plan and feature set.
+- [Architecture Questions](Architecture%20&%20Component%20Guides/architecture-questions.md): Open questions and deployment plan.
+- [Component Details Index](component-details/README.md): Responsibilities, APIs, and extension hooks for all modules.
+
+---
+
 # Roadmap
 
 This roadmap outlines planned features and milestones for Stack Composer.
@@ -35,6 +44,20 @@ This roadmap outlines planned features and milestones for Stack Composer.
 | Security         | Dependency/SBOM automation    | Secrets manager integration         | Zero-trust plugins, auditing        |
 | Distributed      | K8s blueprints                | Sharding, proxy orchestration       | Global multi-user clusters          |
 | API/Web          | REST/gRPC for CI              | Basic web UI with auth              | Full SaaS UI                        |
+
+---
+
+## AI-Guided Authoring & Scaffolding
+
+Stack Composer is evolving into a fully AI-guided, end-to-end project authoring and scaffolding platform. See [Architecture & Component Guides/ai-wizard-roadmap.md](../Architecture%20&%20Component%20Guides/ai-wizard-roadmap.md) for the full vision and phased implementation plan.
+
+- Hybrid conversational-form wizard for discovery and planning
+- Interactive tech stack exploration and “what-if” analysis
+- Real-time directory tree and scaffold preview (tree/graph views)
+- Chat-based copilot, rationale tooltips, and decision history
+- Context-aware recommendations, security risk surfacing, and best practice updates
+- One-click project generation, export, and cloud deployment hooks
+- Template projects, import/modernization, and project history
 
 ---
 

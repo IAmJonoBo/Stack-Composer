@@ -48,6 +48,10 @@ clean:
 book:
 	mdbook serve docs
 
+# Preview the hybrid wizard UI (React Flow + Arborist demo)
+preview-wizard:
+	pnpm run preview-wizard
+
 # Default
 @default:
 	@echo "Available recipes: bootstrap, check, test, build, run, security, fmt, clean, book"

@@ -1,39 +1,39 @@
 # Summary
 
-- [Welcome](../README.md)
+- [Welcome](../readme.md)
 
 ## Getting Started
 
-- [Getting Started Overview](Getting Started Bundle/README.md)
-  - [Quick Start](Getting Started Bundle/quickstart.md)
-  - [System Requirements](Getting Started Bundle/system-requirements.md)
+- [Getting Started Overview](getting-started-bundle/readme.md)
+  - [Quick Start](getting-started-bundle/quickstart.md)
+  - [System Requirements](getting-started-bundle/system-requirements.md)
 - [Installation](installation.md)
 - [FAQ](faq.md)
 
 ## User Guides
 
-- [User Guides Overview](user-guides/README.md)
+- [User Guides Overview](user-guides/readme.md)
   - [Configuration](configuration.md)
   - [Usage Guide](usage.md)
   - [Troubleshooting](troubleshooting.md)
 
 ## Extensibility
 
-- [Extensibility Overview](extensibility/README.md)
-  - [Plugin SDK](plugin-sdk/README.md)
-  - [Component Details](component-details/README.md)
+- [Extensibility Overview](extensibility/readme.md)
+  - [Plugin SDK](plugin-sdk/readme.md)
+  - [Component Details](component-details/readme.md)
 
 ## Architecture & Roadmap
 
-- [Architecture & Roadmap Overview](architecture-roadmap/README.md)
+- [Architecture & Roadmap Overview](architecture-roadmap/readme.md)
   - [Architecture Overview](architecture-overview.md)
-  - [AI Platform Overview](AI Platform Overview.md)
+  - [AI Platform Overview](ai-platform-overview.md)
   - [Roadmap](roadmap.md)
   - [ADRs](adr/0000-template.md)
 
 ## Operations & Security
 
-- [Operations & Security Overview](operations-security/README.md)
+- [Operations & Security Overview](operations-security/readme.md)
   - [Operations Guide](ops-guide.md)
   - [Telemetry & Privacy](telemetry-privacy.md)
   - [Security Policy](security-policy.md)
@@ -41,8 +41,8 @@
 
 ## Community & Contribution
 
-- [Community & Contribution Overview](community-contribution/README.md)
-  - [Contributing](CONTRIBUTING.md)
-  - [Contributing to Docs](contributing-to-docs.md)
-  - [Code of Conduct](CODE_OF_CONDUCT.md)
-  - [Governance](MAINTAINERS.md)
+- [Community & Contribution Overview](community-contribution/readme.md)
+  - [Contributing](community-contribution/contributing.md)
+  - [Contributing to Docs](community-contribution/contributing-to-docs.md)
+  - [Code of Conduct](community-contribution/code-of-conduct.md)
+  - [Governance](community-contribution/maintainers.md)

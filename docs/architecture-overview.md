@@ -1,6 +1,6 @@
 # Architecture Overview
 
-> **Developer Environment:** For details on the required toolchain, reproducible setup, and all supporting tools (Rust, Node, Docker, Nix, Qdrant, Meilisearch, etc.), see [Toolchain & DX Pipeline](toolchain.md) and [Developer Setup](Developer & Extensibility Docs/dev-setup.md).
+> **Developer Environment:** For details on the required toolchain, reproducible setup, and all supporting tools (Rust, Node, Docker, Nix, Qdrant, Meilisearch, etc.), see [Toolchain & DX Pipeline](toolchain.md) and [Developer Setup](developer-extensibility-docs/dev-setup.md).
 
 This document explains **how Stack Composer works** and how its components communicate at run-time.
 
@@ -187,10 +187,10 @@ flowchart TD
 
 ## Next Reading
 
-- [Component-Details Index](component-details/README.md)
+- [Component-Details Index](component-details/readme.md)
 
 - [Planner Integration](planner-integration.md)
 
-- [Plugin SDK](plugin-sdk/README.md)
+- [Plugin SDK](plugin-sdk/readme.md)
 
 ---

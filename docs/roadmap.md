@@ -1,9 +1,9 @@
 # See Also
 
-- [AI Platform Overview](AI%20Platform%20Overview.md): High-level vision, navigation, and links to all major docs.
-- [AI Wizard Roadmap](Architecture%20&%20Component%20Guides/ai-wizard-roadmap.md): Phased plan and feature set.
-- [Architecture Questions](Architecture%20&%20Component%20Guides/architecture-questions.md): Open questions and deployment plan.
-- [Component Details Index](component-details/README.md): Responsibilities, APIs, and extension hooks for all modules.
+- [AI Platform Overview](ai-platform-overview.md): High-level vision, navigation, and links to all major docs.
+- [AI Wizard Roadmap](architecture-component-guides/ai-wizard-roadmap.md): Phased plan and feature set.
+- [Architecture Questions](architecture-component-guides/architecture-questions.md): Open questions and deployment plan.
+- [Component Details Index](component-details/readme.md): Responsibilities, APIs, and extension hooks for all modules.
 
 ---
 
@@ -49,7 +49,7 @@ This roadmap outlines planned features and milestones for Stack Composer.
 
 ## AI-Guided Authoring & Scaffolding
 
-Stack Composer is evolving into a fully AI-guided, end-to-end project authoring and scaffolding platform. See [Architecture & Component Guides/ai-wizard-roadmap.md](Architecture%20&%20Component%20Guides/ai-wizard-roadmap.md) for the full vision and phased implementation plan.
+Stack Composer is evolving into a fully AI-guided, end-to-end project authoring and scaffolding platform. See [ai-wizard-roadmap.md](architecture-component-guides/ai-wizard-roadmap.md) for the full vision and phased implementation plan.
 
 - Hybrid conversational-form wizard for discovery and planning
 - Interactive tech stack exploration and “what-if” analysis
@@ -63,6 +63,6 @@ Stack Composer is evolving into a fully AI-guided, end-to-end project authoring 
 
 **Next Steps:**
 
-- Review [Component Details](extensibility/component-details.md)
+- Review [Component Details](component-details/readme.md)
 - See [Operations Guide](operations-security/ops-guide.md)
-- Join the [Community](community-contribution/CONTRIBUTING.md)
+- Join the [Community](community-contribution/contributing.md)

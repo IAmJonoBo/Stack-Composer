@@ -6,12 +6,12 @@ This document serves as the high-level index and vision for Stack Composer’s n
 
 ## Vision & Roadmap
 
-- See [AI Wizard Roadmap](ai-wizard-roadmap.md) for the phased plan and feature set.
-- See [Architecture Questions](architecture-questions.md) for open questions, technical details, and deployment plan.
+- See [AI Wizard Roadmap](../architecture-roadmap/AI Wizard Roadmap.md) for the phased plan and feature set.
+- See [Architecture Questions](../architecture-roadmap/Architecture Questions.md) for open questions, technical details, and deployment plan.
 
 ## Component Index
 
-- [Component Details Index](../component-details/readme.md): Responsibilities, APIs, and extension hooks for all major modules.
+- [Component Details Index](../extensibility/component-details.md): Responsibilities, APIs, and extension hooks for all major modules.
 - [Planner Adapter](../component-details/planner-adapter.md): Planning, Fast Downward integration, and roadmap.
 - [LLM Runtime](../component-details/llm-runtime.md): LLM abstraction, adapters, and model management.
 - [Plugin Host](../component-details/plugin-host.md): WASI plugins, registry, and security.
@@ -33,9 +33,7 @@ This document serves as the high-level index and vision for Stack Composer’s n
 
 - [Main Roadmap](roadmap.md)
 - [Architecture Overview](architecture-overview.md)
-- [AI Wizard Roadmap](ai-wizard-roadmap.md)
-- [Architecture Questions](architecture-questions.md)
+- [AI Wizard Roadmap](../architecture-roadmap/AI Wizard Roadmap.md)
+- [Architecture Questions](../architecture-roadmap/Architecture Questions.md)
 
 ---
-
-_Use this document as your starting point for all Stack Composer architecture, planning, and implementation work._

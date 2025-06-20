@@ -17,5 +17,9 @@
   "vitest.commandLine": "pnpm vitest",
   "vitest.enable": true,
   // Recommended extensions
-  "extensions.ignoreRecommendations": false
+  "extensions.ignoreRecommendations": false,
+  "sonarlint.connectedMode.project": {
+    "connectionId": "",
+    "projectKey": ""
+  }
 }

@@ -17,20 +17,20 @@ A: Windows 10+, macOS 11+, and Linux (glibc ≥ 2.31).
 ## Installation & Setup
 
 **Q: How do I install Stack Composer?**
-A: See the [Quick Start](quickstart.md) and [Installation](installation.md) guides for platform-specific steps.
+A: See the [Quick Start](getting-started-bundle/quickstart.md) and [Installation](installation.md) guides for platform-specific steps.
 
 **Q: What if the installer fails or dependencies are missing?**
-A: Check [dev-setup.md](../Developer%20&%20Extensibility%20Docs/dev-setup.md#troubleshooting) and [toolchain.md](toolchain.md#troubleshooting).
+A: Check [dev-setup.md](developer-extensibility-docs/dev-setup.md#troubleshooting) and [toolchain.md](toolchain.md#troubleshooting).
 
 ---
 
 ## Usage
 
 **Q: How do I use Stack Composer with a project brief?**
-A: Drag & drop your brief into the app, or use the CLI for headless mode. See [Quick Start](quickstart.md).
+A: Drag & drop your brief into the app, or use the CLI for headless mode. See [Quick Start](getting-started-bundle/quickstart.md).
 
 **Q: How do I add plugins?**
-A: See the [Plugin SDK](plugin-sdk/README.md) and [Configuration](configuration.md) guides.
+A: See the [Configuration](user-guides/configuration.md) guide.
 
 ---
 
@@ -53,7 +53,7 @@ A: Add `--planner-timeout 60` or simplify your brief.
 A: Yes. All inference and search are local by default. Telemetry is opt-in and anonymized.
 
 **Q: How are plugins verified?**
-A: Plugins must be signed (Ed25519) and are sandboxed. See [Security Policy](security-policy.md).
+A: Plugins must be signed (Ed25519) and are sandboxed. See [Security Policy](operations-security/security-policy.md).
 
 ---
 

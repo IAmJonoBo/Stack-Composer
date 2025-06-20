@@ -6,7 +6,6 @@
 		"lint": "eslint . --ext .js,.ts,.tsx && markdownlint docs/**/*.md && vale docs/",
 		"test": "vitest run",
 		"format": "prettier --write .",
-		"prepare": "husky install",
 		"preview-wizard": "vite --config vite.wizard.config.ts",
 		"rust:build": "cargo build --manifest-path rust-backend/Cargo.toml",
 		"rust:test": "cargo test --manifest-path rust-backend/Cargo.toml",
@@ -19,6 +18,7 @@
 	"devDependencies": {
 		"@stryker-mutator/core": "^9.0.1",
 		"@testing-library/jest-dom": "^6.6.3",
+		"@types/node": "latest",
 		"@vitejs/plugin-react": "^4.5.2",
 		"dagre": "latest",
 		"eslint": "latest",
@@ -32,17 +32,17 @@
 		"tippy.js": "latest",
 		"trunk": "latest",
 		"vitest": "latest",
-		"zod": "latest",
-		"@types/node": "latest"
+		"zod": "latest"
 	},
 	"dependencies": {
 		"@supabase/functions-js": "latest",
+		"axios": "latest",
+		"inquirer": "latest",
+		"latest": "^0.2.0",
+		"node-fetch": "latest",
 		"react": "latest",
 		"react-d3-tree": "latest",
-		"react-dom": "latest",
-		"inquirer": "latest",
-		"axios": "latest",
-		"node-fetch": "latest"
+		"react-dom": "latest"
 	},
 	"husky": {
 		"deprecated": false

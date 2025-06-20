@@ -7,7 +7,7 @@
 
 ---
 
-# Roadmap
+## Roadmap
 
 This roadmap outlines planned features and milestones for Stack Composer.
 

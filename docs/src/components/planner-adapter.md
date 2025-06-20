@@ -157,16 +157,13 @@ stack-composer --planner optic --planner-timeout 120
 
 ## 7 Roadmap
 
-| Version | Item                                         |
-| ------- | -------------------------------------------- |
-| 0.5     | Fast Downward adapter + auto PDDL generation |
-| 0.8     | OPTIC temporal support                       |
-| 1.2     | JSHOP‑2 HTN adapter                          |
-
-<!-- trunk-ignore(markdownlint/MD049) -->
-
-| 1.2 | RL‑Critic integration (choose best of *N* plans) |
-| 2.0 | Prost RDDL adapter for stochastic environments |
+| Version | Item                                            |
+| ------- | ----------------------------------------------- |
+| 0.5     | Fast Downward adapter + auto PDDL generation    |
+| 0.8     | OPTIC temporal support                          |
+| 1.2     | JSHOP‑2 HTN adapter                             |
+| 1.2     | RL*Critic integration (choose best of_N* plans) |
+| 2.0     | Prost RDDL adapter for stochastic environments  |
 
 ---
 

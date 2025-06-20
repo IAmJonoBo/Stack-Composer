@@ -124,7 +124,7 @@ CLI override: `--critic off` disables the subsystem.
 
 ---
 
-## 10 FAQ
+## 10 FAQ (RL Critic)
 
 **Is RL required?**  
 No. If disabled, Stack Agent picks the plan with the lowest heuristic cost.

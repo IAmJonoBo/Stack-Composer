@@ -1,24 +1,46 @@
 # WASI Plugin Host
 
-Runs user-provided WebAssembly bundles in a Wasmtime sandbox.
+## Responsibilities
 
-- Wasmtime 1.x claims production-ready isolation and speed [oai_citation:9‡bytecodealliance.org](https://bytecodealliance.org/articles/wasmtime-1-0-fast-safe-and-production-ready?utm_source=chatgpt.com) [oai_citation:10‡bytecodealliance.org](https://bytecodealliance.org/articles/wasmtime-and-cranelift-in-2023?utm_source=chatgpt.com).
-- Capability tokens restrict I/O (read-only FS, no network by default).
+- Host and manage WASI plugins
+- Enforce capability tokens and sandboxing
+- Provide host functions for plugin interaction
 
-## Host Functions
+## Public APIs
 
-| Func                  | Purpose                |
-| --------------------- | ---------------------- |
-| `plugin.search(text)` | Hybrid retrieval query |
-| `plugin.emit(msg)`    | Send UI notification   |
+- `load_plugin(path: str)`
+- `call_plugin(func: str, args: List)`
 
-Plugins live in `~/Library/Application Support/Stack Composer/plugins/`.
+## Extension Hooks
+
+- Support for new plugin types
+- Custom host functions
 
 ## Roadmap & Enhancements
 
-- **Plugin Registry:** Planned OCI-based registry for plugin discovery, versioning, and provenance.
-- **Plugin Discovery UI:** In-app UI for listing, searching, and managing plugins.
-- **Security Templates & SDKs:** WASI Component Model-based SDKs and templates for secure plugin authoring.
-- **Sample Plugins:** To be provided with formal docs, CI, and credential-handling best practices.
+- OCI-based plugin registry
+- In-app plugin discovery UI
+- Security templates & SDKs for plugin authoring
+- Sample plugins with docs and best practices
+
+## Open Questions
+
+- How to manage plugin permissions securely?
+- What is the best way to version plugins?
+
+## How to Extend/Customize
+
+- Add new host functions via the plugin API
+- Register new plugin types in the registry
+
+## Real-World Usage Example
+
+```rust
+plugin_host.load_plugin("my_plugin.wasm");
+```
+
+---
 
 See [architecture-questions.md](../Architecture%20&%20Component%20Guides/architecture-questions.md) for open questions and strategic direction.
+
+_See also: [LLM Runtime](llm-runtime.md), [Telemetry Pipeline](telemetry.md)_

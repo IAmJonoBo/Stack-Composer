@@ -1,44 +1,46 @@
 # Planner Adapter (Fast Downward / OPTIC)
 
-CLI wrapper around external planners.
+## Responsibilities
 
-## Why Fast Downward
+- Invoke external planners (Fast Downward, OPTIC) for PDDL planning
+- Translate requirements into domain/problem files
+- Return plan steps to orchestrator
 
-- Best-in-class classical PDDL search, GPL-2 exception allows subprocess use [oai_citation:8‡github.com](https://github.com/google/sentencepiece?utm_source=chatgpt.com).
+## Public APIs
 
-## Contract
+- `plan(domain: File, problem: File) -> Plan`
+- `validate_plan(plan: Plan) -> bool`
 
-```bash
-fd_adapter solve domain.pddl problem.pddl --timeout 30 --out plan.json
-```
+## Extension Hooks
 
-Output JSON: ordered list of (action, params, cost).
-
-OPTIC
-
-Support temporal/cost PDDL by passing --engine optic.
+- Support for new planners
+- Custom plan validation logic
 
 ## Roadmap & Enhancements
 
-- **Plan Visualization & Editor:** Interactive DAG/textual plan viewer and editor in the UI.
-- **Pluggable Planners:** Support for cloud-based planners and new open-source alternatives; planner layer will be modular.
-- **Planner Adapters:** Expose planning as a service and enable in-process invocation for UI-driven debugging and workflow integration.
+- Canonical PDDL test suite
+- REST endpoints for planning
+- Plan visualization & editor (UI)
+- Pluggable planners and adapters
 
-See [architecture-questions.md](../Architecture%20&%20Component%20Guides/architecture-questions.md) for open questions and strategic direction.
+## Open Questions
+
+- How to generalize for multiple planners?
+- What is the best UI for plan visualization?
+
+## How to Extend/Customize
+
+- Add a new planner adapter by implementing the planner trait
+- Register new planners via configuration
+
+## Real-World Usage Example
+
+```rust
+let plan = planner_adapter.plan(domain_file, problem_file);
+```
 
 ---
 
-## Fast Downward Integration
+See [architecture-questions.md](../Architecture%20&%20Component%20Guides/architecture-questions.md) for open questions and strategic direction.
 
-Stack Composer will integrate Fast Downward as a modular, extensible planner using a dedicated `planners/` crate and a unified Planner trait. The initial focus is on:
-
-- Async Planner trait and Fast Downward subprocess adapter
-- Configurable search parameters (heuristics, timeouts, etc.)
-- CLI plan viewer (action list, GraphViz export)
-- Canonical PDDL test suite and CI validation
-- REST API for planning
-- Telemetry for latency, plan length, and heuristic stats
-
-Future enhancements include a web/desktop plan viewer (React Flow + Dagre), search replay, and support for additional planners.
-
-See [architecture-questions.md](../Architecture%20&%20Component%20Guides/architecture-questions.md#fast-downward-integration-plan) for the full integration plan and rationale.
+_See also: [Stack Agent](stack-agent.md), [Retrieval Layer](retrieval-layer.md)_

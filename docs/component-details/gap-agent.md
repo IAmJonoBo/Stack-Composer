@@ -1,14 +1,45 @@
 # Gap-Analysis Agent
 
-Finds missing requirements and generates clarifying questions.
+## Responsibilities
 
-- Compares extracted requirement graph to an ontology of stack constraints.
-- Calls `llm.ask()` with system prompt “Ask exactly one clarifying question …”.
+- Identify missing requirements and generate clarifying questions
+- Compare extracted requirements to ontology/stack constraints
+- Trigger user prompts for unresolved gaps
+
+## Public APIs
+
+- `find_gaps(requirements: List) -> Gaps`
+- `ask_clarifying_question(gap: Gap) -> Question`
+
+## Extension Hooks
+
+- Custom gap-detection logic
+- Integration with new ontology sources
 
 ## Roadmap & Enhancements
 
-- **Ontology Versioning:** Planned support for versioned, updatable ontologies and knowledge graphs.
-- **GraphRAG Integration:** Will leverage property-graph traversal for richer gap analysis and clarifying question generation.
-- **UI for Gap Review:** Future UI to review, accept, or refine clarifying questions and gap findings.
+- Ontology versioning and updates
+- GraphRAG integration for richer gap analysis
+- UI for gap review and refinement
+
+## Open Questions
+
+- How to balance automated vs. user-driven gap resolution?
+- What is the best UI for reviewing gaps?
+
+## How to Extend/Customize
+
+- Add new gap-detection rules via plugins
+- Connect to external ontologies for richer analysis
+
+## Real-World Usage Example
+
+```rust
+let gaps = gap_agent.find_gaps(requirements);
+```
+
+---
 
 See [architecture-questions.md](../Architecture%20&%20Component%20Guides/architecture-questions.md) for open questions and strategic direction.
+
+_See also: [Ingestion Agent](ingestion-agent.md), [Stack Agent](stack-agent.md)_

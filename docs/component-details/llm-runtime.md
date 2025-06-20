@@ -1,45 +1,45 @@
 # LLM Runtime Abstraction
 
-A thin Rust trait that wraps Ollama’s REST API, leaving room to swap in vLLM or HF TGI later.
-
-## Purpose
-
-- Stream tokens from local GGUF models via Ollama [oai_citation:1‡ollama.com](https://ollama.com/?utm_source=chatgpt.com) [oai_citation:2‡ollama.com](https://ollama.com/blog/openai-compatibility?utm_source=chatgpt.com).
-- Provide an OpenAI-compatible interface for downstream tools.
-
 ## Responsibilities
 
-|                 |                                                     |
-| --------------- | --------------------------------------------------- |
-| Model lifecycle | `pull`, `run`, `list`, `delete`.                    |
-| Streaming API   | WebSocket → Tokio broadcast channel.                |
-| Rate limiting   | Polite back-pressure to avoid OOM on low-RAM hosts. |
+- Abstract over LLM backends (Ollama, vLLM, LM Studio, etc.)
+- Manage model loading, switching, and inference
+- Provide a unified API for agents
 
-## Trait Surface
+## Public APIs
 
-```rust
-#[async_trait]
-pub trait LlmEngine {
-    async fn pull(model: &str) -> Result<()>;
-    async fn chat(req: ChatRequest) -> impl Stream<Item = Token>;
-}
-```
+- `generate(prompt: str) -> str`
+- `load_model(model_name: str)`
 
-Default Implementation
+## Extension Hooks
 
-Uses reqwest against <http://localhost:11434> (Ollama default port).
-Fallback path for OpenAI proxy header when a remote endpoint is configured ￼.
-
-Config
-
-[llm]
-default_model = "phi-3:4bit"
-timeout_secs = 60
+- Support for new LLM providers
+- Custom prompt templates
 
 ## Roadmap & Enhancements
 
-- **Runtime Adapters:** Planned support for vLLM, Hugging Face TGI, and LM Studio as alternative LLM runtimes.
-- **Model Management UI:** UI for listing, downloading, switching, and updating models, inspired by Ollama and LM Studio.
-- **Model Registry:** Metadata and versioning for reproducibility and rolling updates.
+- Model management UI
+- Plugin model sources and online updates
+- Runtime adapters for vLLM, Hugging Face TGI, LM Studio
+
+## Open Questions
+
+- How to handle model versioning and caching?
+- What is the best fallback for failed inferences?
+
+## How to Extend/Customize
+
+- Add new LLM adapters via plugin
+- Implement custom prompt logic
+
+## Real-World Usage Example
+
+```rust
+let response = llm_runtime.generate("Summarize this document.");
+```
+
+---
 
 See [architecture-questions.md](../Architecture%20&%20Component%20Guides/architecture-questions.md) for open questions and strategic direction.
+
+_See also: [Retrieval Layer](retrieval-layer.md), [Plugin Host](plugin-host.md)_

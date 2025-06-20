@@ -4,22 +4,24 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": "always"
   },
-  "biome.enable": true,
-  "biome.lint.enable": true,
-  "biome.format.enable": true,
+  "eslint.enable": true,
+  "eslint.validate": ["javascript", "typescript", "typescriptreact", "javascriptreact"],
+  "prettier.configPath": ".prettierrc",
+  "prettier.enable": true,
   "vale.enabled": true,
   "vale.configPath": ".vale.ini",
   "markdownlint": {
     "config": ".markdownlint.json"
   },
-  "prettier.configPath": ".prettierrc",
+  // SonarLint integration
+  "sonarlint.connectedMode.project": {
+    "connectionId": "",
+    "projectKey": ""
+  },
   // Vitest integration
   "vitest.commandLine": "pnpm vitest",
   "vitest.enable": true,
   // Recommended extensions
   "extensions.ignoreRecommendations": false,
-  "sonarlint.connectedMode.project": {
-    "connectionId": "",
-    "projectKey": ""
-  }
+  "git.ignore": ["husky"]
 }

@@ -9,7 +9,7 @@ bootstrap:
 # Lint all code and docs
 check:
 	cargo clippy --all-targets --all-features -- -D warnings
-	biome check .
+	eslint . --ext .js,.ts,.tsx
 	markdownlint docs/**/*.md
 	vale docs/
 
@@ -36,7 +36,7 @@ security:
 # Format code
 fmt:
 	cargo fmt --all
-	biome format .
+	prettier --write .
 
 # Clean up
 clean:

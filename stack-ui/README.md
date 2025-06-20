@@ -1,5 +1,7 @@
 # Stack Composer UI
 
+> **Note:** This project uses **pnpm** as the primary package manager. Use **Yarn** only for edge cases (see main README).
+
 This directory contains the Tauri + React + Vite frontend for Stack Composer.
 
 ## Setup
@@ -33,3 +35,8 @@ This directory contains the Tauri + React + Vite frontend for Stack Composer.
 ---
 
 For more details, see the main project README.
+
+## Package Manager Policy
+
+- **pnpm** is required for all install, build, and dev commands.
+- **Yarn** is only needed for rare edge cases (see main README for details).

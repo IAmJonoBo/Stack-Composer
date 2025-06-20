@@ -1,5 +1,7 @@
 # justfile for Stack Composer
 
+# All JS/TS package management uses pnpm by default. Use Yarn only for edge cases (see README).
+
 # Bootstrap all dependencies and services
 bootstrap:
 	pnpm install

@@ -1,5 +1,7 @@
 # Contributing to Stack Composer
 
+> **Note:** All JavaScript/TypeScript package management uses **pnpm** by default. Use **Yarn** only for edge cases (see main README).
+
 {% include "../../_includes/contribution-steps.md" %}
 
 ---

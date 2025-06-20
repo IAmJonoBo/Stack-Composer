@@ -18,3 +18,10 @@ overrides:
   npm@<6.14.6: '>=6.14.6'
   npm@<6.13.4: '>=6.13.4'
   npm@<6.13.3: '>=6.13.3'
+
+packages:
+  - stack-ui
+  - src-tauri
+  - agents/*
+  - rust-backend
+  - docs

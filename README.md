@@ -1,6 +1,17 @@
 # Stack Composer: End-to-End Project Brief
 
-Below is a single, end-to-end project brief that gives any engineer (or team) everything they need to bootstrap → ship → evolve Stack Composer. It merges the architectural vision we have iterated on with industry-proven practices and concrete commands, and it references the most relevant primary sources so every claim is traceable.
+> **Note:** This project uses **pnpm** as the primary package manager for all JavaScript/TypeScript dependencies. Use **Yarn** only for edge cases (see below).
+>
+> - All install, build, and dev commands use pnpm by default.
+> - If you encounter a tool or script that requires Yarn, see the troubleshooting section below.
+
+---
+
+## Using pnpm and Yarn
+
+- **pnpm** is required for all standard workflows (install, dev, build, lint, test, etc.).
+- **Yarn** is only needed for rare edge cases (legacy scripts, some Tauri plugins, or if explicitly documented).
+- If you are unsure, always use pnpm first.
 
 ---
 

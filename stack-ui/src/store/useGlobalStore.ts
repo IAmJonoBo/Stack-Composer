@@ -15,6 +15,6 @@ export const useGlobalStore = create<{
 }>((set) => ({
   // Example state
   userProfile: null,
-  setUserProfile: (profile: UserProfile) => set({ userProfile: profile }),
+  setUserProfile: (profile) => set({ userProfile: profile }),
   // Add more global state as needed
 }));

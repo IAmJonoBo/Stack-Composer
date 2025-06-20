@@ -25,6 +25,18 @@ For a reproducible, fast, and modern developer experience, use the pre-configure
 
 ---
 
+## Code Quality & Linting Workflow
+
+All linting, formatting, and code quality checks are orchestrated by **Trunk**. This ensures maximum synergy and minimal duplication between Biome, ESLint (unicorn), Prettier, Stylelint, HTMLHint, Markdownlint, Vale, and other tools.
+
+- **Run `trunk check` locally before pushing or opening a PR.** This will run all configured linters, formatters, and code quality tools in a single pass.
+- The CI pipeline enforces `trunk check` as the main code quality gate. PRs will not pass unless all Trunk checks succeed.
+- Individual linter scripts (e.g., `biome check`, `eslint`, `prettier`, etc.) are deprecated in favor of Trunk orchestration.
+- To add or modify code quality tools, update `.trunk/trunk.yaml` and test with `trunk check`.
+- For more details, see [Trunk documentation](https://docs.trunk.io/cli) and the project `.trunk/trunk.yaml`.
+
+---
+
 ## Pull Request & Review Process
 
 1. Fork the repo and create a feature branch.

@@ -36,7 +36,8 @@
         "valentjn.vscode-ltex",
         "yoavbls.pretty-ts-errors",
         "vitest.explorer",
-        "ms-python.python"
+        "ms-python.python",
+        "openai.chatgpt"
       ]
     }
   }

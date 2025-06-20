@@ -46,6 +46,7 @@ coverage/
 
 # Misc
 *.log
+._*
 
 # Do not ignore source or test files!
 # !src/

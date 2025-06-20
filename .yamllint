@@ -1,0 +1,23 @@
+---
+extends: default
+
+rules:
+  # Allow GitHub Actions "on" keyword (not a truthy value issue)
+  truthy:
+    allowed-values: ['true', 'false', 'on', 'off', 'yes', 'no']
+    check-keys: false
+  
+  # Allow longer lines for URLs and complex expressions
+  line-length:
+    max: 120
+    allow-non-breakable-words: true
+    allow-non-breakable-inline-mappings: true
+  
+  # Be more lenient with comments
+  comments:
+    min-spaces-from-content: 1
+  
+  # Allow empty values (common in GitHub Actions)
+  empty-values:
+    forbid-in-block-mappings: false
+    forbid-in-flow-mappings: false

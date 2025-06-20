@@ -1,14 +1,14 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.0.0/schema.json",
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": true,
-      "complexity": {},
-      "style": {}
-    }
-  },
-  "formatter": {
-    "enabled": true
-  }
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"complexity": {},
+			"style": {}
+		}
+	},
+	"formatter": {
+		"enabled": true
+	}
 }

@@ -1,0 +1,7 @@
+[advisories]
+vulnerability = "deny"
+unmaintained = "deny"
+
+[override]
+# Example: fail build until GTK-3 removed
+"RUSTSEC-2024-0413" = { ignore = false }

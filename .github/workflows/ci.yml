@@ -1,14 +1,12 @@
+---
 name: CI
-
-on:
+'on':
   push:
     branches: [main]
   pull_request:
     branches: [main]
-
 permissions:
   contents: read
-
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -17,28 +15,80 @@ jobs:
         os: [ubuntu-22.04, macos-13, windows-2022]
     steps:
       - uses: actions/checkout@v4
+      - name: Lint GitHub Actions workflows
+        uses: rhysd/actionlint-action@v1
+        with:
+          fail-on-error: true
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Install Rust toolchain
-        run: |
-          curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain stable
-          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@v1
+        with:
+          toolchain: stable
+          components: clippy,rustfmt
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: |
+            .
+            rust-backend
+            src-tauri
       - name: Install pnpm
         run: npm install -g pnpm
+      - name: Cache pnpm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+      - name: Install Trunk CLI
+        run: |
+          curl -fsSL https://get.trunk.io -o install-trunk.sh
+          bash install-trunk.sh -y
+          echo "$HOME/.trunk/bin" >> $GITHUB_PATH
       - name: Install system dependencies
         run: |
-          pnpm install
-          cargo install just
+          if [[ "$RUNNER_OS" == "Linux" ]]; then
+            sudo apt-get update
+            sudo apt-get install -y build-essential pkg-config libssl-dev
+          elif [[ "$RUNNER_OS" == "macOS" ]]; then
+            # macOS already has necessary tools
+            echo "macOS dependencies already available"
+          elif [[ "$RUNNER_OS" == "Windows" ]]; then
+            # Windows dependencies handled by setup actions
+            echo "Windows dependencies handled by setup actions"
+          fi
+      - name: Cache cargo tools
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin
+          key: ${{ runner.os }}-cargo-tools-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-tools-
+      - name: Install cargo tools
+        run: |
+          if ! command -v just &> /dev/null; then
+            cargo install just
+          fi
+          if ! command -v mdbook &> /dev/null; then
+            cargo install mdbook
+          fi
+      - name: Run Trunk code quality checks
+        run: trunk check --all --no-progress
       - name: Log Fast Downward SHA-256
         run: |
           bash scripts/log_fast_downward_sha256.sh
           cat fast_downward.sha256 || true
-      - name: Build UI
+      - name: Install UI dependencies
         run: |
           cd stack-ui
           pnpm install
+      - name: Build UI
+        run: |
+          cd stack-ui
           pnpm build
       - name: Build backend
         run: |
@@ -53,25 +103,32 @@ jobs:
           mdbook test
       - name: Run Axe-core accessibility check
         run: |
-          npx axe-core-cli stack-ui/dist --exit
+          if [ -d "stack-ui/dist" ]; then
+            npx axe-core-cli stack-ui/dist --exit
+          else
+            echo "Warning: stack-ui/dist directory not found, skipping check"
+            exit 1
+          fi
       - name: Run dep-scan
         run: |
-          npx dep-scan --src . --report-format sarif --fail-on-severity HIGH,CRITICAL
+          npx dep-scan --src . \
+            --report-format sarif \
+            --fail-on-severity HIGH,CRITICAL
       - name: Run cargo-deny
         run: |
-          cargo deny check
-      - name: Markdownlint
-        run: |
-          npm install -g markdownlint-cli
-          markdownlint '**/*.md' --config .markdownlint.json
+          cargo \
+            deny \
+            check
       - name: Link Checker (Lychee)
-        run: |
-          curl -LSfs https://github.com/lycheeverse/lychee/releases/latest/download/lychee-x86_64-apple-darwin.tar.gz | tar xz
-          ./lychee --config lychee.toml '**/*.md' || exit 1
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: --config lychee.toml '**/*.md'
+          fail: true
       - name: Upload artefacts
         uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: build-artifacts
+          name: build-artifacts-${{ matrix.os }}
           path: |
             target/
             stack-ui/dist/

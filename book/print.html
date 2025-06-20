@@ -2767,9 +2767,9 @@ spec:
         rust: [stable, nightly]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions-rs/toolchain@v1
+      - uses: actions/setup-rust@v1
         with:
-          toolchain: ${{ matrix.rust }}
+          rust-version: }
       - run: cargo build --release
 </code></pre>
               <hr />

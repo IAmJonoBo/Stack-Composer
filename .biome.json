@@ -1,5 +1,38 @@
 {
-  "files": {
-    "ignore": ["**/*.css"]
-  }
+	"files": {
+		"ignore": [
+			"**/node_modules/**",
+			"**/dist/**",
+			"**/build/**",
+			"**/coverage/**",
+			"**/target/**",
+			"**/book/**",
+			"**/.vale/**",
+			"**/.trunk/**",
+			".trunk/",
+			"**/.git/**",
+			"**/.husky/**",
+			"**/.vscode/**",
+			"**/.idea/**",
+			"**/test_data/**",
+			"**/__tests__/**",
+			"**/__snapshots__/**",
+			"**/vendor/**",
+			"**/third_party/**",
+			"**/legacy/**",
+			"**/*.log",
+			"**/*.tmp",
+			"**/*.bak",
+			"**/*.cache",
+			".DS_Store",
+			"**/._*",
+			"._*",
+			"linkcheck-report.txt",
+			"duplicate_docs_report.txt",
+			"Cargo.lock",
+			"**/*.css",
+			".markdownlintignore",
+			"**/*.min.js"
+		]
+	}
 }

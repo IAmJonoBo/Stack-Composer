@@ -25,9 +25,9 @@ jobs:
         rust: [stable, nightly]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: ${{ matrix.rust }}
+      - uses: actions/setup-rust@v1
+  with:
+    rust-version: }
       - run: cargo build --release
 ```
 

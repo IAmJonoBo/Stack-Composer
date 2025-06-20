@@ -1,0 +1,6 @@
+{
+	"root": true,
+	"plugins": ["unicorn"],
+	"extends": ["plugin:unicorn/recommended"],
+	"rules": {}
+}

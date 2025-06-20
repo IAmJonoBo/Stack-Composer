@@ -3,7 +3,7 @@ title = "Stack Composer Documentation"
 author = ["Stack Composer Team"]
 description = "Comprehensive user, developer, and operator documentation for Stack Composer."
 multilingual = false
-src = "src"
+src = "docs/src"
 
 [output.html]
 default-theme = "light"

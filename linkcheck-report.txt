@@ -1,3 +1,0 @@
-Need to install the following packages:
-markdown-link-check@3.13.7
-Ok to proceed? (y) 

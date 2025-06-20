@@ -1,4 +1,3 @@
-# Trunk cache and outputs
 *out
 *logs
 *actions
@@ -8,8 +7,3 @@ plugins
 user_trunk.yaml
 user.yaml
 tmp
-
-# Do not ignore source or test files!
-# !**/*.ts
-# !**/*.js
-# !**/*.test.*

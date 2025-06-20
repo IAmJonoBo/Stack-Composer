@@ -1,0 +1,196 @@
+# Architecture Overview
+
+> **Developer Environment:** For details on the required toolchain, reproducible setup, and all supporting tools (Rust, Node, Docker, Nix, Qdrant, Meilisearch, etc.), see [Toolchain & DX Pipeline](toolchain.md) and [Developer Setup](developer-extensibility-docs/dev-setup.md).
+
+This document explains **how Stack Composer works** and how its components communicate at run-time.
+
+---
+
+## C4 Context Diagram
+
+```mermaid
+flowchart TD
+    User((User))
+    Admin((Admin))
+    StackComposer["Stack Composer Desktop App"]
+    Qdrant[(Qdrant Vector DB)]
+    Meili[(Meilisearch)]
+    Planner[(Fast Downward / OPTIC)]
+    Plugin[[WASI Plugins]]
+    Web["Web (Docs, Updates)"]
+
+    User -- "Brief, Actions" --> StackComposer
+    Admin -- "Config, Monitoring" --> StackComposer
+    StackComposer -- "Hybrid Search" --> Qdrant
+    StackComposer -- "Hybrid Search" --> Meili
+    StackComposer -- "Plan Request" --> Planner
+    StackComposer -- "Plugin Calls" --> Plugin
+    StackComposer -- "Check for Updates" --> Web
+```
+
+**Responsibilities:**
+
+- Stack Composer ingests briefs, interacts with users/admins, and orchestrates retrieval, planning, and plugin execution.
+
+- External dependencies: Qdrant, Meilisearch, planners, plugins, and web resources.
+
+- Data flows: User input → Stack Composer → retrieval/planning/plugins → output (report, scaffold, telemetry).
+
+---
+
+## C4 Container Diagram
+
+```mermaid
+flowchart TD
+    subgraph DesktopApp
+        UI["UI (Tauri + React)"]
+        ORCH["Orchestrator (Rust)"]
+        RETR["Retrieval Layer"]
+        PLAN["Planner Adapter"]
+        PLUG["Plugin Host"]
+        TELE["Telemetry"]
+        REPORT["Report Agent"]
+        GAP["Gap Agent"]
+    end
+    Qdrant[(Qdrant)]
+    Meili[(Meilisearch)]
+    Planner[(Fast Downward / OPTIC)]
+    Plugin[[WASI Plugins]]
+
+    UI --IPC/gRPC--> ORCH
+    ORCH --async--> RETR
+    ORCH --async--> PLAN
+    ORCH --async--> PLUG
+    ORCH --async--> TELE
+    ORCH --async--> REPORT
+    ORCH --async--> GAP
+    RETR --REST--> Qdrant
+    RETR --REST--> Meili
+    PLAN --CLI--> Planner
+    PLUG --WASI--> Plugin
+```
+
+**Responsibilities:**
+
+- UI: User interaction, brief upload, results display.
+
+- Orchestrator: Coordinates all agents, plugins, and runtime tasks.
+
+- Retrieval Layer: Handles hybrid search (Qdrant + Meilisearch).
+
+- Planner Adapter: Invokes external planners via CLI.
+
+- Plugin Host: Runs WASI plugins securely.
+
+- Telemetry: Collects and exports metrics/events.
+
+- Report Agent: Generates reports and scaffolds.
+
+- Gap Agent: Identifies missing requirements and triggers clarifying questions.
+
+**Dependencies:**
+
+- Qdrant, Meilisearch, planners, plugins.
+
+**Data Flow:**
+
+- UI/CLI → Orchestrator → agents/components → external services → results back to UI/CLI.
+
+---
+
+## High-Level Block Diagram
+
+```mermaid
+flowchart TD
+    classDef comp fill:#f9f9f9,stroke:#333,stroke-width:1px,rx:6,ry:6
+    subgraph Desktop
+        UI[Tauri ± React] -.IPC.-> ORCH(Rust Orchestrator)
+        ORCH -->|REST| OLL(Ollama LLM runtime)
+        ORCH --> RETR[Qdrant (embed) + Meilisearch 1.6]
+        ORCH -->|gRPC| PLAN(Fast Downward / OPTIC)
+        ORCH --> PLUG[[Wasmtime WASI plugins]]
+    end
+    CRAWL((Weekly Ontology Crawler)) --> RETR
+    CRAWL --> RETR
+```
+
+- Tauri binaries are smaller and use less RAM than Electron.
+
+- Ollama exposes a simple localhost REST API (port 11434) for streaming tokens.
+
+- Qdrant 0.15 embedded-mode removes the need for an external vector DB process.
+
+- Meilisearch 1.6 introduces hybrid (dense + sparse) search in a single index.
+
+- Fast Downward is the de-facto PDDL planner; its GPL-2 exception allows subprocess use in closed binaries.
+
+- Wasmtime 1.x is production-ready for secure WASI sandboxing.
+
+- Unsloth 4-bit quantisation halves VRAM for phi-3 without meaningful accuracy loss.
+
+- GraphRAG (future plug-in) lets the LLM walk a property-graph for richer, lower-hallucination answers.
+
+---
+
+## Subsystem Table
+
+| Subsystem    | Tech                                | Highlights                                 |
+| ------------ | ----------------------------------- | ------------------------------------------ |
+| LLM runtime  | Ollama + phi-3 GGUF-4bit            | Local, hot-swappable; REST streaming.      |
+| Retrieval    | Qdrant (dense) + Meilisearch (BM25) | Hybrid fusion improves precision & recall. |
+| Chunking     | SentencePiece, 256-token windows    | Proven sweet-spot for context reuse.       |
+| Planning     | Fast Downward / OPTIC               | Classical + temporal plan generation.      |
+| Telemetry    | OpenTelemetry file exporter (JSON)  | Opt-in, manual upload only.                |
+| Docs-as-Code | mdBook + ADR repo                   | Write docs with same tools as code.        |
+| Governance   | Joel Parker Henderson ADR templates | Decisions captured alongside code.         |
+
+---
+
+## Data Flow (“Compose Stack” request)
+
+1. Brief ingestion – UI or CLI sends the document to the Rust IngestionAgent, which chunks and embeds it (SentencePiece → GGUF).
+2. Gap analysis – GapAgent queries the knowledge graph; unanswered slots trigger clarifying questions in the chat UI.
+3. Retrieval – StackAgent issues hybrid search queries:
+   • dense cosine on Qdrant,
+   • sparse BM25 on Meilisearch,
+   then merges the scored sets.
+4. Planning (optional) – If --planner is on, domain & problem PDDL files are generated and solved by Fast Downward; the plan comes back as a sequence of stack-construction actions.
+5. Critic loop – (future) RL critic re-scores alternative stacks to optimise for build time and licence risk.
+6. Report generation – ReportAgent merges citations, plan steps, and UML diagrams into HTML/Markdown, then offers a JSON export and repo scaffold.
+
+---
+
+## Runtime Layers & Technologies
+
+| Layer         | Component           | Rationale                                         |
+| ------------- | ------------------- | ------------------------------------------------- |
+| UI Shell      | Tauri + React       | 2–3 MB installers and ~58% less RAM than Electron |
+| Orchestrator  | Rust / Tokio        | Memory-safe, zero-cost FFI to Wasmtime            |
+| LLM Runtime   | Ollama + GGUF 4-bit | Local, private LLMs; REST streaming               |
+| Retrieval     | Qdrant (embedded)   | No external DB to install                         |
+| Hybrid Search | Meilisearch 1.6     | Combines dense & sparse ranking                   |
+| Planner       | Fast Downward       | Classical PDDL with GPL-2 exception               |
+| Plugins       | Wasmtime (WASI)     | Syscall-sandboxed execution                       |
+| Docs          | mdBook              | Rust-native docs-as-code                          |
+
+---
+
+## Extensibility Points
+
+- WASI capability tokens – restrict plugins to declarative host functions.
+
+- Model abstraction trait – swap Ollama REST calls with vLLM, LM-Studio, or Hugging Face TGI without touching agent logic.
+
+- GraphRAG plug-in – future Rust crate to replace the current retrieval layer with a property-graph walk.
+
+---
+
+## Next Reading
+
+- [Component-Details Index](component-details/README.md)
+
+- [Planner Integration](planner-integration.md)
+
+- [Plugin SDK](plugin-sdk/README.md)
+
+---

@@ -1,0 +1,3370 @@
+<!doctype html>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+  <head>
+    <!-- Book generated using mdBook -->
+    <meta charset="UTF-8" />
+    <title>Stack Composer Documentation</title>
+    <meta name="robots" content="noindex" />
+
+    <!-- Custom HTML head -->
+
+    <meta
+      name="description"
+      content="Comprehensive user, developer, and operator documentation for Stack Composer."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="icon" href="favicon.svg" />
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/chrome.css" />
+    <link rel="stylesheet" href="css/print.css" media="print" />
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="FontAwesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="fonts/fonts.css" />
+
+    <!-- Highlight.js Stylesheets -->
+    <link rel="stylesheet" id="highlight-css" href="highlight.css" />
+    <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css" />
+    <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css" />
+
+    <!-- Custom theme stylesheets -->
+    <link rel="stylesheet" href="custom.css" />
+
+    <!-- Provide site root and default themes to javascript -->
+    <script>
+      const path_to_root = '';
+      const default_light_theme = 'light';
+      const default_dark_theme = 'navy';
+    </script>
+    <!-- Start loading toc.js asap -->
+    <script src="toc.js"></script>
+  </head>
+  <body>
+    <div id="mdbook-help-container">
+      <div id="mdbook-help-popup">
+        <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+        <div>
+          <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+          <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+          <p>Press <kbd>?</kbd> to show this help</p>
+          <p>Press <kbd>Esc</kbd> to hide this help</p>
+        </div>
+      </div>
+    </div>
+    <div id="body-container">
+      <!-- Work around some values being stored in localStorage wrapped in quotes -->
+      <script>
+        try {
+          let theme = localStorage.getItem('mdbook-theme');
+          let sidebar = localStorage.getItem('mdbook-sidebar');
+
+          if (theme.startsWith('"') && theme.endsWith('"')) {
+            localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+          }
+
+          if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+            localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+          }
+        } catch (e) {}
+      </script>
+
+      <!-- Set the theme before any content is loaded, prevents flash -->
+      <script>
+        const default_theme = window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? default_dark_theme
+          : default_light_theme;
+        let theme;
+        try {
+          theme = localStorage.getItem('mdbook-theme');
+        } catch (e) {}
+        if (theme === null || theme === undefined) {
+          theme = default_theme;
+        }
+        const html = document.documentElement;
+        html.classList.remove('light');
+        html.classList.add(theme);
+        html.classList.add('js');
+      </script>
+
+      <input type="checkbox" id="sidebar-toggle-anchor" class="hidden" />
+
+      <!-- Hide / unhide sidebar before it is displayed -->
+      <script>
+        let sidebar = null;
+        const sidebar_toggle = document.getElementById('sidebar-toggle-anchor');
+        if (document.body.clientWidth >= 1080) {
+          try {
+            sidebar = localStorage.getItem('mdbook-sidebar');
+          } catch (e) {}
+          sidebar = sidebar || 'visible';
+        } else {
+          sidebar = 'hidden';
+        }
+        sidebar_toggle.checked = sidebar === 'visible';
+        html.classList.remove('sidebar-visible');
+        html.classList.add('sidebar-' + sidebar);
+      </script>
+
+      <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+        <!-- populated by js -->
+        <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+        <noscript>
+          <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+        </noscript>
+        <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+          <div class="sidebar-resize-indicator"></div>
+        </div>
+      </nav>
+
+      <div id="page-wrapper" class="page-wrapper">
+        <div class="page">
+          <div id="menu-bar-hover-placeholder"></div>
+          <div id="menu-bar" class="menu-bar sticky">
+            <div class="left-buttons">
+              <label
+                id="sidebar-toggle"
+                class="icon-button"
+                for="sidebar-toggle-anchor"
+                title="Toggle Table of Contents"
+                aria-label="Toggle Table of Contents"
+                aria-controls="sidebar"
+              >
+                <i class="fa fa-bars"></i>
+              </label>
+              <button
+                id="theme-toggle"
+                class="icon-button"
+                type="button"
+                title="Change theme"
+                aria-label="Change theme"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="theme-list"
+              >
+                <i class="fa fa-paint-brush"></i>
+              </button>
+              <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                <li role="none">
+                  <button role="menuitem" class="theme" id="default_theme">Auto</button>
+                </li>
+                <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+              </ul>
+              <button
+                id="search-toggle"
+                class="icon-button"
+                type="button"
+                title="Search (`/`)"
+                aria-label="Toggle Searchbar"
+                aria-expanded="false"
+                aria-keyshortcuts="/ s"
+                aria-controls="searchbar"
+              >
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+
+            <h1 class="menu-title">Stack Composer Documentation</h1>
+
+            <div class="right-buttons">
+              <a href="print.html" title="Print this book" aria-label="Print this book">
+                <i id="print-button" class="fa fa-print"></i>
+              </a>
+            </div>
+          </div>
+
+          <div id="search-wrapper" class="hidden">
+            <form id="searchbar-outer" class="searchbar-outer">
+              <input
+                type="search"
+                id="searchbar"
+                name="searchbar"
+                placeholder="Search this book ..."
+                aria-controls="searchresults-outer"
+                aria-describedby="searchresults-header"
+              />
+            </form>
+            <div id="searchresults-outer" class="searchresults-outer hidden">
+              <div id="searchresults-header" class="searchresults-header"></div>
+              <ul id="searchresults"></ul>
+            </div>
+          </div>
+
+          <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+          <script>
+            document
+              .getElementById('sidebar-toggle')
+              .setAttribute('aria-expanded', sidebar === 'visible');
+            document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+            Array.from(document.querySelectorAll('#sidebar a')).forEach(function (link) {
+              link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+            });
+          </script>
+
+          <div id="content" class="content">
+            <main>
+              <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+              <p>
+                Welcome to Stack Composer! This documentation is organized for users, developers,
+                and operators.
+              </p>
+              <ul>
+                <li><a href="getting-started/README.html">Getting Started</a></li>
+                <li><a href="architecture/README.html">Architecture</a></li>
+                <li><a href="components/README.html">Component Guides</a></li>
+                <li><a href="user-guides/README.html">User Guides</a></li>
+                <li><a href="operations/README.html">Operational Docs</a></li>
+                <li><a href="release-engineering/README.html">Release Engineering</a></li>
+                <li><a href="contributing/README.html">Contributing</a></li>
+              </ul>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="getting-started">
+                <a class="header" href="#getting-started">Getting Started</a>
+              </h1>
+              <p>
+                Welcome to Stack Composer! This section will help you get up and running quickly,
+                whether you’re a new user or setting up a fresh environment.
+              </p>
+              <h2 id="section-structure">
+                <a class="header" href="#section-structure">Section Structure</a>
+              </h2>
+              <pre><code class="language-mermaid">flowchart TD
+  A[Getting Started] --&gt; B[Quick Start]
+  A --&gt; C[Installation]
+  A --&gt; D[System Requirements]
+  A --&gt; E[FAQ]
+</code></pre>
+              <h2 id="key-guides"><a class="header" href="#key-guides">Key Guides</a></h2>
+              <ul>
+                <li>
+                  <a href="getting-started/./quickstart.html">Quick Start</a>: Step-by-step guide to
+                  your first Stack Composer experience.
+                </li>
+                <li>
+                  <a href="getting-started/../installation.html">Installation</a>: How to install
+                  Stack Composer on your system.
+                </li>
+                <li>
+                  <a href="getting-started/./system-requirements.html">System Requirements</a>:
+                  Minimum and recommended requirements.
+                </li>
+                <li>
+                  <a href="getting-started/../faq.html">FAQ</a>: Frequently asked questions and
+                  troubleshooting tips.
+                </li>
+              </ul>
+              <hr />
+              <p><strong>Next Steps:</strong></p>
+              <ul>
+                <li>
+                  Explore the <a href="getting-started/../configuration.html">User Guides</a> for
+                  more advanced usage.
+                </li>
+                <li>
+                  Learn about
+                  <a href="getting-started/../plugin-sdk/README.html">Extensibility</a> to customize
+                  your experience.
+                </li>
+              </ul>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="quickstart"><a class="header" href="#quickstart">Quickstart</a></h1>
+              <p>
+                Welcome to Stack Composer! This quickstart will help you get up and running quickly.
+              </p>
+              <ol>
+                <li>
+                  Review
+                  <a
+                    href="getting-started/../Developer%20&amp;%20Extensibility%20Docs/dev-setup.html"
+                    >dev-setup.md</a
+                  >
+                  for environment setup.
+                </li>
+                <li>
+                  Install all required tools as described in
+                  <a href="getting-started/../toolchain.html">toolchain.md</a>.
+                </li>
+                <li>
+                  Follow the workflow in the
+                  <a href="getting-started/../../README.html">README</a> to start developing or
+                  contributing.
+                </li>
+              </ol>
+              <blockquote>
+                <p>
+                  <strong>Note:</strong> For details on using local Python/conda environments versus
+                  the devcontainer, see
+                  <a
+                    href="getting-started/../Developer%20&amp;%20Extensibility%20Docs/dev-setup.html#python--conda-workflows"
+                    >dev-setup.md</a
+                  >.
+                </p>
+              </blockquote>
+              <p>
+                For troubleshooting, see the relevant sections in
+                <a
+                  href="getting-started/../Developer%20&amp;%20Extensibility%20Docs/dev-setup.html#troubleshooting"
+                  >dev-setup.md</a
+                >
+                and <a href="getting-started/../toolchain.html#troubleshooting">toolchain.md</a>.
+              </p>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="frequently-asked-questions-faq">
+                <a class="header" href="#frequently-asked-questions-faq"
+                  >Frequently Asked Questions (FAQ)</a
+                >
+              </h1>
+              <p>
+                <strong>Q: What is Stack Composer?</strong> A: Stack Composer is a modular,
+                extensible platform for building, orchestrating, and operating AI-powered systems.
+              </p>
+              <p>
+                <strong>Q: How do I get started?</strong> A: See the
+                <a href="reference/../getting-started/README.html">Getting Started Guide</a>.
+              </p>
+              <p>
+                <strong>Q: How do I contribute?</strong> A: See the
+                <a href="reference/../contributing/README.html">Contributing Guide</a>.
+              </p>
+              <p>
+                <strong>Q: Where can I find architecture diagrams?</strong> A: See the
+                <a href="reference/../architecture/README.html">Architecture Overview</a>.
+              </p>
+              <p>
+                <strong>Q: How is telemetry handled?</strong> A: Telemetry is opt-in and anonymized.
+                See
+                <a href="reference/../operations/telemetry-privacy.html">Telemetry &amp; Privacy</a
+                >.
+              </p>
+              <p>
+                <strong>Q: How do I report a security issue?</strong> A: See the
+                <a href="reference/../operations/security-policy.html">Security Policy</a>.
+              </p>
+              <p><em>Add more questions as needed.</em></p>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="system-requirements">
+                <a class="header" href="#system-requirements">System Requirements</a>
+              </h1>
+              <p>
+                This document lists the supported platforms, dependencies, and hardware requirements
+                for Stack Composer.
+              </p>
+              <h2 id="supported-platforms">
+                <a class="header" href="#supported-platforms">Supported Platforms</a>
+              </h2>
+              <ul>
+                <li><strong>OS:</strong> Ubuntu 22.04, macOS 13+, Windows 11 (WSL2 supported)</li>
+                <li><strong>Rust:</strong> ≥1.70 (nightly optional)</li>
+                <li><strong>Datastores:</strong> Qdrant ≥1.4, Meilisearch ≥1.5</li>
+                <li>
+                  <strong>Planner Binaries:</strong> Fast Downward ≥23.05, OPTIC ≥latest commit
+                </li>
+              </ul>
+              <h2 id="hardware-requirements">
+                <a class="header" href="#hardware-requirements">Hardware Requirements</a>
+              </h2>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Environment</th>
+                      <th>RAM</th>
+                      <th>CPU Cores</th>
+                      <th>Disk Space</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Dev</td>
+                      <td>8 GB</td>
+                      <td>4</td>
+                      <td>10 GB</td>
+                    </tr>
+                    <tr>
+                      <td>Prod (single)</td>
+                      <td>16 GB</td>
+                      <td>8</td>
+                      <td>100 GB</td>
+                    </tr>
+                    <tr>
+                      <td>Cluster</td>
+                      <td>Scale per node</td>
+                      <td>Scale per node</td>
+                      <td>See ops guide</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h2 id="notes"><a class="header" href="#notes">Notes</a></h2>
+              <ul>
+                <li>
+                  For best results, use a machine with SSD storage and a modern multi-core CPU.
+                </li>
+                <li>Containerized deployments are supported and recommended for production.</li>
+                <li>
+                  See <a href="getting-started/../../ops-guide.html">ops-guide.md</a> for cluster
+                  scaling and advanced deployment scenarios.
+                </li>
+              </ul>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="user-guides"><a class="header" href="#user-guides">User Guides</a></h1>
+              <p>
+                This section provides practical guides for configuring, using, and troubleshooting
+                Stack Composer.
+              </p>
+              <h2 id="section-structure-1">
+                <a class="header" href="#section-structure-1">Section Structure</a>
+              </h2>
+              <pre><code class="language-mermaid">flowchart TD
+  A[User Guides] --&gt; B[Configuration]
+  A --&gt; C[Usage Guide]
+  A --&gt; D[Troubleshooting]
+</code></pre>
+              <h2 id="key-guides-1"><a class="header" href="#key-guides-1">Key Guides</a></h2>
+              <ul>
+                <li>
+                  <a href="user-guides/../configuration.html">Configuration</a>: How to configure
+                  Stack Composer for your needs.
+                </li>
+                <li>
+                  <a href="user-guides/../usage.html">Usage Guide</a>: In-depth usage instructions
+                  and tips.
+                </li>
+                <li>
+                  <a href="user-guides/../troubleshooting.html">Troubleshooting</a>: Solutions to
+                  common issues.
+                </li>
+              </ul>
+              <hr />
+              <p><strong>Next Steps:</strong></p>
+              <ul>
+                <li>
+                  Explore <a href="user-guides/../plugin-sdk/README.html">Extensibility</a> to
+                  customize Stack Composer.
+                </li>
+                <li>
+                  Review <a href="user-guides/../ops-guide.html">Operations &amp; Security</a> for
+                  deployment and security best practices.
+                </li>
+              </ul>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="configuration"><a class="header" href="#configuration">Configuration</a></h1>
+              <p>
+                This guide describes how to configure Stack Composer, including plugin registration,
+                runtime options, and security settings.
+              </p>
+              <hr />
+              <h2 id="configuration-flow">
+                <a class="header" href="#configuration-flow">Configuration Flow</a>
+              </h2>
+              <pre><code class="language-mermaid">flowchart TD
+    A[Start] --&gt; B{Choose Plugin Type}
+    B -- WASI --&gt; C[Copy .wasm &amp; .sig to plugins dir]
+    B -- REST --&gt; D[Edit config file]
+    C --&gt; E[Configure permissions]
+    D --&gt; E
+    E --&gt; F[Set runtime options]
+    F --&gt; G[Enable telemetry (optional)]
+    G --&gt; H[Save &amp; Restart Stack Composer]
+</code></pre>
+              <hr />
+              <h2 id="1-plugin-registration">
+                <a class="header" href="#1-plugin-registration">1. Plugin Registration</a>
+              </h2>
+              <h3 id="wasi-plugins"><a class="header" href="#wasi-plugins">WASI Plugins</a></h3>
+              <p>Add WASI plugins by copying <code>.wasm</code> and <code>.sig</code> files to:</p>
+              <pre><code class="language-text">~/.local/share/stack-composer/plugins/
+</code></pre>
+              <p>
+                Plugins are auto-discovered at startup. Only plugins with valid Ed25519 signatures
+                (see <a href="user-guides/../extensibility/plugin-sdk.html">Plugin SDK</a>) are
+                loaded.
+              </p>
+              <h3 id="rest-plugins"><a class="header" href="#rest-plugins">REST Plugins</a></h3>
+              <p>Register REST plugins in your config file (TOML or YAML):</p>
+              <pre><code class="language-toml">[plugins.rest]
+my_rest_plugin = { url = "http://localhost:3000/run" }
+</code></pre>
+              <hr />
+              <h2 id="2-security--permissions">
+                <a class="header" href="#2-security--permissions">2. Security &amp; Permissions</a>
+              </h2>
+              <ul>
+                <li>
+                  <strong>Trusted Keys</strong>: List trusted Ed25519 public keys in
+                  <code>~/.config/stack-composer/trusted_keys.toml</code>.
+                </li>
+                <li>
+                  <strong>Plugin Permissions</strong>: Configure per-plugin filesystem/network
+                  access in the config file:
+                </li>
+              </ul>
+              <pre><code class="language-toml">[plugins.wasi.hello_plugin]
+allow_fs_write = false
+allow_network = false
+</code></pre>
+              <hr />
+              <h2 id="3-runtime-options">
+                <a class="header" href="#3-runtime-options">3. Runtime Options</a>
+              </h2>
+              <ul>
+                <li>
+                  <strong>Session Storage</strong>: Set session directory and retention policy.
+                </li>
+                <li>
+                  <strong>Telemetry</strong>: Enable/disable telemetry and set retention (default:
+                  30 days).
+                </li>
+                <li>
+                  <strong>Model Backends</strong>: Configure LLM endpoints and fallback order.
+                </li>
+              </ul>
+              <hr />
+              <h2 id="4-example-full-config">
+                <a class="header" href="#4-example-full-config">4. Example Full Config</a>
+              </h2>
+              <pre><code class="language-toml">[plugins.wasi]
+hello_plugin = { enabled = true }
+
+[plugins.rest]
+my_rest_plugin = { url = "http://localhost:3000/run" }
+
+[security]
+# ...
+</code></pre>
+              <hr />
+              <p><strong>Next Steps:</strong></p>
+              <ul>
+                <li>See <a href="user-guides/usage.html">Usage Guide</a></li>
+                <li>Review <a href="user-guides/troubleshooting.html">Troubleshooting</a></li>
+                <li>
+                  Explore <a href="user-guides/../extensibility/README.html">Extensibility</a>
+                </li>
+              </ul>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="usage-guide"><a class="header" href="#usage-guide">Usage Guide</a></h1>
+              <p>
+                This guide provides in-depth instructions and tips for using Stack Composer
+                effectively.
+              </p>
+              <hr />
+              <h2 id="basic-workflow">
+                <a class="header" href="#basic-workflow">Basic Workflow</a>
+              </h2>
+              <ol>
+                <li>Prepare your project brief and requirements.</li>
+                <li>Launch Stack Composer and select 'New Project'.</li>
+                <li>Follow the guided prompts to select tech stack, plugins, and configuration.</li>
+                <li>Review the generated scaffold and make adjustments as needed.</li>
+                <li>Export or deploy your project.</li>
+              </ol>
+              <hr />
+              <h2 id="tips--tricks">
+                <a class="header" href="#tips--tricks">Tips &amp; Tricks</a>
+              </h2>
+              <ul>
+                <li>
+                  Use the [Quick Start](../Getting Started Bundle/quickstart.md) for your first run.
+                </li>
+                <li>
+                  Explore <a href="user-guides/configuration.html">Configuration</a> for advanced
+                  options.
+                </li>
+                <li>Check [FAQ](../Getting Started Bundle/faq.md) for common questions.</li>
+              </ul>
+              <hr />
+              <p><strong>Next Steps:</strong></p>
+              <ul>
+                <li>See <a href="user-guides/troubleshooting.html">Troubleshooting</a></li>
+                <li>
+                  Learn about <a href="user-guides/../extensibility/README.html">Extensibility</a>
+                </li>
+              </ul>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="troubleshooting">
+                <a class="header" href="#troubleshooting">Troubleshooting</a>
+              </h1>
+              <p>This guide helps you resolve common issues with Stack Composer.</p>
+              <hr />
+              <h2 id="common-issues"><a class="header" href="#common-issues">Common Issues</a></h2>
+              <h3 id="ollama-server-not-reachable">
+                <a class="header" href="#ollama-server-not-reachable"
+                  >Ollama server not reachable</a
+                >
+              </h3>
+              <ul>
+                <li>Start <code>ollama serve</code> and ensure port 11434 is free.</li>
+              </ul>
+              <h3 id="high-memory-usage">
+                <a class="header" href="#high-memory-usage">High memory usage</a>
+              </h3>
+              <ul>
+                <li>Use the 4-bit model or close other apps.</li>
+              </ul>
+              <h3 id="planner-timeout">
+                <a class="header" href="#planner-timeout">Planner timeout</a>
+              </h3>
+              <ul>
+                <li>Add <code>--planner-timeout 60</code> or simplify your brief.</li>
+              </ul>
+              <hr />
+              <h2 id="more-help"><a class="header" href="#more-help">More Help</a></h2>
+              <ul>
+                <li>See [FAQ](../Getting Started Bundle/faq.md)</li>
+                <li>
+                  Check [dev-setup.md](../Developer &amp; Extensibility
+                  Docs/dev-setup.md#troubleshooting)
+                </li>
+                <li>Open a GitHub Issue or Discussion for unresolved problems.</li>
+              </ul>
+              <hr />
+              <p><strong>Next Steps:</strong></p>
+              <ul>
+                <li>Review <a href="user-guides/usage.html">Usage Guide</a></li>
+                <li>Explore <a href="user-guides/configuration.html">Configuration</a></li>
+              </ul>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="architecture--roadmap">
+                <a class="header" href="#architecture--roadmap">Architecture &amp; Roadmap</a>
+              </h1>
+              <p>
+                Understand the design, platform architecture, and future direction of Stack
+                Composer.
+              </p>
+              <h2 id="section-structure-2">
+                <a class="header" href="#section-structure-2">Section Structure</a>
+              </h2>
+              <pre><code class="language-mermaid">flowchart TD
+  A[Architecture &amp; Roadmap] --&gt; B[Architecture Overview]
+  A --&gt; C[AI Platform Overview]
+  A --&gt; D[Roadmap]
+  A --&gt; E[ADRs]
+</code></pre>
+              <h2 id="key-guides-2"><a class="header" href="#key-guides-2">Key Guides</a></h2>
+              <ul>
+                <li>
+                  <a href="architecture/../architecture-overview.html">Architecture Overview</a>:
+                  High-level system design.
+                </li>
+                <li>[AI Platform Overview](../AI Platform Overview.md): AI subsystem details.</li>
+                <li>
+                  <a href="architecture/../roadmap.html">Roadmap</a>: Planned features and
+                  milestones.
+                </li>
+                <li>
+                  <a href="architecture/../adr/0000-template.html">ADRs</a>: Architectural decision
+                  records.
+                </li>
+              </ul>
+              <hr />
+              <p><strong>Next Steps:</strong></p>
+              <ul>
+                <li>
+                  Review <a href="architecture/../ops-guide.html">Operations &amp; Security</a> for
+                  deployment and security.
+                </li>
+                <li>
+                  Explore <a href="architecture/../plugin-sdk/README.html">Extensibility</a> for
+                  customization.
+                </li>
+              </ul>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="architecture-overview">
+                <a class="header" href="#architecture-overview">Architecture Overview</a>
+              </h1>
+              <blockquote>
+                <p>
+                  <strong>Developer Environment:</strong> For details on the required toolchain,
+                  reproducible setup, and all supporting tools (Rust, Node, Docker, Nix, Qdrant,
+                  Meilisearch, etc.), see
+                  <a href="architecture/toolchain.html">Toolchain &amp; DX Pipeline</a> and
+                  <a href="architecture/developer-extensibility-docs/dev-setup.html"
+                    >Developer Setup</a
+                  >.
+                </p>
+              </blockquote>
+              <p>
+                This document explains <strong>how Stack Composer works</strong> and how its
+                components communicate at run-time.
+              </p>
+              <hr />
+              <h2 id="c4-context-diagram">
+                <a class="header" href="#c4-context-diagram">C4 Context Diagram</a>
+              </h2>
+              <pre><code class="language-mermaid">flowchart TD
+    User((User))
+    Admin((Admin))
+    StackComposer["Stack Composer Desktop App"]
+    Qdrant[(Qdrant Vector DB)]
+    Meili[(Meilisearch)]
+    Planner[(Fast Downward / OPTIC)]
+    Plugin[[WASI Plugins]]
+    Web["Web (Docs, Updates)"]
+
+    User -- "Brief, Actions" --&gt; StackComposer
+    Admin -- "Config, Monitoring" --&gt; StackComposer
+    StackComposer -- "Hybrid Search" --&gt; Qdrant
+    StackComposer -- "Hybrid Search" --&gt; Meili
+    StackComposer -- "Plan Request" --&gt; Planner
+    StackComposer -- "Plugin Calls" --&gt; Plugin
+    StackComposer -- "Check for Updates" --&gt; Web
+</code></pre>
+              <p><strong>Responsibilities:</strong></p>
+              <ul>
+                <li>
+                  <p>
+                    Stack Composer ingests briefs, interacts with users/admins, and orchestrates
+                    retrieval, planning, and plugin execution.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    External dependencies: Qdrant, Meilisearch, planners, plugins, and web
+                    resources.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Data flows: User input → Stack Composer → retrieval/planning/plugins → output
+                    (report, scaffold, telemetry).
+                  </p>
+                </li>
+              </ul>
+              <hr />
+              <h2 id="c4-container-diagram">
+                <a class="header" href="#c4-container-diagram">C4 Container Diagram</a>
+              </h2>
+              <pre><code class="language-mermaid">flowchart TD
+    subgraph DesktopApp
+        UI["UI (Tauri + React)"]
+        ORCH["Orchestrator (Rust)"]
+        RETR["Retrieval Layer"]
+        PLAN["Planner Adapter"]
+        PLUG["Plugin Host"]
+        TELE["Telemetry"]
+        REPORT["Report Agent"]
+        GAP["Gap Agent"]
+    end
+    Qdrant[(Qdrant)]
+    Meili[(Meilisearch)]
+    Planner[(Fast Downward / OPTIC)]
+    Plugin[[WASI Plugins]]
+
+    UI --IPC/gRPC--&gt; ORCH
+    ORCH --async--&gt; RETR
+    ORCH --async--&gt; PLAN
+    ORCH --async--&gt; PLUG
+    ORCH --async--&gt; TELE
+    ORCH --async--&gt; REPORT
+    ORCH --async--&gt; GAP
+    RETR --REST--&gt; Qdrant
+    RETR --REST--&gt; Meili
+    PLAN --CLI--&gt; Planner
+    PLUG --WASI--&gt; Plugin
+</code></pre>
+              <p><strong>Responsibilities:</strong></p>
+              <ul>
+                <li>
+                  <p>UI: User interaction, brief upload, results display.</p>
+                </li>
+                <li>
+                  <p>Orchestrator: Coordinates all agents, plugins, and runtime tasks.</p>
+                </li>
+                <li>
+                  <p>Retrieval Layer: Handles hybrid search (Qdrant + Meilisearch).</p>
+                </li>
+                <li>
+                  <p>Planner Adapter: Invokes external planners via CLI.</p>
+                </li>
+                <li>
+                  <p>Plugin Host: Runs WASI plugins securely.</p>
+                </li>
+                <li>
+                  <p>Telemetry: Collects and exports metrics/events.</p>
+                </li>
+                <li>
+                  <p>Report Agent: Generates reports and scaffolds.</p>
+                </li>
+                <li>
+                  <p>
+                    Gap Agent: Identifies missing requirements and triggers clarifying questions.
+                  </p>
+                </li>
+              </ul>
+              <p><strong>Dependencies:</strong></p>
+              <ul>
+                <li>Qdrant, Meilisearch, planners, plugins.</li>
+              </ul>
+              <p><strong>Data Flow:</strong></p>
+              <ul>
+                <li>
+                  UI/CLI → Orchestrator → agents/components → external services → results back to
+                  UI/CLI.
+                </li>
+              </ul>
+              <hr />
+              <h2 id="high-level-block-diagram">
+                <a class="header" href="#high-level-block-diagram">High-Level Block Diagram</a>
+              </h2>
+              <pre><code class="language-mermaid">flowchart TD
+    classDef comp fill:#f9f9f9,stroke:#333,stroke-width:1px,rx:6,ry:6
+    subgraph Desktop
+        UI[Tauri ± React] -.IPC.-&gt; ORCH(Rust Orchestrator)
+        ORCH --&gt;|REST| OLL(Ollama LLM runtime)
+        ORCH --&gt; RETR[Qdrant (embed) + Meilisearch 1.6]
+        ORCH --&gt;|gRPC| PLAN(Fast Downward / OPTIC)
+        ORCH --&gt; PLUG[[Wasmtime WASI plugins]]
+    end
+    CRAWL((Weekly Ontology Crawler)) --&gt; RETR
+    CRAWL --&gt; RETR
+</code></pre>
+              <ul>
+                <li>
+                  <p>Tauri binaries are smaller and use less RAM than Electron.</p>
+                </li>
+                <li>
+                  <p>
+                    Ollama exposes a simple localhost REST API (port 11434) for streaming tokens.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Qdrant 0.15 embedded-mode removes the need for an external vector DB process.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Meilisearch 1.6 introduces hybrid (dense + sparse) search in a single index.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Fast Downward is the de-facto PDDL planner; its GPL-2 exception allows
+                    subprocess use in closed binaries.
+                  </p>
+                </li>
+                <li>
+                  <p>Wasmtime 1.x is production-ready for secure WASI sandboxing.</p>
+                </li>
+                <li>
+                  <p>
+                    Unsloth 4-bit quantisation halves VRAM for phi-3 without meaningful accuracy
+                    loss.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    GraphRAG (future plug-in) lets the LLM walk a property-graph for richer,
+                    lower-hallucination answers.
+                  </p>
+                </li>
+              </ul>
+              <hr />
+              <h2 id="subsystem-table">
+                <a class="header" href="#subsystem-table">Subsystem Table</a>
+              </h2>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Subsystem</th>
+                      <th>Tech</th>
+                      <th>Highlights</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>LLM runtime</td>
+                      <td>Ollama + phi-3 GGUF-4bit</td>
+                      <td>Local, hot-swappable; REST streaming.</td>
+                    </tr>
+                    <tr>
+                      <td>Retrieval</td>
+                      <td>Qdrant (dense) + Meilisearch (BM25)</td>
+                      <td>Hybrid fusion improves precision &amp; recall.</td>
+                    </tr>
+                    <tr>
+                      <td>Chunking</td>
+                      <td>SentencePiece, 256-token windows</td>
+                      <td>Proven sweet-spot for context reuse.</td>
+                    </tr>
+                    <tr>
+                      <td>Planning</td>
+                      <td>Fast Downward / OPTIC</td>
+                      <td>Classical + temporal plan generation.</td>
+                    </tr>
+                    <tr>
+                      <td>Telemetry</td>
+                      <td>OpenTelemetry file exporter (JSON)</td>
+                      <td>Opt-in, manual upload only.</td>
+                    </tr>
+                    <tr>
+                      <td>Docs-as-Code</td>
+                      <td>mdBook + ADR repo</td>
+                      <td>Write docs with same tools as code.</td>
+                    </tr>
+                    <tr>
+                      <td>Governance</td>
+                      <td>Joel Parker Henderson ADR templates</td>
+                      <td>Decisions captured alongside code.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <hr />
+              <h2 id="data-flow-compose-stack-request">
+                <a class="header" href="#data-flow-compose-stack-request"
+                  >Data Flow (“Compose Stack” request)</a
+                >
+              </h2>
+              <ol>
+                <li>
+                  Brief ingestion – UI or CLI sends the document to the Rust IngestionAgent, which
+                  chunks and embeds it (SentencePiece → GGUF).
+                </li>
+                <li>
+                  Gap analysis – GapAgent queries the knowledge graph; unanswered slots trigger
+                  clarifying questions in the chat UI.
+                </li>
+                <li>
+                  Retrieval – StackAgent issues hybrid search queries: • dense cosine on Qdrant, •
+                  sparse BM25 on Meilisearch, then merges the scored sets.
+                </li>
+                <li>
+                  Planning (optional) – If --planner is on, domain &amp; problem PDDL files are
+                  generated and solved by Fast Downward; the plan comes back as a sequence of
+                  stack-construction actions.
+                </li>
+                <li>
+                  Critic loop – (future) RL critic re-scores alternative stacks to optimise for
+                  build time and licence risk.
+                </li>
+                <li>
+                  Report generation – ReportAgent merges citations, plan steps, and UML diagrams
+                  into HTML/Markdown, then offers a JSON export and repo scaffold.
+                </li>
+              </ol>
+              <hr />
+              <h2 id="runtime-layers--technologies">
+                <a class="header" href="#runtime-layers--technologies"
+                  >Runtime Layers &amp; Technologies</a
+                >
+              </h2>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Layer</th>
+                      <th>Component</th>
+                      <th>Rationale</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>UI Shell</td>
+                      <td>Tauri + React</td>
+                      <td>2–3 MB installers and ~58% less RAM than Electron</td>
+                    </tr>
+                    <tr>
+                      <td>Orchestrator</td>
+                      <td>Rust / Tokio</td>
+                      <td>Memory-safe, zero-cost FFI to Wasmtime</td>
+                    </tr>
+                    <tr>
+                      <td>LLM Runtime</td>
+                      <td>Ollama + GGUF 4-bit</td>
+                      <td>Local, private LLMs; REST streaming</td>
+                    </tr>
+                    <tr>
+                      <td>Retrieval</td>
+                      <td>Qdrant (embedded)</td>
+                      <td>No external DB to install</td>
+                    </tr>
+                    <tr>
+                      <td>Hybrid Search</td>
+                      <td>Meilisearch 1.6</td>
+                      <td>Combines dense &amp; sparse ranking</td>
+                    </tr>
+                    <tr>
+                      <td>Planner</td>
+                      <td>Fast Downward</td>
+                      <td>Classical PDDL with GPL-2 exception</td>
+                    </tr>
+                    <tr>
+                      <td>Plugins</td>
+                      <td>Wasmtime (WASI)</td>
+                      <td>Syscall-sandboxed execution</td>
+                    </tr>
+                    <tr>
+                      <td>Docs</td>
+                      <td>mdBook</td>
+                      <td>Rust-native docs-as-code</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <hr />
+              <h2 id="extensibility-points">
+                <a class="header" href="#extensibility-points">Extensibility Points</a>
+              </h2>
+              <ul>
+                <li>
+                  <p>WASI capability tokens – restrict plugins to declarative host functions.</p>
+                </li>
+                <li>
+                  <p>
+                    Model abstraction trait – swap Ollama REST calls with vLLM, LM-Studio, or
+                    Hugging Face TGI without touching agent logic.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    GraphRAG plug-in – future Rust crate to replace the current retrieval layer with
+                    a property-graph walk.
+                  </p>
+                </li>
+              </ul>
+              <hr />
+              <h2 id="next-reading"><a class="header" href="#next-reading">Next Reading</a></h2>
+              <ul>
+                <li>
+                  <p>
+                    <a href="architecture/component-details/readme.html">Component-Details Index</a>
+                  </p>
+                </li>
+                <li>
+                  <p><a href="architecture/planner-integration.html">Planner Integration</a></p>
+                </li>
+                <li>
+                  <p><a href="architecture/plugin-sdk/readme.html">Plugin SDK</a></p>
+                </li>
+              </ul>
+              <hr />
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="roadmap"><a class="header" href="#roadmap">Roadmap</a></h1>
+              <p>This roadmap outlines planned features and milestones for Stack Composer.</p>
+              <h2 id="milestones"><a class="header" href="#milestones">Milestones</a></h2>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Version</th>
+                      <th>Feature/Milestone</th>
+                      <th>Target Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>v1.1</td>
+                      <td>Planner extensibility (Fast Downward, OPTIC)</td>
+                      <td>Q3 2025</td>
+                    </tr>
+                    <tr>
+                      <td>v1.2</td>
+                      <td>Distributed retrieval cluster support</td>
+                      <td>Q4 2025</td>
+                    </tr>
+                    <tr>
+                      <td>v2.0</td>
+                      <td>Enterprise release (RBAC, role-based privacy)</td>
+                      <td>Q2 2026</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h2 id="progress-tracking">
+                <a class="header" href="#progress-tracking">Progress Tracking</a>
+              </h2>
+              <ul>
+                <li>Progress is tracked via GitHub Issues and Milestones.</li>
+                <li>
+                  Each roadmap item links to its corresponding issue or PR for status updates.
+                </li>
+              </ul>
+              <h2 id="how-to-contribute">
+                <a class="header" href="#how-to-contribute">How to Contribute</a>
+              </h2>
+              <ul>
+                <li>Suggest new features or vote on priorities via GitHub Discussions.</li>
+                <li>
+                  Major roadmap changes are discussed in community meetings and require maintainer
+                  consensus.
+                </li>
+              </ul>
+              <hr />
+              <h2 id="strategic-roadmap-20252026">
+                <a class="header" href="#strategic-roadmap-20252026"
+                  >Strategic Roadmap (2025–2026)</a
+                >
+              </h2>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Area</th>
+                      <th>Short-Term (0–3 mo)</th>
+                      <th>Mid-Term (3–6 mo)</th>
+                      <th>Long-Term (6–12 mo+)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Plugin Ecosystem</td>
+                      <td>Registry design, UI discovery</td>
+                      <td>SDKs, samples, security enforcement</td>
+                      <td>Signed plugins, marketplace</td>
+                    </tr>
+                    <tr>
+                      <td>RAG Retrieval</td>
+                      <td>GraphRAG backend plugin</td>
+                      <td>Cloud vector DB, hybrid config</td>
+                      <td>Hierarchical graph retrievers</td>
+                    </tr>
+                    <tr>
+                      <td>LLM Runtime</td>
+                      <td>Model download/switch UI</td>
+                      <td>vLLM/TGI adapters</td>
+                      <td>Plugin model sources, online update</td>
+                    </tr>
+                    <tr>
+                      <td>Planning</td>
+                      <td>Plan UI visualization</td>
+                      <td>Cloud planner support</td>
+                      <td>In-process/DSL planners</td>
+                    </tr>
+                    <tr>
+                      <td>Telemetry</td>
+                      <td>Prometheus + Grafana stack</td>
+                      <td>Cloud telemetry backend</td>
+                      <td>AI-driven alerts, BPM integration</td>
+                    </tr>
+                    <tr>
+                      <td>Reporting</td>
+                      <td>GitHub/Jira export adapters</td>
+                      <td>Templates, hook scripts</td>
+                      <td>CI/CD, PM tool integration</td>
+                    </tr>
+                    <tr>
+                      <td>Security</td>
+                      <td>Dependency/SBOM automation</td>
+                      <td>Secrets manager integration</td>
+                      <td>Zero-trust plugins, auditing</td>
+                    </tr>
+                    <tr>
+                      <td>Distributed</td>
+                      <td>K8s blueprints</td>
+                      <td>Sharding, proxy orchestration</td>
+                      <td>Global multi-user clusters</td>
+                    </tr>
+                    <tr>
+                      <td>API/Web</td>
+                      <td>REST/gRPC for CI</td>
+                      <td>Basic web UI with auth</td>
+                      <td>Full SaaS UI</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <hr />
+              <h2 id="ai-guided-authoring--scaffolding">
+                <a class="header" href="#ai-guided-authoring--scaffolding"
+                  >AI-Guided Authoring &amp; Scaffolding</a
+                >
+              </h2>
+              <p>
+                Stack Composer is evolving into a fully AI-guided, end-to-end project authoring and
+                scaffolding platform. See [Architecture &amp; Component
+                Guides/ai-wizard-roadmap.md](../Architecture &amp; Component
+                Guides/ai-wizard-roadmap.md) for the full vision and phased implementation plan.
+              </p>
+              <ul>
+                <li>Hybrid conversational-form wizard for discovery and planning</li>
+                <li>Interactive tech stack exploration and “what-if” analysis</li>
+                <li>Real-time directory tree and scaffold preview (tree/graph views)</li>
+                <li>Chat-based copilot, rationale tooltips, and decision history</li>
+                <li>
+                  Context-aware recommendations, security risk surfacing, and best practice updates
+                </li>
+                <li>One-click project generation, export, and cloud deployment hooks</li>
+                <li>Template projects, import/modernization, and project history</li>
+              </ul>
+              <hr />
+              <p><strong>Next Steps:</strong></p>
+              <ul>
+                <li>
+                  Review
+                  <a href="architecture/../extensibility/component-details.html"
+                    >Component Details</a
+                  >
+                </li>
+                <li>
+                  See
+                  <a href="architecture/../operations-security/ops-guide.html">Operations Guide</a>
+                </li>
+                <li>
+                  Join the
+                  <a href="architecture/../community-contribution/CONTRIBUTING.html">Community</a>
+                </li>
+              </ul>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="stack-composer-ai-platform-overview">
+                <a class="header" href="#stack-composer-ai-platform-overview"
+                  >Stack Composer AI Platform Overview</a
+                >
+              </h1>
+              <p>
+                This document serves as the high-level index and vision for Stack Composer’s
+                next-generation, AI-guided orchestration platform. It links to all major
+                architectural, component, and roadmap documents, and summarizes the core philosophy,
+                accessibility, and internationalization goals.
+              </p>
+              <hr />
+              <h2 id="vision--roadmap">
+                <a class="header" href="#vision--roadmap">Vision &amp; Roadmap</a>
+              </h2>
+              <ul>
+                <li>
+                  See <a href="architecture/ai-wizard-roadmap.html">AI Wizard Roadmap</a> for the
+                  phased plan and feature set.
+                </li>
+                <li>
+                  See
+                  <a href="architecture/architecture-questions.html">Architecture Questions</a> for
+                  open questions, technical details, and deployment plan.
+                </li>
+              </ul>
+              <h2 id="component-index">
+                <a class="header" href="#component-index">Component Index</a>
+              </h2>
+              <ul>
+                <li>
+                  <a href="architecture/../component-details/readme.html">Component Details Index</a
+                  >: Responsibilities, APIs, and extension hooks for all major modules.
+                </li>
+                <li>
+                  <a href="architecture/../component-details/planner-adapter.html"
+                    >Planner Adapter</a
+                  >: Planning, Fast Downward integration, and roadmap.
+                </li>
+                <li>
+                  <a href="architecture/../component-details/llm-runtime.html">LLM Runtime</a>: LLM
+                  abstraction, adapters, and model management.
+                </li>
+                <li>
+                  <a href="architecture/../component-details/plugin-host.html">Plugin Host</a>: WASI
+                  plugins, registry, and security.
+                </li>
+                <li>
+                  <a href="architecture/../component-details/retrieval-layer.html"
+                    >Retrieval Layer</a
+                  >: Hybrid search, GraphRAG, and modularity.
+                </li>
+                <li>
+                  <a href="architecture/../component-details/telemetry.html">Telemetry</a>:
+                  Observability, feedback, and dashboards.
+                </li>
+                <li>
+                  <a href="architecture/../component-details/report-agent.html">Report Agent</a>:
+                  Output formats, export, and workflow integration.
+                </li>
+                <li>
+                  <a href="architecture/../component-details/stack-agent.html">Stack Agent</a>:
+                  Stack synthesis, REST API, and extensibility.
+                </li>
+                <li>
+                  <a href="architecture/../component-details/gap-agent.html">Gap Agent</a>:
+                  Requirements analysis and clarifying questions.
+                </li>
+                <li>
+                  <a href="architecture/../component-details/ingestion-agent.html"
+                    >Ingestion Agent</a
+                  >: Brief parsing, chunking, and embedding.
+                </li>
+                <li>
+                  <a href="architecture/../component-details/orchestrator.html">Orchestrator</a>:
+                  Agent coordination and extensibility.
+                </li>
+                <li>
+                  <a href="architecture/../component-details/ontology-crawler.html"
+                    >Ontology Crawler</a
+                  >: Knowledge graph and ontology updates.
+                </li>
+              </ul>
+              <h2 id="accessibility--internationalization">
+                <a class="header" href="#accessibility--internationalization"
+                  >Accessibility &amp; Internationalization</a
+                >
+              </h2>
+              <ul>
+                <li>
+                  <a href="architecture/../accessibility.html">Accessibility Statement</a>
+                  (planned): Commitment to keyboard, ARIA, and screen reader support.
+                </li>
+                <li>
+                  <a href="architecture/../internationalization.html">Internationalization</a>
+                  (planned): Strategy for multi-language and locale support.
+                </li>
+              </ul>
+              <h2 id="navigation"><a class="header" href="#navigation">Navigation</a></h2>
+              <ul>
+                <li><a href="architecture/roadmap.html">Main Roadmap</a></li>
+                <li><a href="architecture/architecture-overview.html">Architecture Overview</a></li>
+                <li><a href="architecture/ai-wizard-roadmap.html">AI Wizard Roadmap</a></li>
+                <li>
+                  <a href="architecture/architecture-questions.html">Architecture Questions</a>
+                </li>
+              </ul>
+              <hr />
+              <p>
+                <em
+                  >Use this document as your starting point for all Stack Composer architecture,
+                  planning, and implementation work.</em
+                >
+              </p>
+              <div style="break-before: page; page-break-before: always"></div>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="component-details-index">
+                <a class="header" href="#component-details-index">Component Details Index</a>
+              </h1>
+              <p>
+                A map of every major module in Stack Composer. Each link points to a dedicated
+                document (<code>.md</code>) that dives into responsibilities, APIs, data contracts,
+                and extension hooks.
+              </p>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Component</th>
+                      <th>Filename</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Ingestion Agent</td>
+                      <td><code>ingestion-agent.md</code></td>
+                      <td><em>TODO</em></td>
+                    </tr>
+                    <tr>
+                      <td>Gap Agent</td>
+                      <td><code>gap-agent.md</code></td>
+                      <td><em>TODO</em></td>
+                    </tr>
+                    <tr>
+                      <td>Stack Agent</td>
+                      <td><code>stack-agent.md</code></td>
+                      <td><em>TODO</em></td>
+                    </tr>
+                    <tr>
+                      <td>Report Agent</td>
+                      <td><code>report-agent.md</code></td>
+                      <td><em>TODO</em></td>
+                    </tr>
+                    <tr>
+                      <td>Planner Adapter (Fast Downward / OPTIC)</td>
+                      <td><code>planner-adapter.md</code></td>
+                      <td><em>TODO</em></td>
+                    </tr>
+                    <tr>
+                      <td>Retrieval Layer (Qdrant + Meilisearch)</td>
+                      <td><code>retrieval-layer.md</code></td>
+                      <td><em>TODO</em></td>
+                    </tr>
+                    <tr>
+                      <td>LLM Runtime Abstraction</td>
+                      <td><code>llm-runtime.md</code></td>
+                      <td><em>TODO</em></td>
+                    </tr>
+                    <tr>
+                      <td>WASI Plugin Host</td>
+                      <td><code>plugin-host.md</code></td>
+                      <td><em>TODO</em></td>
+                    </tr>
+                    <tr>
+                      <td>Weekly Crawler</td>
+                      <td><code>ontology-crawler.md</code></td>
+                      <td><em>TODO</em></td>
+                    </tr>
+                    <tr>
+                      <td>Telemetry Pipeline</td>
+                      <td><code>telemetry.md</code></td>
+                      <td><em>TODO</em></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <blockquote>
+                <p>
+                  <strong>Tip:</strong> When you flesh out a component, begin with its
+                  <em>raison d’être</em>, list any public structs/traits (if Rust) or messages (if
+                  TypeScript), and finish with extension examples.
+                </p>
+              </blockquote>
+              <hr />
+              <h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
+              <ul>
+                <li>
+                  <a href="components/../AI%20Platform%20Overview.html">AI Platform Overview</a>:
+                  High-level vision, navigation, and links to all major docs.
+                </li>
+                <li>
+                  <a
+                    href="components/../Architecture%20&amp;%20Component%20Guides/ai-wizard-roadmap.html"
+                    >AI Wizard Roadmap</a
+                  >: Phased plan and feature set.
+                </li>
+                <li>
+                  <a
+                    href="components/../Architecture%20&amp;%20Component%20Guides/architecture-questions.html"
+                    >Architecture Questions</a
+                  >: Open questions and deployment plan.
+                </li>
+                <li>
+                  <a href="components/../roadmap.html">Main Roadmap</a>: Milestones and strategic
+                  priorities.
+                </li>
+              </ul>
+              <hr />
+              <h2 id="tooling-setup-for-documentation-and-linting">
+                <a class="header" href="#tooling-setup-for-documentation-and-linting"
+                  >Tooling Setup for Documentation and Linting</a
+                >
+              </h2>
+              <p>This project uses several tools to ensure high-quality documentation and code:</p>
+              <h2 id="documentation-tools">
+                <a class="header" href="#documentation-tools">Documentation Tools</a>
+              </h2>
+              <ul>
+                <li>
+                  <strong>mdBook</strong>: Generates multi-page Rust-style manuals with Mermaid
+                  diagram support.
+                  <ul>
+                    <li>Install: <code>cargo install mdbook</code></li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>rustdoc / cargo doc</strong>: Generates API reference docs.
+                  <ul>
+                    <li>Usage: <code>cargo doc --open</code></li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>Mermaid</strong>: For diagrams in Markdown and mdBook.
+                  <ul>
+                    <li>VS Code: Install the "Markdown Preview Mermaid Support" extension.</li>
+                    <li>CLI (optional): <code>pnpm add -g @mermaid-js/mermaid-cli</code></li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>ADR-tools</strong>: For managing Architecture Decision Records (ADRs).
+                  <ul>
+                    <li>Install: <code>brew install adr-tools</code></li>
+                  </ul>
+                </li>
+              </ul>
+              <h2 id="linting-tools"><a class="header" href="#linting-tools">Linting Tools</a></h2>
+              <ul>
+                <li>
+                  <strong>Vale</strong>: Prose linter for style and grammar.
+                  <ul>
+                    <li>Install: <code>brew install vale</code></li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>markdownlint</strong>: Lints Markdown files for style and heading rules.
+                  <ul>
+                    <li>Install: <code>pnpm add -g markdownlint-cli</code></li>
+                  </ul>
+                </li>
+              </ul>
+              <h2 id="quick-install-script-macos">
+                <a class="header" href="#quick-install-script-macos"
+                  >Quick Install Script (macOS)</a
+                >
+              </h2>
+              <pre><code class="language-bash"># Install Rust tools
+cargo install mdbook
+
+# Install Node.js tools (if not already installed)
+brew install node
+pnpm add -g @mermaid-js/mermaid-cli markdownlint-cli
+
+# Install ADR tools
+brew install adr-tools
+
+# Install Vale
+brew install vale
+</code></pre>
+              <blockquote>
+                <p>
+                  For Python environments, ensure you have Node.js and Rust installed via Homebrew
+                  if not already present.
+                </p>
+              </blockquote>
+              <hr />
+              <h2 id="ai-guided-authoring--scaffolding-1">
+                <a class="header" href="#ai-guided-authoring--scaffolding-1"
+                  >AI-Guided Authoring &amp; Scaffolding</a
+                >
+              </h2>
+              <p>
+                Stack Composer is evolving into a fully AI-guided, end-to-end project authoring and
+                scaffolding platform. See
+                <a
+                  href="components/../Architecture%20&amp;%20Component%20Guides/ai-wizard-roadmap.html"
+                  >ai-wizard-roadmap.md</a
+                >
+                for the full vision and phased implementation plan.
+              </p>
+              <h3 id="key-features"><a class="header" href="#key-features">Key Features</a></h3>
+              <ul>
+                <li>Hybrid conversational-form wizard for discovery and planning</li>
+                <li>Interactive tech stack exploration and “what-if” analysis</li>
+                <li>Real-time directory tree and scaffold preview (tree/graph views)</li>
+                <li>Chat-based copilot, rationale tooltips, and decision history</li>
+                <li>
+                  Context-aware recommendations, security risk surfacing, and best practice updates
+                </li>
+                <li>One-click project generation, export, and cloud deployment hooks</li>
+                <li>Template projects, import/modernization, and project history</li>
+              </ul>
+              <h3 id="open-questions">
+                <a class="header" href="#open-questions">Open Questions</a>
+              </h3>
+              <ul>
+                <li>Wizard UI format (chat, form, hybrid)</li>
+                <li>Customization depth (CI, infra, test frameworks)</li>
+                <li>Explainability and rationale requirements</li>
+                <li>Integration priorities (GitHub, Jira, cloud)</li>
+                <li>Project import/refactor use cases</li>
+                <li>Preferred scaffold visualization (tree, graph, hybrid)</li>
+              </ul>
+              <hr />
+              <h2 id="next-actions"><a class="header" href="#next-actions">Next actions</a></h2>
+              <ol>
+                <li>Add these three files to your repository.</li>
+                <li>
+                  When you begin implementing a component, create its matching
+                  docs/component-details/*.md stub – that keeps docs and code evolving together.
+                </li>
+                <li>
+                  As soon as the first irreversible architecture choice is made, open
+                  adr/0001-initial-decision.md using the template from Joel Parker Henderson’s repo.
+                </li>
+              </ol>
+              <p>
+                Once you’ve copied these drafts in, let me know which component you’d like to
+                document first, or if you’d prefer me to generate the Planner-Integration and
+                Plugin-SDK guides next.
+              </p>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="stack-agent"><a class="header" href="#stack-agent">Stack Agent</a></h1>
+              <h2 id="responsibilities">
+                <a class="header" href="#responsibilities">Responsibilities</a>
+              </h2>
+              <ul>
+                <li>Synthesize candidate tech stacks from requirements</li>
+                <li>Score and rank proposals</li>
+                <li>Interface with retrieval and planner components</li>
+              </ul>
+              <h2 id="public-apis"><a class="header" href="#public-apis">Public APIs</a></h2>
+              <ul>
+                <li><code>propose_stack(requirements: List) -&gt; Proposals</code></li>
+                <li><code>score_stack(proposal: Proposal) -&gt; Score</code></li>
+              </ul>
+              <h2 id="extension-hooks">
+                <a class="header" href="#extension-hooks">Extension Hooks</a>
+              </h2>
+              <ul>
+                <li>Custom scoring algorithms</li>
+                <li>New stack synthesis strategies</li>
+              </ul>
+              <h2 id="roadmap--enhancements">
+                <a class="header" href="#roadmap--enhancements">Roadmap &amp; Enhancements</a>
+              </h2>
+              <ul>
+                <li>REST/gRPC API for headless/CI use</li>
+                <li>Web UI for remote/collaborative access</li>
+                <li>RBAC &amp; multi-tenancy for distributed deployments</li>
+              </ul>
+              <h2 id="open-questions-1">
+                <a class="header" href="#open-questions-1">Open Questions</a>
+              </h2>
+              <ul>
+                <li>How to support multi-user or distributed deployments?</li>
+                <li>What are the best metrics for stack scoring?</li>
+              </ul>
+              <h2 id="how-to-extendcustomize">
+                <a class="header" href="#how-to-extendcustomize">How to Extend/Customize</a>
+              </h2>
+              <ul>
+                <li>Implement a new scoring function and register via plugin</li>
+                <li>Add new proposal generators for niche domains</li>
+              </ul>
+              <h2 id="real-world-usage-example">
+                <a class="header" href="#real-world-usage-example">Real-World Usage Example</a>
+              </h2>
+              <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let proposals = stack_agent.propose_stack(requirements);
+<span class="boring">}</span></code></pre></pre>
+              <hr />
+              <p>
+                See
+                <a
+                  href="components/../Architecture%20&amp;%20Component%20Guides/architecture-questions.html"
+                  >architecture-questions.md</a
+                >
+                for open questions and strategic direction.
+              </p>
+              <p>
+                <em
+                  >See also: <a href="components/gap-agent.html">Gap Agent</a>,
+                  <a href="components/report-agent.html">Report Agent</a></em
+                >
+              </p>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="ingestion-agent">
+                <a class="header" href="#ingestion-agent">Ingestion Agent</a>
+              </h1>
+              <h2 id="responsibilities-1">
+                <a class="header" href="#responsibilities-1">Responsibilities</a>
+              </h2>
+              <ul>
+                <li>Parse and preprocess input briefs (PDF, MD, DOCX, TXT)</li>
+                <li>Chunk and embed documents for downstream retrieval</li>
+                <li>Interface with the knowledge graph and ontology</li>
+              </ul>
+              <h2 id="flow"><a class="header" href="#flow">Flow</a></h2>
+              <ol>
+                <li>
+                  Detect file type (<code>pdf</code>, <code>md</code>, <code>docx</code>,
+                  <code>txt</code>).
+                </li>
+                <li>Extract text (Mammoth for <code>.docx</code>, pdf-extract, pulldown-cmark).</li>
+                <li>Chunk with sliding window; encode using SentencePiece.</li>
+                <li>Write into retrieval layer.</li>
+              </ol>
+              <h2 id="public-apis-1"><a class="header" href="#public-apis-1">Public APIs</a></h2>
+              <ul>
+                <li><code>ingest(input: File) -&gt; Chunks</code></li>
+                <li><code>update_ontology(new_terms: List)</code></li>
+              </ul>
+              <h2 id="extension-hooks-1">
+                <a class="header" href="#extension-hooks-1">Extension Hooks</a>
+              </h2>
+              <ul>
+                <li>Support for new file formats</li>
+                <li>Custom chunking strategies</li>
+              </ul>
+              <h2 id="roadmap--enhancements-1">
+                <a class="header" href="#roadmap--enhancements-1">Roadmap &amp; Enhancements</a>
+              </h2>
+              <ul>
+                <li>Distributed/clustered ingestion in multi-node deployments</li>
+                <li>REST/gRPC endpoints for remote or automated ingestion workflows</li>
+                <li>Plugin-based support for new document types and custom chunking strategies</li>
+              </ul>
+              <h2 id="open-questions-2">
+                <a class="header" href="#open-questions-2">Open Questions</a>
+              </h2>
+              <ul>
+                <li>How to handle very large files efficiently?</li>
+                <li>What is the best fallback for unsupported formats?</li>
+              </ul>
+              <h2 id="how-to-extendcustomize-1">
+                <a class="header" href="#how-to-extendcustomize-1">How to Extend/Customize</a>
+              </h2>
+              <ul>
+                <li>Implement a new chunker by subclassing the base chunker trait/class</li>
+                <li>Register new file format handlers via the plugin system</li>
+              </ul>
+              <h2 id="real-world-usage-example-1">
+                <a class="header" href="#real-world-usage-example-1">Real-World Usage Example</a>
+              </h2>
+              <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>enum IngestionMsg { AddFile(PathBuf), Shutdown }
+let chunks = ingestion_agent.ingest(File::open("brief.pdf")?);
+<span class="boring">}</span></code></pre></pre>
+              <hr />
+              <p>
+                See
+                <a
+                  href="components/../Architecture%20&amp;%20Component%20Guides/architecture-questions.html"
+                  >architecture-questions.md</a
+                >
+                for open questions and strategic direction.
+              </p>
+              <p>
+                <em
+                  >See also: <a href="components/gap-agent.html">Gap Agent</a>,
+                  <a href="components/retrieval-layer.html">Retrieval Layer</a></em
+                >
+              </p>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="llm-runtime-abstraction">
+                <a class="header" href="#llm-runtime-abstraction">LLM Runtime Abstraction</a>
+              </h1>
+              <h2 id="responsibilities-2">
+                <a class="header" href="#responsibilities-2">Responsibilities</a>
+              </h2>
+              <ul>
+                <li>Abstract over LLM backends (Ollama, vLLM, LM Studio, etc.)</li>
+                <li>Manage model loading, switching, and inference</li>
+                <li>Provide a unified API for agents</li>
+              </ul>
+              <h2 id="public-apis-2"><a class="header" href="#public-apis-2">Public APIs</a></h2>
+              <ul>
+                <li><code>generate(prompt: str) -&gt; str</code></li>
+                <li><code>load_model(model_name: str)</code></li>
+              </ul>
+              <h2 id="extension-hooks-2">
+                <a class="header" href="#extension-hooks-2">Extension Hooks</a>
+              </h2>
+              <ul>
+                <li>Support for new LLM providers</li>
+                <li>Custom prompt templates</li>
+              </ul>
+              <h2 id="roadmap--enhancements-2">
+                <a class="header" href="#roadmap--enhancements-2">Roadmap &amp; Enhancements</a>
+              </h2>
+              <ul>
+                <li>Model management UI</li>
+                <li>Plugin model sources and online updates</li>
+                <li>Runtime adapters for vLLM, Hugging Face TGI, LM Studio</li>
+              </ul>
+              <h2 id="open-questions-3">
+                <a class="header" href="#open-questions-3">Open Questions</a>
+              </h2>
+              <ul>
+                <li>How to handle model versioning and caching?</li>
+                <li>What is the best fallback for failed inferences?</li>
+              </ul>
+              <h2 id="how-to-extendcustomize-2">
+                <a class="header" href="#how-to-extendcustomize-2">How to Extend/Customize</a>
+              </h2>
+              <ul>
+                <li>Add new LLM adapters via plugin</li>
+                <li>Implement custom prompt logic</li>
+              </ul>
+              <h2 id="real-world-usage-example-2">
+                <a class="header" href="#real-world-usage-example-2">Real-World Usage Example</a>
+              </h2>
+              <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let response = llm_runtime.generate("Summarize this document.");
+<span class="boring">}</span></code></pre></pre>
+              <hr />
+              <p>
+                See
+                <a
+                  href="components/../Architecture%20&amp;%20Component%20Guides/architecture-questions.html"
+                  >architecture-questions.md</a
+                >
+                for open questions and strategic direction.
+              </p>
+              <p>
+                <em
+                  >See also: <a href="components/retrieval-layer.html">Retrieval Layer</a>,
+                  <a href="components/plugin-host.html">Plugin Host</a></em
+                >
+              </p>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="weekly-ontology-crawler">
+                <a class="header" href="#weekly-ontology-crawler">Weekly Ontology Crawler</a>
+              </h1>
+              <h2 id="responsibilities-3">
+                <a class="header" href="#responsibilities-3">Responsibilities</a>
+              </h2>
+              <ul>
+                <li>Refresh and update the knowledge base/ontology</li>
+                <li>Schedule and run periodic crawls</li>
+                <li>Integrate new data into the system</li>
+              </ul>
+              <h2 id="public-apis-3"><a class="header" href="#public-apis-3">Public APIs</a></h2>
+              <ul>
+                <li><code>run_crawl() -&gt; Result</code></li>
+                <li><code>update_schedule(cron: str)</code></li>
+              </ul>
+              <h2 id="extension-hooks-3">
+                <a class="header" href="#extension-hooks-3">Extension Hooks</a>
+              </h2>
+              <ul>
+                <li>Support for new data sources</li>
+                <li>Custom scheduling logic</li>
+              </ul>
+              <h2 id="roadmap--enhancements-3">
+                <a class="header" href="#roadmap--enhancements-3">Roadmap &amp; Enhancements</a>
+              </h2>
+              <ul>
+                <li>Ontology versioning and updates</li>
+                <li>Validation workflow (UI/CLI) for vetting updates</li>
+                <li>Distributed updates for multi-node/clustered refresh</li>
+              </ul>
+              <h2 id="open-questions-4">
+                <a class="header" href="#open-questions-4">Open Questions</a>
+              </h2>
+              <ul>
+                <li>How to handle failed or partial crawls?</li>
+                <li>What is the best way to notify users of updates?</li>
+              </ul>
+              <h2 id="how-to-extendcustomize-3">
+                <a class="header" href="#how-to-extendcustomize-3">How to Extend/Customize</a>
+              </h2>
+              <ul>
+                <li>Add new data source connectors via plugin</li>
+                <li>Implement custom crawl strategies</li>
+              </ul>
+              <h2 id="real-world-usage-example-3">
+                <a class="header" href="#real-world-usage-example-3">Real-World Usage Example</a>
+              </h2>
+              <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>weekly_crawler.run_crawl();
+<span class="boring">}</span></code></pre></pre>
+              <hr />
+              <p>
+                See
+                <a
+                  href="components/../Architecture%20&amp;%20Component%20Guides/architecture-questions.html"
+                  >architecture-questions.md</a
+                >
+                for open questions and strategic direction.
+              </p>
+              <p>
+                <em
+                  >See also:
+                  <a
+                    href="components/../Architecture%20&amp;%20Component%20Guides/architecture-questions.html"
+                    >Ontology/Knowledge Graph</a
+                  ></em
+                >
+              </p>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="rust-orchestrator">
+                <a class="header" href="#rust-orchestrator">Rust Orchestrator</a>
+              </h1>
+              <p>Coordinates every long-running agent, service, and plugin at runtime.</p>
+              <h2 id="purpose"><a class="header" href="#purpose">Purpose</a></h2>
+              <ul>
+                <li>
+                  Start/stop agent tasks on Tokio’s work-stealing scheduler
+                  <a href="https://tokio.rs/tokio/tutorial/async?utm_source=chatgpt.com"
+                    >oai_citation:0‡tokio.rs</a
+                  >.
+                </li>
+                <li>Route messages between GUI, CLI, and background jobs via async channels.</li>
+                <li>
+                  Expose a single IPC surface: gRPC for the Tauri shell, JSON over stdio for
+                  headless mode.
+                </li>
+              </ul>
+              <h2 id="responsibilities-4">
+                <a class="header" href="#responsibilities-4">Responsibilities</a>
+              </h2>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Category</th>
+                      <th>Detail</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Task management</td>
+                      <td>Spawn / cancel / supervise agent <code>tokio::task</code>s.</td>
+                    </tr>
+                    <tr>
+                      <td>Plugin host link</td>
+                      <td>Hand out WASI capability tokens and forward host calls.</td>
+                    </tr>
+                    <tr>
+                      <td>Error propagation</td>
+                      <td>Convert anyhow/thiserror to UI notifications &amp; exit codes.</td>
+                    </tr>
+                    <tr>
+                      <td>Metrics</td>
+                      <td>Emit OpenTelemetry spans for timing and error rate.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h2 id="key-apis"><a class="header" href="#key-apis">Key APIs</a></h2>
+              <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait AgentHandle {
+    async fn send(&amp;self, msg: AgentMsg) -&gt; anyhow::Result&lt;()&gt;;
+}
+pub struct Orchestrator {
+    registry: DashMap&lt;String, AgentHandle&gt;,
+}
+<span class="boring">}</span></code></pre></pre>
+              <p>Configuration (TOML)</p>
+              <p>[orchestrator] max_concurrent_agents = 8 shutdown_timeout_secs = 10</p>
+              <p>
+                Extension Hooks • PluginInit – dynamic registration of new host functions for WASI 🡒
+                see plugin-host.md. • AgentFactory – pluggable agent creation for test harnesses.
+              </p>
+              <p>Implementation Guide</p>
+              <p>
+                Source files live in crates/orchestrator/. Unit tests mock an in-memory channel
+                layer and use tokio::time::pause to test timers deterministically.
+              </p>
+              <h2 id="roadmap--enhancements-4">
+                <a class="header" href="#roadmap--enhancements-4">Roadmap &amp; Enhancements</a>
+              </h2>
+              <ul>
+                <li>
+                  <strong>Distributed Orchestration:</strong> Planned support for multi-node
+                  orchestration and agent supervision (Kubernetes, sharding, etc.).
+                </li>
+                <li>
+                  <strong>API Surface Expansion:</strong> REST/gRPC endpoints for remote
+                  orchestration and automation.
+                </li>
+                <li>
+                  <strong>Extensibility:</strong> Dynamic agent/plugin registration and runtime
+                  configuration reloads.
+                </li>
+              </ul>
+              <p>
+                See
+                <a
+                  href="components/../Architecture%20&amp;%20Component%20Guides/architecture-questions.html"
+                  >architecture-questions.md</a
+                >
+                for open questions and strategic direction.
+              </p>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="planner-adapter-fast-downward--optic">
+                <a class="header" href="#planner-adapter-fast-downward--optic"
+                  >Planner Adapter (Fast Downward / OPTIC)</a
+                >
+              </h1>
+              <h2 id="responsibilities-5">
+                <a class="header" href="#responsibilities-5">Responsibilities</a>
+              </h2>
+              <ul>
+                <li>Invoke external planners (Fast Downward, OPTIC) for PDDL planning</li>
+                <li>Translate requirements into domain/problem files</li>
+                <li>Return plan steps to orchestrator</li>
+              </ul>
+              <h2 id="public-apis-4"><a class="header" href="#public-apis-4">Public APIs</a></h2>
+              <ul>
+                <li><code>plan(domain: File, problem: File) -&gt; Plan</code></li>
+                <li><code>validate_plan(plan: Plan) -&gt; bool</code></li>
+              </ul>
+              <h2 id="extension-hooks-4">
+                <a class="header" href="#extension-hooks-4">Extension Hooks</a>
+              </h2>
+              <ul>
+                <li>Support for new planners</li>
+                <li>Custom plan validation logic</li>
+              </ul>
+              <h2 id="roadmap--enhancements-5">
+                <a class="header" href="#roadmap--enhancements-5">Roadmap &amp; Enhancements</a>
+              </h2>
+              <ul>
+                <li>Canonical PDDL test suite</li>
+                <li>REST endpoints for planning</li>
+                <li>Plan visualization &amp; editor (UI)</li>
+                <li>Pluggable planners and adapters</li>
+              </ul>
+              <h2 id="open-questions-5">
+                <a class="header" href="#open-questions-5">Open Questions</a>
+              </h2>
+              <ul>
+                <li>How to generalize for multiple planners?</li>
+                <li>What is the best UI for plan visualization?</li>
+              </ul>
+              <h2 id="how-to-extendcustomize-4">
+                <a class="header" href="#how-to-extendcustomize-4">How to Extend/Customize</a>
+              </h2>
+              <ul>
+                <li>Add a new planner adapter by implementing the planner trait</li>
+                <li>Register new planners via configuration</li>
+              </ul>
+              <h2 id="real-world-usage-example-4">
+                <a class="header" href="#real-world-usage-example-4">Real-World Usage Example</a>
+              </h2>
+              <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let plan = planner_adapter.plan(domain_file, problem_file);
+<span class="boring">}</span></code></pre></pre>
+              <hr />
+              <p>
+                See
+                <a
+                  href="components/../Architecture%20&amp;%20Component%20Guides/architecture-questions.html"
+                  >architecture-questions.md</a
+                >
+                for open questions and strategic direction.
+              </p>
+              <p>
+                <em
+                  >See also: <a href="components/stack-agent.html">Stack Agent</a>,
+                  <a href="components/retrieval-layer.html">Retrieval Layer</a></em
+                >
+              </p>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="wasi-plugin-host">
+                <a class="header" href="#wasi-plugin-host">WASI Plugin Host</a>
+              </h1>
+              <h2 id="responsibilities-6">
+                <a class="header" href="#responsibilities-6">Responsibilities</a>
+              </h2>
+              <ul>
+                <li>Host and manage WASI plugins</li>
+                <li>Enforce capability tokens and sandboxing</li>
+                <li>Provide host functions for plugin interaction</li>
+                <li>Verify plugin signatures (Ed25519)</li>
+                <li>Enforce per-plugin permissions (filesystem/network)</li>
+              </ul>
+              <h2 id="public-apis-5"><a class="header" href="#public-apis-5">Public APIs</a></h2>
+              <ul>
+                <li><code>load_plugin(path: str)</code></li>
+                <li><code>call_plugin(func: str, args: List)</code></li>
+              </ul>
+              <h2 id="extension-hooks-5">
+                <a class="header" href="#extension-hooks-5">Extension Hooks</a>
+              </h2>
+              <ul>
+                <li>Support for new plugin types (REST, gRPC, future adapters)</li>
+                <li>Custom host functions</li>
+              </ul>
+              <h2 id="roadmap--enhancements-6">
+                <a class="header" href="#roadmap--enhancements-6">Roadmap &amp; Enhancements</a>
+              </h2>
+              <ul>
+                <li>OCI-based plugin registry</li>
+                <li>In-app plugin discovery UI</li>
+                <li>Security templates &amp; SDKs for plugin authoring</li>
+                <li>Sample plugins with docs and best practices</li>
+                <li>Registry/discovery UI for plugin management</li>
+              </ul>
+              <h2 id="open-questions-6">
+                <a class="header" href="#open-questions-6">Open Questions</a>
+              </h2>
+              <ul>
+                <li>How to manage plugin permissions securely?</li>
+                <li>What is the best way to version plugins?</li>
+                <li>How to support new plugin transports (GraphRAG, telemetry)?</li>
+              </ul>
+              <h2 id="how-to-extendcustomize-5">
+                <a class="header" href="#how-to-extendcustomize-5">How to Extend/Customize</a>
+              </h2>
+              <ul>
+                <li>Add new host functions via the plugin API</li>
+                <li>Register new plugin types in the registry</li>
+                <li>Configure plugin permissions in the config file</li>
+              </ul>
+              <h2 id="real-world-usage-example-5">
+                <a class="header" href="#real-world-usage-example-5">Real-World Usage Example</a>
+              </h2>
+              <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>plugin_host.load_plugin("my_plugin.wasm");
+<span class="boring">}</span></code></pre></pre>
+              <hr />
+              <ul>
+                <li>
+                  Plugins are auto-discovered from
+                  <code>~/.local/share/stack-composer/plugins/</code>.
+                </li>
+                <li>
+                  Only plugins with valid Ed25519 signatures are loaded (see
+                  <a href="components/../plugin-sdk/README.html">Plugin SDK</a>).
+                </li>
+                <li>
+                  Per-plugin permissions (filesystem/network) are enforced as configured (see
+                  <a href="components/../configuration.html">Configuration Guide</a>).
+                </li>
+              </ul>
+              <p>
+                See
+                <a
+                  href="components/../Architecture%20&amp;%20Component%20Guides/architecture-questions.html"
+                  >architecture-questions.md</a
+                >
+                for open questions and strategic direction.
+              </p>
+              <p>
+                <em
+                  >See also: <a href="components/llm-runtime.html">LLM Runtime</a>,
+                  <a href="components/telemetry.html">Telemetry Pipeline</a></em
+                >
+              </p>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="report-agent"><a class="header" href="#report-agent">Report Agent</a></h1>
+              <h2 id="responsibilities-7">
+                <a class="header" href="#responsibilities-7">Responsibilities</a>
+              </h2>
+              <ul>
+                <li>Generate human- and machine-readable reports</li>
+                <li>Export scaffolds, API outputs, and documentation</li>
+              </ul>
+              <h2 id="public-apis-6"><a class="header" href="#public-apis-6">Public APIs</a></h2>
+              <ul>
+                <li><code>generate_report(proposal: Proposal) -&gt; Report</code></li>
+                <li><code>export_scaffold(report: Report) -&gt; Archive</code></li>
+              </ul>
+              <h2 id="extension-hooks-6">
+                <a class="header" href="#extension-hooks-6">Extension Hooks</a>
+              </h2>
+              <ul>
+                <li>Custom export formats (PDF, DOCX, etc.)</li>
+                <li>Post-generation hooks for workflow automation</li>
+              </ul>
+              <h2 id="roadmap--enhancements-7">
+                <a class="header" href="#roadmap--enhancements-7">Roadmap &amp; Enhancements</a>
+              </h2>
+              <ul>
+                <li>Export connectors for Jira, Confluence, GitHub Issues</li>
+                <li>Custom templates and user-defined formats</li>
+                <li>Post-generation hooks for workflow integration</li>
+              </ul>
+              <h2 id="open-questions-7">
+                <a class="header" href="#open-questions-7">Open Questions</a>
+              </h2>
+              <ul>
+                <li>How to support user scripts for post-processing?</li>
+                <li>What is the best way to handle large exports?</li>
+              </ul>
+              <h2 id="how-to-extendcustomize-6">
+                <a class="header" href="#how-to-extendcustomize-6">How to Extend/Customize</a>
+              </h2>
+              <ul>
+                <li>Add new export adapters via plugin</li>
+                <li>Implement custom report templates</li>
+              </ul>
+              <h2 id="real-world-usage-example-6">
+                <a class="header" href="#real-world-usage-example-6">Real-World Usage Example</a>
+              </h2>
+              <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let report = report_agent.generate_report(proposal);
+<span class="boring">}</span></code></pre></pre>
+              <hr />
+              <p>
+                See
+                <a
+                  href="components/../Architecture%20&amp;%20Component%20Guides/architecture-questions.html"
+                  >architecture-questions.md</a
+                >
+                for open questions and strategic direction.
+              </p>
+              <p>
+                <em
+                  >See also: <a href="components/stack-agent.html">Stack Agent</a>,
+                  <a href="components/planner-adapter.html">Planner Adapter</a></em
+                >
+              </p>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="retrieval-layer-qdrant--meilisearch">
+                <a class="header" href="#retrieval-layer-qdrant--meilisearch"
+                  >Retrieval Layer (Qdrant + Meilisearch)</a
+                >
+              </h1>
+              <h2 id="responsibilities-8">
+                <a class="header" href="#responsibilities-8">Responsibilities</a>
+              </h2>
+              <ul>
+                <li>Power hybrid dense + sparse search for RAG</li>
+                <li>Manage Qdrant and Meilisearch indices</li>
+                <li>Serve queries for stack synthesis and gap analysis</li>
+              </ul>
+              <h2 id="public-apis-7"><a class="header" href="#public-apis-7">Public APIs</a></h2>
+              <ul>
+                <li><code>search(query: str) -&gt; Results</code></li>
+                <li><code>index(document: Document)</code></li>
+              </ul>
+              <h2 id="extension-hooks-7">
+                <a class="header" href="#extension-hooks-7">Extension Hooks</a>
+              </h2>
+              <ul>
+                <li>Support for new vector DBs or search engines</li>
+                <li>Custom ranking/merging strategies</li>
+              </ul>
+              <h2 id="roadmap--enhancements-8">
+                <a class="header" href="#roadmap--enhancements-8">Roadmap &amp; Enhancements</a>
+              </h2>
+              <ul>
+                <li>GraphRAG backend plugin</li>
+                <li>Cloud vector DB and hybrid config</li>
+              </ul>
+              <h2 id="open-questions-8">
+                <a class="header" href="#open-questions-8">Open Questions</a>
+              </h2>
+              <ul>
+                <li>How to optimize for large-scale retrieval?</li>
+                <li>What is the best fallback for missing data?</li>
+              </ul>
+              <h2 id="how-to-extendcustomize-7">
+                <a class="header" href="#how-to-extendcustomize-7">How to Extend/Customize</a>
+              </h2>
+              <ul>
+                <li>Add new indexers or search backends via plugin</li>
+                <li>Implement custom query pipelines</li>
+              </ul>
+              <h2 id="real-world-usage-example-7">
+                <a class="header" href="#real-world-usage-example-7">Real-World Usage Example</a>
+              </h2>
+              <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let results = retrieval_layer.search("Find all Python microservices");
+<span class="boring">}</span></code></pre></pre>
+              <hr />
+              <p>
+                See
+                <a
+                  href="components/../Architecture%20&amp;%20Component%20Guides/architecture-questions.html"
+                  >architecture-questions.md</a
+                >
+                for open questions and strategic direction.
+              </p>
+              <p>
+                <em
+                  >See also: <a href="components/planner-adapter.html">Planner Adapter</a>,
+                  <a href="components/llm-runtime.html">LLM Runtime</a></em
+                >
+              </p>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="telemetry-pipeline">
+                <a class="header" href="#telemetry-pipeline">Telemetry Pipeline</a>
+              </h1>
+              <h2 id="responsibilities-9">
+                <a class="header" href="#responsibilities-9">Responsibilities</a>
+              </h2>
+              <ul>
+                <li>Collect and export metrics, traces, and usage data</li>
+                <li>Integrate with OpenTelemetry and external dashboards</li>
+              </ul>
+              <h2 id="public-apis-8"><a class="header" href="#public-apis-8">Public APIs</a></h2>
+              <ul>
+                <li><code>record_event(event: TelemetryEvent)</code></li>
+                <li><code>export_metrics() -&gt; File</code></li>
+              </ul>
+              <h2 id="extension-hooks-8">
+                <a class="header" href="#extension-hooks-8">Extension Hooks</a>
+              </h2>
+              <ul>
+                <li>Support for new telemetry backends</li>
+                <li>Custom event types and exporters</li>
+              </ul>
+              <h2 id="roadmap--enhancements-9">
+                <a class="header" href="#roadmap--enhancements-9">Roadmap &amp; Enhancements</a>
+              </h2>
+              <ul>
+                <li>Prometheus &amp; Grafana integration for real-time metrics and dashboards</li>
+                <li>Cloud telemetry backend for enterprise/remote monitoring</li>
+                <li>Alerting &amp; integrations (Slack/email)</li>
+              </ul>
+              <h2 id="open-questions-9">
+                <a class="header" href="#open-questions-9">Open Questions</a>
+              </h2>
+              <ul>
+                <li>How to balance privacy with observability?</li>
+                <li>What is the best way to surface actionable insights?</li>
+              </ul>
+              <h2 id="how-to-extendcustomize-8">
+                <a class="header" href="#how-to-extendcustomize-8">How to Extend/Customize</a>
+              </h2>
+              <ul>
+                <li>Add new exporters via plugin</li>
+                <li>Implement custom event types</li>
+              </ul>
+              <h2 id="real-world-usage-example-8">
+                <a class="header" href="#real-world-usage-example-8">Real-World Usage Example</a>
+              </h2>
+              <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>telemetry_pipeline.record_event(TelemetryEvent::new("user_login"));
+<span class="boring">}</span></code></pre></pre>
+              <hr />
+              <p>
+                See
+                <a
+                  href="components/../Architecture%20&amp;%20Component%20Guides/architecture-questions.html"
+                  >architecture-questions.md</a
+                >
+                for open questions and strategic direction.
+              </p>
+              <p>
+                <em
+                  >See also: <a href="components/plugin-host.html">Plugin Host</a>,
+                  <a href="components/../ops-guide.html">Ops Guide</a></em
+                >
+              </p>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="operational-docs">
+                <a class="header" href="#operational-docs">Operational Docs</a>
+              </h1>
+              <ul>
+                <li><a href="operations/../../operational-docs/ops-guide.html">Ops Guide</a></li>
+                <li>
+                  <a href="operations/../../operational-docs/security-policy.html"
+                    >Security Policy</a
+                  >
+                </li>
+                <li>
+                  <a href="operations/../../operational-docs/telemetry-privacy.html"
+                    >Telemetry &amp; Privacy</a
+                  >
+                </li>
+              </ul>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="operations-guide">
+                <a class="header" href="#operations-guide">Operations Guide</a>
+              </h1>
+              <p>
+                For reproducible local operations, see
+                <a href="operations/../../toolchain.html">Toolchain &amp; DX Pipeline</a> and
+                <a href="operations/../../developer-extensibility-docs/dev-setup.html"
+                  >Developer Setup</a
+                >
+                for Docker, Nix, and all required tools.
+              </p>
+              <ul>
+                <li>Qdrant runs via Docker for local development.</li>
+                <li>Use <code>trivy</code> for container and SBOM health/security checks.</li>
+                <li>Nix enables reproducible ops environments.</li>
+              </ul>
+              <hr />
+              <h2 id="local-deployment-docker-compose-example">
+                <a class="header" href="#local-deployment-docker-compose-example"
+                  >Local Deployment: Docker Compose Example</a
+                >
+              </h2>
+              <pre><code class="language-yaml">version: '3.8'
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.4
+    ports: ['6333:6333']
+    volumes:
+      - qdrant_data:/qdrant/storage
+  meilisearch:
+    image: getmeili/meilisearch:v1.5
+    ports: ['7700:7700']
+    environment:
+      - MEILI_NO_ANALYTICS=true
+  stack-composer:
+    build: .
+    depends_on:
+      - qdrant
+      - meilisearch
+    environment:
+      - QDRANT_URL=http://qdrant:6333
+      - MEILI_URL=http://meilisearch:7700
+volumes:
+  qdrant_data:
+</code></pre>
+              <hr />
+              <h2 id="production-kubernetes-snippet">
+                <a class="header" href="#production-kubernetes-snippet"
+                  >Production: Kubernetes Snippet</a
+                >
+              </h2>
+              <pre><code class="language-yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stack-composer
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: stack-composer
+  template:
+    metadata:
+      labels:
+        app: stack-composer
+    spec:
+      containers:
+        - name: stack-composer
+          image: ghcr.io/your-org/stack-composer:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /livez
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 30
+</code></pre>
+              <hr />
+              <h2 id="health--metrics-endpoints">
+                <a class="header" href="#health--metrics-endpoints"
+                  >Health &amp; Metrics Endpoints</a
+                >
+              </h2>
+              <ul>
+                <li><code>/healthz</code> – Readiness probe (returns 200 if ready)</li>
+                <li><code>/livez</code> – Liveness probe (returns 200 if alive)</li>
+                <li><code>/metrics</code> – Prometheus metrics endpoint</li>
+              </ul>
+              <hr />
+              <h2 id="observability-stack">
+                <a class="header" href="#observability-stack">Observability Stack</a>
+              </h2>
+              <ul>
+                <li>
+                  <strong>Prometheus</strong>: Scrapes <code>/metrics</code> for system and app
+                  metrics.
+                </li>
+                <li><strong>Grafana</strong>: Dashboards for latency, throughput, error rates.</li>
+                <li><strong>Jaeger</strong>: Distributed tracing via OpenTelemetry.</li>
+                <li><strong>ELK/OpenSearch</strong>: Structured log aggregation and search.</li>
+                <li><strong>Alerting</strong>: Example Prometheus rule:</li>
+              </ul>
+              <pre><code class="language-yaml">- alert: HighPlanLatency
+  expr: plan_latency_seconds &gt; 5
+  for: 5m
+  labels:
+    severity: warning
+  annotations:
+    summary: 'Plan latency is high (&gt;5s)'
+</code></pre>
+              <hr />
+              <h2 id="topology-diagram">
+                <a class="header" href="#topology-diagram">Topology Diagram</a>
+              </h2>
+              <pre><code class="language-mermaid">flowchart LR
+    subgraph Cluster
+        SC[Stack Composer]
+        QD[Qdrant]
+        ME[Meilisearch]
+        PR[Prometheus]
+        GR[Grafana]
+        JG[Jaeger]
+        LS[Logstash/ELK]
+    end
+    SC -- metrics --&gt; PR
+    PR -- dashboards --&gt; GR
+    SC -- traces --&gt; JG
+    SC -- logs --&gt; LS
+    SC -- hybrid search --&gt; QD
+    SC -- hybrid search --&gt; ME
+</code></pre>
+              <hr />
+              <h2 id="ontology-crawler--health-checks">
+                <a class="header" href="#ontology-crawler--health-checks"
+                  >Ontology Crawler &amp; Health Checks</a
+                >
+              </h2>
+              <ul>
+                <li>Ontology crawler runs weekly to refresh the knowledge base.</li>
+                <li>
+                  Health checks: <code>/healthz</code>, <code>/livez</code>, and
+                  <code>/metrics</code> endpoints for monitoring and alerting.
+                </li>
+              </ul>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="security-policy">
+                <a class="header" href="#security-policy">Security Policy</a>
+              </h1>
+              <p>
+                Stack Composer follows modern security best practices. All contributors and users
+                should:
+              </p>
+              <ul>
+                <li>
+                  Review
+                  <a href="operations/../../developer-extensibility-docs/dev-setup.html"
+                    >Developer Setup</a
+                  >
+                  for secure environment setup.
+                </li>
+                <li>
+                  Use the latest toolchain as described in
+                  <a href="operations/../../toolchain.html">Toolchain</a>.
+                </li>
+                <li>Report vulnerabilities as described below.</li>
+              </ul>
+              <hr />
+              <h2 id="sbom--scanning">
+                <a class="header" href="#sbom--scanning">SBOM &amp; Scanning</a>
+              </h2>
+              <ul>
+                <li>
+                  All releases include a CycloneDX SBOM (<code>bom.json</code>) published with
+                  release assets.
+                </li>
+                <li>
+                  SBOM is updated automatically in CI using <code>trivy</code> and
+                  <code>cargo-audit</code>.
+                </li>
+                <li>Scan containers and dependencies before each release.</li>
+                <li>
+                  All plugins are scanned with <code>trivy</code> and
+                  <code>cargo-audit</code> before release (see
+                  <a href="operations/../../plugin-sdk/readme.html">Plugin SDK</a>).
+                </li>
+              </ul>
+              <hr />
+              <h2 id="plugin-signing--verification">
+                <a class="header" href="#plugin-signing--verification"
+                  >Plugin Signing &amp; Verification</a
+                >
+              </h2>
+              <ul>
+                <li>
+                  Every <code>.wasm</code> plugin must be accompanied by a <code>.sig</code> file
+                  (Ed25519 signature, hex).
+                </li>
+                <li>
+                  Verification uses the <code>ed25519-dalek</code> crate; trusted public keys are
+                  listed in <code>~/.config/stack-composer/trusted_keys.toml</code>.
+                </li>
+                <li>Plugins without valid signatures are rejected by default.</li>
+                <li>
+                  Security thresholds: CVSS ≥ 7.0 blocks plugin install; non-OSI/GPL licenses are
+                  blocked.
+                </li>
+              </ul>
+              <hr />
+              <h2 id="telemetry--privacy">
+                <a class="header" href="#telemetry--privacy">Telemetry &amp; Privacy</a>
+              </h2>
+              <ul>
+                <li>
+                  Telemetry is <strong>opt-in</strong> by default. Enable via config or CLI flag.
+                </li>
+                <li>
+                  Collected fields: hashed project ID, feature flag counts, duration stats (no
+                  source text or PII).
+                </li>
+                <li>Example log line:</li>
+              </ul>
+              <pre><code class="language-json">{
+  "project_id": "abc123...",
+  "feature_flags": { "planner": true },
+  "duration_ms": 1234,
+  "timestamp": "2025-06-20T12:34:56Z"
+}
+</code></pre>
+              <ul>
+                <li>Retention: Local JSON files are kept for 30 days unless manually purged.</li>
+                <li>Upload: Only on user action (GUI button or CLI flag).</li>
+              </ul>
+              <hr />
+              <h2 id="vulnerability-reporting">
+                <a class="header" href="#vulnerability-reporting">Vulnerability Reporting</a>
+              </h2>
+              <ul>
+                <li>
+                  Please report security issues via GitHub Issues or the contact method in
+                  <a href="operations/../../community-contribution/contributing.html"
+                    >CONTRIBUTING.md</a
+                  >.
+                </li>
+                <li>Triage: Acknowledge within 24h, assess CVSS, and prioritize patches.</li>
+                <li>Patch timeline: Critical issues patched within 7 days; others as scheduled.</li>
+                <li>
+                  Disclosure: Coordinated with reporter; public advisories for high/critical issues.
+                </li>
+              </ul>
+              <hr />
+              <h2 id="gdpr--compliance">
+                <a class="header" href="#gdpr--compliance">GDPR &amp; Compliance</a>
+              </h2>
+              <ul>
+                <li>No PII is collected by default; telemetry is anonymized and opt-in.</li>
+                <li>Data storage: All telemetry/logs are local unless user uploads.</li>
+                <li>Deletion: Users can purge all local data via GUI or CLI.</li>
+                <li>
+                  Compliance: GDPR mode disables telemetry and purges temp data after report
+                  generation.
+                </li>
+              </ul>
+              <hr />
+              <h2 id="troubleshooting-1">
+                <a class="header" href="#troubleshooting-1">Troubleshooting</a>
+              </h2>
+              <ul>
+                <li>
+                  For security-related setup issues, see
+                  <a
+                    href="operations/../../developer-extensibility-docs/dev-setup.html#troubleshooting"
+                    >Developer Setup</a
+                  >.
+                </li>
+              </ul>
+              <p>
+                <em
+                  >See also: <a href="operations/../../plugin-sdk/readme.html">Plugin SDK</a>,
+                  <a href="operations/../../configuration.html">Configuration Guide</a></em
+                >
+              </p>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="telemetry--privacy-1">
+                <a class="header" href="#telemetry--privacy-1">Telemetry &amp; Privacy</a>
+              </h1>
+              <p>Stack Composer is designed with privacy in mind.</p>
+              <ul>
+                <li>
+                  See
+                  <a href="operations/../../developer-extensibility-docs/dev-setup.html"
+                    >Developer Setup</a
+                  >
+                  for details on telemetry configuration.
+                </li>
+                <li>
+                  The toolchain (<a href="operations/../../toolchain.html">toolchain</a>) includes
+                  instructions for managing telemetry and privacy settings.
+                </li>
+                <li>Local JSON flow and GDPR toggles are documented in the relevant sections.</li>
+              </ul>
+              <hr />
+              <h2 id="telemetry-schema">
+                <a class="header" href="#telemetry-schema">Telemetry Schema</a>
+              </h2>
+              <ul>
+                <li><strong>Opt-in</strong> only: telemetry is disabled by default.</li>
+                <li>
+                  Collected fields: hashed project ID, feature flag counts, duration stats,
+                  timestamp.
+                </li>
+                <li>No source text, PII, or user content is ever collected.</li>
+              </ul>
+              <h3 id="example-log-entry">
+                <a class="header" href="#example-log-entry">Example Log Entry</a>
+              </h3>
+              <pre><code class="language-json">{
+  "project_id": "abc123...",
+  "feature_flags": { "planner": true },
+  "duration_ms": 1234,
+  "timestamp": "2025-06-20T12:34:56Z"
+}
+</code></pre>
+              <hr />
+              <h2 id="retention--upload">
+                <a class="header" href="#retention--upload">Retention &amp; Upload</a>
+              </h2>
+              <ul>
+                <li>Local JSON files are retained for 30 days unless manually purged.</li>
+                <li>Upload is only triggered by explicit user action (GUI or CLI).</li>
+              </ul>
+              <hr />
+              <h2 id="gdpr--privacy-controls">
+                <a class="header" href="#gdpr--privacy-controls">GDPR &amp; Privacy Controls</a>
+              </h2>
+              <ul>
+                <li>
+                  GDPR mode disables all telemetry and purges temp data after report generation.
+                </li>
+                <li>Users can delete all local telemetry via GUI or CLI.</li>
+              </ul>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="release-engineering">
+                <a class="header" href="#release-engineering">Release Engineering</a>
+              </h1>
+              <ul>
+                <li>
+                  <a href="release-engineering/../../release-engineering/changelog.html"
+                    >Changelog</a
+                  >
+                </li>
+                <li>
+                  <a href="release-engineering/../../release-engineering/release-process.html"
+                    >Release Process</a
+                  >
+                </li>
+                <li>
+                  <a href="release-engineering/../../release-engineering/roadmap.html">Roadmap</a>
+                </li>
+              </ul>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="changelog"><a class="header" href="#changelog">Changelog</a></h1>
+              <p>All notable changes to this project will be documented in this file.</p>
+              <p>
+                The format is based on
+                <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>, and this
+                project adheres to
+                <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.
+              </p>
+              <h2 id="unreleased"><a class="header" href="#unreleased">[Unreleased]</a></h2>
+              <h3 id="added"><a class="header" href="#added">Added</a></h3>
+              <ul>
+                <li>Initial changelog structure and documentation updates.</li>
+              </ul>
+              <h3 id="changed"><a class="header" href="#changed">Changed</a></h3>
+              <ul>
+                <li>N/A</li>
+              </ul>
+              <h3 id="fixed"><a class="header" href="#fixed">Fixed</a></h3>
+              <ul>
+                <li>N/A</li>
+              </ul>
+              <h3 id="removed"><a class="header" href="#removed">Removed</a></h3>
+              <ul>
+                <li>N/A</li>
+              </ul>
+              <h2 id="v100---2025-06-20">
+                <a class="header" href="#v100---2025-06-20">[v1.0.0] - 2025-06-20</a>
+              </h2>
+              <h3 id="initial-release">
+                <a class="header" href="#initial-release">Initial Release</a>
+              </h3>
+              <ul>
+                <li>Initial public release of Stack Composer.</li>
+                <li>Core architecture, retrieval, planning, and plugin modules.</li>
+                <li>CI/CD pipeline, SBOM, and docs-as-code setup.</li>
+              </ul>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="release-process">
+                <a class="header" href="#release-process">Release Process</a>
+              </h1>
+              <p>This document describes the release process for Stack Composer.</p>
+              <h2 id="prerequisites"><a class="header" href="#prerequisites">Prerequisites</a></h2>
+              <ul>
+                <li>
+                  Ensure your environment is set up as described in
+                  <a href="release-engineering/../../developer-extensibility-docs/dev-setup.html"
+                    >Developer Setup</a
+                  >
+                  and <a href="release-engineering/../../toolchain.html">Toolchain</a>.
+                </li>
+                <li>
+                  All releases must pass automated linting and tests (see
+                  <a href="release-engineering/../../community-contribution/contributing.html"
+                    >Contributing</a
+                  >).
+                </li>
+              </ul>
+              <hr />
+              <h2 id="ci-build-matrix">
+                <a class="header" href="#ci-build-matrix">CI Build Matrix</a>
+              </h2>
+              <ul>
+                <li>
+                  Supported platforms: Rust ≥1.70, Ubuntu 22.04, macOS 13+, Windows 11 (WSL2
+                  supported)
+                </li>
+                <li>Matrix includes: Rust stable/nightly, Docker build, UI test suite</li>
+                <li>Example (GitHub Actions):</li>
+              </ul>
+              <pre><code class="language-yaml">jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        rust: [stable, nightly]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ matrix.rust }}
+      - run: cargo build --release
+</code></pre>
+              <hr />
+              <h2 id="release-automation">
+                <a class="header" href="#release-automation">Release Automation</a>
+              </h2>
+              <ul>
+                <li>Version bump and changelog generation via semantic-release or PR labels</li>
+                <li>SBOM (<code>bom.json</code>) updated in CI</li>
+                <li>Artifacts signed with GPG in CI</li>
+                <li>Publish to GitHub Releases, DockerHub, crates.io as appropriate</li>
+              </ul>
+              <hr />
+              <h2 id="rollback--hotfix-workflow">
+                <a class="header" href="#rollback--hotfix-workflow"
+                  >Rollback &amp; Hotfix Workflow</a
+                >
+              </h2>
+              <ul>
+                <li>To rollback: redeploy previous Git tag or release artifact</li>
+                <li>
+                  Hotfix: branch from last tag, patch, CI run, sign, redeploy, update changelog
+                </li>
+              </ul>
+              <hr />
+              <h2 id="troubleshooting-2">
+                <a class="header" href="#troubleshooting-2">Troubleshooting</a>
+              </h2>
+              <ul>
+                <li>
+                  See
+                  <a
+                    href="release-engineering/../../developer-extensibility-docs/dev-setup.html#troubleshooting"
+                    >Developer Setup</a
+                  >
+                  for common issues.
+                </li>
+                <li>
+                  For toolchain issues, refer to
+                  <a href="release-engineering/../../toolchain.html#troubleshooting">Toolchain</a>.
+                </li>
+              </ul>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="stack-composer--public-roadmap">
+                <a class="header" href="#stack-composer--public-roadmap"
+                  >Stack Composer — Public Roadmap</a
+                >
+              </h1>
+              <blockquote>
+                <p>
+                  <strong>Purpose</strong> This roadmap aligns release milestones,
+                  security-hardening gates, and documentation maturity with open‑source best
+                  practices such as Semantic Versioning 2.0.0 and human‑readable
+                  changelogs.citeturn0search1turn0search3
+                </p>
+              </blockquote>
+              <hr />
+              <h2 id="1--releasecadence-principles">
+                <a class="header" href="#1--releasecadence-principles"
+                  >1  Release‑cadence Principles</a
+                >
+              </h2>
+              <ul>
+                <li>
+                  <strong>Time‑boxed minors, feature‑boxed majors</strong>.
+                  <ul>
+                    <li>Patch releases land ad‑hoc for CVEs or critical fixes.</li>
+                    <li>
+                      Minor versions ship on a <strong>6‑week</strong> cadence; majors only when
+                      public API changes. Semantic‑ver rules apply.citeturn0search1
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <strong>Source‑available first, notarised later.</strong> macOS/Windows signing is
+                  added at <strong>v 1.0</strong> per Tauri notarisation guide lines to avoid early
+                  release friction.citeturn0search2
+                </li>
+                <li>
+                  <strong>Each release must pass</strong> Axe a11y, dep‑scan CVSS ≥ 7 block, OTLP
+                  trace‑export smoke‑test.citeturn0search4turn0search5
+                </li>
+                <li>
+                  Changelogs follow <em>Keep a Changelog</em> spec and list date + semantic
+                  version.citeturn0search3turn0search8
+                </li>
+              </ul>
+              <hr />
+              <h2 id="2--milestone-timeline">
+                <a class="header" href="#2--milestone-timeline">2  Milestone Timeline</a>
+              </h2>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Version</th>
+                      <th>Target Date</th>
+                      <th>Status</th>
+                      <th>Themes</th>
+                      <th>Exit Criteria</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>0.5 (MVP)</strong></td>
+                      <td>2025‑08</td>
+                      <td>🔄 In dev</td>
+                      <td>Hybrid RAG, Tauri GUI, CLI parity</td>
+                      <td>
+                        <em
+                          >Quick Start passes on macOS, Win, Linux; plan export JSON validated.</em
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>0.8</strong></td>
+                      <td>2025‑11</td>
+                      <td>⏳ Planned</td>
+                      <td>Signed WASI plugin registry (OCI), RL‑Critic v0</td>
+                      <td><em>Registry CLI push/pull, critic value =̂ heuristic ±10 % mean.</em></td>
+                    </tr>
+                    <tr>
+                      <td><strong>1.0</strong></td>
+                      <td>2026‑02</td>
+                      <td>⏳ Planned</td>
+                      <td>Code‑sign &amp; notarise, auto‑update, installer matrix</td>
+                      <td>
+                        <em>DMG notarised, MSI signed, AppImage checksum in CI; Axe score ≥ 90.</em>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>1.1</strong></td>
+                      <td>2026‑04</td>
+                      <td>⏳ Planned</td>
+                      <td>Marketplace UI, Homebrew/Scoop, telemetry dashboard</td>
+                      <td><em>In‑app plugin browse + install; OTLP traces in Grafana.</em></td>
+                    </tr>
+                    <tr>
+                      <td><strong>1.2</strong></td>
+                      <td>2026‑07</td>
+                      <td>⏳ Planned</td>
+                      <td>HTN planner adapter (JSHOP‑2), cost metric v2</td>
+                      <td><em>Plans with durative + HTN validated against test corpus.</em></td>
+                    </tr>
+                    <tr>
+                      <td><strong>2.0</strong></td>
+                      <td>2026‑Q4</td>
+                      <td>⏳ Vision</td>
+                      <td>GraphRAG, Tauri‑Mobile, PWA, CRDT collab</td>
+                      <td><em>Mobile beta on iOS/Android, real‑time multi‑cursor in Fluid.</em></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>
+                Date slippage &gt; 30 days requires ADR addendum per OSS‑Watch release‑management
+                best‑practice.citeturn0search10
+              </p>
+              <hr />
+              <h2 id="3--documentation-maturity-alignment">
+                <a class="header" href="#3--documentation-maturity-alignment"
+                  >3  Documentation Maturity Alignment</a
+                >
+              </h2>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Release</th>
+                      <th>Docs Gate</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>0.5</td>
+                      <td>Quick‑Start, Arch‑Overview, Component stubs</td>
+                    </tr>
+                    <tr>
+                      <td>0.8</td>
+                      <td>Install guide (this), Plugin SDK, RAG &amp; Planner docs</td>
+                    </tr>
+                    <tr>
+                      <td>1.0</td>
+                      <td>Security policy, Telemetry policy, full ADR index</td>
+                    </tr>
+                    <tr>
+                      <td>1.1</td>
+                      <td>Operations handbook, Marketplace user guide</td>
+                    </tr>
+                    <tr>
+                      <td>2.0</td>
+                      <td>Mobile client docs, CRDT collaboration guide</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <hr />
+              <h2 id="4--security--compliance-gates">
+                <a class="header" href="#4--security--compliance-gates"
+                  >4  Security &amp; Compliance Gates</a
+                >
+              </h2>
+              <ul>
+                <li>
+                  <strong>CVEs</strong> — dep‑scan &amp; cve‑bin‑tool must show no HIGH/CRITICAL
+                  open issues.citeturn0search2turn0search11
+                </li>
+                <li>
+                  <strong>Licence audit</strong> — GPL/AGPL flagged; block if dependency—not
+                  plugin—requires.
+                </li>
+                <li><strong>SBOM</strong> generated on each release artefact.</li>
+              </ul>
+              <hr />
+              <h2 id="5--endoflife-policy">
+                <a class="header" href="#5--endoflife-policy">5  End‑of‑Life Policy</a>
+              </h2>
+              <p>
+                Minor releases receive security patches for <strong>9 months</strong>; majors for
+                <strong>18 months</strong>.<br />
+                Older versions archived but remain visible per Open‑Source Guide transparency
+                advice.citeturn0search0
+              </p>
+              <hr />
+              <h2 id="6--feedback--changemanagement">
+                <a class="header" href="#6--feedback--changemanagement"
+                  >6  Feedback &amp; Change‑Management</a
+                >
+              </h2>
+              <ul>
+                <li>
+                  Feature requests via GitHub Discussions; roadmap adjustments batched quarterly.
+                </li>
+                <li>ADR updates may be submitted with PRs; batched commits permitted.</li>
+              </ul>
+              <hr />
+              <h2 id="7--next-actions">
+                <a class="header" href="#7--next-actions">7  Next Actions</a>
+              </h2>
+              <ol>
+                <li>Finalise 0.5 scope tickets (<code>#76–#110</code>).</li>
+                <li>Prepare mdBook release‐docs pipeline.</li>
+                <li>Draft ADR‑002: Release‑cadence &amp; EoL policy.</li>
+              </ol>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="community--contribution">
+                <a class="header" href="#community--contribution">Community &amp; Contribution</a>
+              </h1>
+              <p>
+                Get involved with Stack Composer! Learn how to contribute, follow our code of
+                conduct, and join the community.
+              </p>
+              <h2 id="section-structure-3">
+                <a class="header" href="#section-structure-3">Section Structure</a>
+              </h2>
+              <pre><code class="language-mermaid">flowchart TD
+  A[Community &amp; Contribution] --&gt; B[Contributing]
+  A --&gt; C[Contributing to Docs]
+  A --&gt; D[Code of Conduct]
+  A --&gt; E[Governance]
+</code></pre>
+              <h2 id="key-guides-3"><a class="header" href="#key-guides-3">Key Guides</a></h2>
+              <ul>
+                <li>
+                  <a href="contributing/../CONTRIBUTING.html">Contributing</a>: How to contribute
+                  code or ideas.
+                </li>
+                <li>
+                  <a href="contributing/../contributing-to-docs.html">Contributing to Docs</a>:
+                  Improve our documentation.
+                </li>
+                <li>
+                  <a href="contributing/../CODE_OF_CONDUCT.html">Code of Conduct</a>: Community
+                  standards.
+                </li>
+                <li>
+                  <a href="contributing/../MAINTAINERS.html">Governance</a>: Project governance and
+                  maintainers.
+                </li>
+              </ul>
+              <hr />
+              <p><strong>Next Steps:</strong></p>
+              <ul>
+                <li>
+                  Explore <a href="contributing/../configuration.html">User Guides</a> to get
+                  started.
+                </li>
+                <li>
+                  Learn about <a href="contributing/../plugin-sdk/README.html">Extensibility</a> to
+                  build plugins.
+                </li>
+              </ul>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="how-to-contribute-to-documentation">
+                <a class="header" href="#how-to-contribute-to-documentation"
+                  >How to Contribute to Documentation</a
+                >
+              </h1>
+              <p>We welcome contributions to Stack Composer docs!</p>
+              <h2 id="guidelines"><a class="header" href="#guidelines">Guidelines</a></h2>
+              <ul>
+                <li>Edit or add files in <code>docs/src/</code>.</li>
+                <li>Use clear, concise language and follow the existing style.</li>
+                <li>Use kebab-case for file and folder names.</li>
+                <li>Update <code>SUMMARY.md</code> for navigation.</li>
+                <li>Preview changes locally with <code>mdbook build</code>.</li>
+              </ul>
+              <h2 id="submitting-changes">
+                <a class="header" href="#submitting-changes">Submitting Changes</a>
+              </h2>
+              <ol>
+                <li>Fork the repo and create a branch.</li>
+                <li>Make your changes and commit with a descriptive message.</li>
+                <li>Open a pull request and describe your changes.</li>
+                <li>A maintainer will review and merge.</li>
+              </ol>
+              <h2 id="resources"><a class="header" href="#resources">Resources</a></h2>
+              <ul>
+                <li><a href="contributing/contributing.html">Contributing Guide</a></li>
+                <li><a href="contributing/code-of-conduct.html">Code of Conduct</a></li>
+              </ul>
+              <p>Thank you for helping improve the docs!</p>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="contributing-to-stack-composer">
+                <a class="header" href="#contributing-to-stack-composer"
+                  >Contributing to Stack Composer</a
+                >
+              </h1>
+              <p>
+                Thank you for your interest in contributing! This guide explains how to get started,
+                propose changes, and participate in the Stack Composer community.
+              </p>
+              <hr />
+              <h2 id="contribution-workflow">
+                <a class="header" href="#contribution-workflow">Contribution Workflow</a>
+              </h2>
+              <pre><code class="language-mermaid">flowchart TD
+    A[Fork Repo] --&gt; B[Create Feature Branch]
+    B --&gt; C[Make Changes]
+    C --&gt; D[Open Pull Request]
+    D --&gt; E[Review &amp; CI]
+    E -- Approved --&gt; F[Merge]
+    E -- Changes Requested --&gt; C
+    F --&gt; G[Release]
+</code></pre>
+              <hr />
+              <h2 id="developer-environment">
+                <a class="header" href="#developer-environment">Developer Environment</a>
+              </h2>
+              <p>
+                For a reproducible, fast, and modern developer experience, use the pre-configured
+                Dev Container or Nix environment. See
+                <a href="contributing/../toolchain.html">Toolchain &amp; DX Pipeline</a> for the
+                full toolchain and workflow details.
+              </p>
+              <h3 id="toolchain-checklist">
+                <a class="header" href="#toolchain-checklist">Toolchain Checklist</a>
+              </h3>
+              <ul>
+                <li>
+                  <p>
+                    All required tools (see [dev-setup](../Developer &amp; Extensibility
+                    Docs/dev-setup.md) and <a href="contributing/../toolchain.html">toolchain</a>)
+                    are installed
+                  </p>
+                </li>
+                <li>
+                  <p>Qdrant is running via Docker</p>
+                </li>
+                <li>
+                  <p>Nix is available (restart terminal after install)</p>
+                </li>
+                <li>
+                  <p>Mutagen is a Rust library, not a CLI tool</p>
+                </li>
+                <li>
+                  <p>Run <code>just bootstrap</code> to set up all dependencies and services</p>
+                </li>
+                <li>
+                  <p>
+                    Use <code>just check</code> and <code>just test</code> for linting and tests
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    See [Developer Setup](../Developer &amp; Extensibility Docs/dev-setup.md) for
+                    step-by-step onboarding
+                  </p>
+                </li>
+              </ul>
+              <blockquote>
+                <p>
+                  If you have issues with Nix, Docker, or any tool, see the troubleshooting sections
+                  in [dev-setup](../Developer &amp; Extensibility Docs/dev-setup.md) or open an
+                  issue.
+                </p>
+              </blockquote>
+              <hr />
+              <h2 id="pull-request--review-process">
+                <a class="header" href="#pull-request--review-process"
+                  >Pull Request &amp; Review Process</a
+                >
+              </h2>
+              <ol>
+                <li>Fork the repo and create a feature branch.</li>
+                <li>Make your changes and add/expand tests and documentation as needed.</li>
+                <li>
+                  If your change impacts architecture or public APIs, propose an ADR (see below).
+                </li>
+                <li>Open a PR; at least one maintainer must review and approve.</li>
+                <li>All PRs must pass CI, lint, and test checks before merge.</li>
+                <li>Major changes are discussed in GitHub Discussions or community meetings.</li>
+              </ol>
+              <hr />
+              <h2 id="adr-workflow--decision-logging">
+                <a class="header" href="#adr-workflow--decision-logging"
+                  >ADR Workflow &amp; Decision Logging</a
+                >
+              </h2>
+              <ul>
+                <li>
+                  Propose new ADRs in <code>/docs/architecture-roadmap/</code> using the template.
+                </li>
+                <li>Each ADR must include a title, date, status, and rationale.</li>
+                <li>ADRs are reviewed and merged via PR, with consensus from maintainers.</li>
+                <li>All major decisions are logged and linked from the ADR index.</li>
+              </ul>
+              <hr />
+              <h2 id="community-guidelines">
+                <a class="header" href="#community-guidelines">Community Guidelines</a>
+              </h2>
+              <ul>
+                <li>
+                  All contributors must follow the
+                  <a href="contributing/CODE_OF_CONDUCT.html">Code of Conduct</a>.
+                </li>
+                <li>
+                  Communication is primarily via GitHub Discussions; real-time chat is available via
+                  Slack/Discord (see README).
+                </li>
+                <li>
+                  Quarterly community meetings are open to all; notes are posted in Discussions.
+                </li>
+              </ul>
+              <hr />
+              <h2 id="maintainers--governance">
+                <a class="header" href="#maintainers--governance">Maintainers &amp; Governance</a>
+              </h2>
+              <ul>
+                <li>
+                  See <a href="contributing/MAINTAINERS.html">MAINTAINERS.md</a> for roles, triage
+                  rotation, and how to become a maintainer.
+                </li>
+              </ul>
+              <hr />
+              <p><strong>Next Steps:</strong></p>
+              <ul>
+                <li>
+                  See <a href="contributing/contributing-to-docs.html">Contributing to Docs</a>
+                </li>
+                <li>Review <a href="contributing/CODE_OF_CONDUCT.html">Code of Conduct</a></li>
+                <li>
+                  Explore
+                  <a href="contributing/README.html">Community &amp; Contribution Overview</a>
+                </li>
+              </ul>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="code-of-conduct">
+                <a class="header" href="#code-of-conduct">Code of Conduct</a>
+              </h1>
+              <p>All contributors, maintainers, and community members are expected to:</p>
+              <ul>
+                <li>Be respectful and inclusive in all interactions.</li>
+                <li>Provide constructive feedback and support newcomers.</li>
+                <li>Avoid personal attacks, harassment, or discriminatory language.</li>
+                <li>Report violations to the maintainers via GitHub Issues or private email.</li>
+              </ul>
+              <h2 id="enforcement"><a class="header" href="#enforcement">Enforcement</a></h2>
+              <ul>
+                <li>Reports are reviewed by maintainers within 48 hours.</li>
+                <li>
+                  Actions may include warning, temporary ban, or permanent removal from the
+                  community, depending on severity.
+                </li>
+                <li>
+                  Appeals can be made via GitHub Discussions or by contacting a maintainer directly.
+                </li>
+              </ul>
+              <hr />
+              <p>
+                For questions or concerns, contact a maintainer (see
+                <a href="contributing/MAINTAINERS.html">MAINTAINERS.md</a>).
+              </p>
+              <hr />
+              <p><strong>Next Steps:</strong></p>
+              <ul>
+                <li>
+                  See <a href="contributing/README.html">Community &amp; Contribution Overview</a>
+                </li>
+                <li>Review <a href="contributing/CONTRIBUTING.html">Contributing</a></li>
+              </ul>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="maintainers"><a class="header" href="#maintainers">Maintainers</a></h1>
+              <p>
+                The following people are responsible for the ongoing maintenance, review, and
+                stewardship of the Stack Composer project. For questions, issues, or contributions,
+                please contact a maintainer below.
+              </p>
+              <div class="table-wrapper">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>GitHub Username</th>
+                      <th>Role</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Jonathan Botha</td>
+                      <td>@IAmJonoBo</td>
+                      <td>Lead Maintainer</td>
+                    </tr>
+                    <tr>
+                      <td>[Add more here]</td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <h2 id="responsibilities-10">
+                <a class="header" href="#responsibilities-10">Responsibilities</a>
+              </h2>
+              <ul>
+                <li>Review and merge pull requests</li>
+                <li>Triage issues and feature requests</li>
+                <li>Oversee releases and CI/CD</li>
+                <li>Ensure code quality and documentation standards</li>
+                <li>Respond to security and vulnerability reports</li>
+              </ul>
+              <p>
+                For more information, see the
+                <a href="contributing/contributing.html">Contributing Guide</a> and
+                <a href="contributing/code-of-conduct.html">Code of Conduct</a>.
+              </p>
+              <div style="break-before: page; page-break-before: always"></div>
+              <h1 id="glossary"><a class="header" href="#glossary">Glossary</a></h1>
+              <p>A list of key terms and concepts used in Stack Composer.</p>
+              <ul>
+                <li><strong>ADR</strong>: Architecture Decision Record</li>
+                <li><strong>SBOM</strong>: Software Bill of Materials</li>
+                <li><strong>Qdrant</strong>: Vector database used for semantic search</li>
+                <li><strong>Meilisearch</strong>: Full-text search engine</li>
+                <li><strong>Prometheus</strong>: Monitoring and metrics collection</li>
+                <li><strong>Jaeger</strong>: Distributed tracing system</li>
+                <li><strong>ELK</strong>: Elasticsearch, Logstash, Kibana (log aggregation)</li>
+                <li><strong>CVSS</strong>: Common Vulnerability Scoring System</li>
+                <li><strong>PII</strong>: Personally Identifiable Information</li>
+                <li><strong>CI/CD</strong>: Continuous Integration/Continuous Deployment</li>
+                <li><strong>WASM</strong>: WebAssembly, used for plugins</li>
+              </ul>
+              <p><em>Add more terms as needed.</em></p>
+            </main>
+
+            <nav class="nav-wrapper" aria-label="Page navigation">
+              <!-- Mobile navigation buttons -->
+
+              <div style="clear: both"></div>
+            </nav>
+          </div>
+        </div>
+
+        <nav class="nav-wide-wrapper" aria-label="Page navigation"></nav>
+      </div>
+
+      <script>
+        window.playground_copyable = true;
+      </script>
+
+      <script src="elasticlunr.min.js"></script>
+      <script src="mark.min.js"></script>
+      <script src="searcher.js"></script>
+
+      <script src="clipboard.min.js"></script>
+      <script src="highlight.js"></script>
+      <script src="book.js"></script>
+
+      <!-- Custom JS scripts -->
+
+      <script>
+        window.addEventListener('load', function () {
+          window.setTimeout(window.print, 100);
+        });
+      </script>
+    </div>
+  </body>
+</html>

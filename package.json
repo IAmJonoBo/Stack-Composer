@@ -1,36 +1,35 @@
 {
-  "name": "stack-composer",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "lint": "biome check . && markdownlint docs/**/*.md && vale docs/",
-    "test": "vitest run",
-    "format": "biome format . && prettier --write .",
-    "prepare": "husky install",
-    "preview-wizard": "vite --config vite.wizard.config.ts"
-  },
-  "devDependencies": {
-    "@stryker-mutator/core": "^9.0.1",
-    "husky": "^9.0.0",
-    "vitest": "latest",
-    "biome": "latest",
-    "markdownlint-cli": "latest",
-    "vale": "latest",
-    "prettier": "latest",
-    "trunk": "latest",
-    "eslint": "latest",
-    "eslint-plugin-jsx-a11y": "latest",
-    "zod": "latest",
-    "tippy.js": "latest",
-    "react-arborist": "latest",
-    "react-flow-renderer": "latest",
-    "dagre": "latest"
-  },
-  "dependencies": {
-    "latest": "^0.2.0",
-    "react": "latest",
-    "react-dom": "latest",
-    "react-d3-tree": "latest",
-    "@supabase/functions-js": "latest"
-  }
+	"name": "stack-composer",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"lint": "biome check . && markdownlint docs/**/*.md && vale docs/",
+		"test": "vitest run",
+		"format": "biome format . && prettier --write .",
+		"prepare": "husky install",
+		"preview-wizard": "vite --config vite.wizard.config.ts"
+	},
+	"devDependencies": {
+		"@stryker-mutator/core": "^9.0.1",
+		"husky": "^9.0.0",
+		"vitest": "latest",
+		"biome": "latest",
+		"markdownlint-cli": "latest",
+		"prettier": "latest",
+		"trunk": "latest",
+		"eslint": "latest",
+		"eslint-plugin-jsx-a11y": "latest",
+		"zod": "latest",
+		"tippy.js": "latest",
+		"react-arborist": "latest",
+		"reactflow": "latest",
+		"dagre": "latest"
+	},
+	"dependencies": {
+		"latest": "^0.2.0",
+		"react": "latest",
+		"react-dom": "latest",
+		"react-d3-tree": "latest",
+		"@supabase/functions-js": "latest"
+	}
 }

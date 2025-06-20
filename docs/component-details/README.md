@@ -105,7 +105,7 @@ Stack Composer is evolving into a fully AI-guided, end-to-end project authoring 
 
 1. Add these three files to your repository.
 2. When you begin implementing a component, create its matching
-   docs/component-details/\*.md stub – that keeps docs and code evolving
+   docs/component-details/*.md stub – that keeps docs and code evolving
    together.
 3. As soon as the first irreversible architecture choice is made,
    open adr/0001-initial-decision.md using the template from

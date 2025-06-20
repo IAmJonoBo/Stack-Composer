@@ -1,0 +1,22 @@
+name: Link Checker
+
+permissions:
+  contents: read
+
+on:
+  pull_request:
+    paths:
+      - '**/*.md'
+  push:
+    paths:
+      - '**/*.md'
+
+jobs:
+  linkcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install mdBook-linkcheck
+        run: cargo install mdbook-linkcheck
+      - name: Run mdBook-linkcheck
+        run: mdbook-linkcheck docs/src

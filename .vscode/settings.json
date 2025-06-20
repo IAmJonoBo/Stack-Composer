@@ -2,7 +2,9 @@
   // Formatting and linting
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": "always"
+    "source.fixAll": "always",
+    "source.fixAll.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
   },
   "eslint.enable": true,
   "eslint.validate": ["javascript", "typescript", "typescriptreact", "javascriptreact"],
@@ -23,5 +25,13 @@
   "vitest.enable": true,
   // Recommended extensions
   "extensions.ignoreRecommendations": false,
-  "git.ignore": ["husky"]
+  "git.ignore": ["husky"],
+  // Tailwind/Stylelint/HTMLHint integration
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "css.validate": false
 }

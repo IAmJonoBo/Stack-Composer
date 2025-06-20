@@ -1,21 +1,6 @@
 # Contributing to Stack Composer
 
-Thank you for your interest in contributing! This guide explains how to get started, propose changes, and participate in the Stack Composer community.
-
----
-
-## Contribution Workflow
-
-```mermaid
-flowchart TD
-    A[Fork Repo] --> B[Create Feature Branch]
-    B --> C[Make Changes]
-    C --> D[Open Pull Request]
-    D --> E[Review & CI]
-    E -- Approved --> F[Merge]
-    E -- Changes Requested --> C
-    F --> G[Release]
-```
+{% include "../../_includes/contribution-steps.md" %}
 
 ---
 
@@ -49,12 +34,17 @@ For a reproducible, fast, and modern developer experience, use the pre-configure
 
 ---
 
+## Docs Required in PRs
+
+All user-facing or architectural changes **must** include documentation updates. PRs without docs will not be merged. See the PR template for details.
+
+---
+
 ## ADR Workflow & Decision Logging
 
-- Propose new ADRs in `/docs/architecture-roadmap/` using the template.
+- Propose new ADRs in `/docs/src/architecture/adr/` using the template.
 - Each ADR must include a title, date, status, and rationale.
-- ADRs are reviewed and merged via PR, with consensus from maintainers.
-- All major decisions are logged and linked from the ADR index.
+- Update the [ADR log](../architecture/adr/README.md) with each new ADR.
 
 ---
 
@@ -69,6 +59,10 @@ For a reproducible, fast, and modern developer experience, use the pre-configure
 ## Maintainers & Governance
 
 - See [MAINTAINERS.md](MAINTAINERS.md) for roles, triage rotation, and how to become a maintainer.
+
+---
+
+{% include "../../_includes/top-doc-contributors.md" %}
 
 ---
 

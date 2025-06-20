@@ -5,7 +5,7 @@ This document describes the release process for Stack Composer.
 ## Prerequisites
 
 - Ensure your environment is set up as described in [Developer Setup](../../developer-extensibility-docs/dev-setup.md) and [Toolchain](../../toolchain.md).
-- All releases must pass automated linting and tests (see [Contributing](../../community-contribution/contributing.md)).
+- All releases must pass automated linting and tests (see [Contributing](../../contributing/contributing.md)).
 
 ---
 

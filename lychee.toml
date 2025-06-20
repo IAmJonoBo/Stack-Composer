@@ -1,0 +1,8 @@
+# Lychee link checker configuration
+exclude = [
+  "https://localhost",
+  "http://localhost",
+  "https://127.0.0.1",
+  "http://127.0.0.1",
+]
+accept = ["200", "429"]

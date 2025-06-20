@@ -1,0 +1,11 @@
+[workspace]
+members = [
+  "agents/orchestrator",
+  "agents/ingestion",
+  "agents/retrieval",
+  "agents/critic",
+  "agents/telemetry",
+  "agents/planner-adapter",
+  "src-tauri",
+]
+resolver = "2"

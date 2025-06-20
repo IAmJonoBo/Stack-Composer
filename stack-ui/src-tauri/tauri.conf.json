@@ -1,0 +1,25 @@
+{
+  "productName": "Stack Composer",
+  "identifier": "com.stackcomposer.app",
+  "build": {
+    "beforeBuildCommand": "pnpm install",
+    "beforeDevCommand": "pnpm dev",
+    "devUrl": "http://localhost:5173",
+    "frontendDist": "dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Stack Composer",
+        "width": 1200,
+        "height": 800,
+        "resizable": true
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {},
+  "plugins": {}
+}

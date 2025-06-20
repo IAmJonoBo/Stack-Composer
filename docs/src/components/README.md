@@ -3,6 +3,8 @@
 _All major modules in **Stack Composer** are documented here. When you touch a
 component, update its corresponding Markdown so the docs never trail the code._
 
+{% include "../_includes/toolchain.md" %}
+
 > For detailed technical mapping, diagrams, and crate relationships, see [../component-details/README.md](../component-details/README.md).
 
 | #   | Component                                   | File                                                           | Status               |

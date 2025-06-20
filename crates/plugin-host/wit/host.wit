@@ -1,0 +1,5 @@
+interface host {
+  log: func(level: s32, msg: string);
+  retrieval_search: func(query: string, k: u32) -> list<chunk>;
+  llm_chat: func(request: chat-request) -> stream<token-delta>;
+}

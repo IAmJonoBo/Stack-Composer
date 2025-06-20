@@ -56,4 +56,4 @@ Stack Composer is evolving into a fully AI-guided, end-to-end project authoring 
 
 - Review [Component Details](../extensibility/component-details.md)
 - See [Operations Guide](../operations-security/ops-guide.md)
-- Join the [Community](../community-contribution/CONTRIBUTING.md)
+- Join the [Community](../contributing/README.md)

@@ -1,6 +1,17 @@
+ignoredBuiltDependencies:
+  - optipng-bin
+  - pngquant-bin
+  - sharp
+  - zopflipng-bin
+
 onlyBuiltDependencies:
   - core-js
   - esbuild
+  - optipng-bin
+  - pngquant-bin
+  - sharp
+  - tauri
+  - zopflipng-bin
 
 overrides:
   npm@<5.7.1: '>=5.7.1'

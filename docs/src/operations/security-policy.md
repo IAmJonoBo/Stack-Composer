@@ -48,7 +48,7 @@ Stack Composer follows modern security best practices. All contributors and user
 
 ## Vulnerability Reporting
 
-- Please report security issues via GitHub Issues or the contact method in [CONTRIBUTING.md](../../community-contribution/contributing.md).
+- Please report security issues via GitHub Issues or the contact method in [CONTRIBUTING.md](../../contributing/contributing.md).
 - Triage: Acknowledge within 24h, assess CVSS, and prioritize patches.
 - Patch timeline: Critical issues patched within 7 days; others as scheduled.
 - Disclosure: Coordinated with reporter; public advisories for high/critical issues.

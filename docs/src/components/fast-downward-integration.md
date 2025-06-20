@@ -35,6 +35,13 @@ FD is GPL-v3 with a “linking exception,” so invoking it as a subprocess keep
 - Store the binary SHA-256 and precise Git commit in your SBOM.
 - On first run, show a modal with the GPL text and require the user to click **I acknowledge** to satisfy § 5c of the license.
 
+### 2.1 SBOM & First‑Run Acknowledgement
+
+- **SBOM entry** – the `build.rs` script computes the SHA‑256 of the built (or downloaded) `downward‑release` binary **and** the Git commit hash of the sub‑module.
+  Both values are appended to `target/sbom/fast‑downward.spdx.json` so the Auditor job can merge them into the global SBOM.
+- **GPL modal** – on first launch, the Orchestrator checks `~/.config/stack‑composer/fd_accepted = true`; if missing, it spawns a native dialog that shows the GPL‑3 text and the linking‑exception clause.
+  Clicking **I Acknowledge** writes the flag, satisfying GPL § 5 c while preserving user transparency.
+
 ---
 
 ## 3. Runtime Integration Points
@@ -52,6 +59,14 @@ Command::new(env::var("FD_BIN")      // overrideable
   .stdout(Stdio::piped())
   .spawn()?;
 ```
+
+> **Path resolution order**
+>
+> 1. `FD_BIN` environment variable (user override)
+> 2. `~/.local/share/stack‑composer/fastdownward/bin/fast‑downward.py`
+> 3. `$PATH` lookup (`fast‑downward.py`)
+>
+> This keeps power‑user overrides easy while giving deterministic defaults.
 
 - Parse either the classical `plan.txt` or OPTIC’s XML plan, using the grammar documented in the FD planner-usage guide.
 - Exit codes: `0` = success; `124` = timeout; anything else → `PlannerError::Crash`.
@@ -92,6 +107,7 @@ Expose these in `planner.toml` so advanced users can tune FD without recompiling
 - Add IPC mini-benchmarks (e.g., `gripper-small`, `blocks-4`) to `tests/fixtures/`.
 - In CI, run `fd_adapter solve …` and assert plan length & cost match golden outputs each sprint.
 - Use the official FD Docker image for Linux runners and pre-built macOS/Windows artifacts for those jobs to ensure deterministic pipelines across platforms.
+- Inject the SBOM step: `cargo auditable build && cat target/sbom/*.json >> global-sbom.json`.
 
 ---
 
@@ -107,4 +123,4 @@ Expose these in `planner.toml` so advanced users can tune FD without recompiling
 
 ## TL;DR
 
-Vendoring Fast Downward, compiling it in Docker during CI, and treating it as a signed, time-boxed subprocess gives you maximum flexibility (all heuristics, portfolios, temporal OPTIC fork) without entangling Stack Composer in GPL. Wire that binary through your existing `PlannerAdapter` trait, cache the translation output, and surface key heuristics in `planner.toml`; you’ll hit IPC-grade planner performance while staying reproducible and legally clean.
+Vendoring Fast Downward, compiling it deterministically (Docker for Linux/macOS, verified MinGW artefact for Windows) and treating it as a signed, time‑boxed subprocess gives you maximum flexibility (all heuristics, portfolios, temporal OPTIC fork) without entangling Stack Composer in GPL. Wire that binary through your existing `PlannerAdapter` trait, cache the translation output, and surface key heuristics in `planner.toml`; you’ll hit IPC-grade planner performance while staying reproducible and legally clean.

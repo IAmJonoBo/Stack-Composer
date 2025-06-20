@@ -1,0 +1,22 @@
+[advisories]
+denied = ["critical", "high"]
+
+[licenses]
+allow = ["Apache-2.0", "MIT", "BSD-3-Clause", "BSD-2-Clause", "ISC"]
+denied = [
+  "GPL-2.0",
+  "GPL-3.0",
+  "AGPL-3.0",
+  "LGPL-2.1",
+  "LGPL-3.0",
+  "SSPL-1.0",
+  "BSL-1.1",
+  "Elastic-2.0",
+  "BUSL-1.1",
+  "CockroachDB",
+]
+
+[bans]
+denied = [
+  { name = "fast-downward", reason = "GPL-2.0 exception allowed only as subprocess" },
+]

@@ -1,0 +1,6 @@
+[plugin]
+id = "org.example.hello"
+version = "0.1.0"
+wasm_target = "wasm32-wasi"
+capabilities = ["log", "retrieval"]
+signature = "file:hello.sig"

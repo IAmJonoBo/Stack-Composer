@@ -1,8 +1,8 @@
 # Component Details Index
 
-_All roads lead here: every major module in **Stack Composer** has a
-dedicated sub‑page. When you start coding or refactoring, update the matching
-doc so the map never lags behind the territory._
+_All roads lead here: every major module in **Stack Composer** has a dedicated sub‑page. When you start coding or refactoring, update the matching doc so the map never lags behind the territory._
+
+{% include "../../_includes/toolchain.md" %}
 
 | #   | Component                            | Filename                                                             | Lead crate / dir         | Status            |
 | --- | ------------------------------------ | -------------------------------------------------------------------- | ------------------------ | ----------------- |
@@ -18,6 +18,7 @@ doc so the map never lags behind the territory._
 | 10  | **WASI Plugin Host**                 | [`plugin-host.md`](plugin-host.md)                                   | `crates/plugin-host`     | Draft             |
 | 11  | **Weekly Ontology Crawler**          | [`ontology-crawler.md`](ontology-crawler.md)                         | `tasks/crawler`          | Draft             |
 | 12  | **Telemetry Pipeline**               | [`telemetry.md`](telemetry.md)                                       | `crates/telemetry`       | Draft             |
+| 13  | **Plugin Example**                   | [`plugin-example.md`](plugin-example.md)                             | `crates/plugin-host`     | Example           |
 
 ## Contributing Workflow
 
@@ -26,8 +27,7 @@ doc so the map never lags behind the territory._
 3. Commit both code and docs in the same PR—CI fails if headings are missing.
 4. Once the component reaches MVP, change its **Status** to `🚀 Implemented`.
 
-> **Tip:** If a component crosses multiple crates (e.g., UI + backend), link to
-> all relevant paths in the “Lead crate / dir” column.
+> **Tip:** If a component crosses multiple crates (e.g., UI + backend), link to all relevant paths in the “Lead crate / dir” column.
 
 ## Legend
 
@@ -37,3 +37,10 @@ doc so the map never lags behind the territory._
 | In Progress    | Active implementation phase.                     |
 | Spec Complete  | Design locked; implementation not yet merged.    |
 | 🚀 Implemented | Code merged, tests passing, docs up‑to‑date.     |
+
+---
+
+See also:
+
+- [AI Platform Overview](../ai-platform-overview.md)
+- [Architecture Overview](../architecture-overview.md)

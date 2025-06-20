@@ -133,3 +133,9 @@ Stack Composer is evolving into a fully AI-guided, end-to-end project authoring 
 - Context-aware recommendations, security risk surfacing, and best practice updates
 - One-click project generation, export, and cloud deployment hooks
 - Template projects, import/modernization, and project history
+
+---
+
+## Top Documentation Contributors
+
+{% include "docs/_includes/top-doc-contributors.md" %}

@@ -6,6 +6,16 @@ This document explains **how Stack Composer works** and how its components commu
 
 ---
 
+> **Modular Docs:** This overview is split into focused modules:
+>
+> - [Context](context.md)
+> - [Containers](containers.md)
+> - [Components](components.md)
+> - [Data Flow](data-flow.md)
+> - [Extensibility](extensibility.md)
+
+---
+
 ## C4 Context Diagram
 
 ```mermaid

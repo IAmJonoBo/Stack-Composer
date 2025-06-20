@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, macos-13, windows-2022]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Rust toolchain
+        run: |
+          curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain stable
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+      - name: Install pnpm
+        run: npm install -g pnpm
+      - name: Install system dependencies
+        run: |
+          pnpm install
+          cargo install just
+      - name: Log Fast Downward SHA-256
+        run: |
+          bash scripts/log_fast_downward_sha256.sh
+          cat fast_downward.sha256 || true
+      - name: Build UI
+        run: |
+          cd stack-ui
+          pnpm install
+          pnpm build
+      - name: Build backend
+        run: |
+          cargo build --workspace --all-targets
+      - name: Run tests
+        run: |
+          cargo test --workspace --all-targets
+      - name: Lint docs
+        run: |
+          cd docs
+          mdbook build
+          mdbook test
+      - name: Run Axe-core accessibility check
+        run: |
+          npx axe-core-cli stack-ui/dist --exit
+      - name: Run dep-scan
+        run: |
+          npx dep-scan --src . --report-format sarif --fail-on-severity HIGH,CRITICAL
+      - name: Run cargo-deny
+        run: |
+          cargo deny check
+      - name: Markdownlint
+        run: |
+          npm install -g markdownlint-cli
+          markdownlint '**/*.md' --config .markdownlint.json
+      - name: Link Checker (Lychee)
+        run: |
+          curl -LSfs https://github.com/lycheeverse/lychee/releases/latest/download/lychee-x86_64-apple-darwin.tar.gz | tar xz
+          ./lychee --config lychee.toml '**/*.md' || exit 1
+      - name: Upload artefacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            target/
+            stack-ui/dist/

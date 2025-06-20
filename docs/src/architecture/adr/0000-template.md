@@ -1,5 +1,26 @@
-# Architecture Decision Record Template
+# Architecture Decision Record Template (Nygard)
 
-**TODO:** This is a placeholder for the ADR template. Please add the actual template content or redirect to the canonical location if it exists elsewhere.
+## Status
 
-> _This file was auto-generated to resolve a dead link. Please update with real content or redirect as needed._
+Proposed
+
+## Context
+
+_What is the issue that we're seeing that is motivating this decision or change?_
+
+## Decision
+
+_What is the change that we're actually proposing and/or doing?_
+
+## Consequences
+
+_What becomes easier or more difficult to do because of this change?_
+
+---
+
+- Date: YYYY-MM-DD
+- Decision Makers: [names]
+- Supersedes: [ADR-xxx]
+- Related: [ADR-yyy]
+
+> Based on [Michael Nygard's template](https://github.com/joelparkerhenderson/architecture_decision_record)

@@ -18,6 +18,11 @@ flowchart TD
 - [AI Platform Overview](../ai-platform-overview.md): AI subsystem details.
 - [Roadmap](../roadmap.md): Planned features and milestones.
 - [ADRs](../adr/0000-template.md): Architectural decision records.
+- [Context](context.md)
+- [Containers](containers.md)
+- [Components](components.md)
+- [Data Flow](data-flow.md)
+- [Extensibility](extensibility.md)
 
 ---
 

@@ -3,9 +3,7 @@
 Stack Composer follows modern security best practices. All contributors and users should:
 
 - Review [dev-setup.md](../Developer%20&%20Extensibility%20Docs/dev-setup.md) for secure environment setup.
-
 - Use the latest toolchain as described in [toolchain.md](toolchain.md).
-
 - Report vulnerabilities as described below.
 
 ---
@@ -15,6 +13,16 @@ Stack Composer follows modern security best practices. All contributors and user
 - All releases include a CycloneDX SBOM (`bom.json`) published with release assets.
 - SBOM is updated automatically in CI using `trivy` and `cargo-audit`.
 - Scan containers and dependencies before each release.
+- All plugins are scanned with `trivy` and `cargo-audit` before release (see [Plugin SDK](plugin-sdk/README.md)).
+
+---
+
+## Plugin Signing & Verification
+
+- Every `.wasm` plugin must be accompanied by a `.sig` file (Ed25519 signature, hex).
+- Verification uses the `ed25519-dalek` crate; trusted public keys are listed in `~/.config/stack-composer/trusted_keys.toml`.
+- Plugins without valid signatures are rejected by default.
+- Security thresholds: CVSS ≥ 7.0 blocks plugin install; non-OSI/GPL licenses are blocked.
 
 ---
 
@@ -59,3 +67,5 @@ Stack Composer follows modern security best practices. All contributors and user
 ## Troubleshooting
 
 - For security-related setup issues, see [dev-setup.md](../Developer%20&%20Extensibility%20Docs/dev-setup.md#troubleshooting).
+
+_See also: [Plugin SDK](plugin-sdk/README.md), [Configuration Guide](configuration.md)_

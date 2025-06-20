@@ -22,7 +22,7 @@ This guide helps you resolve common issues with Stack Composer.
 
 ## More Help
 
-- See [FAQ](../Getting Started Bundle/faq.md)
+- See [FAQ](../reference/faq.md)
 - Check [dev-setup.md](../developer-extensibility-docs/dev-setup.md#troubleshooting)
 - Open a GitHub Issue or Discussion for unresolved problems.
 

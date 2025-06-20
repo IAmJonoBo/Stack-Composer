@@ -10,7 +10,7 @@ A: See the [Getting Started Guide](../getting-started/README.md).
 A: See the [Contributing Guide](../contributing/README.md).
 
 **Q: Where can I find architecture diagrams?**
-A: See the [Architecture Overview](../architecture/README.md).
+A: See the [Architecture Overview](../architecture/architecture-overview.md).
 
 **Q: How is telemetry handled?**
 A: Telemetry is opt-in and anonymized. See [Telemetry & Privacy](../operations/telemetry-privacy.md).

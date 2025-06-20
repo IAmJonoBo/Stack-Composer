@@ -1,6 +1,6 @@
 # Operations Guide
 
-For reproducible local operations, see [Toolchain & DX Pipeline](../toolchain.md) and [Developer Setup](../Developer & Extensibility Docs/dev-setup.md) for Docker, Nix, and all required tools.
+For reproducible local operations, see [Toolchain & DX Pipeline](../toolchain.md) and [Developer Setup](../developer-extensibility-docs/dev-setup.md) for Docker, Nix, and all required tools.
 
 ---
 

@@ -17,7 +17,7 @@ flowchart TD
 - [Quick Start](./quickstart.md): Step-by-step guide to your first Stack Composer experience.
 - [Installation](../installation.md): How to install Stack Composer on your system.
 - [System Requirements](./system-requirements.md): Minimum and recommended requirements.
-- [FAQ](../faq.md): Frequently asked questions and troubleshooting tips.
+- [FAQ](../reference/faq.md): Frequently asked questions and troubleshooting tips.
 
 ---
 

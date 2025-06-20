@@ -1,5 +1,3 @@
 # Report Agent
 
-See the main documentation in [../components/report-agent.md](../components/report-agent.md).
-
-This is a legacy/compatibility placeholder for old links. Please update references to point to the canonical file in `components/`.
+> **Redirect:** The canonical Report Agent documentation is in [../components/report-agent.md](../components/report-agent.md). This file is retained for legacy link compatibility.

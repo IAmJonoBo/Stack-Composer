@@ -1,5 +1,3 @@
 # Security Policy
 
-**TODO:** This is a placeholder. The security policy should be added here or redirect to the canonical file in `operations/security-policy.md`.
-
-> _This file was auto-generated to resolve a dead link. Please update with real content or redirect as needed._
+> **Redirect:** The canonical security policy is in [operations/security-policy.md](../operations/security-policy.md). This file is retained for legacy link compatibility.

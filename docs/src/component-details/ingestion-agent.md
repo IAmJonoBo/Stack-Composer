@@ -1,5 +1,3 @@
 # Ingestion Agent
 
-See the main documentation in [../components/ingestion-agent.md](../components/ingestion-agent.md).
-
-This is a legacy/compatibility placeholder for old links. Please update references to point to the canonical file in `components/`.
+> **Redirect:** The canonical Ingestion Agent documentation is in [../components/ingestion-agent.md](../components/ingestion-agent.md). This file is retained for legacy link compatibility.

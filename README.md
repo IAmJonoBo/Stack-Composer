@@ -124,7 +124,7 @@ Great docs are the #1 predictor of OSS success – see Django’s origin story.
 
 ## AI-Guided Authoring & Scaffolding Vision
 
-Stack Composer is evolving into a fully AI-guided, end-to-end project authoring and scaffolding platform. See [docs/Architecture & Component Guides/ai-wizard-roadmap.md](docs/Architecture%20&%20Component%20Guides/ai-wizard-roadmap.md) for the full vision and phased implementation plan.
+Stack Composer is evolving into a fully AI-guided, end-to-end project authoring and scaffolding platform. See [AI Wizard Roadmap](docs/src/architecture-and-component-guides/ai-wizard-roadmap.md) for the full vision and phased implementation plan.
 
 - Hybrid conversational-form wizard for discovery and planning
 - Interactive tech stack exploration and “what-if” analysis

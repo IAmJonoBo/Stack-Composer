@@ -4,12 +4,12 @@
 
 ---
 
-See [architecture-questions.md](../Architecture%20&%20Component%20Guides/architecture-questions.md) for open questions and strategic direction.
+See [Architecture Questions](../architecture-and-component-guides/architecture-questions.md) for open questions and strategic direction.
 
 See also:
 
-- [Gap Agent](gap-agent.md)
-- [Report Agent](report-agent.md)
+- [Gap Agent](../component-details/gap-agent.md)
+- [Report Agent](../component-details/report-agent.md)
 
 The **Stack Agent** synthesises one or more candidate technology stacks that
 satisfy the fully‑specified requirement graph coming out of the Gap‑Analysis
@@ -179,6 +179,6 @@ for p in &mut proposals {
 
 See also:
 
-- [Retrieval Layer](retrieval-layer.md)
-- [Planner Adapter](planner-adapter.md)
-- [RL Critic](../ai-sub-system-docs/rl-critic.md)
+- [Retrieval Layer](../component-details/retrieval-layer.md)
+- [Planner Adapter](../component-details/planner-adapter.md)
+- [RL Critic](../component-details/rl-critic.md)

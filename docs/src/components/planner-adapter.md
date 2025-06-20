@@ -41,9 +41,9 @@ let plan = planner_adapter.plan(domain_file, problem_file);
 
 ---
 
-See [Architecture Questions](../architecture/architecture-questions.md) for open questions and strategic direction.
+See [Architecture Questions](../architecture-and-component-guides/architecture-questions.md) for open questions and strategic direction.
 
-_See also: [Stack Agent](stack-agent.md), [Retrieval Layer](retrieval-layer.md)_
+_See also: [Stack Agent](../component-details/stack-agent.md), [Retrieval Layer](../component-details/retrieval-layer.md)_
 
 # Planner Adapter (Fast Downward / OPTIC)
 
@@ -182,6 +182,6 @@ Yes—Planner View in UI renders a Gantt when temporal data present.
 
 See also:
 
-- [Planner Integration](../ai-sub-system-docs/planner-integration.md)
-- [RL Critic](../ai-sub-system-docs/rl-critic.md)
-- [Orchestrator](orchestrator.md)
+- [Planner Integration](../architecture/planner-integration.md)
+- [RL Critic](../component-details/rl-critic.md)
+- [Orchestrator](../component-details/orchestrator.md)

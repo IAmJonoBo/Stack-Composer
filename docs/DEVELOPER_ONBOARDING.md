@@ -22,6 +22,7 @@ Follow the [Toolchain & DX Pipeline](src/toolchain.md) guide to install:
 ## Project Setup
 
 1. **Clone and Install**
+
    ```bash
    git clone https://github.com/your-org/stack-composer
    cd stack-composer
@@ -29,6 +30,7 @@ Follow the [Toolchain & DX Pipeline](src/toolchain.md) guide to install:
    ```
 
 2. **Verify Installation**
+
    ```bash
    cargo xtask ci
    ```
@@ -40,12 +42,14 @@ Follow the [Toolchain & DX Pipeline](src/toolchain.md) guide to install:
 ⚠️ **Important**: macOS has specific build requirements due to resource fork file issues.
 
 1. **Set Environment Variables** (add to your shell profile):
+
    ```bash
    export COPYFILE_DISABLE=1
    export COPY_EXTENDED_ATTRIBUTES_DISABLE=1
    ```
 
 2. **Use Platform-Specific Commands**:
+
    ```bash
    # Regular development (all packages except Tauri)
    cargo check --workspace
@@ -60,6 +64,7 @@ Follow the [Toolchain & DX Pipeline](src/toolchain.md) guide to install:
 ### Linux/Windows Developers
 
 Standard Rust/Cargo commands work normally:
+
 ```bash
 cargo check --workspace
 cargo build --workspace
@@ -69,6 +74,7 @@ cargo test --workspace
 ## Development Workflow
 
 1. **Create a Branch**
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -79,6 +85,7 @@ cargo test --workspace
    - Add/update tests
 
 3. **Test Your Changes**
+
    ```bash
    # macOS
    cargo check --workspace
@@ -90,6 +97,7 @@ cargo test --workspace
    ```
 
 4. **Commit and Push**
+
    ```bash
    git add .
    git commit -m "feat: your descriptive commit message"
@@ -104,6 +112,7 @@ cargo test --workspace
 ## Common Commands
 
 ### Package Management
+
 ```bash
 # Install dependencies
 pnpm install
@@ -113,6 +122,7 @@ pnpm add package-name
 ```
 
 ### Rust Development
+
 ```bash
 # Check all packages (excludes Tauri on macOS)
 cargo check --workspace
@@ -131,6 +141,7 @@ cargo clippy
 ```
 
 ### Tauri Development (macOS)
+
 ```bash
 # Build Tauri app
 ./build-tauri.sh
@@ -141,6 +152,7 @@ COPYFILE_DISABLE=1 cargo check
 ```
 
 ### Documentation
+
 ```bash
 # Build documentation
 mdbook build
@@ -154,12 +166,14 @@ mdbook serve
 ### macOS Build Issues
 
 If you see errors like:
-```
+
+```markdown
 stream did not contain valid UTF-8
 failed to read file '.../_default.toml'
 ```
 
 1. **Clean the project**:
+
    ```bash
    cargo clean
    dot_clean .
@@ -167,11 +181,13 @@ failed to read file '.../_default.toml'
    ```
 
 2. **Use the build script**:
+
    ```bash
    ./build-tauri.sh
    ```
 
 3. **Check environment variables**:
+
    ```bash
    echo $COPYFILE_DISABLE  # Should output: 1
    echo $COPY_EXTENDED_ATTRIBUTES_DISABLE  # Should output: 1
@@ -180,18 +196,21 @@ failed to read file '.../_default.toml'
 ### General Issues
 
 1. **Dependencies out of sync**:
+
    ```bash
    pnpm install
    cargo update
    ```
 
 2. **Build cache issues**:
+
    ```bash
    cargo clean
    pnpm clean  # if available
    ```
 
 3. **Permission issues**:
+
    ```bash
    chmod +x build-tauri.sh
    chmod +x scripts/*.sh

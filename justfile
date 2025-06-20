@@ -16,7 +16,7 @@ check:
 	vale docs/
 
 # Run all tests
- test:
+test:
 	cargo nextest run --all
 	pnpm vitest run
 

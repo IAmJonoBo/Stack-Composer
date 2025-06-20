@@ -1,9 +1,29 @@
 [advisories]
-denied = ["critical", "high"]
+vulnerability = "deny"
+unmaintained = "warn"
+
+# GTK-3 related advisories - temporarily ignored until upstream GTK-4 migration
+# See: https://github.com/tauri-apps/wry/issues/1474
+ignore = [
+    "RUSTSEC-2024-0411",  # gdkwayland-sys - no longer maintained
+    "RUSTSEC-2024-0412",  # gdk - no longer maintained  
+    "RUSTSEC-2024-0413",  # atk - no longer maintained
+    "RUSTSEC-2024-0414",  # gdkx11-sys - no longer maintained
+    "RUSTSEC-2024-0415",  # gtk - no longer maintained
+    "RUSTSEC-2024-0416",  # atk-sys - no longer maintained
+    "RUSTSEC-2024-0417",  # gdkx11 - no longer maintained
+    "RUSTSEC-2024-0418",  # gdk-sys - no longer maintained
+    "RUSTSEC-2024-0419",  # gtk3-macros - no longer maintained
+    "RUSTSEC-2024-0420",  # gtk-sys - no longer maintained
+    "RUSTSEC-2024-0370",  # proc-macro-error - unmaintained
+]
+
+# TODO: Remove these ignores once wry migrates to GTK-4
+# Track progress: https://github.com/tauri-apps/wry/issues/1474
 
 [licenses]
 allow = ["Apache-2.0", "MIT", "BSD-3-Clause", "BSD-2-Clause", "ISC"]
-denied = [
+deny = [
   "GPL-2.0",
   "GPL-3.0",
   "AGPL-3.0",
@@ -17,6 +37,6 @@ denied = [
 ]
 
 [bans]
-denied = [
+deny = [
   { name = "fast-downward", reason = "GPL-2.0 exception allowed only as subprocess" },
 ]

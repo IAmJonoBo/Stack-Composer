@@ -13,6 +13,7 @@ The link validation system ensures all cross-references in Markdown documentatio
 **Purpose**: Scans all Markdown files and validates internal links.
 
 **Features**:
+
 - Validates relative links in all `.md` files
 - Skips external URLs and email links
 - Uses link mapping for legacy path redirects
@@ -20,6 +21,7 @@ The link validation system ensures all cross-references in Markdown documentatio
 - Reports remaining issues with clear error messages
 
 **Usage**:
+
 ```bash
 node scripts/check-links.js
 # or
@@ -31,6 +33,7 @@ pnpm check-links
 **Purpose**: Maps legacy/broken link targets to their canonical locations.
 
 **Structure**:
+
 ```json
 {
   "legacy-path.md": "canonical-path.md",
@@ -39,6 +42,7 @@ pnpm check-links
 ```
 
 **Common Mappings**:
+
 - Component details moved from `component-details/` to `components/`
 - Architecture docs consolidated under `architecture/`
 - AI subsystem docs in dedicated `ai-sub-system-docs/` folder
@@ -47,16 +51,19 @@ pnpm check-links
 ### 3. Automation Integration
 
 #### Pre-commit Hook (`.husky/pre-commit`)
+
 - Runs link validation before each commit
 - Prevents broken links from entering the repository
 - Provides immediate feedback to developers
 
 #### GitHub Actions (`.github/workflows/link-check.yml`)
+
 - Validates links on push/PR to main branches
 - Runs only when documentation files change
 - Provides CI feedback on link status
 
 #### Package.json Script
+
 ```json
 {
   "scripts": {
@@ -103,6 +110,7 @@ When files are moved or renamed, add entries to `link-map.json`:
 4. **Missing mapping**: Add entry to `link-map.json`
 
 **Debug Steps**:
+
 ```bash
 # Run link checker
 node scripts/check-links.js

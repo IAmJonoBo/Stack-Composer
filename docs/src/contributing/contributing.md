@@ -28,12 +28,14 @@ For a reproducible, fast, and modern developer experience, use the pre-configure
 ⚠️ **macOS developers must follow these additional steps** due to resource fork file issues with Tauri builds:
 
 1. **Set environment variables** (add to your shell profile):
+
    ```bash
    export COPYFILE_DISABLE=1
    export COPY_EXTENDED_ATTRIBUTES_DISABLE=1
    ```
 
 2. **Use platform-specific build commands**:
+
    ```bash
    # Regular development (all packages except Tauri)
    cargo check --workspace

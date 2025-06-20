@@ -2950,6 +2950,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "rust-backend"
+version = "0.1.0"
+
+[[package]]
 name = "rust_decimal"
 version = "1.37.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"

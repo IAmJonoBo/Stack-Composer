@@ -7,5 +7,6 @@ members = [
   "agents/telemetry",
   "agents/planner-adapter",
   "src-tauri",
+  "rust-backend",
 ]
 resolver = "2"

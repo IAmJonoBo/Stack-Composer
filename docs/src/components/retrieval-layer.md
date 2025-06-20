@@ -1,6 +1,6 @@
 # Retrieval Layer (Hybrid Dense + Sparse Search)
 
-_Status: Draft — last updated 2025‑06‑20_
+> _Status: Draft — last updated 2025‑06‑20_
 
 The **Retrieval Layer** powers Stack Composer’s hybrid search.
 It combines **Qdrant** (dense vectors) and **Meilisearch 1.6** (BM25 sparse

@@ -80,7 +80,7 @@ Templates stored in `templates/report_v05/*.tera` (Tera syntax).
 - **Directory renderer** – uses `liquid` templates so plugin can override.
 - Default scaffold structure:
 
-```
+```text
 scaffold/
 ├─ README.md
 ├─ docker/
@@ -173,3 +173,7 @@ See also:
 - [Stack Agent](stack-agent.md)
 - [Planner Adapter](planner-adapter.md)
 - [Plugin SDK](../plugin-sdk/README.md)
+
+```text
+
+```

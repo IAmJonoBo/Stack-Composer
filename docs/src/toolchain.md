@@ -111,7 +111,7 @@ Post v1.0 the notarisation job (`xcrun notarytool`) runs in a macOS runner. �
 
 ---
 
-## 10 Developer Ergonomics
+## 10 Developer Ergonomics (Current)
 
 | Shortcut                          | Action                                           |
 | --------------------------------- | ------------------------------------------------ |
@@ -152,7 +152,7 @@ PowerShell bootstrap script.
 
 Sources: cargo‑nextest benchmarks citeturn0search0 · VS Code Dev Containers citeturn0search1 · just cross‑platform scripts citeturn0search2 · Biome perf claims citeturn0search3 · CVE scanning best‑practice citeturn0search5 · Qdrant vector DB citeturn0search6 · Meilisearch hybrid search citeturn0search7 · tauri‑action notarisation citeturn0search4 · OpenTelemetry Rust exporter citeturn0search5 · Penpot OSS design tool citeturn0search8 · Playwright screenshot testing citeturn0search11
 
-# Toolchain
+## Toolchain (Next Generation)
 
 ## Future‑proof build‑and‑dev pipeline for Stack Composer — v 1.0‑alpha
 
@@ -163,7 +163,7 @@ per roadmap sprint. Everything is ordered to keep feedback loops < 5 s on a
 
 ---
 
-## 1 Design Objectives
+## 1 Design Objectives — Next Generation
 
 | ID   | Objective                | Measurement                                   |
 | ---- | ------------------------ | --------------------------------------------- |
@@ -175,7 +175,7 @@ per roadmap sprint. Everything is ordered to keep feedback loops < 5 s on a
 
 ---
 
-## 2 Environment Bootstrap
+## 2A Environment Bootstrap (Next Generation)
 
 ### 2.1 Containers & Package Managers
 
@@ -262,7 +262,7 @@ per roadmap sprint. Everything is ordered to keep feedback loops < 5 s on a
 
 ---
 
-## 9 Plugin & Extension Workflow
+## 9A Plugin & Extension Workflow (Next Generation)
 
 | Today                   | Future                                  |
 | ----------------------- | --------------------------------------- | ------------------------------- |
@@ -272,7 +272,7 @@ per roadmap sprint. Everything is ordered to keep feedback loops < 5 s on a
 
 ---
 
-## 10 Developer Ergonomics
+## 10A Developer Ergonomics (Next Generation)
 
 | just recipe    | Desc                    | Avg runtime         |
 | -------------- | ----------------------- | ------------------- |

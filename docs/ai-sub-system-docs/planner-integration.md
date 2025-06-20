@@ -1,6 +1,6 @@
 # Planner Integration Guide
 
-_Version 1.0 — last updated 2025‑06‑20_
+> _Version 1.0 — last updated 2025‑06‑20_
 
 This document explains how **Stack Composer** invokes symbolic planners (**Fast Downward** and **OPTIC**) to turn high‑level requirements into an executable build‑orchestration plan. It covers the Planner trait, PDDL generation, CLI adapters, configuration, security, and future extensibility.
 

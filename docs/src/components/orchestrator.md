@@ -1,6 +1,6 @@
-# Rust Orchestrator
+> _Status: In Progress – last updated 2025‑06‑20_
 
-_Status: In Progress – last updated 2025‑06‑20_
+# Rust Orchestrator
 
 The **Orchestrator** is the beating heart of Stack Composer.  
 It spawns, supervises and connects every agent and long‑running service, while

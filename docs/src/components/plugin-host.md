@@ -1,3 +1,5 @@
+> _Status: Draft — last updated 2025‑06‑20_
+
 # WASI Plugin Host
 
 ## Responsibilities
@@ -54,9 +56,8 @@ See [architecture-questions.md](../architecture/architecture-questions.md) for o
 
 _See also: [LLM Runtime](llm-runtime.md), [Telemetry Pipeline](telemetry.md)_
 
-# WASI Plugin Host
+---
 
-_Status: Draft — last updated 2025‑06‑20_  
 The **Plugin Host** lets Stack Composer load, execute and sandbox untrusted
 extensions compiled to WebAssembly System Interface (**WASI**). It provides an
 API surface that mirrors native host functions (retrieval, LLM, planner, log,
@@ -80,7 +81,7 @@ network) while enforcing capability‑based security and signature verification.
 
 ## 2 Directory Layout & Discovery
 
-```
+```text
 plugins/
 ├─ hello-plugin.wasm
 ├─ hello-plugin.sig

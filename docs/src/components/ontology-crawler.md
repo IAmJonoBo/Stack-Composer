@@ -1,4 +1,4 @@
-# Weekly Ontology Crawler
+# Ontology Crawler Overview
 
 ## Responsibilities
 
@@ -44,7 +44,7 @@ See [Architecture Questions](../architecture/architecture-questions.md) for open
 
 _See also: [Ontology/Knowledge Graph](../Architecture%20&%20Component%20Guides/architecture-questions.md)_
 
-# Weekly Ontology Crawler
+## Weekly Ontology Crawler
 
 _Status: Draft — last updated 2025‑06‑20_
 The **Ontology Crawler** (OC) keeps Stack Composer’s knowledge base fresh by

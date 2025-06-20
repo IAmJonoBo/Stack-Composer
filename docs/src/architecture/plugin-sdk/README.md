@@ -1,5 +1,5 @@
 # Plugin SDK (Legacy)
 
-**TODO:** This is a placeholder for legacy plugin SDK documentation. Please update links to use the canonical `plugin-sdk/README.md` as appropriate.
+> This file is deprecated. Please use the canonical [README.md](./README.md) in this directory for all Plugin SDK documentation.
 
-> _This file was auto-generated to resolve a dead link. Please update with real content or redirect as needed._
+This file was auto-generated to resolve a dead link. If you arrived here, update your links to point to `plugin-sdk/README.md` (uppercase) for the latest documentation.

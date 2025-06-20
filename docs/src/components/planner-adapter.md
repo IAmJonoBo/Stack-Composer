@@ -1,5 +1,7 @@
 # Planner Adapter (Fast Downward / OPTIC)
 
+> **See also:** [Fast Downward Integration](fast-downward-integration.md)
+
 ## Responsibilities
 
 - Invoke external planners (Fast Downward, OPTIC) for PDDL planning

@@ -40,15 +40,15 @@ For a full breakdown of the developer toolchain and how to get a reproducible, f
 
 ## 3 Key subsystems
 
-| Subsystem    | Tech                                | Highlights                                 |
-| ------------ | ----------------------------------- | ------------------------------------------ |
-| LLM runtime  | Ollama + phi-3 GGUF-4bit            | Local, hot-swappable; REST streaming.      |
-| Retrieval    | Qdrant (dense) + Meilisearch (BM25) | Hybrid fusion improves precision & recall. |
-| Chunking     | SentencePiece, 256-token windows    | Proven sweet-spot for context reuse.       |
-| Planning     | Fast Downward / OPTIC               | Classical + temporal plan generation.      |
-| Telemetry    | OpenTelemetry file exporter (JSON)  | Opt-in, manual upload only.                |
-| Docs-as-Code | mdBook + ADR repo                   | Write docs with same tools as code.        |
-| Governance   | Joel Parker Henderson ADR templates | Decisions captured alongside code.         |
+| Subsystem    | Tech                                                                      | Highlights                                 |
+| ------------ | ------------------------------------------------------------------------- | ------------------------------------------ |
+| LLM runtime  | Ollama + phi-3 GGUF-4bit                                                  | Local, hot-swappable; REST streaming.      |
+| Retrieval    | Qdrant (dense) + Meilisearch (BM25)                                       | Hybrid fusion improves precision & recall. |
+| Chunking     | SentencePiece, 256-token windows                                          | Proven sweet-spot for context reuse.       |
+| Planning     | [Fast Downward / OPTIC](docs/src/components/fast-downward-integration.md) | Classical + temporal plan generation.      |
+| Telemetry    | OpenTelemetry file exporter (JSON)                                        | Opt-in, manual upload only.                |
+| Docs-as-Code | mdBook + ADR repo                                                         | Write docs with same tools as code.        |
+| Governance   | Joel Parker Henderson ADR templates                                       | Decisions captured alongside code.         |
 
 ---
 
@@ -113,12 +113,12 @@ Great docs are the #1 predictor of OSS success – see Django’s origin story.
 
 ## 8 Risks & mitigations
 
-| Risk                    | Impact                | Mitigation                                       |
-| ----------------------- | --------------------- | ------------------------------------------------ |
-| Large models > 4 GB RAM | App OOM on low-end    | Ship 4-bit default; warn before model pull.      |
-| Planner GPL linkage     | Licence contamination | Keep Fast Downward as subprocess (GPL exception) |
-| Plugin supply-chain     | Malicious WASM        | Verify signature; enforce Wasmtime sandbox.      |
-| Ontology drift          | Out-dated stacks      | Weekly crawler, manual pin option.               |
+| Risk                    | Impact                | Mitigation                                                                        |
+| ----------------------- | --------------------- | --------------------------------------------------------------------------------- |
+| Large models > 4 GB RAM | App OOM on low-end    | Ship 4-bit default; warn before model pull.                                       |
+| Planner GPL linkage     | Licence contamination | See [Fast Downward Integration](docs/src/components/fast-downward-integration.md) |
+| Plugin supply-chain     | Malicious WASM        | Verify signature; enforce Wasmtime sandbox.                                       |
+| Ontology drift          | Out-dated stacks      | Weekly crawler, manual pin option.                                                |
 
 ---
 

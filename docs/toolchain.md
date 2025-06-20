@@ -37,23 +37,23 @@ Developers clone the repo and open Dev Containers (or nix develop) to get a pre-
 
 ## 1 — Environment bootstrap
 
-| Concern                | Baseline              | DX Upgrade                                   | Why it helps                                      |
-|------------------------|----------------------|----------------------------------------------|---------------------------------------------------|
-| Deterministic dev env  | Manual tool installs | Dev Containers (.devcontainer.json), Nix     | One-click VS Code experience; same rustc/Node in CI|
-| Task runner            | cargo make           | justfile aliases (just bootstrap test release)| Simpler syntax; tasks can run outside Rust ws      |
-| Editor setup           | VS Code defaults     | Settings for Copilot Chat & Vale lint-on-save | Instant AI help plus prose lint for docs           |
+| Concern               | Baseline             | DX Upgrade                                     | Why it helps                                        |
+| --------------------- | -------------------- | ---------------------------------------------- | --------------------------------------------------- |
+| Deterministic dev env | Manual tool installs | Dev Containers (.devcontainer.json), Nix       | One-click VS Code experience; same rustc/Node in CI |
+| Task runner           | cargo make           | justfile aliases (just bootstrap test release) | Simpler syntax; tasks can run outside Rust ws       |
+| Editor setup          | VS Code defaults     | Settings for Copilot Chat & Vale lint-on-save  | Instant AI help plus prose lint for docs            |
 
 ---
 
 ## 2 — Code quality & feedback loop
 
-| Layer         | Tool(s)                        | DX gain                        |
-|---------------|-------------------------------|--------------------------------|
-| Rust lint     | Clippy in cargo check/pre-commit| Idiomatic code suggestions     |
-| JS/TS lint    | Biome (Rust-powered)           | <50 ms file checks             |
-| Markdown style| Vale, inclusive language checks| Guards docs quality            |
-| Tests         | cargo-nextest                  | Up to 3× faster than cargo test|
-| Mutation tests| mutagen-rs (Rust), StrykerJS   | Surfaces false-positive tests  |
+| Layer          | Tool(s)                          | DX gain                         |
+| -------------- | -------------------------------- | ------------------------------- |
+| Rust lint      | Clippy in cargo check/pre-commit | Idiomatic code suggestions      |
+| JS/TS lint     | Biome (Rust-powered)             | <50 ms file checks              |
+| Markdown style | Vale, inclusive language checks  | Guards docs quality             |
+| Tests          | cargo-nextest                    | Up to 3× faster than cargo test |
+| Mutation tests | mutagen-rs (Rust), StrykerJS     | Surfaces false-positive tests   |
 
 ---
 
@@ -67,11 +67,11 @@ Developers clone the repo and open Dev Containers (or nix develop) to get a pre-
 
 ## 4 — Static analysis & security
 
-| Tool                | Scope                        |
-|---------------------|------------------------------|
-| cargo-audit, denylists | Rust CVE / licence scan   |
-| trivy               | Container & SBOM scan in CI  |
-| cargo-udeps         | Dead-code & unused-dep prune |
+| Tool                   | Scope                        |
+| ---------------------- | ---------------------------- |
+| cargo-audit, denylists | Rust CVE / licence scan      |
+| trivy                  | Container & SBOM scan in CI  |
+| cargo-udeps            | Dead-code & unused-dep prune |
 
 ---
 
@@ -93,13 +93,13 @@ Developers clone the repo and open Dev Containers (or nix develop) to get a pre-
 
 ## 7 — CI / CD & release
 
-| Stage           | Tool/Source                        | Benefit                                 |
-|-----------------|------------------------------------|-----------------------------------------|
-| Matrix build    | tauri-action cross-compiles         | Notarises macOS, Win, Linux             |
-| Notarisation    | xcrun notarytool, GitHub OIDC       | Zero manual Apple keychain prompts      |
-| Container tests | Dagger or Earthly                   | Same steps locally and in CI            |
-| Release notes   | semantic-release                    | Changelog from commit messages          |
-| Update channel  | Tauri’s built-in updater            | Auto-prompt users for new versions      |
+| Stage           | Tool/Source                   | Benefit                            |
+| --------------- | ----------------------------- | ---------------------------------- |
+| Matrix build    | tauri-action cross-compiles   | Notarises macOS, Win, Linux        |
+| Notarisation    | xcrun notarytool, GitHub OIDC | Zero manual Apple keychain prompts |
+| Container tests | Dagger or Earthly             | Same steps locally and in CI       |
+| Release notes   | semantic-release              | Changelog from commit messages     |
+| Update channel  | Tauri’s built-in updater      | Auto-prompt users for new versions |
 
 ---
 
@@ -112,12 +112,12 @@ Developers clone the repo and open Dev Containers (or nix develop) to get a pre-
 
 ## 9 — Data & reasoning back-ends
 
-| Function     | Tool/Source                        |
-|--------------|------------------------------------|
-| Vector DB    | Qdrant embedded; zero external svc |
-| Hybrid search| Meilisearch 1.6 (dense + BM25)     |
-| Planning     | Fast Downward / OPTIC via CLI      |
-| LLM          | Ollama REST API; hot-swap GGUF     |
+| Function      | Tool/Source                        |
+| ------------- | ---------------------------------- |
+| Vector DB     | Qdrant embedded; zero external svc |
+| Hybrid search | Meilisearch 1.6 (dense + BM25)     |
+| Planning      | Fast Downward / OPTIC via CLI      |
+| LLM           | Ollama REST API; hot-swap GGUF     |
 
 ---
 

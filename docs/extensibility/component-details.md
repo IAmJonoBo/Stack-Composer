@@ -44,7 +44,7 @@ This project uses several tools to ensure high-quality documentation and code:
   - Usage: `cargo doc --open`
 - **Mermaid**: For diagrams in Markdown and mdBook.
   - VS Code: Install the "Markdown Preview Mermaid Support" extension.
-  - CLI (optional): `npm install -g @mermaid-js/mermaid-cli`
+  - CLI (optional): `pnpm add -g @mermaid-js/mermaid-cli`
 - **ADR-tools**: For managing Architecture Decision Records (ADRs).
   - Install: `brew install adr-tools`
 
@@ -53,7 +53,7 @@ This project uses several tools to ensure high-quality documentation and code:
 - **Vale**: Prose linter for style and grammar.
   - Install: `brew install vale`
 - **markdownlint**: Lints Markdown files for style and heading rules.
-  - Install: `npm install -g markdownlint-cli`
+  - Install: `pnpm add -g markdownlint-cli`
 
 ## Quick Install Script (macOS)
 

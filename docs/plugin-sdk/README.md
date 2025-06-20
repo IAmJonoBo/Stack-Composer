@@ -73,7 +73,7 @@ Copy the resulting **`hello_plugin.wasm`** and **`hello_plugin.sig`** (see §5) 
 ```bash
 # Example: Node.js REST plugin
 mkdir rest_plugin && cd rest_plugin
-npm init -y && npm install express
+pnpm init && pnpm add express
 ```
 
 ```js

@@ -1,4 +1,4 @@
-# Retrieval‑Augmented Generation (RAG) Design
+# RAG Design
 
 _Version 1.0 — last updated 2025‑06‑20_
 

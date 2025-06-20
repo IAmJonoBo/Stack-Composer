@@ -1,4 +1,4 @@
-# Reinforcement‑Learning (RL) Critic Design
+# RL Critic
 
 _Version 1.0 — last updated 2025‑06‑20_
 

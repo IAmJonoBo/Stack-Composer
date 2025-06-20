@@ -96,13 +96,13 @@ Meilisearch BM25 (and BM25+vector) ─ kS=256 ─┘                ↑
 
 ## 5 Parameter Defaults
 
-| Parameter              | Default     | Rationale                                |
-| ---------------------- | ----------- | ---------------------------------------- |
-| Dense *k<sub>D</sub>*  | 128         | Fast on laptop SSDs, ~30 ms              |
-| Sparse *k<sub>S</sub>* | 256         | Higher recall for rare terms             |
-| Fusion `λ`             | 0.5         | Equal weight dense / sparse              |
-| Max chunks             | 16          | Fits 128 k context at 4‑bit quantisation |
-| Wal checkpoint         | 02:00 local | Avoids interactive hours                 |
+| Parameter      | Default     | Rationale                                |
+| -------------- | ----------- | ---------------------------------------- |
+| Dense *k_D*    | 128         | Fast on laptop SSDs, ~30 ms              |
+| Sparse *k_S*   | 256         | Higher recall for rare terms             |
+| Fusion `λ`     | 0.5         | Equal weight dense / sparse              |
+| Max chunks     | 16          | Fits 128 k context at 4‑bit quantisation |
+| Wal checkpoint | 02:00 local | Avoids interactive hours                 |
 
 All parameters live in `config/rag.toml` and can be overridden per‑session.
 

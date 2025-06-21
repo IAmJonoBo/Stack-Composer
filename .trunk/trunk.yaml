@@ -1,4 +1,5 @@
 ---
+version: 0.1
 cli:
   version: 1.24.0
 # Trunk provides extensibility via plugins. (https://docs.trunk.io/plugins)

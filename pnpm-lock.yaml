@@ -100,8 +100,8 @@ importers:
         specifier: 0.18.1
         version: 0.18.1
       prettier:
-        specifier: 3.5.3
-        version: 3.5.3
+        specifier: 3.6.2
+        version: 3.6.2
       react-arborist:
         specifier: 3.4.3
         version: 3.4.3(@types/node@24.0.3)(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -295,6 +295,7 @@ packages:
   '@babel/plugin-proposal-explicit-resource-management@7.27.4':
     resolution: {integrity: sha512-1SwtCDdZWQvUU1i7wt/ihP7W38WjC3CSTOHAl+Xnbze8+bbMNjRvRQydnj0k9J1jPqCAZctBFp6NHJXkrVVmEA==}
     engines: {node: '>=6.9.0'}
+    deprecated: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-explicit-resource-management instead.
     peerDependencies:
       '@babel/core': ^7.0.0-0
 
@@ -375,6 +376,7 @@ packages:
   '@biomejs/biome@2.0.2':
     resolution: {integrity: sha512-IEeXplI1jwI1NJLTW4Oj0ieyVaDtyAOnpZu567qd6JCBc64HmTSlmY9j/7lWK2cmfLvGv6fS6JNClT6VobzjmQ==}
     engines: {node: '>=14.21.3'}
+    deprecated: This version of Biome has a broken manifest and we don't recommend to use it. Please update to v2.0.4 or later.
     hasBin: true
 
   '@biomejs/cli-darwin-arm64@2.0.2':
@@ -3182,8 +3184,8 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
-  prettier@3.5.3:
-    resolution: {integrity: sha512-QQtaxnoDJeAkDvDKWCLiwIXkTgRhwYDEQCghU9Z6q03iyek/rxRh/2lC3HB7P8sWT2xC/y5JDctPLBIGzHKbhw==}
+  prettier@3.6.2:
+    resolution: {integrity: sha512-I7AIg5boAr5R0FFtJ6rCfD+LFsWHp81dolrFD8S79U9tb8Az2nGrJncnMSnys+bpQJfRUzqs9hnA81OAA3hCuQ==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -7372,7 +7374,7 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier@3.5.3: {}
+  prettier@3.6.2: {}
 
   pretty-ms@9.2.0:
     dependencies:

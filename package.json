@@ -45,7 +45,7 @@
 		"jsdom": "26.1.0",
 		"markdown-link-check": "3.13.7",
 		"markdownlint-cli2": "0.18.1",
-		"prettier": "3.5.3",
+		"prettier": "3.6.2",
 		"react-arborist": "3.4.3",
 		"reactflow": "11.11.4",
 		"stylelint-config-standard": "^38.0.0",

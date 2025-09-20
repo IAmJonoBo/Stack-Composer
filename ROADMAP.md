@@ -30,7 +30,7 @@ this plan.
   enforce WIP limits and definition-of-ready checks.
 - Seed quarterly OKR scorecards covering product, DX, quality, and docs.
 
-**Acceptance criteria**
+#### Acceptance criteria (Program & Governance)
 
 - Architecture sync on calendar; meeting notes + ADR IDs linked in Projects.
 - Projects board auto-triages issues with lane-specific workflows; OKRs baselined
@@ -45,7 +45,7 @@ this plan.
 - Complete migration of docs and configs (remove placeholders, align SUMMARY.md,
   add navigation landing pages).
 
-**Acceptance criteria**
+#### Acceptance criteria (Platform Foundations)
 
 - Toolchain pins committed; `just reproduce-build` verifies deterministic builds
   locally and in CI.
@@ -61,7 +61,7 @@ this plan.
 - Generate typed IPC contracts via `tauri-specta`, consumed by UI and planner
   modules.
 
-**Acceptance criteria**
+#### Acceptance criteria (Intelligence & Retrieval)
 
 - `cargo xtask smoke` executes end-to-end agent pass; telemetry captures span
   IDs for each request.
@@ -78,7 +78,7 @@ this plan.
 - Stand up Storybook with Playwright visual regression and deploy previews per
   PR.
 
-**Acceptance criteria**
+#### Acceptance criteria (Experience & Activation)
 
 - Storybook build + visual regression job required in CI; 5+ components documented.
 - Wizard flow available behind feature flag, shipping persistence + citations.
@@ -92,7 +92,7 @@ this plan.
   retrieval hit metrics.
 - Baseline performance budgets: cold start < 90s, plan solve < 15s (median).
 
-**Acceptance criteria**
+#### Acceptance criteria (Observability & Evaluation)
 
 - `telemetry.md` updated with endpoints and dashboards; CI uploads traces for
   failing tests.
@@ -106,7 +106,7 @@ this plan.
   pre-frontier branches (toolchain changes, doc links, new commands).
 - Ensure end-to-end tests run clean on macOS, Ubuntu, and Windows/WSL.
 
-**Acceptance criteria**
+#### Acceptance criteria (Migration Readiness)
 
 - Migration playbook committed under `docs/src/architecture/migration.md` and
   referenced from README + onboarding docs.

@@ -6,18 +6,13 @@ into PDDL, executes search strategies, and streams results back to the runtime.
 
 ## Responsibilities
 
-| Responsibility          | Details                                                                 |
-| ----------------------- | ----------------------------------------------------------------------- |
-| Request normalisation   | Receives `PlanRequest` from the orchestrator, validates schemas, and
-maps requirements to domain predicates. |
-| PDDL generation         | Renders domain/problem files using handlebars templates versioned by
-language features. |
-| Solver orchestration    | Launches Fast Downward/OPTIC via `std::process::Command`, attaches
-timeouts, captures stdout/stderr. |
-| Progress streaming      | Emits `PlanEvent` updates (grounding, search layer, heuristic status)
-so the UI and telemetry agent stay informed. |
-| Result packaging        | Produces `PlanResult` with steps, cost metrics, violated constraints,
-and persists artefacts for diffing. |
+ | Responsibility        | Details                                                                                                      |
+ | --------------------- | ------------------------------------------------------------------------------------------------------------ |
+ | Request normalisation | Receives `PlanRequest` from the orchestrator, validates schemas, and maps requirements to domain predicates. |
+ | PDDL generation       | Renders domain/problem files using handlebars templates versioned by language features.                      |
+ | Solver orchestration  | Launches Fast Downward/OPTIC via `std::process::Command`, attaches timeouts, captures stdout/stderr.         |
+ | Progress streaming    | Emits `PlanEvent` updates (grounding, search layer, heuristic status) so the UI and telemetry agent stay informed. |
+ | Result packaging      | Produces `PlanResult` with steps, cost metrics, violated constraints, and persists artefacts for diffing.    |
 
 ## Data Flow
 
@@ -29,7 +24,7 @@ and persists artefacts for diffing. |
 4. On success, adapter parses the plan trace into structured JSON and returns it
    to the orchestrator; on failure it emits `PlanEvent::Error`.
 
-```
+ ```text
 UI → Orchestrator → Planner Adapter → Solver
                       ↑            ↓
                  PlanResult   PlanEvents

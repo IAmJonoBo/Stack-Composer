@@ -1,15 +1,15 @@
 {
   // Formatting and linting
   "editor.formatOnSave": true,
+  "editor.defaultFormatter": "biomejs.biome",
   "editor.codeActionsOnSave": {
-    "source.fixAll": "always",
-    "source.fixAll.biome": "explicit",
-    "source.organizeImports.biome": "explicit"
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
   },
   "eslint.enable": true,
   "eslint.validate": ["javascript", "typescript", "typescriptreact", "javascriptreact"],
-  "prettier.configPath": ".prettierrc",
-  "prettier.enable": true,
+  "eslint.useFlatConfig": true,
+  "prettier.enable": false,
   "vale.enabled": true,
   "vale.configPath": ".vale.ini",
   "markdownlint": {
@@ -45,4 +45,40 @@
     "editor.defaultFormatter": "stylelint.vscode-stylelint"
   },
   "css.validate": false
+  ,
+  "files.eol": "\n",
+  "files.trimFinalNewlines": true,
+  "files.insertFinalNewline": true,
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/._*": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/node_modules": true,
+    "**/target": true,
+    "**/*.min.js": true
+  },
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/target": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/*.min.js": true
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "biome.enabled": true,
+  "biome.requireConfiguration": true,
+  "rust-analyzer.cargo.features": "all",
+  "rust-analyzer.check.command": "clippy",
+  "rust-analyzer.procMacro.enable": true,
+  "rust-analyzer.imports.granularity.group": "module",
+  "rust-analyzer.inlayHints.enable": true,
+  "rust-analyzer.diagnostics.disabled": [
+    "inactive-code"
+  ],
+  "tauri.validateJson": true,
+  "[markdown]": {
+    "editor.wordWrap": "on"
+  }
 }

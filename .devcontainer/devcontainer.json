@@ -24,9 +24,18 @@
         "markdownlint": {
           "config": ".markdownlint.json"
         },
-        "vale.configPath": ".vale.ini"
+        "vale.configPath": ".vale.ini",
+        "github.copilot.enable": {
+          "*": true,
+          "plaintext": true,
+          "markdown": true,
+          "scminput": false
+        },
+        "editor.inlineSuggest.enabled": true
       },
       "extensions": [
+        "github.copilot",
+        "github.copilot-chat",
         "rust-lang.rust-analyzer",
         "esbenp.prettier-vscode",
         "streetsidesoftware.code-spell-checker",
@@ -36,8 +45,7 @@
         "valentjn.vscode-ltex",
         "yoavbls.pretty-ts-errors",
         "vitest.explorer",
-        "ms-python.python",
-        "openai.chatgpt"
+        "ms-python.python"
       ]
     }
   }

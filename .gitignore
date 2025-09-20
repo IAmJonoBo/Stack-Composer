@@ -53,6 +53,10 @@ coverage/
 .AppleDouble
 .LSOverride
 
+# Conda environment files
+.conda/
+**/.conda/
+
 # Do not ignore source or test files!
 # !src/
 # !tests/

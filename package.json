@@ -57,7 +57,7 @@
 		"typescript": "^5.8.3",
 		"vite": "6.3.6",
 		"vitest": "3.2.4",
-		"zod": "3.25.76"
+		"zod": "4.1.9"
 	},
 	"dependencies": {
 		"@supabase/functions-js": "2.5.0",

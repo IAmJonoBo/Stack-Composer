@@ -7,9 +7,15 @@ set -euo pipefail
 # - A fine-grained PAT with project and repo read/write scopes exported as GH_TOKEN or set as a secret
 # - jq installed
 
-USER_LOGIN="IAmJonoBo"
-PROJECT_NUMBER=2
+# Accept USER_LOGIN and PROJECT_NUMBER from environment or command-line arguments
+USER_LOGIN="${USER_LOGIN:-${1:-}}"
+PROJECT_NUMBER="${PROJECT_NUMBER:-${2:-}}"
 
+if [[ -z "${USER_LOGIN}" || -z "${PROJECT_NUMBER}" ]]; then
+  echo "Usage: USER_LOGIN=<github_user> PROJECT_NUMBER=<number> $0 [USER_LOGIN] [PROJECT_NUMBER]" >&2
+  echo "Either set USER_LOGIN and PROJECT_NUMBER as environment variables, or pass them as arguments." >&2
+  exit 1
+fi
 if ! command -v gh >/dev/null 2>&1; then
   echo "ERROR: gh CLI is required. Install from https://github.com/cli/cli" >&2
   exit 1

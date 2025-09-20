@@ -84,7 +84,6 @@ jobs:
             cargo install mdbook
           fi
       - name: Run Trunk code quality checks
-        if: ${{ matrix.os == 'ubuntu-22.04' }}
         run: trunk check --all --no-progress
       - name: Log Fast Downward SHA-256
         run: |

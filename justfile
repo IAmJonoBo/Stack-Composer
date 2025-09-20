@@ -54,6 +54,15 @@ book:
 preview-wizard:
 	pnpm run preview-wizard
 
+# Show Copilot coding agent instructions
+copilot:
+	@echo "Opening .github/copilot-instructions.md"
+	@if command -v bat >/dev/null 2>&1; then \
+		bat -pp .github/copilot-instructions.md; \
+	else \
+		cat .github/copilot-instructions.md; \
+	fi
+
 # Default
 @default:
-	@echo "Available recipes: bootstrap, check, test, build, run, security, fmt, clean, book"
+	@echo "Available recipes: bootstrap, check, test, build, run, security, fmt, clean, book, preview-wizard, copilot"

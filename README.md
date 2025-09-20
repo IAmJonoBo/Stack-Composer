@@ -7,6 +7,33 @@
 
 ---
 
+## Developer quickstart
+
+Fast path to a working build and tests locally. For full details, see the Copilot Coding Agent guide at `.github/copilot-instructions.md`.
+
+- Install deps
+  - Root: `pnpm install`
+  - UI: `cd stack-ui && pnpm install`
+- Build
+  - Web: `pnpm build` (and/or `cd stack-ui && pnpm build`)
+  - Rust: `cargo build --workspace --all-targets`
+- Test
+  - JS/TS: `pnpm test`
+  - Rust: `cargo test --workspace --all-targets`
+- Run
+  - Dev web: `pnpm dev` (Vite)
+  - Tauri dev: `pnpm run tauri:dev`
+
+Optional helpers
+
+- `just bootstrap` (if just is installed) – installs deps and starts local services (Qdrant, Meilisearch)
+- `just check` – lint suite (ESLint, markdownlint, Vale, Clippy)
+- `just test` – project tests
+
+---
+
+---
+
 ## Using pnpm and Yarn
 
 - **pnpm** is required for all standard workflows (install, dev, build, lint, test, etc.).

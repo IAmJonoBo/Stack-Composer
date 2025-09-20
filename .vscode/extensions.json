@@ -5,13 +5,15 @@
 		"rust-lang.rust-analyzer",
 		"esbenp.prettier-vscode",
 		"biomejs.biome",
-		"streetsidesoftware.code-spell-checker",
 		"davidanson.vscode-markdownlint",
 		"bierner.markdown-mermaid",
-		"valentjn.vscode-ltex",
 		"stylelint.vscode-stylelint",
 		"vitest.explorer",
 		"yoavbls.pretty-ts-errors",
 		"ms-python.python"
+	],
+	"unwantedRecommendations": [
+		// Disable Code Spell Checker (cspell) in this workspace
+		"streetsidesoftware.code-spell-checker"
 	]
 }

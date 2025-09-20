@@ -113,7 +113,7 @@ importers:
         version: 38.0.0(stylelint@16.21.0(typescript@5.8.3))
       stylelint-config-tailwindcss:
         specifier: ^1.0.0
-        version: 1.0.0(stylelint@16.21.0(typescript@5.8.3))(tailwindcss@4.1.10)
+        version: 1.0.0(stylelint@16.21.0(typescript@5.8.3))(tailwindcss@4.1.13)
       stylelint-order:
         specifier: ^7.0.0
         version: 7.0.0(stylelint@16.21.0(typescript@5.8.3))
@@ -186,7 +186,7 @@ importers:
         version: 7.0.0(stylelint@16.21.0(typescript@5.8.3))
       tailwindcss:
         specifier: ^4.1.10
-        version: 4.1.10
+        version: 4.1.13
       vite:
         specifier: ^6.3.5
         version: 6.3.6(@types/node@24.0.3)
@@ -3669,8 +3669,8 @@ packages:
     resolution: {integrity: sha512-9kY+CygyYM6j02t5YFHbNz2FN5QmYGv9zAjVp4lCDjlCw7amdckXlEt/bjMhUIfj4ThGRE4gCUH5+yGnNuPo5A==}
     engines: {node: '>=10.0.0'}
 
-  tailwindcss@4.1.10:
-    resolution: {integrity: sha512-P3nr6WkvKV/ONsTzj6Gb57sWPMX29EPNPopo7+FcpkQaNsrNpZ1pv8QmrYI2RqEKD7mlGqLnGovlcYnBK0IqUA==}
+  tailwindcss@4.1.13:
+    resolution: {integrity: sha512-i+zidfmTqtwquj4hMEwdjshYYgMbOrPzb9a0M3ZgNa0JMoZeFC6bxZvO8yr8ozS6ix2SDz0+mvryPeBs2TFE+w==}
 
   test-exclude@7.0.1:
     resolution: {integrity: sha512-pFYqmTw68LXVjeWJMST4+borgQP2AyMNbg1BpZh9LbyhUeNkeaPF9gzfPGUAnSMV3qPYdWUwDIjjCLiSDOl7vg==}
@@ -7989,10 +7989,10 @@ snapshots:
       stylelint: 16.21.0(typescript@5.8.3)
       stylelint-config-recommended: 16.0.0(stylelint@16.21.0(typescript@5.8.3))
 
-  stylelint-config-tailwindcss@1.0.0(stylelint@16.21.0(typescript@5.8.3))(tailwindcss@4.1.10):
+  stylelint-config-tailwindcss@1.0.0(stylelint@16.21.0(typescript@5.8.3))(tailwindcss@4.1.13):
     dependencies:
       stylelint: 16.21.0(typescript@5.8.3)
-      tailwindcss: 4.1.10
+      tailwindcss: 4.1.13
 
   stylelint-order@7.0.0(stylelint@16.21.0(typescript@5.8.3)):
     dependencies:
@@ -8077,7 +8077,7 @@ snapshots:
       string-width: 4.2.3
       strip-ansi: 6.0.1
 
-  tailwindcss@4.1.10: {}
+  tailwindcss@4.1.13: {}
 
   test-exclude@7.0.1:
     dependencies:

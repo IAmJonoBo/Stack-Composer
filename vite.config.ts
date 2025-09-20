@@ -1,8 +1,7 @@
-import react from "@vitejs/plugin-react";
 import { defineConfig } from "vitest/config";
+// Root-level config is only for Vitest; not for building an app at the repo root.
 
 export default defineConfig({
-	plugins: [react()],
 	test: {
 		environment: "jsdom",
 		globals: true,

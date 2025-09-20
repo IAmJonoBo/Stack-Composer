@@ -12,7 +12,7 @@ create_issue() {
   shift
   local body="$1"
   shift
-  gh issue create --title "$title" --body "$body" --label "$LABELS" ${ASSIGNEE:+--assignee "$ASSIGNEE"}
+  gh issue create --title "${title}" --body "${body}" --label "${LABELS}" ${ASSIGNEE:+--assignee "${ASSIGNEE}"}
 }
 
 create_issue "S-01: Wire Changesets + Conventional Commits" "Add commitlint/PR title check, configure Changesets, document workflow in README."

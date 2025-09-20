@@ -14,7 +14,7 @@ and UI.
    to the orchestrator.
 5. The UI presents the plan along with rationale and “what-if” adjustments.
 
-```
+```text
 Wizard UI → Orchestrator → Planner Adapter → Fast Downward / OPTIC
                                ↓
                         Plan Updates + Telemetry → UI & Telemetry Agent

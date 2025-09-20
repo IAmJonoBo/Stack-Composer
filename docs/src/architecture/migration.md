@@ -7,10 +7,12 @@ frontier foundations introduced in Sprints S-01–S-02.
 
 1. Pull latest `main` and install the pinned toolchains referenced by
    `rust-toolchain.toml` and `package.json`.
-   ```sh
-   rustup toolchain install stable
-   pnpm env use --global 10
-   ```
+
+    ```sh
+    rustup toolchain install stable
+    pnpm env use --global 10
+    ```
+
 2. Let `rustup` honour `rust-toolchain.toml`; do not override the channel
    manually. If you work outside the devcontainer, ensure the same components
    (`clippy`, `rustfmt`, `wasm32-wasi`) are installed.

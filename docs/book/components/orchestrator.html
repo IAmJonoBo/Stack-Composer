@@ -1,0 +1,357 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Orchestrator</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <blockquote>
+<p><em>Status: In Progress – last updated 2025‑06‑20</em></p>
+</blockquote>
+<h1 id="rust-orchestrator"><a class="header" href="#rust-orchestrator">Rust Orchestrator</a></h1>
+<p>The <strong>Orchestrator</strong> is the beating heart of Stack Composer.<br />
+It spawns, supervises and connects every agent and long‑running service, while
+presenting a single, language‑agnostic IPC surface to the UI, CLI, and any
+automation clients.</p>
+<hr />
+<h2 id="1-responsibilities"><a class="header" href="#1-responsibilities">1 Responsibilities</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>#</th><th>Responsibility</th><th>Implementation Notes</th></tr></thead><tbody>
+<tr><td>1</td><td><strong>Lifecycle</strong> – start/stop agents &amp; services</td><td>Tokio work‑stealing runtime; dynamic supervisor tree</td></tr>
+<tr><td>2</td><td><strong>Routing</strong> – async message bus</td><td><code>tokio::mpsc</code> channels keyed by <code>AgentId</code></td></tr>
+<tr><td>3</td><td><strong>Plugin hand‑off</strong></td><td>Attach WASI capability tokens; forward host calls</td></tr>
+<tr><td>4</td><td><strong>IPC façade</strong></td><td>gRPC bidirectional stream for Tauri UI; JSON over stdio for headless</td></tr>
+<tr><td>5</td><td><strong>Health &amp; metrics</strong></td><td><code>/healthz</code> HTTP endpoint; OpenTelemetry spans</td></tr>
+<tr><td>6</td><td><strong>Config hot‑reload</strong></td><td>Watch <code>*.toml</code>; diff → live update without restart</td></tr>
+<tr><td>7</td><td><strong>Graceful shutdown</strong></td><td>Fan‑out <code>Shutdown</code> message, await tasks, flush WALs</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="2-highlevel-architecture"><a class="header" href="#2-highlevel-architecture">2 High‑level Architecture</a></h2>
+<pre><code class="language-mermaid">flowchart TD
+  subgraph Orchestrator
+    API[gRPC / stdio API] --&gt; BUS((Async Bus))
+    BUS --&gt; A[Ingestion Agent]
+    BUS --&gt; G[Gap Agent]
+    BUS --&gt; S[Stack Agent]
+    BUS --&gt; R[Report Agent]
+    BUS --&gt; P[Planner Adapter]
+    BUS --&gt; C[RL Critic]
+    BUS --&gt; W[WASI Plugin Host]
+  end
+  UI[Tauri UI] -- gRPC --&gt; API
+  CLI[Headless CLI] -- stdio JSON --&gt; API
+</code></pre>
+<p><em>Every arrow = non‑blocking channel; buffer size defaults to <code>512</code>.</em></p>
+<hr />
+<h2 id="3-key-apis"><a class="header" href="#3-key-apis">3 Key APIs</a></h2>
+<h3 id="31-agent-registry"><a class="header" href="#31-agent-registry">3.1 Agent Registry</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>type AgentId = String;
+
+pub trait AgentHandle: Send + Sync {
+    fn id(&amp;self) -&gt; &amp;AgentId;
+    async fn send(&amp;self, msg: AgentMsg) -&gt; anyhow::Result&lt;()&gt;;
+}
+
+pub struct Orchestrator {
+    registry: DashMap&lt;AgentId, Box&lt;dyn AgentHandle&gt;&gt;,
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="32-public-ipc-grpc"><a class="header" href="#32-public-ipc-grpc">3.2 Public IPC (gRPC)</a></h3>
+<p>* <code>orchestrator.proto</code> owns two bidirectional streams:</p>
+<pre><code class="language-protobuf">service Orchestrator {
+  rpc Command(stream CommandReq) returns (stream CommandRes);
+  rpc Events(Empty) returns (stream Event);
+}
+</code></pre>
+<p>* Commands mutate state; Events are broadcast (e.g., “PlannerDone”).</p>
+<hr />
+<h2 id="4-configuration-orchestratortoml"><a class="header" href="#4-configuration-orchestratortoml">4 Configuration (<code>orchestrator.toml</code>)</a></h2>
+<pre><code class="language-toml">[general]
+max_concurrent_agents = 12
+shutdown_timeout_secs = 15
+
+[ipc]
+grpc_port = 5123
+stdio_json = true
+
+[logging]
+level = "info"           # trace|debug|info|warn|error
+file  = "~/.local/share/stack-composer/logs/orch.log"
+</code></pre>
+<p>Reload on file‑change via <code>notify</code> crate; fields that can’t reload (e.g.,
+<code>grpc_port</code>) trigger “restart‑needed” event.</p>
+<hr />
+<h2 id="5-extension-hooks"><a class="header" href="#5-extension-hooks">5 Extension Hooks</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Hook</th><th>Description</th></tr></thead><tbody>
+<tr><td><strong><code>PluginInit</code></strong></td><td>WASI plugin registers new host fns; orchestrator adds to capability table</td></tr>
+<tr><td><strong><code>AgentFactory</code></strong></td><td>Tests or plugins can inject mock agents at runtime</td></tr>
+<tr><td><strong><code>Middleware</code></strong></td><td>Intercept <code>AgentMsg</code> (e.g., for tracing or throttling)</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="6-security-considerations"><a class="header" href="#6-security-considerations">6 Security Considerations</a></h2>
+<p>*All plugin calls execute in Wasmtime sandbox; orchestrator binds only allowed
+host functions.<br />
+* gRPC port listens on <code>127.0.0.1</code> by default; set <code>--grpc-bind 0.0.0.0</code> to
+expose.<br />
+_ Sensitive config values (tokens) loaded from <code>$SC*SECRET*_</code> env vars.</p>
+<hr />
+<h2 id="7-metrics--observability"><a class="header" href="#7-metrics--observability">7 Metrics &amp; Observability</a></h2>
+<p>*OpenTelemetry spans: <code>orch.agent.spawn</code>, <code>orch.msg.send</code>, <code>orch.shutdown</code>.<br />
+* Prometheus exporter (<code>/metrics</code> on port <code>9134</code>) summarises per‑agent mailbox
+depth and task count.<br />
+* <code>orch doctor</code> CLI prints live status table.</p>
+<hr />
+<h2 id="8-roadmap--enhancements"><a class="header" href="#8-roadmap--enhancements">8 Roadmap &amp; Enhancements</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Version</th><th>Planned Feature</th></tr></thead><tbody>
+<tr><td>0.5</td><td>Core async bus, gRPC façade, health endpoint</td></tr>
+<tr><td>0.8</td><td>Hot‑reload config, dynamic plugin host attach</td></tr>
+<tr><td>1.0</td><td>Cluster mode: orchestrator ⇄ orchestrator gRPC federation</td></tr>
+<tr><td>1.1</td><td>REST proxy &amp; WebSocket events for web clients</td></tr>
+<tr><td>2.0</td><td>Kubernetes operator for multi‑node orchestration</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="9-implementation-guide"><a class="header" href="#9-implementation-guide">9 Implementation Guide</a></h2>
+<p>1. Entry point <code>crates/orchestrator/src/main.rs</code> builds <code>Builder</code> then <code>run()</code>.<br />
+2. Unit tests (<code>tests/</code>) pause tokio clock → deterministic timeouts.<br />
+3. Benchmarks (<code>benches/</code>) use <code>criterion</code> to measure 10 k msg/s throughput.<br />
+4. Use <code>just orch-dev</code> to start orchestrator standalone with hot‑reload.</p>
+<hr />
+<h2 id="10-faq"><a class="header" href="#10-faq">10 FAQ</a></h2>
+<p><strong>How do I add a new agent?</strong><br />
+Implement <code>AgentHandle</code>, register via <code>orchestrator.add_agent()</code> at start‑up.</p>
+<p><strong>Can I embed orchestrator in another process?</strong><br />
+Yes—link <code>orchestrator</code> crate, call <code>Builder::default().run_embedded()</code>.</p>
+<p><strong>What happens on panic inside an agent?</strong><br />
+Supervisor restarts task up to 3 times, then marks agent unhealthy and emits
+<code>AgentCrashed</code> event.</p>
+<hr />
+<p>See also:<br />
+*<a href="gap-agent.html">Gap‑Analysis Agent</a><br />
+* <a href="../ai-sub-system-docs/planner-integration.html">Planner Integration</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../components/ontology-crawler.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../components/planner-adapter.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../components/ontology-crawler.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../components/planner-adapter.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

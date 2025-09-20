@@ -15,4 +15,4 @@ jobs:
         with:
           version: 9
       - run: pnpm install --frozen-lockfile
-      - run: pnpm biome check .
+      - run: pnpm biome

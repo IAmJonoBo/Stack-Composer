@@ -1,0 +1,389 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Stack Agent</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <blockquote>
+<p><em>Status: Draft — last updated 2025-06-20</em></p>
+</blockquote>
+<h1 id="stack-agent"><a class="header" href="#stack-agent">Stack Agent</a></h1>
+<hr />
+<p>See <a href="../architecture-and-component-guides/architecture-questions.html">Architecture Questions</a> for open questions and strategic direction.</p>
+<p>See also:</p>
+<ul>
+<li><a href="../component-details/gap-agent.html">Gap Agent</a></li>
+<li><a href="../component-details/report-agent.html">Report Agent</a></li>
+</ul>
+<p>The <strong>Stack Agent</strong> synthesises one or more candidate technology stacks that
+satisfy the fully‑specified requirement graph coming out of the Gap‑Analysis
+Agent. It ranks those candidates using a multi‑objective score that balances
+licence compatibility, ecosystem maturity, performance, hiring pool and known
+security posture. The top‑N proposals are streamed back to the Orchestrator
+for user review and report generation.</p>
+<hr />
+<h2 id="1-responsibilities"><a class="header" href="#1-responsibilities">1 Responsibilities</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>#</th><th>Responsibility</th><th>Detail</th></tr></thead><tbody>
+<tr><td>1</td><td><strong>Collect evidence</strong></td><td>Query Retrieval Layer for chunks tagged with relevant domains</td></tr>
+<tr><td>2</td><td><strong>Generate candidates</strong></td><td>Apply rule‑based templates + LLM “fill gaps” prompt</td></tr>
+<tr><td>3</td><td><strong>Invoke planner</strong></td><td>Attach plan cost (time/resource) to each candidate</td></tr>
+<tr><td>4</td><td><strong>Score &amp; rank</strong></td><td>Weighted AHP (analytic hierarchy process) + RL‑Critic adjustment</td></tr>
+<tr><td>5</td><td><strong>Emit proposals</strong></td><td>Stream <code>Proposal</code> objects to UI for incremental rendering</td></tr>
+<tr><td>6</td><td><strong>Telemetry</strong></td><td>Emit <code>stack.proposal</code> and <code>stack.score</code> spans</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="2-data-flow"><a class="header" href="#2-data-flow">2 Data Flow</a></h2>
+<pre><code class="language-mermaid">flowchart LR
+  R[Requirement Graph] --&gt; E( Evidence Collector )
+  E --&gt; G(Candidate Generator)
+  G --&gt; P(Planner Adapter)
+  P --&gt; S(Scorer)
+  S --&gt;|top‑N| ORCH[Orchestrator / UI]
+</code></pre>
+<p><em>Evidence Collector</em> issues hybrid searches;
+<em>Candidate Generator</em> uses both <strong>template rules</strong> and <strong>LLM “slot‑fill”</strong>;
+<em>Scorer</em> combines heuristic score + optional RL‑Critic value.</p>
+<hr />
+<h2 id="3-public-rust-api"><a class="header" href="#3-public-rust-api">3 Public Rust API</a></h2>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct Proposal {
+    pub id: Uuid,
+    pub stack: TechStack,        // nested langs, frameworks, infra
+    pub score: f32,
+    pub plan: Vec&lt;PlanStep&gt;,     // optional if planner disabled
+    pub rationale: String,       // LLM explanation
+}
+
+#[async_trait]
+pub trait StackAgent {
+    async fn propose(requirements: &amp;RequirementGraph, max: usize)
+        -&gt; anyhow::Result&lt;Vec&lt;Proposal&gt;&gt;;
+
+    async fn score(proposal: &amp;mut Proposal) -&gt; anyhow::Result&lt;()&gt;;
+}
+<span class="boring">}</span></code></pre></pre>
+<p><code>TechStack</code> defined in <code>schema/tech_stack.rs</code>.</p>
+<hr />
+<h2 id="4-scoring-function"><a class="header" href="#4-scoring-function">4 Scoring Function</a></h2>
+<p>Total score = Σ ( wᵢ × metricᵢ ) − penalty</p>
+<div class="table-wrapper"><table><thead><tr><th>Metric</th><th>Symbol</th><th>Weight (default)</th></tr></thead><tbody>
+<tr><td>Licence compatibility</td><td>L</td><td>0.25</td></tr>
+<tr><td>Ecosystem maturity (GitHub stars, age)</td><td>M</td><td>0.20</td></tr>
+<tr><td>Performance benchmarks</td><td>P</td><td>0.15</td></tr>
+<tr><td>Hiring pool size</td><td>H</td><td>0.15</td></tr>
+<tr><td>Security track record</td><td>S</td><td>0.15</td></tr>
+<tr><td>Planner cost (build time)</td><td>C</td><td>−0.10 (penalty)</td></tr>
+</tbody></table>
+</div>
+<p>Weights are stored in <code>config/stack_agent.toml</code> and adjustable per project.
+If RL‑Critic is enabled, its value estimate <em>re‑weights</em> the final score by up
+to ±10 %.</p>
+<hr />
+<h2 id="5-candidate-generation-strategies"><a class="header" href="#5-candidate-generation-strategies">5 Candidate Generation Strategies</a></h2>
+<ol>
+<li>
+<p><strong>Rule‑based templates</strong> (fast, deterministic)
+<em>Example</em>: “Web → Language: Rust | JS; Framework: Actix | Next.js …”</p>
+</li>
+<li>
+<p><strong>LLM slot fill</strong> — prompt:</p>
+<blockquote>
+<p>“Given requirements A, B, C produce <strong>one</strong> complete tech stack as JSON…”</p>
+</blockquote>
+</li>
+<li>
+<p><strong>Hybrid</strong> — start with rule template, let LLM propose alternates.</p>
+</li>
+</ol>
+<p>Strategy selected via config: <code>gen_mode = "hybrid"</code>.</p>
+<hr />
+<h2 id="6-configuration-stack_agenttoml"><a class="header" href="#6-configuration-stack_agenttoml">6 Configuration (<code>stack_agent.toml</code>)</a></h2>
+<pre><code class="language-toml">[generator]
+mode = "hybrid"        # rule | llm | hybrid
+max_candidates = 10
+
+[scoring]
+weights = { licence = 0.25, maturity = 0.2, perf = 0.15,
+            hiring = 0.15, security = 0.15, plan_cost = -0.1 }
+
+[planner]
+enabled = true
+timeout_secs = 45
+</code></pre>
+<hr />
+<h2 id="7-extension-hooks"><a class="header" href="#7-extension-hooks">7 Extension Hooks</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Hook</th><th>How</th></tr></thead><tbody>
+<tr><td><strong>Custom score metric</strong></td><td>WASI plugin implements <code>fn metric(stack) -&gt; f32</code></td></tr>
+<tr><td><strong>New generator strategy</strong></td><td>Register <code>Box&lt;dyn ProposalGenerator&gt;</code></td></tr>
+<tr><td><strong>Domain‑specific rules</strong></td><td>TOML file <code>rules/*.toml</code> hot‑loaded on change</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="8-uiux-integration"><a class="header" href="#8-uiux-integration">8 UI/UX Integration</a></h2>
+<ul>
+<li>Proposals stream into a <strong>card grid</strong>; clicking a card shows rationale,
+plan timeline, and licence/security matrix.</li>
+<li><strong>Risk badge</strong> colours: green ≥ 0.8, yellow 0.6‑0.79, red &lt; 0.6.</li>
+<li>Hover over score shows spider‑chart of metric contributions.</li>
+</ul>
+<hr />
+<h2 id="9-roadmap"><a class="header" href="#9-roadmap">9 Roadmap</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Version</th><th>Feature</th></tr></thead><tbody>
+<tr><td>0.5</td><td>Rule + hybrid generator, static AHP scores</td></tr>
+<tr><td>0.8</td><td>RL‑Critic adjustment loop</td></tr>
+<tr><td>1.0</td><td>Live “what‑if” matrix (UI slider to tweak weights)</td></tr>
+<tr><td>1.1</td><td>Feedback‑learning — user star/rank feeds critic</td></tr>
+<tr><td>2.0</td><td>Multi‑objective Pareto frontier visualisation</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="10-open-questions"><a class="header" href="#10-open-questions">10 Open Questions</a></h2>
+<ul>
+<li>Best default weight set for security‑focused industries?</li>
+<li>Should plan cost be normalised by team size?</li>
+<li>Strategy for detecting circular dependencies in candidate stacks?</li>
+</ul>
+<hr />
+<h2 id="11-usage-example"><a class="header" href="#11-usage-example">11 Usage Example</a></h2>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let mut proposals = stack_agent
+    .propose(&amp;req_graph, 5)
+    .await?;
+for p in &amp;mut proposals {
+    stack_agent.score(p).await?;
+}
+<span class="boring">}</span></code></pre></pre>
+<hr />
+<p>See also:</p>
+<ul>
+<li><a href="../component-details/retrieval-layer.html">Retrieval Layer</a></li>
+<li><a href="../component-details/planner-adapter.html">Planner Adapter</a></li>
+<li><a href="../ai-sub-system-docs/rl-critic.html">RL Critic</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../components/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../components/ingestion-agent.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../components/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../components/ingestion-agent.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

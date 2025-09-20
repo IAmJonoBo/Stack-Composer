@@ -32,6 +32,13 @@ Optional helpers
 
 ---
 
+## Project Brief and Roadmap
+
+For the authoritative sprint plan and governance, see the new Project Brief:
+
+- Project Brief: [PROJECT_BRIEF.md](./PROJECT_BRIEF.md)
+- High-level Roadmap: [ROADMAP.md](./ROADMAP.md)
+
 ---
 
 ## Using pnpm and Yarn
@@ -93,7 +100,6 @@ For a full breakdown of the developer toolchain and how to get a reproducible, f
 ## 4 Boot-up checklist
 
 1. Install all required tools (see [Toolchain & DX Pipeline](docs/src/toolchain.md) for install commands):
-
    - Rust (rustup), Node.js (≥ v20), pnpm, just, tauri CLI, biome, vale, mdbook, cargo-nextest, stryker, cargo-audit, cargo-deny, cargo-udeps, wasmtime, trivy, nix (restart terminal after install), Qdrant (via Docker), Meilisearch, Renovate, gh (GitHub CLI)
    - Qdrant is run via Docker for local development. Mutagen is a Rust library, not a CLI tool.
 

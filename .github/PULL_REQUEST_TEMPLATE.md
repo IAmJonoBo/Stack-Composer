@@ -10,6 +10,26 @@
 
 ---
 
+## Summary
+
+Describe the change. Link issues.
+
+## Type
+
+- [ ] Bug fix
+- [ ] Feature
+- [ ] Docs
+- [ ] Refactor/Chore
+
+## Checklist
+
+- [ ] Tests added/updated (if applicable)
+- [ ] Docs updated (README/docs/ADR)
+- [ ] Conventional Commit (squash title)
+- [ ] Changeset added (if user-visible)
+
+---
+
 ### What does this PR do?
 
 _Describe your changes and link to any relevant issues or discussions._

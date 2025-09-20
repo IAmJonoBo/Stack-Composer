@@ -1,53 +1,82 @@
 {
-	// Formatting and linting
-	"editor.formatOnSave": true,
-	"editor.codeActionsOnSave": {
-		"source.fixAll": "always",
-		"source.fixAll.biome": "explicit",
-		"source.organizeImports.biome": "explicit"
-	},
-	"eslint.enable": true,
-	"eslint.validate": [
-		"javascript",
-		"typescript",
-		"typescriptreact",
-		"javascriptreact"
-	],
-	"prettier.configPath": ".prettierrc",
-	"prettier.enable": true,
-	"vale.enabled": true,
-	"vale.configPath": ".vale.ini",
-	"markdownlint": {
-		"config": ".markdownlint.json"
-	},
-	// GitHub Copilot configuration
-	"github.copilot.enable": {
-		"*": true,
-		"plaintext": true,
-		"markdown": true,
-		"scminput": false
-	},
-	"github.copilot.editor.enableAutoCompletions": true,
-	"editor.inlineSuggest.enabled": true,
-	// SonarLint integration
-	"sonarlint.connectedMode.project": {
-		"connectionId": "",
-		"projectKey": ""
-	},
-	// Vitest integration
-	"vitest.commandLine": "pnpm vitest",
-	"vitest.enable": true,
-	// Recommended extensions
-	"extensions.ignoreRecommendations": false,
-	"git.ignore": [
-		"husky"
-	],
-	// Tailwind/Stylelint/HTMLHint integration
-	"files.associations": {
-		"*.css": "tailwindcss"
-	},
-	"[css]": {
-		"editor.defaultFormatter": "vscode.css-language-features"
-	},
-	"css.validate": false
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "eslint.enable": true,
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "javascriptreact"
+  ],
+  "eslint.useFlatConfig": true,
+  "prettier.enable": false,
+  "vale.enabled": true,
+  "vale.configPath": ".vale.ini",
+  "markdownlint": {
+    "config": ".markdownlint.json"
+  },
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "markdown": true,
+    "scminput": false
+  },
+  "github.copilot.editor.enableAutoCompletions": true,
+  "editor.inlineSuggest.enabled": true,
+  "sonarlint.connectedMode.project": {
+    "connectionId": "",
+    "projectKey": ""
+  },
+  "vitest.commandLine": "pnpm vitest",
+  "vitest.enable": true,
+  "extensions.ignoreRecommendations": false,
+  "git.ignore": [
+    "husky"
+  ],
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "css.validate": false,
+  "files.eol": "\n",
+  "files.trimFinalNewlines": true,
+  "files.insertFinalNewline": true,
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/._*": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/node_modules": true,
+    "**/target": true,
+    "**/*.min.js": true
+  },
+  "search.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/target": true,
+    "**/dist": true,
+    "**/build": true,
+    "**/*.min.js": true
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "biome.enabled": true,
+  "biome.requireConfiguration": true,
+  "rust-analyzer.cargo.features": "all",
+  "rust-analyzer.check.command": "clippy",
+  "rust-analyzer.procMacro.enable": true,
+  "rust-analyzer.imports.granularity.group": "module",
+  "rust-analyzer.inlayHints.enable": true,
+  "rust-analyzer.diagnostics.disabled": [
+    "inactive-code"
+  ],
+  "tauri.validateJson": true,
+  "[markdown]": {
+    "editor.wordWrap": "on"
+  }
 }

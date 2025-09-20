@@ -20,7 +20,6 @@
 	"markdownlint": {
 		"config": ".markdownlint.json"
 	},
-
 	// GitHub Copilot configuration
 	"github.copilot.enable": {
 		"*": true,
@@ -30,7 +29,6 @@
 	},
 	"github.copilot.editor.enableAutoCompletions": true,
 	"editor.inlineSuggest.enabled": true,
-
 	// SonarLint integration
 	"sonarlint.connectedMode.project": {
 		"connectionId": "",
@@ -41,13 +39,15 @@
 	"vitest.enable": true,
 	// Recommended extensions
 	"extensions.ignoreRecommendations": false,
-	"git.ignore": ["husky"],
+	"git.ignore": [
+		"husky"
+	],
 	// Tailwind/Stylelint/HTMLHint integration
 	"files.associations": {
 		"*.css": "tailwindcss"
 	},
 	"[css]": {
-		"editor.defaultFormatter": "stylelint.vscode-stylelint"
+		"editor.defaultFormatter": "vscode.css-language-features"
 	},
 	"css.validate": false
 }

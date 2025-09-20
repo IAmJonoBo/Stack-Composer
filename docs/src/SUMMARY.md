@@ -21,6 +21,7 @@ This is the new root for your mdBook documentation. Please use the navigation to
   - [Data Flow](architecture/data-flow.md)
   - [Extensibility](architecture/extensibility.md)
   - [Roadmap](architecture/roadmap.md)
+  - [Observability](architecture/observability.md)
   - [AI Platform](architecture/ai-platform-overview-alt.md)
   - [ADR Template](architecture/adr-0000-template.md)
 - [Component Guides](components/README.md)

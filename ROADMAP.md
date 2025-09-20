@@ -1,139 +1,235 @@
-# Stack Composer – Next-Level Roadmap (excluding safety)
+# Stack Composer – Frontier Roadmap (excluding safety)
 
-This roadmap focuses on planning/coordination, core logic, developer experience (DX), UX/UI, repo management, and frontier software development standards. It intentionally excludes safety topics for now.
+This roadmap lays out the path to a frontier-grade Stack Composer release. It
+connects governance, runtime architecture, intelligence quality, developer
+experience, and user activation in a single program view. Safety topics remain
+tracked separately.
 
-See also: [PROJECT_BRIEF.md](./PROJECT_BRIEF.md) for the authoritative, sprint-based plan.
+See also: [PROJECT_BRIEF.md](./PROJECT_BRIEF.md) for the sprint-by-sprint cut of
+this plan.
 
 ## Milestones
 
-- Now (0–2 sprints): Highest leverage, low risk, fast feedback
-- Next (3–6 sprints): Medium scope with architectural impact
-- Later (7+ sprints): Large/strategic initiatives and bets
+- **Now (0–2 sprints)** – Finish the migration to frontier foundations, wire up
+  end-to-end governance, light up observability, and deliver the first usable
+  wizard loop.
+- **Next (3–6 sprints)** – Expand retrieval intelligence, planner depth, and
+  plugin ecosystem while hardening CI/CD and experience instrumentation.
+- **Later (7+ sprints)** – Tackle strategic bets: distributed runtimes, AI
+  assistants, marketplace maturation, and enterprise-grade operations.
 
 ---
 
 ## Now
 
-### Planning & Coordination
+### Program & Governance
 
-- Lightweight RFC process (PR label `rfc` + template; timeboxed review, ADR when accepted)
-- GitHub Projects board with automation (triage → ready → in-progress → review → done)
-- Labels and priorities: `type:*`, `area:*`, `impact:*`, `blocked`, `good-first-issue`
-- Weekly release notes draft via Changesets summaries
+- Stand up Architecture Council with weekly design review; publish decisions via
+  ADRs (and require ADR references in every structural PR).
+- Automate GitHub Projects views for Roadmap, Sprint, and Migration swimlanes;
+  enforce WIP limits and definition-of-ready checks.
+- Seed quarterly OKR scorecards covering product, DX, quality, and docs.
 
-Acceptance criteria:
+**Acceptance criteria**
 
-- RFC template and label live; at least 1 accepted RFC lands with ADR
-- Project board enabled with default views; labels populated and used
+- Architecture sync on calendar; meeting notes + ADR IDs linked in Projects.
+- Projects board auto-triages issues with lane-specific workflows; OKRs baselined
+  and shared in repo (`docs/OKRS.md`).
 
-### Developer Experience (DX) & CI/CD
+### Platform Foundations
 
-- Adopt Changesets for versioning and release notes (aligns with pnpm workspaces)
-- Conventional Commits + commitlint + PR title check
-- Single-source code quality gate: `trunk check` plus Cargo and JS linters; PR annotations
-- Incremental CI: matrix cache for Rust/Node, artifactable Tauri build
-- Devcontainers (or Nix shell) for reliable env parity
+- Pin toolchains (`rust-toolchain.toml`, `pnpm`/Tauri versions) and document
+  reproducible build steps (devcontainer + Nix shell parity).
+- Finalise repository automation: CODEOWNERS with ≥2 maintainers per area, PR
+  templates enforcing docs/ADR links, Changesets pipelines.
+- Complete migration of docs and configs (remove placeholders, align SUMMARY.md,
+  add navigation landing pages).
 
-Acceptance criteria:
+**Acceptance criteria**
 
-- `changeset` workflow runs on main; prerelease + stable modes documented
-- CI produces per-PR summary with quality status; cold build < cache-hit build by ≥50%
+- Toolchain pins committed; `just reproduce-build` verifies deterministic builds
+  locally and in CI.
+- Docs navigation free of placeholders; quick-start, installation, and
+  architecture bundles green in lint/link pipelines.
 
-### Repo Management & Docs
+### Intelligence & Retrieval
 
-- CODEOWNERS per area; Issue/PR templates (bug/feat/rfc)
-- Docs quickstart hardening: copy-paste install and first-run verified
-- Contributor guide links from PR template; ADR Primer in docs
+- Implement ingestion, retrieval, critic, and telemetry agent baselines with
+  smoke-test coverage and instrumentation.
+- Ship retrieval evaluation harness (seed 100 Q/A pairs, nDCG@{5,10}, P/R,
+  faithfulness, hallucination checks) and publish the first dashboard.
+- Generate typed IPC contracts via `tauri-specta`, consumed by UI and planner
+  modules.
 
-Acceptance criteria:
+**Acceptance criteria**
 
-- CODEOWNERS enforced in PRs; templates in use; doc links round-trip
+- `cargo xtask smoke` executes end-to-end agent pass; telemetry captures span
+  IDs for each request.
+- Evaluation harness runs in CI nightly; dashboard artefact uploaded and linked
+  in Projects.
+- UI type generation pipeline gates PRs touching commands.
 
-### Logic & Quality
+### Experience & Activation
 
-- Typed Tauri commands via `tauri-specta` (TS types generated from Rust)
-- Tests: property-based (`proptest`) for orchestrator; snapshot (`insta`) for API/LLM prompts; micro-bench (`criterion`) for hot paths
-- Determinism guardrails: pin seeds and feature flags for test modes
+- Adopt unified design system (shadcn/Radix + Tailwind v4 tokens shared between
+  app and Storybook) and migrate existing components.
+- Deliver onboarding wizard v1 (Import → Clarify → Preview → Export) with
+  rationale tooltips, draft citations, and reduced-motion mode.
+- Stand up Storybook with Playwright visual regression and deploy previews per
+  PR.
 
-Acceptance criteria:
+**Acceptance criteria**
 
-- TS types generated in UI from Rust; ≥3 property-based tests; ≥3 snapshot tests; ≥1 micro-benchmark tracked in CI
+- Storybook build + visual regression job required in CI; 5+ components documented.
+- Wizard flow available behind feature flag, shipping persistence + citations.
+- Accessibility checks (axe-core + keyboard traversal) pass for onboarding path.
 
-### UX/UI
+### Observability & Evaluation
 
-- Design primitives: adopt a design system (e.g., Radix UI + Tailwind or Mantine)
-- Storybook for UI components; visual regression with Playwright screenshots
-- Onboarding path: “Import brief → Clarify → Preview stack → Export scaffold” with progress indicators
+- OpenTelemetry pipelines for orchestrator and agents with trace IDs surfaced in
+  UI dev tools.
+- Metrics exporter (Prometheus) capturing request latency, plan solve time,
+  retrieval hit metrics.
+- Baseline performance budgets: cold start < 90s, plan solve < 15s (median).
 
-Acceptance criteria:
+**Acceptance criteria**
 
-- Storybook runs; ≥5 core components documented; onboarding flow has a passing E2E test
+- `telemetry.md` updated with endpoints and dashboards; CI uploads traces for
+  failing tests.
+- Budget regression alarms configured (GitHub status checks) and dashboards linked.
+
+### Migration Readiness
+
+- Close outstanding placeholder/legacy docs; add migration tracker table in
+  `docs/src/architecture/roadmap.md`.
+- Publish “Migration Playbook” outlining steps for contributors upgrading from
+  pre-frontier branches (toolchain changes, doc links, new commands).
+- Ensure end-to-end tests run clean on macOS, Ubuntu, and Windows/WSL.
+
+**Acceptance criteria**
+
+- Migration playbook committed under `docs/src/architecture/migration.md` and
+  referenced from README + onboarding docs.
+- Cross-platform CI green; backlog renamed/labelled to align with new roadmap.
 
 ---
 
 ## Next
 
-### Planning & Coordination (Next)
+### Program & Governance (Next)
 
-- Roadmap views (Now/Next/Later boards); team capacity heuristics and WIP limits
-- Release train cadence (e.g., fortnightly) with release checklist automation
+- Introduce dual-track discovery (Experience + Core) with shared cadence.
+- Publish monthly frontier scorecard summarising evaluation metrics, DX KPIs,
+  docs impact, and community velocity.
+- Run quarterly roadmap retro to re-balance Now/Next/Later lanes.
 
-### Developer Experience (DX) & CI/CD (Next)
+### Platform & Runtime (Next)
 
-- End-to-end tests for Tauri with Playwright + `@tauri-apps/cli` driver
-- Split CI into reusable workflows; SBOM/provenance generation (no safety hardening here)
-- Monorepo task graph viz (Just tasks + docs)
+- Modularise orchestrator into micro-crates; enable wasm compilation for agents.
+- Implement distributed cache layer for retrieval (Qdrant/Meilisearch
+  clustering); support remote data sources via adapters.
+- Deliver reproducible task graphs in CI with change impact analysis.
 
-### Logic & Platform (Next)
+### Intelligence & Retrieval (Next)
 
-- Retrieval upgrades: hybrid fusion tuning, RAG evaluation harness (Ragas-like metrics), ontology freshness gating
-- Planner integration: temporal constraints surfaced in UI; partial plan repair on changed requirements
-- Plugin SDK v1: capability contracts, semver’d host API, example signed WASI plugins
+- Reranker service (ONNX or vLLM) behind async queue; late interaction scoring.
+- Planner partial repair loop with constraint deltas and timeline visualisation.
+- Plugin SDK v1 GA: signed WASI plugins, capability validation CLI, marketplace
+  staging site.
+- Evaluation expansion: synthetic dataset generation, failure classification,
+  and bias audits.
 
-### UX/UI (Next)
+### Experience & Activation (Next)
 
-- Information architecture: wizard + advanced “stack explorer” with rationale tooltips and “what-if” side panel
-- Accessibility: target WCAG 2.2 AA; keyboard navigability and reduced-motion modes
+- “Stack explorer” with multi-path comparisons, cost/risk sliders, and scenario
+  bookmarking.
+- A11y certification (WCAG 2.2 AA) via independent audit; document remediation
+  backlog.
+- Copilot interactions: inline clarifications, plan diffs, and historical trail.
+
+### Operations & Commercialisation (Next)
+
+- Release engineering: signed binaries, reproducible SBOM + provenance, release
+  train automation.
+- Telemetry aggregation backend (optional cloud) with anonymised opt-in upload.
+- Docs-as-product: versioned mdBook site, API reference generated from Specta.
 
 ---
 
 ## Later
 
-### Planning & Coordination (Later)
+### Program & Governance (Later)
 
-- Structured Roadmap publishing (Docs site) with live status from labels/Projects
+- Community steering committee, RFC voting, incubator program for plugins.
+- Partner integrations roadmap (cloud runtimes, data platforms) with shared SLAs.
 
-### Developer Experience (DX) & CI/CD (Later)
+### Platform & Runtime (Later)
 
-- Flaky test detection/quarantine; test-impact analysis for selective runs
-- Performance CI with historical baselines; cold-start and interaction latency budgets
+- Federated orchestrators (cluster mode, multi-node scheduling, gossip health).
+- Cross-platform binary distribution with auto-update and delta sync.
+- Policy engine for capability enforcement (Rego/WASM-based).
 
-### Logic & Platform (Later)
+### Intelligence & Retrieval (Later)
 
-- Advanced retrievers (late interaction/ColBERT-like or hybrid rerankers)
-- Model/runtime adapters: seamless swap local/remote providers with evaluation plateaus tracked
-- Domain template packs: ontologies and scaffolds for web, data, ML, gaming, embedded
+- GraphRAG with knowledge graph enrichment, embeddings distillation, and active
+  learning loops.
+- Model adapters (local Ollama, remote vLLM/TGI, hosted GPUs) with evaluation
+  plateaus and automated fallback.
+- Autonomous remediation: planner + critic auto-iterate until constraints
+  satisfied, with human-in-the-loop checkpoints.
 
-### UX/UI (Later)
+### Experience & Activation (Later)
 
-- Scenario planning playground: multi-criteria comparison of stacks with cost/operational risk sliders
-- Collaborative reviews: per-requirement comments and change suggestions
+- Scenario planning playground with collaborative review, inline comments, and
+  meeting export.
+- Real-time scaffold preview (tree + diff) with streaming updates.
+- Guided modernization flows for importing legacy repos and generating upgrade
+  plans.
+
+### Operations & Commercialisation (Later)
+
+- Enterprise features: RBAC, key management, offline licence bundles, audit log.
+- Marketplace GA with revenue sharing, automated security scanning, and trust
+  signals.
+- SaaS control plane option with multi-tenant data isolation.
 
 ---
 
-## Cross-cutting Engineering Standards (frontier-focused)
+## Migration & Sprint Kickoff
 
-- Deterministic builds: lockfiles, toolchain pinning, `repro` CI job verifying no-diff rebuilds
-- Spec-first integration: OpenAPI/JSON Schema for config and plugin contracts; generated clients/types
-- Strong typing across boundaries: Specta/serde for Rust↔TS; Zod or JSON Schema for runtime validation
-- Quality bars: property-based tests, snapshot tests for outputs/prompts, perf budgets, and doc linting
-- Documentation-as-contract: ADRs gate public API changes; Storybook and mdBook kept in lockstep via CI
+- **Sprint S-01 (Migration & Foundations)** – Ship toolchain pins, baseline
+  agents, documentation cleanup, and wizard skeleton. Use the migration playbook
+  to re-align open branches.
+- **Sprint S-02 (Evaluation & Retrieval)** – Land evaluation harness, retrieval
+  tuning, telemetry dashboards, and Strengthen UI citations.
+- **Sprint S-03 (Planner & Plugins)** – Deliver partial plan repair, plugin SDK
+  v1 GA, and marketplace staging.
+- Sprints S-04 to S-06 continue as in the project brief, updated to map to the
+  Next lane responsibilities above.
+
+---
+
+## Cross-cutting Engineering Standards (Frontier Edition)
+
+- Deterministic builds: toolchain pinning, artifact reproducibility checks, and
+  change-impact reports are mandatory.
+- Spec-first integration: OpenAPI/JSON Schema for every external interface;
+  generated clients/types validated in CI.
+- Quality bars: property-based + snapshot tests, performance budgets with trend
+  dashboards, evaluation harness gating, and nightly resilience runs.
+- Documentation-as-contract: each feature ships with docs, ADR references,
+  Storybook stories, telemetry notes, and migration guidance.
+- Observability defaults: traces, metrics, and logs connected to dashboards and
+  surfaced to developers.
 
 ---
 
 ## Getting Started (team)
 
-- Create tracking issues for each Now item; link to this roadmap
-- Enable Projects views and CODEOWNERS
-- Add CI gates: Changesets, Conventional Commits, `trunk check`, core linters
-- Schedule a 30–45 min weekly review to move RFCs and update the board
+- Create/refresh tracking issues for each Now item; link to this roadmap and to
+  the Architecture Council backlog.
+- Enable Projects automation (Now/Next/Later + Sprint + Migration views).
+- Schedule weekly architecture review and fortnightly program review.
+- Run `just reproduce-build` and `just smoke` before merging; failures block PRs.
+- Keep docs + Storybook updated in every PR; use the migration playbook when
+  rebasing older branches.

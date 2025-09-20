@@ -3,16 +3,14 @@
 	"image": "mcr.microsoft.com/devcontainers/rust:1-ubuntu",
 	"features": {
 		"ghcr.io/devcontainers/features/node:1": {
-			"version": "latest"
+			"version": "20"
 		},
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {
-			"version": "latest"
-		},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
 		"ghcr.io/devcontainers-extra/features/pnpm:2": {
-			"version": "latest"
+			"version": "10"
 		},
 		"ghcr.io/devcontainers/features/python:1": {
-			"version": "latest"
+			"version": "3.11"
 		}
 	},
 	"postCreateCommand": "just bootstrap && just check",
@@ -21,7 +19,7 @@
 			"settings": {
 				"editor.formatOnSave": true,
 				"editor.codeActionsOnSave": {
-					"source.fixAll": "always"
+					"source.fixAll": "explicit"
 				},
 				"markdownlint": {
 					"config": ".markdownlint.json"
@@ -40,6 +38,7 @@
 				"github.copilot-chat",
 				"rust-lang.rust-analyzer",
 				"esbenp.prettier-vscode",
+				"streetsidesoftware.code-spell-checker",
 				"davidanson.vscode-markdownlint",
 				"bierner.markdown-mermaid",
 				"stylelint.vscode-stylelint",

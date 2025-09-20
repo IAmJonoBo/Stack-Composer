@@ -57,6 +57,7 @@ jobs:
           bash install-trunk.sh -y
           echo "$HOME/.trunk/bin" >> $GITHUB_PATH
       - name: Install system dependencies
+        shell: bash
         run: |
           if [[ "$RUNNER_OS" == "Linux" ]]; then
             sudo apt-get update
@@ -76,12 +77,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cargo-tools-
       - name: Install cargo tools
+        shell: bash
         run: |
           if ! command -v just &> /dev/null; then
             cargo install just
           fi
           if ! command -v mdbook &> /dev/null; then
             cargo install mdbook
+          fi
+          if ! command -v cargo-deny &> /dev/null; then
+            cargo install cargo-deny
           fi
       - name: Run Trunk code quality checks
         run: trunk check --all --no-progress
@@ -115,7 +120,7 @@ jobs:
         continue-on-error: true
         run: |
           if [ -d "stack-ui/dist" ]; then
-            npx axe-core-cli stack-ui/dist --exit
+            npx @axe-core/cli "file://$PWD/stack-ui/dist/index.html" --exit
           else
             echo "Warning: stack-ui/dist directory not found, skipping check"
             exit 1
@@ -181,6 +186,7 @@ jobs:
           bash install-trunk.sh -y
           echo "$HOME/.trunk/bin" >> $GITHUB_PATH
       - name: Install system dependencies
+        shell: bash
         run: |
           if [[ "$RUNNER_OS" == "Linux" ]]; then
             sudo apt-get update
@@ -200,12 +206,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cargo-tools-
       - name: Install cargo tools
+        shell: bash
         run: |
           if ! command -v just &> /dev/null; then
             cargo install just
           fi
           if ! command -v mdbook &> /dev/null; then
             cargo install mdbook
+          fi
+          if ! command -v cargo-deny &> /dev/null; then
+            cargo install cargo-deny
           fi
       - name: Run Trunk code quality checks
         run: trunk check --all --no-progress
@@ -240,7 +250,7 @@ jobs:
         if: ${{ matrix.os == 'ubuntu-22.04' }}
         run: |
           if [ -d "stack-ui/dist" ]; then
-            npx axe-core-cli stack-ui/dist --exit
+            npx @axe-core/cli "file://$PWD/stack-ui/dist/index.html" --exit
           else
             echo "Warning: stack-ui/dist directory not found, skipping check"
             exit 1

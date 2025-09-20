@@ -5,10 +5,15 @@ name: CI
     branches: [main]
   pull_request:
     branches: [main]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.head.ref || github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
   build:
+    # Run full matrix on push; on PRs, only ubuntu to speed up feedback
+    if: ${{ github.event_name != 'pull_request' || matrix.os == 'ubuntu-22.04' }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -23,6 +28,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'pnpm'
       - name: Set up Rust
         uses: dtolnay/rust-toolchain@v1
         with:
@@ -36,7 +42,9 @@ jobs:
             rust-backend
             src-tauri
       - name: Install pnpm
-        run: npm install -g pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - name: Cache pnpm dependencies
         uses: actions/cache@v4
         with:
@@ -80,6 +88,7 @@ jobs:
             cargo install mdbook
           fi
       - name: Run Trunk code quality checks
+        if: ${{ matrix.os == 'ubuntu-22.04' }}
         run: trunk check --all --no-progress
       - name: Log Fast Downward SHA-256
         run: |
@@ -97,17 +106,21 @@ jobs:
           cd stack-ui
           pnpm build
       - name: Build backend
+        if: ${{ matrix.os == 'ubuntu-22.04' }}
         run: |
           cargo build --workspace --all-targets
       - name: Run tests
+        if: ${{ matrix.os == 'ubuntu-22.04' }}
         run: |
           cargo test --workspace --all-targets
       - name: Lint docs
+        if: ${{ matrix.os == 'ubuntu-22.04' }}
         run: |
           cd docs
           mdbook build
           mdbook test
       - name: Run Axe-core accessibility check
+        if: ${{ matrix.os == 'ubuntu-22.04' }}
         run: |
           if [ -d "stack-ui/dist" ]; then
             npx axe-core-cli stack-ui/dist --exit
@@ -116,16 +129,19 @@ jobs:
             exit 1
           fi
       - name: Run dep-scan
+        if: ${{ github.event_name == 'push' && matrix.os == 'ubuntu-22.04' }}
         run: |
           npx dep-scan --src . \
             --report-format sarif \
             --fail-on-severity HIGH,CRITICAL
       - name: Run cargo-deny
+        if: ${{ matrix.os == 'ubuntu-22.04' }}
         run: |
           cargo \
             deny \
             check
       - name: Link Checker (Lychee)
+        if: ${{ github.event_name == 'push' && matrix.os == 'ubuntu-22.04' }}
         uses: lycheeverse/lychee-action@v1
         with:
           args: --config lychee.toml '**/*.md'

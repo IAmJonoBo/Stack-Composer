@@ -1,0 +1,13 @@
+ui:
+  - 'stack-ui/**'
+rust:
+  - 'agents/**'
+  - 'src-tauri/**'
+  - 'rust-backend/**'
+docs:
+  - 'docs/**'
+  - '**/*.md'
+workflows:
+  - '.github/workflows/**'
+scripts:
+  - 'scripts/**'

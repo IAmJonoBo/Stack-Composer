@@ -54,8 +54,8 @@ jobs:
       - name: Install Trunk CLI
         run: |
           curl -fsSL https://get.trunk.io -o install-trunk.sh
-          bash install-trunk.sh -y
-          echo "$HOME/.trunk/bin" >> $GITHUB_PATH
+          bash "install-trunk.sh" -y
+          echo "$HOME/.trunk/bin" >> "$GITHUB_PATH"
       - name: Install system dependencies
         shell: bash
         run: |
@@ -183,8 +183,8 @@ jobs:
       - name: Install Trunk CLI
         run: |
           curl -fsSL https://get.trunk.io -o install-trunk.sh
-          bash install-trunk.sh -y
-          echo "$HOME/.trunk/bin" >> $GITHUB_PATH
+          bash "install-trunk.sh" -y
+          echo "$HOME/.trunk/bin" >> "$GITHUB_PATH"
       - name: Install system dependencies
         shell: bash
         run: |

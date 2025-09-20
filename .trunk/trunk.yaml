@@ -18,7 +18,6 @@ runtimes:
 lint:
   enabled:
     - biome@2.2.4
-    - eslint@9.29.0
     - stylelint@16.24.0
     - clippy@1.87.0
     - oxipng@9.1.5
@@ -28,10 +27,9 @@ lint:
     - renovate@41.118.1
     - taplo@0.10.0
     - actionlint@1.7.7
-    - checkov@3.2.471
+
     - git-diff-check
     - markdownlint@0.45.0
-    - prettier@3.6.2
     - shellcheck@0.11.0
     - shfmt@3.6.0
     - trufflehog@3.90.8

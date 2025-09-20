@@ -11,7 +11,8 @@ This document outlines known build issues specific to macOS development environm
 On macOS file systems (HFS+ and APFS), the system automatically creates resource fork files (also known as AppleDouble files) with names starting with `._` for files that contain extended attributes or metadata. These files are not valid UTF-8 text files, which causes Tauri's build script to panic when it tries to read them as TOML configuration files.
 
 **Error Symptoms:**
-```
+
+```text
 thread 'main' panicked at /Users/.../tauri-2.5.1/build.rs:418:25:
 failed to define permissions for core:path: failed to read file '.../_default.toml': 
 stream did not contain valid UTF-8
@@ -85,6 +86,7 @@ The `.gitignore` file already includes patterns to exclude resource fork files:
 ### Development Workflow
 
 #### For Regular Development (Non-Tauri)
+
 ```bash
 # This works normally and includes all packages except Tauri
 cargo check --workspace
@@ -93,6 +95,7 @@ cargo test --workspace
 ```
 
 #### For Tauri Development
+
 ```bash
 # Use the dedicated script
 ./build-tauri.sh
@@ -103,6 +106,7 @@ COPYFILE_DISABLE=1 COPY_EXTENDED_ATTRIBUTES_DISABLE=1 cargo check
 ```
 
 #### For Full Project Builds
+
 ```bash
 # Build workspace first
 cargo build --workspace
@@ -114,6 +118,7 @@ cargo build --workspace
 ### Prevention Strategies
 
 #### 1. Environment Variables
+
 Set these environment variables in your shell profile (`.zshrc`, `.bashrc`, etc.):
 
 ```bash
@@ -122,6 +127,7 @@ export COPY_EXTENDED_ATTRIBUTES_DISABLE=1
 ```
 
 #### 2. Regular Cleanup
+
 Periodically clean resource fork files:
 
 ```bash
@@ -133,6 +139,7 @@ find . -name "._*" -type f -delete
 ```
 
 #### 3. Build Script Integration
+
 The `src-tauri/build.rs` has been modified to set environment variables:
 
 ```rust
@@ -149,9 +156,10 @@ fn main() {
 
 ### Troubleshooting
 
-#### If you encounter UTF-8 errors:
+#### If you encounter UTF-8 errors
 
 1. **Clean the project:**
+
    ```bash
    cargo clean
    dot_clean .
@@ -159,11 +167,13 @@ fn main() {
    ```
 
 2. **Check for resource fork files:**
+
    ```bash
    find . -name "._*" -type f
    ```
 
 3. **Use the dedicated build script:**
+
    ```bash
    ./build-tauri.sh
    ```
@@ -173,14 +183,16 @@ fn main() {
    - Use a Linux container or VM
    - Use GitHub Actions for CI/CD builds
 
-#### If workspace builds fail:
+#### If workspace builds fail
 
 1. **Verify Tauri is excluded:**
+
    ```bash
    cargo metadata --format-version 1 | jq '.workspace_members'
    ```
 
 2. **Build individual packages:**
+
    ```bash
    cargo check -p orchestrator
    cargo check -p stack-telemetry

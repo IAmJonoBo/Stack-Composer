@@ -1,37 +1,53 @@
 {
-  // Formatting and linting
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll": "always",
-    "source.fixAll.biome": "explicit",
-    "source.organizeImports.biome": "explicit"
-  },
-  "eslint.enable": true,
-  "eslint.validate": ["javascript", "typescript", "typescriptreact", "javascriptreact"],
-  "prettier.configPath": ".prettierrc",
-  "prettier.enable": true,
-  "vale.enabled": true,
-  "vale.configPath": ".vale.ini",
-  "markdownlint": {
-    "config": ".markdownlint.json"
-  },
-  // SonarLint integration
-  "sonarlint.connectedMode.project": {
-    "connectionId": "",
-    "projectKey": ""
-  },
-  // Vitest integration
-  "vitest.commandLine": "pnpm vitest",
-  "vitest.enable": true,
-  // Recommended extensions
-  "extensions.ignoreRecommendations": false,
-  "git.ignore": ["husky"],
-  // Tailwind/Stylelint/HTMLHint integration
-  "files.associations": {
-    "*.css": "tailwindcss"
-  },
-  "[css]": {
-    "editor.defaultFormatter": "stylelint.vscode-stylelint"
-  },
-  "css.validate": false
+	// Formatting and linting
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll": "always",
+		"source.fixAll.biome": "explicit",
+		"source.organizeImports.biome": "explicit"
+	},
+	"eslint.enable": true,
+	"eslint.validate": [
+		"javascript",
+		"typescript",
+		"typescriptreact",
+		"javascriptreact"
+	],
+	"prettier.configPath": ".prettierrc",
+	"prettier.enable": true,
+	"vale.enabled": true,
+	"vale.configPath": ".vale.ini",
+	"markdownlint": {
+		"config": ".markdownlint.json"
+	},
+
+	// GitHub Copilot configuration
+	"github.copilot.enable": {
+		"*": true,
+		"plaintext": true,
+		"markdown": true,
+		"scminput": false
+	},
+	"github.copilot.editor.enableAutoCompletions": true,
+	"editor.inlineSuggest.enabled": true,
+
+	// SonarLint integration
+	"sonarlint.connectedMode.project": {
+		"connectionId": "",
+		"projectKey": ""
+	},
+	// Vitest integration
+	"vitest.commandLine": "pnpm vitest",
+	"vitest.enable": true,
+	// Recommended extensions
+	"extensions.ignoreRecommendations": false,
+	"git.ignore": ["husky"],
+	// Tailwind/Stylelint/HTMLHint integration
+	"files.associations": {
+		"*.css": "tailwindcss"
+	},
+	"[css]": {
+		"editor.defaultFormatter": "stylelint.vscode-stylelint"
+	},
+	"css.validate": false
 }

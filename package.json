@@ -62,7 +62,7 @@
 	"dependencies": {
 		"@supabase/functions-js": "2.5.0",
 		"@tauri-apps/api": "^2.5.0",
-		"axios": "1.12.0",
+		"axios": "1.12.2",
 		"inquirer": "12.9.6",
 		"node-fetch": "3.3.2",
 		"react": "19.1.1",

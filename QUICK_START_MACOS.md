@@ -12,6 +12,7 @@ export COPY_EXTENDED_ATTRIBUTES_DISABLE=1
 ```
 
 Then restart your terminal or run:
+
 ```bash
 source ~/.zshrc  # or ~/.bashrc
 ```
@@ -27,6 +28,7 @@ pnpm install
 ## 3. Build Commands
 
 ### Regular Development (Recommended)
+
 ```bash
 # Check all packages (excludes Tauri)
 cargo check --workspace
@@ -39,6 +41,7 @@ cargo test --workspace
 ```
 
 ### Tauri Development (When Needed)
+
 ```bash
 # Use the dedicated script
 ./build-tauri.sh
@@ -67,11 +70,13 @@ find . -name "._*" -type f -delete
 ### Build Hangs or Times Out
 
 1. Check environment variables:
+
    ```bash
    echo $COPYFILE_DISABLE  # Should output: 1
    ```
 
 2. Clean and retry:
+
    ```bash
    cargo clean
    ./build-tauri.sh

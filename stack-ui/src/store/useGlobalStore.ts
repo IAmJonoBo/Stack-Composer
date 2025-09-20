@@ -11,10 +11,11 @@ interface UserProfile {
 
 export const useGlobalStore = create<{
 	userProfile: UserProfile | null;
-	setUserProfile: (profile: UserProfile) => void;
+	// eslint-disable-next-line no-unused-vars
+	setUserProfile: (userProfile: UserProfile) => void;
 }>((set) => ({
 	// Example state
 	userProfile: null,
-	setUserProfile: (profile) => set({ userProfile: profile }),
+	setUserProfile: (userProfile) => set({ userProfile }),
 	// Add more global state as needed
 }));

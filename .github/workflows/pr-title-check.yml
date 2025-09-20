@@ -1,14 +1,14 @@
 ---
-name: PR Title Check
-'on':
+name: PR Title (Conventional Commits)
+on:
   pull_request_target:
     types: [opened, edited, synchronize, reopened]
 permissions:
-  pull-requests: read
   contents: read
+  pull-requests: write
 jobs:
-  conventional:
-    runs-on: ubuntu-latest
+  check-title:
+    runs-on: ubuntu-22.04
     steps:
       - name: Validate PR title
         uses: amannn/action-semantic-pull-request@v5

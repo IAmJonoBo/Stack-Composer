@@ -1,5 +1,3 @@
----
-# Auto-label PRs based on changed paths
 ui:
   - 'stack-ui/**'
 rust:

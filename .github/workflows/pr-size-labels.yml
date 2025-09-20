@@ -1,4 +1,3 @@
----
 # yamllint disable rule:line-length
 name: PR Size Labels
 on:
@@ -23,13 +22,7 @@ jobs:
             let page = 1;
             let total = 0;
             for (;;) {
-              const { data: files } = await github.rest.pulls.listFiles({
-                owner,
-                repo,
-                pull_number: pr.number,
-                per_page: 100,
-                page,
-              });
+              const { data: files } = await github.rest.pulls.listFiles({ owner, repo, pull_number: pr.number, per_page: 100, page });
               for (const f of files) {
                 if (['pnpm-lock.yaml', 'Cargo.lock'].includes(f.filename)) continue;
                 total += (f.changes || 0);
@@ -44,24 +37,16 @@ jobs:
             if (idx === -1) idx = labels.length - 1;
             const labelToAdd = labels[idx];
             // Remove existing size/* labels
-            const { data: currentLabels } = await github.rest.issues.listLabelsOnIssue({
-              owner,
-              repo,
-              issue_number: pr.number,
-            });
+            const { data: currentLabels } = await github.rest.issues.listLabelsOnIssue({ owner, repo, issue_number: pr.number });
             const sizeLabels = currentLabels.filter(l => l.name.startsWith('size/')).map(l => l.name);
             for (const l of sizeLabels) {
               if (l !== labelToAdd) {
-                try {
-                  await github.rest.issues.removeLabel({ owner, repo, issue_number: pr.number, name: l });
-                } catch {}
+                try { await github.rest.issues.removeLabel({ owner, repo, issue_number: pr.number, name: l }); } catch {}
               }
             }
             // Add new size label if missing
             if (!sizeLabels.includes(labelToAdd)) {
-              try {
-                await github.rest.issues.addLabels({ owner, repo, issue_number: pr.number, labels: [labelToAdd] });
-              } catch (e) {
+              try { await github.rest.issues.addLabels({ owner, repo, issue_number: pr.number, labels: [labelToAdd] }); } catch (e) {
                 core.info(`Could not add label ${labelToAdd}: ${e.message}`);
               }
             }

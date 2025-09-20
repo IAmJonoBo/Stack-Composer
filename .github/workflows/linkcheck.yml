@@ -1,19 +1,16 @@
 ---
-name: Link Checker
+name: Link Checker (mdBook)
 
 permissions:
   contents: read
 
 on:
-  pull_request:
-    paths:
-      - '**/*.md'
   push:
     paths:
-      - '**/*.md'
+      - 'docs/**'
 
 jobs:
-  linkcheck:
+  mdbook-linkcheck:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

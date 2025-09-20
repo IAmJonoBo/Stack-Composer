@@ -1,0 +1,100 @@
+---
+name: Setup Project Fields
+'on':
+  workflow_dispatch: {}
+permissions:
+  contents: read
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ensure Status field and options
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          script: |
+            const login = 'IAmJonoBo';
+            const number = 2;
+            const STATUS_TYPE = 'ProjectV2SingleSelectField';
+            const required = [
+              'Triage','Backlog','Selected','In Progress',
+              'Blocked','In Review','Done'
+            ];
+
+            const projRes = await github.graphql(
+              `query($login:String!,$number:Int!){
+                user(login:$login){
+                  projectV2(number:$number){
+                    id
+                    fields(first:100){
+                      nodes{
+                        __typename
+                        ... on ProjectV2FieldCommon{ id name }
+                        ... on ProjectV2SingleSelectField{ id name options{ id name } }
+                      }
+                    }
+                  }
+                }
+              }`,
+              { login, number }
+            );
+
+            const project = projRes.user?.projectV2;
+            if (!project) {
+              core.setFailed('Project not found.');
+              return;
+            }
+
+            let statusField = project.fields.nodes.find((f) => {
+              return f.name === 'Status' && f.__typename === STATUS_TYPE;
+            });
+
+            if (!statusField) {
+              const createRes = await github.graphql(
+                `mutation($pid:ID!){
+                  createProjectV2Field(input:{
+                    projectId:$pid, dataType:SINGLE_SELECT, name:"Status"
+                  }){ projectV2Field{ ... on ProjectV2FieldCommon { id name } } }
+                }`,
+                { pid: project.id }
+              );
+              statusField = createRes.createProjectV2Field.projectV2Field;
+              core.info('Created Status field.');
+            }
+
+            // Fetch options
+            const fieldsRes = await github.graphql(
+              `query($pid:ID!){
+                node(id:$pid){
+                  ... on ProjectV2{
+                    fields(first:100){ nodes{
+                      __typename id name
+                      ... on ProjectV2SingleSelectField{ options{ id name } }
+                    } }
+                  }
+                }
+              }`,
+              { pid: project.id }
+            );
+
+            const fieldNode = fieldsRes.node.fields.nodes.find((n) => n.id === statusField.id);
+            const existing = new Set((fieldNode.options || []).map((o) => o.name));
+            const toAdd = required.filter((n) => !existing.has(n));
+            if (toAdd.length === 0) {
+              core.info('All Status options already present.');
+              return;
+            }
+
+            for (const name of toAdd) {
+              await github.graphql(
+                `mutation($pid:ID!,$fid:ID!,$name:String!){
+                  updateProjectV2SingleSelectField(input:{
+                    projectId:$pid, fieldId:$fid, name:"Status",
+                    options:{ add:[{ name:$name }] }
+                  }){ projectV2SingleSelectField{ id name } }
+                }`,
+                { pid: project.id, fid: statusField.id, name }
+              );
+              core.info(`Added Status option: ${name}`);
+            }
+            core.info('Project setup complete.');

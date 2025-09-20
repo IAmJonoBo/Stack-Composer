@@ -2,7 +2,11 @@
 	"compilerOptions": {
 		"target": "ESNext",
 		"module": "ESNext",
-		"moduleResolution": "Node",
+<<<<<<< HEAD
+		"moduleResolution": "Bundler",
+=======
+		"moduleResolution": "Bundler",
+>>>>>>> 2cda2ed (chore(tsconfig): switch to moduleResolution=bundler and add ignoreDeprecations in UI to silence TS 6.x deprecation warnings)
 		"jsx": "react-jsx",
 		"strict": true,
 		"esModuleInterop": true,

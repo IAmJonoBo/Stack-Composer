@@ -6,9 +6,9 @@
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit"
   },
-  "eslint.enable": true,
-  "eslint.validate": ["javascript", "typescript", "typescriptreact", "javascriptreact"],
-  "eslint.useFlatConfig": true,
+  "eslint.enable": false,
+  "eslint.validate": [],
+  "eslint.useFlatConfig": false,
   "prettier.enable": false,
   "vale.enabled": true,
   "vale.configPath": ".vale.ini",

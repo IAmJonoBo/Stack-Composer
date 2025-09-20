@@ -11,6 +11,11 @@ trim_trailing_whitespace = true
 indent_style = space
 indent_size = 2
 
+# Rust files follow rustfmt defaults (4 spaces)
+[*.rs]
+indent_style = space
+indent_size = 4
+
 # Ignore files: treat as plain text
 [*.gitignore]
 charset = utf-8

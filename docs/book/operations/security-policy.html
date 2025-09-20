@@ -1,410 +1,293 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html lang="en" class="light sidebar-visible" dir="ltr">
-  <head>
-    <!-- Book generated using mdBook -->
-    <meta charset="UTF-8" />
-    <title>Security Policy</title>
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Security Policy</title>
 
-    <!-- Custom HTML head -->
 
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#ffffff" />
+        <!-- Custom HTML head -->
 
-    <link rel="icon" href="../favicon.svg" />
-    <link rel="shortcut icon" href="../favicon.png" />
-    <link rel="stylesheet" href="../css/variables.css" />
-    <link rel="stylesheet" href="../css/general.css" />
-    <link rel="stylesheet" href="../css/chrome.css" />
-    <link rel="stylesheet" href="../css/print.css" media="print" />
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="../fonts/fonts.css" />
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
-    <!-- Highlight.js Stylesheets -->
-    <link rel="stylesheet" id="highlight-css" href="../highlight.css" />
-    <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css" />
-    <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css" />
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
-    <!-- Custom theme stylesheets -->
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
-    <!-- Provide site root and default themes to javascript -->
-    <script>
-      const path_to_root = '../';
-      const default_light_theme = 'light';
-      const default_dark_theme = 'navy';
-    </script>
-    <!-- Start loading toc.js asap -->
-    <script src="../toc.js"></script>
-  </head>
-  <body>
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
     <div id="mdbook-help-container">
-      <div id="mdbook-help-popup">
-        <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
-        <div>
-          <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
-          <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
-          <p>Press <kbd>?</kbd> to show this help</p>
-          <p>Press <kbd>Esc</kbd> to hide this help</p>
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
         </div>
-      </div>
     </div>
     <div id="body-container">
-      <!-- Work around some values being stored in localStorage wrapped in quotes -->
-      <script>
-        try {
-          let theme = localStorage.getItem('mdbook-theme');
-          let sidebar = localStorage.getItem('mdbook-sidebar');
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
-          if (theme.startsWith('"') && theme.endsWith('"')) {
-            localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
-          }
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
 
-          if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
-            localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
-          }
-        } catch (e) {}
-      </script>
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
 
-      <!-- Set the theme before any content is loaded, prevents flash -->
-      <script>
-        const default_theme = window.matchMedia('(prefers-color-scheme: dark)').matches
-          ? default_dark_theme
-          : default_light_theme;
-        let theme;
-        try {
-          theme = localStorage.getItem('mdbook-theme');
-        } catch (e) {}
-        if (theme === null || theme === undefined) {
-          theme = default_theme;
-        }
-        const html = document.documentElement;
-        html.classList.remove('light');
-        html.classList.add(theme);
-        html.classList.add('js');
-      </script>
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
 
-      <input type="checkbox" id="sidebar-toggle-anchor" class="hidden" />
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
-      <!-- Hide / unhide sidebar before it is displayed -->
-      <script>
-        let sidebar = null;
-        const sidebar_toggle = document.getElementById('sidebar-toggle-anchor');
-        if (document.body.clientWidth >= 1080) {
-          try {
-            sidebar = localStorage.getItem('mdbook-sidebar');
-          } catch (e) {}
-          sidebar = sidebar || 'visible';
-        } else {
-          sidebar = 'hidden';
-        }
-        sidebar_toggle.checked = sidebar === 'visible';
-        html.classList.remove('sidebar-visible');
-        html.classList.add('sidebar-' + sidebar);
-      </script>
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
 
-      <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-        <!-- populated by js -->
-        <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
-        <noscript>
-          <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
-        </noscript>
-        <div id="sidebar-resize-handle" class="sidebar-resize-handle">
-          <div class="sidebar-resize-indicator"></div>
-        </div>
-      </nav>
-
-      <div id="page-wrapper" class="page-wrapper">
-        <div class="page">
-          <div id="menu-bar-hover-placeholder"></div>
-          <div id="menu-bar" class="menu-bar sticky">
-            <div class="left-buttons">
-              <label
-                id="sidebar-toggle"
-                class="icon-button"
-                for="sidebar-toggle-anchor"
-                title="Toggle Table of Contents"
-                aria-label="Toggle Table of Contents"
-                aria-controls="sidebar"
-              >
-                <i class="fa fa-bars"></i>
-              </label>
-              <button
-                id="theme-toggle"
-                class="icon-button"
-                type="button"
-                title="Change theme"
-                aria-label="Change theme"
-                aria-haspopup="true"
-                aria-expanded="false"
-                aria-controls="theme-list"
-              >
-                <i class="fa fa-paint-brush"></i>
-              </button>
-              <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                <li role="none">
-                  <button role="menuitem" class="theme" id="default_theme">Auto</button>
-                </li>
-                <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
-              </ul>
-              <button
-                id="search-toggle"
-                class="icon-button"
-                type="button"
-                title="Search (`/`)"
-                aria-label="Toggle Searchbar"
-                aria-expanded="false"
-                aria-keyshortcuts="/ s"
-                aria-controls="searchbar"
-              >
-                <i class="fa fa-search"></i>
-              </button>
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
             </div>
+        </nav>
 
-            <h1 class="menu-title"></h1>
+        <div id="page-wrapper" class="page-wrapper">
 
-            <div class="right-buttons">
-              <a href="../print.html" title="Print this book" aria-label="Print this book">
-                <i id="print-button" class="fa fa-print"></i>
-              </a>
-            </div>
-          </div>
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
 
-          <div id="search-wrapper" class="hidden">
-            <form id="searchbar-outer" class="searchbar-outer">
-              <input
-                type="search"
-                id="searchbar"
-                name="searchbar"
-                placeholder="Search this book ..."
-                aria-controls="searchresults-outer"
-                aria-describedby="searchresults-header"
-              />
-            </form>
-            <div id="searchresults-outer" class="searchresults-outer hidden">
-              <div id="searchresults-header" class="searchresults-header"></div>
-              <ul id="searchresults"></ul>
-            </div>
-          </div>
+                    <h1 class="menu-title"></h1>
 
-          <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-          <script>
-            document
-              .getElementById('sidebar-toggle')
-              .setAttribute('aria-expanded', sidebar === 'visible');
-            document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-            Array.from(document.querySelectorAll('#sidebar a')).forEach(function (link) {
-              link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
-            });
-          </script>
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
 
-          <div id="content" class="content">
-            <main>
-              <h1 id="security-policy">
-                <a class="header" href="#security-policy">Security Policy</a>
-              </h1>
-              <p>
-                Stack Composer follows modern security best practices. All contributors and users
-                should:
-              </p>
-              <ul>
-                <li>
-                  Review
-                  <a href="../../developer-extensibility-docs/dev-setup.html">Developer Setup</a>
-                  for secure environment setup.
-                </li>
-                <li>
-                  Use the latest toolchain as described in
-                  <a href="../../toolchain.html">Toolchain</a>.
-                </li>
-                <li>Report vulnerabilities as described below.</li>
-              </ul>
-              <hr />
-              <h2 id="sbom--scanning">
-                <a class="header" href="#sbom--scanning">SBOM &amp; Scanning</a>
-              </h2>
-              <ul>
-                <li>
-                  All releases include a CycloneDX SBOM (<code>bom.json</code>) published with
-                  release assets.
-                </li>
-                <li>
-                  SBOM is updated automatically in CI using <code>trivy</code> and
-                  <code>cargo-audit</code>.
-                </li>
-                <li>Scan containers and dependencies before each release.</li>
-                <li>
-                  All plugins are scanned with <code>trivy</code> and
-                  <code>cargo-audit</code> before release (see
-                  <a href="../../plugin-sdk/README.html">Plugin SDK</a>).
-                </li>
-              </ul>
-              <hr />
-              <h2 id="plugin-signing--verification">
-                <a class="header" href="#plugin-signing--verification"
-                  >Plugin Signing &amp; Verification</a
-                >
-              </h2>
-              <ul>
-                <li>
-                  Every <code>.wasm</code> plugin must be accompanied by a <code>.sig</code> file
-                  (Ed25519 signature, hex).
-                </li>
-                <li>
-                  Verification uses the <code>ed25519-dalek</code> crate; trusted public keys are
-                  listed in <code>~/.config/stack-composer/trusted_keys.toml</code>.
-                </li>
-                <li>Plugins without valid signatures are rejected by default.</li>
-                <li>
-                  Security thresholds: CVSS ≥ 7.0 blocks plugin install; non-OSI/GPL licenses are
-                  blocked.
-                </li>
-              </ul>
-              <hr />
-              <h2 id="telemetry--privacy">
-                <a class="header" href="#telemetry--privacy">Telemetry &amp; Privacy</a>
-              </h2>
-              <ul>
-                <li>
-                  Telemetry is <strong>opt-in</strong> by default. Enable via config or CLI flag.
-                </li>
-                <li>
-                  Collected fields: hashed project ID, feature flag counts, duration stats (no
-                  source text or PII).
-                </li>
-                <li>Example log line:</li>
-              </ul>
-              <pre><code class="language-json">{
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="security-policy"><a class="header" href="#security-policy">Security Policy</a></h1>
+<p>Stack Composer follows modern security best practices. All contributors and users should:</p>
+<ul>
+<li>Review <a href="../../developer-extensibility-docs/dev-setup.html">Developer Setup</a> for secure environment setup.</li>
+<li>Use the latest toolchain as described in <a href="../toolchain.html">Toolchain</a>.</li>
+<li>Report vulnerabilities as described below.</li>
+</ul>
+<hr />
+<h2 id="sbom--scanning"><a class="header" href="#sbom--scanning">SBOM &amp; Scanning</a></h2>
+<ul>
+<li>All releases include a CycloneDX SBOM (<code>bom.json</code>) published with release assets.</li>
+<li>SBOM is updated automatically in CI using <code>trivy</code> and <code>cargo-audit</code>.</li>
+<li>Scan containers and dependencies before each release.</li>
+<li>All plugins are scanned with <code>trivy</code> and <code>cargo-audit</code> before release (see <a href="../extensibility/plugin-sdk.html">Plugin SDK</a>).</li>
+</ul>
+<hr />
+<h2 id="plugin-signing--verification"><a class="header" href="#plugin-signing--verification">Plugin Signing &amp; Verification</a></h2>
+<ul>
+<li>Every <code>.wasm</code> plugin must be accompanied by a <code>.sig</code> file (Ed25519 signature, hex).</li>
+<li>Verification uses the <code>ed25519-dalek</code> crate; trusted public keys are listed in <code>~/.config/stack-composer/trusted_keys.toml</code>.</li>
+<li>Plugins without valid signatures are rejected by default.</li>
+<li>Security thresholds: CVSS ≥ 7.0 blocks plugin install; non-OSI/GPL licenses are blocked.</li>
+</ul>
+<hr />
+<h2 id="telemetry--privacy"><a class="header" href="#telemetry--privacy">Telemetry &amp; Privacy</a></h2>
+<ul>
+<li>Telemetry is <strong>opt-in</strong> by default. Enable via config or CLI flag.</li>
+<li>Collected fields: hashed project ID, feature flag counts, duration stats (no source text or PII).</li>
+<li>Example log line:</li>
+</ul>
+<pre><code class="language-json">{
   "project_id": "abc123...",
   "feature_flags": { "planner": true },
   "duration_ms": 1234,
   "timestamp": "2025-06-20T12:34:56Z"
 }
 </code></pre>
-              <ul>
-                <li>Retention: Local JSON files are kept for 30 days unless manually purged.</li>
-                <li>Upload: Only on user action (GUI button or CLI flag).</li>
-              </ul>
-              <hr />
-              <h2 id="vulnerability-reporting">
-                <a class="header" href="#vulnerability-reporting">Vulnerability Reporting</a>
-              </h2>
-              <ul>
-                <li>
-                  Please report security issues via GitHub Issues or the contact method in
-                  <a href="../../contributing/contributing.html">CONTRIBUTING.md</a>.
-                </li>
-                <li>Triage: Acknowledge within 24h, assess CVSS, and prioritize patches.</li>
-                <li>Patch timeline: Critical issues patched within 7 days; others as scheduled.</li>
-                <li>
-                  Disclosure: Coordinated with reporter; public advisories for high/critical issues.
-                </li>
-              </ul>
-              <hr />
-              <h2 id="gdpr--compliance">
-                <a class="header" href="#gdpr--compliance">GDPR &amp; Compliance</a>
-              </h2>
-              <ul>
-                <li>No PII is collected by default; telemetry is anonymized and opt-in.</li>
-                <li>Data storage: All telemetry/logs are local unless user uploads.</li>
-                <li>Deletion: Users can purge all local data via GUI or CLI.</li>
-                <li>
-                  Compliance: GDPR mode disables telemetry and purges temp data after report
-                  generation.
-                </li>
-              </ul>
-              <hr />
-              <h2 id="troubleshooting">
-                <a class="header" href="#troubleshooting">Troubleshooting</a>
-              </h2>
-              <ul>
-                <li>
-                  For security-related setup issues, see
-                  <a href="../../developer-extensibility-docs/dev-setup.html#troubleshooting"
-                    >Developer Setup</a
-                  >.
-                </li>
-              </ul>
-              <p>
-                <em
-                  >See also: <a href="../../plugin-sdk/README.html">Plugin SDK</a>,
-                  <a href="../../configuration.html">Configuration Guide</a></em
-                >
-              </p>
-            </main>
+<ul>
+<li>Retention: Local JSON files are kept for 30 days unless manually purged.</li>
+<li>Upload: Only on user action (GUI button or CLI flag).</li>
+</ul>
+<hr />
+<h2 id="vulnerability-reporting"><a class="header" href="#vulnerability-reporting">Vulnerability Reporting</a></h2>
+<ul>
+<li>Please report security issues via GitHub Issues or the contact method in <a href="../contributing/contributing.html">CONTRIBUTING.md</a>.</li>
+<li>Triage: Acknowledge within 24h, assess CVSS, and prioritize patches.</li>
+<li>Patch timeline: Critical issues patched within 7 days; others as scheduled.</li>
+<li>Disclosure: Coordinated with reporter; public advisories for high/critical issues.</li>
+</ul>
+<hr />
+<h2 id="gdpr--compliance"><a class="header" href="#gdpr--compliance">GDPR &amp; Compliance</a></h2>
+<ul>
+<li>No PII is collected by default; telemetry is anonymized and opt-in.</li>
+<li>Data storage: All telemetry/logs are local unless user uploads.</li>
+<li>Deletion: Users can purge all local data via GUI or CLI.</li>
+<li>Compliance: GDPR mode disables telemetry and purges temp data after report generation.</li>
+</ul>
+<hr />
+<h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
+<ul>
+<li>For security-related setup issues, see <a href="../../developer-extensibility-docs/dev-setup.html#troubleshooting">Developer Setup</a>.</li>
+</ul>
+<p><em>See also: <a href="../extensibility/plugin-sdk.html">Plugin SDK</a>, <a href="../configuration.html">Configuration Guide</a></em></p>
 
-            <nav class="nav-wrapper" aria-label="Page navigation">
-              <!-- Mobile navigation buttons -->
-              <a
-                rel="prev"
-                href="../operations/ops-guide.html"
-                class="mobile-nav-chapters previous"
-                title="Previous chapter"
-                aria-label="Previous chapter"
-                aria-keyshortcuts="Left"
-              >
-                <i class="fa fa-angle-left"></i>
-              </a>
+                    </main>
 
-              <a
-                rel="next prefetch"
-                href="../operations/telemetry-privacy.html"
-                class="mobile-nav-chapters next"
-                title="Next chapter"
-                aria-label="Next chapter"
-                aria-keyshortcuts="Right"
-              >
-                <i class="fa fa-angle-right"></i>
-              </a>
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../operations/ops-guide.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
-              <div style="clear: both"></div>
+                            <a rel="next prefetch" href="../operations/telemetry-privacy.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../operations/ops-guide.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../operations/telemetry-privacy.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
-          </div>
+
         </div>
 
-        <nav class="nav-wide-wrapper" aria-label="Page navigation">
-          <a
-            rel="prev"
-            href="../operations/ops-guide.html"
-            class="nav-chapters previous"
-            title="Previous chapter"
-            aria-label="Previous chapter"
-            aria-keyshortcuts="Left"
-          >
-            <i class="fa fa-angle-left"></i>
-          </a>
 
-          <a
-            rel="next prefetch"
-            href="../operations/telemetry-privacy.html"
-            class="nav-chapters next"
-            title="Next chapter"
-            aria-label="Next chapter"
-            aria-keyshortcuts="Right"
-          >
-            <i class="fa fa-angle-right"></i>
-          </a>
-        </nav>
-      </div>
 
-      <script>
-        window.playground_copyable = true;
-      </script>
 
-      <script src="../elasticlunr.min.js"></script>
-      <script src="../mark.min.js"></script>
-      <script src="../searcher.js"></script>
+        <script>
+            window.playground_copyable = true;
+        </script>
 
-      <script src="../clipboard.min.js"></script>
-      <script src="../highlight.js"></script>
-      <script src="../book.js"></script>
 
-      <!-- Custom JS scripts -->
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
     </div>
-  </body>
+    </body>
 </html>

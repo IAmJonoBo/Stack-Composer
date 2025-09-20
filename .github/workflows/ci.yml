@@ -84,6 +84,7 @@ jobs:
             cargo install mdbook
           fi
       - name: Run Trunk code quality checks
+        if: ${{ matrix.os == 'ubuntu-22.04' }}
         run: trunk check --all --no-progress
       - name: Log Fast Downward SHA-256
         run: |
@@ -231,11 +232,13 @@ jobs:
         run: |
           cargo test --workspace --all-targets
       - name: Lint docs
+        if: ${{ matrix.os == 'ubuntu-22.04' }}
         run: |
           cd docs
           mdbook build
           mdbook test
       - name: Run Axe-core accessibility check
+        if: ${{ matrix.os == 'ubuntu-22.04' }}
         run: |
           if [ -d "stack-ui/dist" ]; then
             npx axe-core-cli stack-ui/dist --exit
@@ -244,11 +247,13 @@ jobs:
             exit 1
           fi
       - name: Run dep-scan
+        if: ${{ matrix.os == 'ubuntu-22.04' }}
         run: |
           npx dep-scan --src . \
             --report-format sarif \
             --fail-on-severity HIGH,CRITICAL
       - name: Run cargo-deny
+        if: ${{ matrix.os == 'ubuntu-22.04' }}
         run: |
           cargo \
             deny \

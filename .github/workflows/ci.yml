@@ -44,6 +44,9 @@ jobs:
           key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-
+      - name: Install workspace dependencies (root)
+        run: |
+          pnpm install --frozen-lockfile
       - name: Install Trunk CLI
         run: |
           curl -fsSL https://get.trunk.io -o install-trunk.sh

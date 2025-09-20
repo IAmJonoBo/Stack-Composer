@@ -1,6 +1,7 @@
 {
 	"files": {
 		"ignore": [
+			".changeset/config.json",
 			"**/node_modules/**",
 			"**/dist/**",
 			"**/build/**",

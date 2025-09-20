@@ -1,7 +1,13 @@
-# Ignore all files for Vale except markdown
+---
+# Ignore all files for Vale except markdown; scope other linters to reduce overlap
 linters:
   - name: vale
     ignore:
       - '**'
       - '!**/*.md'
       - '!**/*.markdown'
+  - name: stylelint
+    ignore:
+      - '**/*.min.css'
+      - 'book/**'
+      - 'docs/book/**'

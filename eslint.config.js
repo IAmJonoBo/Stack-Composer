@@ -60,9 +60,10 @@ export default [
 			},
 		},
 	},
-	// Node config files (CommonJS, not TypeScript)
+	// Node scripts and config files
 	{
 		files: [
+			"scripts/**/*.js",
 			"tailwind.config.js",
 			"stack-ui/tailwind.config.js",
 			"vite.config.js",
@@ -72,8 +73,15 @@ export default [
 		],
 		languageOptions: {
 			ecmaVersion: "latest",
-			sourceType: "script",
-			globals: { module: "readonly", require: "readonly" },
+			sourceType: "module",
+			globals: { 
+				module: "readonly", 
+				require: "readonly",
+				console: "readonly",
+				process: "readonly",
+				__dirname: "readonly",
+				__filename: "readonly"
+			},
 		},
 		rules: {},
 	},

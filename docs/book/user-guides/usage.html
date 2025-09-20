@@ -1,640 +1,360 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html lang="en" class="light sidebar-visible" dir="ltr">
-  <head>
-    <!-- Book generated using mdBook -->
-    <meta charset="UTF-8" />
-    <title>Usage</title>
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Usage</title>
 
-    <!-- Custom HTML head -->
 
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#ffffff" />
+        <!-- Custom HTML head -->
 
-    <link rel="icon" href="../favicon.svg" />
-    <link rel="shortcut icon" href="../favicon.png" />
-    <link rel="stylesheet" href="../css/variables.css" />
-    <link rel="stylesheet" href="../css/general.css" />
-    <link rel="stylesheet" href="../css/chrome.css" />
-    <link rel="stylesheet" href="../css/print.css" media="print" />
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="../fonts/fonts.css" />
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
-    <!-- Highlight.js Stylesheets -->
-    <link rel="stylesheet" id="highlight-css" href="../highlight.css" />
-    <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css" />
-    <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css" />
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
-    <!-- Custom theme stylesheets -->
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
-    <!-- Provide site root and default themes to javascript -->
-    <script>
-      const path_to_root = '../';
-      const default_light_theme = 'light';
-      const default_dark_theme = 'navy';
-    </script>
-    <!-- Start loading toc.js asap -->
-    <script src="../toc.js"></script>
-  </head>
-  <body>
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
     <div id="mdbook-help-container">
-      <div id="mdbook-help-popup">
-        <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
-        <div>
-          <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
-          <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
-          <p>Press <kbd>?</kbd> to show this help</p>
-          <p>Press <kbd>Esc</kbd> to hide this help</p>
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
         </div>
-      </div>
     </div>
     <div id="body-container">
-      <!-- Work around some values being stored in localStorage wrapped in quotes -->
-      <script>
-        try {
-          let theme = localStorage.getItem('mdbook-theme');
-          let sidebar = localStorage.getItem('mdbook-sidebar');
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
-          if (theme.startsWith('"') && theme.endsWith('"')) {
-            localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
-          }
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
 
-          if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
-            localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
-          }
-        } catch (e) {}
-      </script>
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
 
-      <!-- Set the theme before any content is loaded, prevents flash -->
-      <script>
-        const default_theme = window.matchMedia('(prefers-color-scheme: dark)').matches
-          ? default_dark_theme
-          : default_light_theme;
-        let theme;
-        try {
-          theme = localStorage.getItem('mdbook-theme');
-        } catch (e) {}
-        if (theme === null || theme === undefined) {
-          theme = default_theme;
-        }
-        const html = document.documentElement;
-        html.classList.remove('light');
-        html.classList.add(theme);
-        html.classList.add('js');
-      </script>
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
 
-      <input type="checkbox" id="sidebar-toggle-anchor" class="hidden" />
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
-      <!-- Hide / unhide sidebar before it is displayed -->
-      <script>
-        let sidebar = null;
-        const sidebar_toggle = document.getElementById('sidebar-toggle-anchor');
-        if (document.body.clientWidth >= 1080) {
-          try {
-            sidebar = localStorage.getItem('mdbook-sidebar');
-          } catch (e) {}
-          sidebar = sidebar || 'visible';
-        } else {
-          sidebar = 'hidden';
-        }
-        sidebar_toggle.checked = sidebar === 'visible';
-        html.classList.remove('sidebar-visible');
-        html.classList.add('sidebar-' + sidebar);
-      </script>
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
 
-      <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-        <!-- populated by js -->
-        <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
-        <noscript>
-          <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
-        </noscript>
-        <div id="sidebar-resize-handle" class="sidebar-resize-handle">
-          <div class="sidebar-resize-indicator"></div>
-        </div>
-      </nav>
-
-      <div id="page-wrapper" class="page-wrapper">
-        <div class="page">
-          <div id="menu-bar-hover-placeholder"></div>
-          <div id="menu-bar" class="menu-bar sticky">
-            <div class="left-buttons">
-              <label
-                id="sidebar-toggle"
-                class="icon-button"
-                for="sidebar-toggle-anchor"
-                title="Toggle Table of Contents"
-                aria-label="Toggle Table of Contents"
-                aria-controls="sidebar"
-              >
-                <i class="fa fa-bars"></i>
-              </label>
-              <button
-                id="theme-toggle"
-                class="icon-button"
-                type="button"
-                title="Change theme"
-                aria-label="Change theme"
-                aria-haspopup="true"
-                aria-expanded="false"
-                aria-controls="theme-list"
-              >
-                <i class="fa fa-paint-brush"></i>
-              </button>
-              <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                <li role="none">
-                  <button role="menuitem" class="theme" id="default_theme">Auto</button>
-                </li>
-                <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
-              </ul>
-              <button
-                id="search-toggle"
-                class="icon-button"
-                type="button"
-                title="Search (`/`)"
-                aria-label="Toggle Searchbar"
-                aria-expanded="false"
-                aria-keyshortcuts="/ s"
-                aria-controls="searchbar"
-              >
-                <i class="fa fa-search"></i>
-              </button>
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
             </div>
-
-            <h1 class="menu-title"></h1>
-
-            <div class="right-buttons">
-              <a href="../print.html" title="Print this book" aria-label="Print this book">
-                <i id="print-button" class="fa fa-print"></i>
-              </a>
-            </div>
-          </div>
-
-          <div id="search-wrapper" class="hidden">
-            <form id="searchbar-outer" class="searchbar-outer">
-              <input
-                type="search"
-                id="searchbar"
-                name="searchbar"
-                placeholder="Search this book ..."
-                aria-controls="searchresults-outer"
-                aria-describedby="searchresults-header"
-              />
-            </form>
-            <div id="searchresults-outer" class="searchresults-outer hidden">
-              <div id="searchresults-header" class="searchresults-header"></div>
-              <ul id="searchresults"></ul>
-            </div>
-          </div>
-
-          <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-          <script>
-            document
-              .getElementById('sidebar-toggle')
-              .setAttribute('aria-expanded', sidebar === 'visible');
-            document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-            Array.from(document.querySelectorAll('#sidebar a')).forEach(function (link) {
-              link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
-            });
-          </script>
-
-          <div id="content" class="content">
-            <main>
-              <h1 id="usage-guide"><a class="header" href="#usage-guide">Usage Guide</a></h1>
-              <p>
-                <em>Last updated · 2025‑06‑20</em><br />
-                This guide walks you, click‑by‑click — and key‑stroke‑by‑keystroke — through the
-                full <strong>Stack Composer</strong> experience: from opening the application to
-                exporting a production‑ready repository. It covers every wizard screen, modal,
-                shortcut and status badge so you can move from <em>idea to initial commit</em> in
-                minutes.
-              </p>
-              <hr />
-              <h2 id="0--before-you-start">
-                <a class="header" href="#0--before-you-start">0 · Before you start</a>
-              </h2>
-              <div class="table-wrapper">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Requirement</th>
-                      <th>Notes</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Project brief</td>
-                      <td>PDF, DOCX, Markdown or plaintext.</td>
-                    </tr>
-                    <tr>
-                      <td>Free disk</td>
-                      <td>2 GB for binaries + 2 GB for the default 4‑bit model.</td>
-                    </tr>
-                    <tr>
-                      <td>Ollama model</td>
-                      <td>
-                        The wizard will download <code>phi‑3:4b</code> at first run if not present.
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Accessibility</td>
-                      <td>
-                        Every control is keyboard‑navigable; press <kbd>Alt+K</kbd> anywhere to
-                        display the shortcut legend.
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <hr />
-              <h2 id="1--launch--home-screen">
-                <a class="header" href="#1--launch--home-screen">1 · Launch &amp; Home Screen</a>
-              </h2>
-              <pre><code class="language-text">⌘ Space → “Stack Composer” ↵
-</code></pre>
-              <ul>
-                <li>
-                  <strong>Resume banner</strong> appears if an incomplete session JSON is found.
-                </li>
-                <li>
-                  <strong>New Project</strong> button opens the Hybrid Wizard (also <kbd>N</kbd>).
-                </li>
-              </ul>
-              <hr />
-              <h2 id="2--hybrid-wizard-walkthrough">
-                <a class="header" href="#2--hybrid-wizard-walkthrough"
-                  >2 · Hybrid Wizard Walk‑through</a
-                >
-              </h2>
-              <div class="table-wrapper">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Step</th>
-                      <th>Pane</th>
-                      <th>What happens</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><strong>Brief Upload</strong></td>
-                      <td>Left: drag‑and‑drop zone • Right: real‑time text extractor preview</td>
-                      <td>Parser detects type, shows page/word count, accessibility tags.</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Clarify Requirements</strong></td>
-                      <td>Chat panel with LLM + structured form fields</td>
-                      <td>
-                        Gaps auto‑detected; pressing <kbd>↵</kbd> submits, <kbd>Esc</kbd> skips.
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><strong>Stack Choices</strong></td>
-                      <td>
-                        Tree view (React Arborist) of languages &amp; frameworks; Graph view toggle
-                        (React Flow + Dagre)
-                      </td>
-                      <td>
-                        Choosing a node auto‑filters incompatible children; hover shows licence.
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><strong>Plan Preview</strong></td>
-                      <td>Timeline table + optional Gantt chart if OPTIC used</td>
-                      <td>Duration estimates, cost roll‑up and risk score pill.</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Plugins</strong></td>
-                      <td>Signed plugin marketplace with search • details modal</td>
-                      <td>Installing prompts signature check; capability grants listed.</td>
-                    </tr>
-                    <tr>
-                      <td><strong>Review &amp; Generate</strong></td>
-                      <td>Summary accordion + diff viewer for default scaffold</td>
-                      <td>“Why?” tool‑tips next to each choice; click to show LLM rationale.</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <h3 id="21-decision-timeline">
-                <a class="header" href="#21-decision-timeline">2.1 Decision Timeline</a>
-              </h3>
-              <p>
-                A collapsible sidebar records every choice (time‑stamp + diff hash). Use
-                <kbd>Ctrl + Z</kbd> / <kbd>Ctrl + Shift + Z</kbd> to undo/redo; hover over an entry
-                to jump back.
-              </p>
-              <h3 id="22-conflictdetection-modal">
-                <a class="header" href="#22-conflictdetection-modal"
-                  >2.2 Conflict‑Detection Modal</a
-                >
-              </h3>
-              <p>
-                If you pick mutually exclusive options (e.g., <strong>GPL‑3 framework</strong> with
-                <strong>permissive licence only</strong>):
-              </p>
-              <ul>
-                <li>Modal explains conflict in plain language.</li>
-                <li>
-                  “Are you sure?” button requires typing <strong>override</strong> to proceed.
-                </li>
-              </ul>
-              <hr />
-              <h2 id="3--generation--output">
-                <a class="header" href="#3--generation--output">3 · Generation &amp; Output</a>
-              </h2>
-              <ol>
-                <li>
-                  <p>
-                    Spinner shows <strong>Hybrid RAG</strong> + <strong>Planner</strong> progress,
-                    each with p50 latency.
-                  </p>
-                </li>
-                <li>
-                  <p>Upon success you can:</p>
-                  <div class="table-wrapper">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Action</th>
-                          <th>Shortcut</th>
-                          <th>Result</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td><strong>Open Repo</strong></td>
-                          <td><kbd>O</kbd></td>
-                          <td>Opens scaffold in your default editor.</td>
-                        </tr>
-                        <tr>
-                          <td><strong>Export Zip</strong></td>
-                          <td><kbd>Z</kbd></td>
-                          <td>Saves starter repo (<code>stack‑composer‑scaffold.zip</code>).</td>
-                        </tr>
-                        <tr>
-                          <td><strong>Copy JSON</strong></td>
-                          <td><kbd>C</kbd></td>
-                          <td>Puts tech‑stack report on clipboard.</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </li>
-                <li>
-                  <p>
-                    A toast asks if you want to <strong>purge telemetry</strong> from the previous
-                    run.
-                  </p>
-                </li>
-              </ol>
-              <hr />
-              <h2 id="4--import--modernise-existing-repo">
-                <a class="header" href="#4--import--modernise-existing-repo"
-                  >4 · Import &amp; Modernise Existing Repo</a
-                >
-              </h2>
-              <ul>
-                <li>Home Screen → <strong>Import Repository</strong> → choose folder.</li>
-                <li>Static analyser runs ESLint, Clippy, dep‑scan; surfaces debt dashboard.</li>
-                <li>
-                  “Auto‑Refactor” checkbox rewrites outdated patterns in‑place; a Git commit is
-                  created so you can review.
-                </li>
-              </ul>
-              <hr />
-              <h2 id="5--keyboard-shortcuts-cheatsheet">
-                <a class="header" href="#5--keyboard-shortcuts-cheatsheet"
-                  >5 · Keyboard Shortcuts Cheat‑Sheet</a
-                >
-              </h2>
-              <div class="table-wrapper">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Global</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><kbd>Alt + K</kbd></td>
-                      <td>Show keyboard help</td>
-                    </tr>
-                    <tr>
-                      <td><kbd>Ctrl + P</kbd></td>
-                      <td>Command palette</td>
-                    </tr>
-                    <tr>
-                      <td><kbd>Ctrl + S</kbd></td>
-                      <td>Save session</td>
-                    </tr>
-                    <tr>
-                      <td><kbd>Ctrl + Shift + L</kbd></td>
-                      <td>Toggle light/dark theme</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="table-wrapper">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Wizard</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><kbd>Tab</kbd>/<kbd>Shift + Tab</kbd></td>
-                      <td>Next/prev input</td>
-                    </tr>
-                    <tr>
-                      <td><kbd>Esc</kbd></td>
-                      <td>Dismiss modal</td>
-                    </tr>
-                    <tr>
-                      <td><kbd>⌘ + ←</kbd>/<kbd>⌘ + →</kbd></td>
-                      <td>Prev/next wizard step</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <hr />
-              <h2 id="6--plugin-management">
-                <a class="header" href="#6--plugin-management">6 · Plugin Management</a>
-              </h2>
-              <ul>
-                <li>
-                  <strong>Settings ▸ Plugins</strong> lists installed bundles; red shield =
-                  signature fail.
-                </li>
-                <li>
-                  Click <strong>Add Plugin</strong> → file picker; <code>.wasm</code> +
-                  <code>.sig</code> files copied to plugin dir.
-                </li>
-                <li>Toggle capabilities (retrieval, llm, network) per plugin.</li>
-              </ul>
-              <hr />
-              <h2 id="7--model-detection--selection">
-                <a class="header" href="#7--model-detection--selection"
-                  >7 · Model Detection &amp; Selection</a
-                >
-              </h2>
-              <p>On <strong>Settings ▸ LLMs</strong> the app probes, in order:</p>
-              <ol>
-                <li>vLLM (<code>localhost:8000</code>)</li>
-                <li>LM Studio (<code>localhost:1234</code>)</li>
-                <li>HF TGI (<code>localhost:8080</code>)</li>
-                <li>Ollama (<code>localhost:11434</code>)</li>
-              </ol>
-              <p>
-                Detected runtimes appear as radio buttons; select and test with the “Ping” button.
-                If none found, an <strong>Install Ollama</strong> prompt appears (shell installer).
-              </p>
-              <hr />
-              <h2 id="8--session--telemetry">
-                <a class="header" href="#8--session--telemetry">8 · Session &amp; Telemetry</a>
-              </h2>
-              <ul>
-                <li>
-                  Sessions auto‑save every 60 s to<br />
-                  <code>~/Library/Application Support/Stack Composer/sessions/*.json</code> (or
-                  <code>$XDG_DATA_HOME</code> on Linux).
-                </li>
-                <li>
-                  Telemetry JSON chunks stored for 30 days; purge with
-                  <strong>Settings ▸ Privacy ▸ Delete Telemetry</strong>.
-                </li>
-              </ul>
-              <hr />
-              <h2 id="9--troubleshooting-highlights">
-                <a class="header" href="#9--troubleshooting-highlights"
-                  >9 · Troubleshooting Highlights</a
-                >
-              </h2>
-              <div class="table-wrapper">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Symptom</th>
-                      <th>Quick Fix</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>“Ollama server not reachable”</td>
-                      <td>Run <code>ollama serve</code> or change port in Settings.</td>
-                    </tr>
-                    <tr>
-                      <td>Planner timeout</td>
-                      <td>Increase limit (<code>Settings ▸ Planner ▸ Timeout</code>).</td>
-                    </tr>
-                    <tr>
-                      <td>Plugin quarantine</td>
-                      <td>Check <code>.sig</code> and trusted keys list.</td>
-                    </tr>
-                    <tr>
-                      <td>High memory</td>
-                      <td>Switch to 4‑bit model or disable RL‑Critic.</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <p>More in <a href="../troubleshooting.html">Troubleshooting</a>.</p>
-              <hr />
-              <h2 id="10--next-steps">
-                <a class="header" href="#10--next-steps">10 · Next Steps</a>
-              </h2>
-              <ul>
-                <li>
-                  Dive into <a href="configuration.html">Configuration</a> to tweak embeddings,
-                  chunk size and planner aliases.
-                </li>
-                <li>
-                  Write your first extension with the
-                  <a href="../plugin-sdk/README.html">Plugin SDK</a>.
-                </li>
-                <li>
-                  Join the conversation on GitHub Discussions to request features or share
-                  templates.
-                </li>
-              </ul>
-              <p>Happy composing! 🎉</p>
-            </main>
-
-            <nav class="nav-wrapper" aria-label="Page navigation">
-              <!-- Mobile navigation buttons -->
-              <a
-                rel="prev"
-                href="../user-guides/configuration.html"
-                class="mobile-nav-chapters previous"
-                title="Previous chapter"
-                aria-label="Previous chapter"
-                aria-keyshortcuts="Left"
-              >
-                <i class="fa fa-angle-left"></i>
-              </a>
-
-              <a
-                rel="next prefetch"
-                href="../user-guides/troubleshooting.html"
-                class="mobile-nav-chapters next"
-                title="Next chapter"
-                aria-label="Next chapter"
-                aria-keyshortcuts="Right"
-              >
-                <i class="fa fa-angle-right"></i>
-              </a>
-
-              <div style="clear: both"></div>
-            </nav>
-          </div>
-        </div>
-
-        <nav class="nav-wide-wrapper" aria-label="Page navigation">
-          <a
-            rel="prev"
-            href="../user-guides/configuration.html"
-            class="nav-chapters previous"
-            title="Previous chapter"
-            aria-label="Previous chapter"
-            aria-keyshortcuts="Left"
-          >
-            <i class="fa fa-angle-left"></i>
-          </a>
-
-          <a
-            rel="next prefetch"
-            href="../user-guides/troubleshooting.html"
-            class="nav-chapters next"
-            title="Next chapter"
-            aria-label="Next chapter"
-            aria-keyshortcuts="Right"
-          >
-            <i class="fa fa-angle-right"></i>
-          </a>
         </nav>
-      </div>
 
-      <script>
-        window.playground_copyable = true;
-      </script>
+        <div id="page-wrapper" class="page-wrapper">
 
-      <script src="../elasticlunr.min.js"></script>
-      <script src="../mark.min.js"></script>
-      <script src="../searcher.js"></script>
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
 
-      <script src="../clipboard.min.js"></script>
-      <script src="../highlight.js"></script>
-      <script src="../book.js"></script>
+                    <h1 class="menu-title"></h1>
 
-      <!-- Custom JS scripts -->
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="usage-guide"><a class="header" href="#usage-guide">Usage Guide</a></h1>
+<p><em>Last updated · 2025‑06‑20</em><br />
+This guide walks you, click‑by‑click — and key‑stroke‑by‑keystroke — through the
+full <strong>Stack Composer</strong> experience: from opening the application to exporting a
+production‑ready repository. It covers every wizard screen, modal, shortcut and
+status badge so you can move from <em>idea to initial commit</em> in minutes.</p>
+<hr />
+<h2 id="0--before-you-start"><a class="header" href="#0--before-you-start">0 · Before you start</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Requirement</th><th>Notes</th></tr></thead><tbody>
+<tr><td>Project brief</td><td>PDF, DOCX, Markdown or plaintext.</td></tr>
+<tr><td>Free disk</td><td>2 GB for binaries + 2 GB for the default 4‑bit model.</td></tr>
+<tr><td>Ollama model</td><td>The wizard will download <code>phi‑3:4b</code> at first run if not present.</td></tr>
+<tr><td>Accessibility</td><td>Every control is keyboard‑navigable; press <kbd>Alt+K</kbd> anywhere to display the shortcut legend.</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="1--launch--home-screen"><a class="header" href="#1--launch--home-screen">1 · Launch &amp; Home Screen</a></h2>
+<pre><code class="language-text">⌘ Space → “Stack Composer” ↵
+</code></pre>
+<ul>
+<li><strong>Resume banner</strong> appears if an incomplete session JSON is found.</li>
+<li><strong>New Project</strong> button opens the Hybrid Wizard (also <kbd>N</kbd>).</li>
+</ul>
+<hr />
+<h2 id="2--hybrid-wizard-walkthrough"><a class="header" href="#2--hybrid-wizard-walkthrough">2 · Hybrid Wizard Walk‑through</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Step</th><th>Pane</th><th>What happens</th></tr></thead><tbody>
+<tr><td><strong>Brief Upload</strong></td><td>Left: drag‑and‑drop zone • Right: real‑time text extractor preview</td><td>Parser detects type, shows page/word count, accessibility tags.</td></tr>
+<tr><td><strong>Clarify Requirements</strong></td><td>Chat panel with LLM + structured form fields</td><td>Gaps auto‑detected; pressing <kbd>↵</kbd> submits, <kbd>Esc</kbd> skips.</td></tr>
+<tr><td><strong>Stack Choices</strong></td><td>Tree view (React Arborist) of languages &amp; frameworks; Graph view toggle (React Flow + Dagre)</td><td>Choosing a node auto‑filters incompatible children; hover shows licence.</td></tr>
+<tr><td><strong>Plan Preview</strong></td><td>Timeline table + optional Gantt chart if OPTIC used</td><td>Duration estimates, cost roll‑up and risk score pill.</td></tr>
+<tr><td><strong>Plugins</strong></td><td>Signed plugin marketplace with search • details modal</td><td>Installing prompts signature check; capability grants listed.</td></tr>
+<tr><td><strong>Review &amp; Generate</strong></td><td>Summary accordion + diff viewer for default scaffold</td><td>“Why?” tool‑tips next to each choice; click to show LLM rationale.</td></tr>
+</tbody></table>
+</div>
+<h3 id="21-decision-timeline"><a class="header" href="#21-decision-timeline">2.1 Decision Timeline</a></h3>
+<p>A collapsible sidebar records every choice (time‑stamp + diff hash). Use
+<kbd>Ctrl + Z</kbd> / <kbd>Ctrl + Shift + Z</kbd> to undo/redo; hover over an
+entry to jump back.</p>
+<h3 id="22-conflictdetection-modal"><a class="header" href="#22-conflictdetection-modal">2.2 Conflict‑Detection Modal</a></h3>
+<p>If you pick mutually exclusive options (e.g., <strong>GPL‑3 framework</strong> with
+<strong>permissive licence only</strong>):</p>
+<ul>
+<li>Modal explains conflict in plain language.</li>
+<li>“Are you sure?” button requires typing <strong>override</strong> to proceed.</li>
+</ul>
+<hr />
+<h2 id="3--generation--output"><a class="header" href="#3--generation--output">3 · Generation &amp; Output</a></h2>
+<ol>
+<li>
+<p>Spinner shows <strong>Hybrid RAG</strong> + <strong>Planner</strong> progress, each with p50 latency.</p>
+</li>
+<li>
+<p>Upon success you can:</p>
+<div class="table-wrapper"><table><thead><tr><th>Action</th><th>Shortcut</th><th>Result</th></tr></thead><tbody>
+<tr><td><strong>Open Repo</strong></td><td><kbd>O</kbd></td><td>Opens scaffold in your default editor.</td></tr>
+<tr><td><strong>Export Zip</strong></td><td><kbd>Z</kbd></td><td>Saves starter repo (<code>stack‑composer‑scaffold.zip</code>).</td></tr>
+<tr><td><strong>Copy JSON</strong></td><td><kbd>C</kbd></td><td>Puts tech‑stack report on clipboard.</td></tr>
+</tbody></table>
+</div></li>
+<li>
+<p>A toast asks if you want to <strong>purge telemetry</strong> from the previous run.</p>
+</li>
+</ol>
+<hr />
+<h2 id="4--import--modernise-existing-repo"><a class="header" href="#4--import--modernise-existing-repo">4 · Import &amp; Modernise Existing Repo</a></h2>
+<ul>
+<li>Home Screen → <strong>Import Repository</strong> → choose folder.</li>
+<li>Static analyser runs ESLint, Clippy, dep‑scan; surfaces debt dashboard.</li>
+<li>“Auto‑Refactor” checkbox rewrites outdated patterns in‑place; a Git commit is
+created so you can review.</li>
+</ul>
+<hr />
+<h2 id="5--keyboard-shortcuts-cheatsheet"><a class="header" href="#5--keyboard-shortcuts-cheatsheet">5 · Keyboard Shortcuts Cheat‑Sheet</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Global</th><th>Action</th></tr></thead><tbody>
+<tr><td><kbd>Alt + K</kbd></td><td>Show keyboard help</td></tr>
+<tr><td><kbd>Ctrl + P</kbd></td><td>Command palette</td></tr>
+<tr><td><kbd>Ctrl + S</kbd></td><td>Save session</td></tr>
+<tr><td><kbd>Ctrl + Shift + L</kbd></td><td>Toggle light/dark theme</td></tr>
+</tbody></table>
+</div><div class="table-wrapper"><table><thead><tr><th>Wizard</th><th>Action</th></tr></thead><tbody>
+<tr><td><kbd>Tab</kbd>/<kbd>Shift + Tab</kbd></td><td>Next/prev input</td></tr>
+<tr><td><kbd>Esc</kbd></td><td>Dismiss modal</td></tr>
+<tr><td><kbd>⌘ + ←</kbd>/<kbd>⌘ + →</kbd></td><td>Prev/next wizard step</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="6--plugin-management"><a class="header" href="#6--plugin-management">6 · Plugin Management</a></h2>
+<ul>
+<li><strong>Settings ▸ Plugins</strong> lists installed bundles; red shield = signature fail.</li>
+<li>Click <strong>Add Plugin</strong> → file picker; <code>.wasm</code> + <code>.sig</code> files copied to plugin dir.</li>
+<li>Toggle capabilities (retrieval, llm, network) per plugin.</li>
+</ul>
+<hr />
+<h2 id="7--model-detection--selection"><a class="header" href="#7--model-detection--selection">7 · Model Detection &amp; Selection</a></h2>
+<p>On <strong>Settings ▸ LLMs</strong> the app probes, in order:</p>
+<ol>
+<li>vLLM (<code>localhost:8000</code>)</li>
+<li>LM Studio (<code>localhost:1234</code>)</li>
+<li>HF TGI (<code>localhost:8080</code>)</li>
+<li>Ollama (<code>localhost:11434</code>)</li>
+</ol>
+<p>Detected runtimes appear as radio buttons; select and test with the “Ping”
+button. If none found, an <strong>Install Ollama</strong> prompt appears (shell installer).</p>
+<hr />
+<h2 id="8--session--telemetry"><a class="header" href="#8--session--telemetry">8 · Session &amp; Telemetry</a></h2>
+<ul>
+<li>Sessions auto‑save every 60 s to<br />
+<code>~/Library/Application Support/Stack Composer/sessions/*.json</code> (or
+<code>$XDG_DATA_HOME</code> on Linux).</li>
+<li>Telemetry JSON chunks stored for 30 days; purge with
+<strong>Settings ▸ Privacy ▸ Delete Telemetry</strong>.</li>
+</ul>
+<hr />
+<h2 id="9--troubleshooting-highlights"><a class="header" href="#9--troubleshooting-highlights">9 · Troubleshooting Highlights</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Symptom</th><th>Quick Fix</th></tr></thead><tbody>
+<tr><td>“Ollama server not reachable”</td><td>Run <code>ollama serve</code> or change port in Settings.</td></tr>
+<tr><td>Planner timeout</td><td>Increase limit (<code>Settings ▸ Planner ▸ Timeout</code>).</td></tr>
+<tr><td>Plugin quarantine</td><td>Check <code>.sig</code> and trusted keys list.</td></tr>
+<tr><td>High memory</td><td>Switch to 4‑bit model or disable RL‑Critic.</td></tr>
+</tbody></table>
+</div>
+<p>More in <a href="troubleshooting.html">Troubleshooting</a>.</p>
+<hr />
+<h2 id="10--next-steps"><a class="header" href="#10--next-steps">10 · Next Steps</a></h2>
+<ul>
+<li>Dive into <a href="configuration.html">Configuration</a> to tweak embeddings, chunk size and planner aliases.</li>
+<li>Write your first extension with the <a href="../plugin-sdk/README.html">Plugin SDK</a>.</li>
+<li>Join the conversation on GitHub Discussions to request features or share templates.</li>
+</ul>
+<p>Happy composing! 🎉</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../user-guides/configuration.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../user-guides/troubleshooting.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../user-guides/configuration.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../user-guides/troubleshooting.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
     </div>
-  </body>
+    </body>
 </html>

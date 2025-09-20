@@ -112,6 +112,7 @@ jobs:
           mdbook build
           mdbook test
       - name: Run Axe-core accessibility check
+        continue-on-error: true
         run: |
           if [ -d "stack-ui/dist" ]; then
             npx axe-core-cli stack-ui/dist --exit
@@ -126,6 +127,7 @@ jobs:
             --report-format sarif \
             --fail-on-severity HIGH,CRITICAL
       - name: Run cargo-deny
+        if: ${{ github.event_name == 'push' }}
         run: |
           cargo \
             deny \

@@ -9,135 +9,139 @@ Stack Composer is a desktop-first Rust + Tauri app that ingests a project brief,
 ## Goals and Non-Goals
 
 - Goals
-  - Automate stack design from diverse briefs with explainability and citations.
-  - Operate offline by default; support optional online enrichment.
-  - Provide strong typing and validation across Rust↔TS boundaries.
-  - Offer an extensible, signed plugin model with capability contracts.
-  - Ship high-quality docs-as-code and reliable CI/CD gates.
+  - Automate stack design from diverse briefs with explainability, citations, and replayable plans.
+  - Operate offline by default; support optional online enrichment through signed plugins.
+  - Provide strong typing and validation across Rust↔TS boundaries with reproducible builds.
+  - Offer an extensible, capability-scoped plugin model and marketplace-ready SDK.
+  - Ship program-grade docs, telemetry, and evaluation dashboards for every feature.
 - Non-Goals (for this cycle)
-  - Safety/compliance hardening beyond basic hygiene.
-  - Deep mobile/web client parity with desktop.
+  - Safety/compliance hardening beyond baseline hygiene (tracked separately).
+  - Multi-tenant SaaS distribution; focus remains on desktop-first with optional services.
 
 ## Success Metrics (program-level)
 
-- Retrieval quality: nDCG@10 ≥ 0.75 on the seed eval set; Precision@5 ≥ 0.6; Faithfulness ≥ 0.9.
-- UX: Onboarding E2E p95 < 12s on entry laptop; keyboard navigation and reduced-motion pass.
-- CI: Cold build time improved ≥ 40% with caching; PRs annotated with trunk/linters; reproducible builds.
-- Docs: Link-check and lint zero errors on main; ADR log created and used for public API decisions.
+- Retrieval quality: nDCG@10 ≥ 0.78; Precision@5 ≥ 0.65; Faithfulness ≥ 0.92 on the seed eval set.
+- Planning fidelity: ≥ 90% of plans meet constraints; average solve time ≤ 15 s (target hardware).
+- UX: Onboarding E2E p95 < 10 s on entry laptop; WCAG 2.2 AA audit passes with <5 open findings.
+- CI/DX: Cold build time improved ≥ 50% vs. baseline with caching; reproducible build job green; `just reproduce-build` deterministic on all runners.
+- Docs/Governance: Link-check and lint 0 errors on main; ADR log updated for every API change; Architecture Council cadence maintained.
 
 ## Constraints and Principles
 
 - Local-first, free-first: all core workflows work offline with free/open tools.
-- Determinism: lockfiles, toolchain pinning, seeded tests, reproducible artifacts.
-- Docs-as-contract: specs (OpenAPI/JSON Schema), ADRs, Storybook, and mdBook stay in lockstep.
+- Determinism: lockfiles, toolchain pinning, seeded tests, reproducible artifacts, and traceable releases.
+- Docs-as-contract: specs (OpenAPI/JSON Schema), ADRs, Storybook, telemetry notes, and migration guides ship with features.
+- Evaluation-first: every intelligence change pairs with automated metrics, dashboards, and regression alarms.
 
 ## Governance and Ways of Working
 
-- RFCs via PR label `rfc` and a template; timeboxed review; accepted RFCs become ADRs.
-- ADRs: Nygard/MADR-derived template in `adr/` with index; gate public API changes.
-- Project management: GitHub Projects board (triage → ready → in-progress → review → done), WIP limits, weekly 30–45 min review.
-- Versioning and releases: Changesets + Conventional Commits; automated release notes.
+- Architecture Council meets weekly; accepted RFCs convert to ADRs with IDs referenced in PR templates.
+- Projects board automation (Now/Next/Later, Sprint, Migration views) manages flow with WIP limits.
+- Program scorecards (monthly) aggregate metrics across product, DX, docs, and community.
+- Versioning and releases: Changesets + Conventional Commits; signed artefacts with SBOM/provenance.
 
 ## Cross-Cutting Engineering Standards
 
-- Strong typing: `tauri-specta` Rust↔TS types; Zod/JSON Schema for runtime validation.
-- Quality bars: property-based tests (proptest), prompt/output snapshots (insta), micro-benchmarks (criterion).
-- CI Gate: `trunk check` + cargo/js linters; Playwright for E2E; Storybook + visual regression.
-- Documentation hygiene: markdownlint, Vale, mdbook-linkcheck; `_includes/` for reuse; no placeholders.
+- Strong typing: `tauri-specta` Rust↔TS types; Zod/JSON Schema for runtime validation; Specta-generated API docs.
+- Quality bars: property-based tests (proptest), prompt/output snapshots (insta), micro-benchmarks (criterion), resilience/nightly smoke suites.
+- CI Gate: `trunk check`, cargo/js linters, `cargo-audit`/`cargo-deny`, Playwright E2E (desktop), Storybook visual regression, evaluation harness.
+- Documentation hygiene: markdownlint, Vale, mdbook-linkcheck, docs includes, migration playbook updates, ADR references in PR template.
+- Observability defaults: OpenTelemetry spans, Prometheus metrics, dashboards linked from docs.
 
 ---
 
 ## Sprint Plan (Six Sprints, Two Weeks Each)
 
-> Assumptions: team size 2–4; sprints S-01 to S-06; dates to be set by PM. Each sprint lists objectives, deliverables, and acceptance criteria. Items marked [docs] integrate the gap-analysis actions.
+> Assumptions: team size 2–4; sprints S-01 to S-06; dates set by PM. Each sprint lists objectives, deliverables, and acceptance criteria. Items marked [docs] tie back to roadmap migration actions.
 
-### S-01 — Foundations, Governance, and DX
-
-- Objectives
-  - Establish contribution hygiene, typing across boundaries, and baseline tests.
-  - Resolve high-friction docs and navigation issues.
-- Deliverables
-  - Changesets + Conventional Commits (commitlint + PR title check); CODEOWNERS; Issue/PR templates (bug/feat/rfc).
-  - `tauri-specta` type generation wired; TS types emitted into UI.
-  - Test scaffolding: ≥3 property-based tests, ≥3 snapshot tests, ≥1 micro-benchmark in CI.
-  - Storybook bootstrapped with ≥5 core components; Playwright set up for visual regression.
-  - [docs] Remove/fill placeholders; add `_includes/`; enable markdownlint, Vale, link check.
-- Acceptance Criteria
-  - PRs show trunk/linters annotations; TS types generated automatically; Storybook runs locally.
-  - Docs CI (lint + link check) passes; no placeholder pages remain in the primary nav.
-
-### S-02 — Retrieval Precision and Evaluation
+### S-01 — Migration & Frontier Foundations
 
 - Objectives
-  - Improve answer quality with adaptive chunking, hybrid fusion tuning, and reranking.
-  - Add transparent citations and a basic evaluation harness.
+  - Pin toolchains, stand up governance rituals, and light up baseline agents/telemetry.
+  - Finish documentation/nav migration and deliver wizard skeleton + design system.
 - Deliverables
-  - Adaptive chunking + top-k window expansion; hybrid fusion scoring tweaks.
-  - ONNX reranker (e.g., bge-reranker-base) behind a feature flag.
-  - UI citations, confidence indicators, and clarifying questions loop.
-  - Eval harness (seed set 50–100 Q/A) computing nDCG@k, P/R, faithfulness; CI baseline report.
+  - `rust-toolchain.toml`, pinned pnpm/Tauri; devcontainer + Nix parity notes; `just reproduce-build` recipe and CI job.
+  - Architecture Council charter, Projects automation, CODEOWNERS ≥2 maintainers/area, PR template ADR section.
+  - Agents (ingestion, retrieval, critic, telemetry) wired to orchestrator with smoke test; `tauri-specta` type generation gating UI.
+  - Storybook bootstrapped with 5+ components; wizard flow skeleton with citations + reduced-motion support.
+  - [docs] Installation, accessibility, i18n, migration playbook, navigation cleanup.
 - Acceptance Criteria
-  - nDCG@10 ≥ 0.70 and faithfulness ≥ 0.85 on seed set; citations rendered in UI.
+  - CI enforces toolchain pins and deterministic build job; governance cadence live.
+  - Smoke test `just smoke` passes; telemetry spans visible; Storybook + Playwright jobs green.
+  - Docs lint/link zero errors; migration playbook published.
 
-### S-03 — Planning Surface and Plugin SDK v1
+### S-02 — Retrieval Intelligence & Evaluation
 
 - Objectives
-  - Expose planner constraints and enable partial plan repair.
-  - Formalize the plugin SDK capability contracts and examples.
+  - Establish retrieval evaluation harness, reranker groundwork, and telemetry dashboards.
+  - Harden onboarding flow with citations, clarifications, and instrumentation.
 - Deliverables
-  - Planner UI: temporal constraints surfaced; change-impact and partial plan repair prototype.
-  - Plugin SDK v1: capability contracts, semver’d host API, signed WASI example plugins.
-  - [docs] Plugin author guide with step-by-step and API references.
+  - Eval dataset (≥100 Q/A), nDCG/P/R dashboards, nightly harness; ONNX reranker feature flag; ontology freshness metrics.
+  - Wizard clarifying question loop, trust indicators, and instrumentation to telemetry.
+  - [docs] Evaluation guide, dashboard handbook, telemetry operations doc.
 - Acceptance Criteria
-  - Demonstrable plan repair on changed requirements; two example plugins pass capability checks.
+  - nDCG@10 ≥ 0.70, faithfulness ≥ 0.88; dashboards published; alerts configured.
+  - Wizard instrumentation captured in telemetry; UX acceptance (keyboard/axe) passes.
 
-### S-04 — Onboarding Flow, A11y, and E2E
+### S-03 — Planner Surface & Plugin SDK v1
 
 - Objectives
-  - Ship a polished “Import brief → Clarify → Preview → Export” flow with accessibility.
-  - Add Tauri E2E and stabilize visual diffs.
+  - Deliver partial plan repair, temporal constraint surfacing, and marketplace-ready plugin SDK.
 - Deliverables
-  - Onboarding wizard with progress indicators; rationale tooltips; “what-if” side panel basics.
-  - A11y improvements to target WCAG 2.2 AA; keyboard navigability; reduced-motion mode.
-  - Playwright + `@tauri-apps/cli` E2E tests; golden screenshot baselines.
+  - Planner adapter diff/repair workflow, plan timeline UI, constraint violation reporting.
+  - Plugin SDK v1: capability manifest, signing CLI, two example WASI plugins, staging marketplace catalogue.
+  - [docs] Planner integration narrative, plugin author guide, SDK reference + ADR.
 - Acceptance Criteria
-  - E2E suite green locally and in CI; onboarding p95 < 12s on entry laptop; key A11y checks pass.
+  - Plan repair demo with diff view; plan solve SLA met; plugins pass capability checks and run end-to-end.
 
-### S-05 — CI/CD Scale and Performance
+### S-04 — Experience, Copilot, and Auditability
 
 - Objectives
-  - Harden CI for scale, reproducibility, and performance transparency.
+  - Launch stack explorer, rationale diffing, and copilot interactions; achieve WCAG 2.2 AA audit.
 - Deliverables
-  - Split CI into reusable workflows; artifactable Tauri build; SBOM/provenance generation.
-  - Devcontainers (or Nix shell) for env parity; task graph viz for Just tasks.
-  - Performance budget tracking (cold-start, interaction latency) with historical trends.
+  - Stack explorer with cost/risk sliders, citation drill-down, bookmarking; copilot inline prompts.
+  - External accessibility audit + remediation log; Playwright regression across locales.
+  - [docs] A11y audit report, explorer usage guide, copilot FAQ.
 - Acceptance Criteria
-  - Cold build improved ≥ 40% vs. baseline with caching; reproducible build job shows no-diff results.
+  - Audit passes (≤5 findings, all tracked); explorer + copilot features green in E2E; telemetry captures usage metrics.
 
-### S-06 — Graph-Augmented and Advanced Retrieval
+### S-05 — CI/CD Scale, Resilience, and Release Automation
 
 - Objectives
-  - Elevate retrieval beyond hybrid fusion with graph augmentation and late-interaction.
+  - Harden pipelines, add resilience testing, and deliver signed releases with SBOM/provenance.
 - Deliverables
-  - GraphRAG augmentation pipeline for ontology/knowledge graphs.
-  - Optional late-interaction or ColBERT-like re-scoring; domain template packs for common verticals.
-  - [docs] Scenario planning/playground guide; domain templates documentation.
+  - Split CI workflows, selective test runs, flaky detector, chaos/resilience suite, `just smoke` nightly.
+  - Release automation: signed artefacts, provenance, reproducible build verification, release notes pipeline.
+  - [docs] Release runbook, resilience playbook, CI architecture diagram.
 - Acceptance Criteria
-  - nDCG@10 ≥ 0.75 and Precision@5 ≥ 0.60 on seed set; latency budgets respected on entry hardware.
+  - CI time improved ≥ 40%; resilience suite green; release job produces signed artefacts + SBOM; docs updated.
+
+### S-06 — Graph-Augmented Intelligence & Automation
+
+- Objectives
+  - Elevate retrieval/planning with GraphRAG, adaptive models, and autonomous remediation loops.
+- Deliverables
+  - GraphRAG pipeline, knowledge graph enrichment, reranker integration; adaptive model adapters (local/remote).
+  - Autonomous remediation (planner + critic) with human-in-the-loop controls; scenario planning playground (beta).
+  - [docs] GraphRAG architecture, remediation SOP, scenario playground guide.
+- Acceptance Criteria
+  - nDCG@10 ≥ 0.78; plan remediation success ≥ 80%; playground beta telemetry meets engagement targets.
 
 ---
 
 ## Backlog Epics (Post S-06)
 
-- Collaborative reviews (per-requirement comments), scenario comparison with cost/risk sliders.
-- Model/runtime adapters with evaluation plateaus; flaky test quarantine and test-impact analysis.
-- Performance CI deep-dive and reproducible environment verification across platforms.
+- Federated orchestrators and multi-tenant control plane.
+- Plugin marketplace GA with revenue share, automated trust scoring, and security reports.
+- Enterprise features: RBAC, audit trails, licence bundles, policy engine.
+- Autonomic ops: predictive scaling, anomaly detection, AI-assisted debugging.
 
 ## Dependencies and Risks
 
-- External binaries (Fast Downward) licensing and reproducibility.
-- Large-model memory pressure on low-end devices (mitigate with 4-bit defaults and warnings).
-- Plugin supply-chain risks (mitigate with signatures and Wasmtime sandboxing).
+- External solver binaries licensing/reproducibility (Fast Downward/OPTIC).
+- Large-model memory pressure on low-end devices (mitigate via 4-bit defaults, warnings).
+- Plugin supply-chain risks (mitigate with signing, capability enforcement, marketplace review).
+- Evaluation dataset drift (address via scheduled refresh, human review backlog).
 
 ## References
 
@@ -145,13 +149,14 @@ Stack Composer is a desktop-first Rust + Tauri app that ingests a project brief,
 - Gap Analysis: `docs/gap-analysis.md`
 - Task Graph: `TASK_GRAPH.md`
 - Product README: `README.md`
+- Migration Playbook: `docs/src/architecture/migration.md`
 
 ---
 
 ## How to Use This Brief
 
-- PM: assign sprint issues from each section; track in GitHub Projects; review weekly.
-- Devs: treat acceptance criteria as the definition of done; add tests/docs with every PR.
-- Docs: keep `_includes/`, ADRs, and Storybook/mdBook in sync; block merges on lint/link failures.
+- PM: convert sprint deliverables into issues linked to Projects boards; maintain scorecards.
+- Devs: treat acceptance criteria as definition of done; run `just reproduce-build` and `just smoke` before PR ready.
+- Docs: update migration playbook, Storybook, ADRs, and telemetry notes with every change.
 
 End of Brief

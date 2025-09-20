@@ -1,59 +1,64 @@
 # Roadmap
 
-This roadmap outlines planned features and milestones for Stack Composer.
+This architecture roadmap mirrors `ROADMAP.md` with a focus on system
+capabilities and long-term bets. Use it when aligning component design docs or
+preparing RFCs.
 
-## Milestones
+## Frontier Milestones
 
-| Version | Feature/Milestone                             | Target Date |
-| ------- | --------------------------------------------- | ----------- |
-| v1.1    | Planner extensibility (Fast Downward, OPTIC)  | Q3 2025     |
-| v1.2    | Distributed retrieval cluster support         | Q4 2025     |
-| v2.0    | Enterprise release (RBAC, role-based privacy) | Q2 2026     |
+| Horizon | Focus                                                        | Target Timeline |
+| ------- | ------------------------------------------------------------ | --------------- |
+| Now     | Toolchain pinning, agent baselines, wizard v1, eval harness   | Sprints S-01–S-02 |
+| Next    | Planner repair, plugin SDK v1 GA, stack explorer, resilience  | Sprints S-03–S-06 |
+| Later   | Federated orchestration, GraphRAG, marketplace GA             | Post S-06        |
 
-## Progress Tracking
+## Migration Tracker
 
-- Progress is tracked via GitHub Issues and Milestones.
-- Each roadmap item links to its corresponding issue or PR for status updates.
+| Area                 | Task                                                      | Status |
+| -------------------- | --------------------------------------------------------- | ------ |
+| Tooling              | Commit `rust-toolchain.toml`, pin pnpm/Tauri versions     | TODO   |
+| Docs                 | Migration playbook, navigation cleanup, ADR links in PRs  | In Progress |
+| Agents               | Baseline ingestion/retrieval/critic/telemetry pipelines   | TODO   |
+| Evaluation           | Harness (nDCG/P/R/faithfulness) + dashboard               | TODO   |
+| Wizard               | shadcn/Radix tokens, citations, reduced-motion support    | In Progress |
+| Telemetry            | OpenTelemetry spans + Prometheus exporter                 | TODO   |
 
-## How to Contribute
-
-- Suggest new features or vote on priorities via GitHub Discussions.
-- Major roadmap changes are discussed in community meetings and require maintainer consensus.
-
----
+Update this table as migration tasks land. It should reflect the current state
+of the main branch.
 
 ## Strategic Roadmap (2025–2026)
 
-| Area             | Short-Term (0–3 mo)           | Mid-Term (3–6 mo)                   | Long-Term (6–12 mo+)                |
-| ---------------- | ----------------------------- | ----------------------------------- | ----------------------------------- |
-| Plugin Ecosystem | Registry design, UI discovery | SDKs, samples, security enforcement | Signed plugins, marketplace         |
-| RAG Retrieval    | GraphRAG backend plugin       | Cloud vector DB, hybrid config      | Hierarchical graph retrievers       |
-| LLM Runtime      | Model download/switch UI      | vLLM/TGI adapters                   | Plugin model sources, online update |
-| Planning         | Plan UI visualization         | Cloud planner support               | In-process/DSL planners             |
-| Telemetry        | Prometheus + Grafana stack    | Cloud telemetry backend             | AI-driven alerts, BPM integration   |
-| Reporting        | GitHub/Jira export adapters   | Templates, hook scripts             | CI/CD, PM tool integration          |
-| Security         | Dependency/SBOM automation    | Secrets manager integration         | Zero-trust plugins, auditing        |
-| Distributed      | K8s blueprints                | Sharding, proxy orchestration       | Global multi-user clusters          |
-| API/Web          | REST/gRPC for CI              | Basic web UI with auth              | Full SaaS UI                        |
-
----
+| Area             | Short-Term (0–3 mo)                                           | Mid-Term (3–6 mo)                                  | Long-Term (6–12 mo+)                                   |
+| ---------------- | ------------------------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------ |
+| Plugin Ecosystem | SDK v1, signing CLI, marketplace staging                      | Marketplace GA, revenue/share models               | Community moderation, automated trust scores           |
+| Retrieval        | Eval harness, ONNX reranker, ontology freshness               | GraphRAG enrichment, latency budgets               | Hierarchical/Graph retrievers, active learning loops   |
+| Planning         | Partial repair, timeline UI, constraint diffing               | Cooperative planning (planner + critic)            | Autonomous remediation, DSL planner options            |
+| LLM Runtime      | Typed IPC, model adapters (Ollama/vLLM)                       | Adaptive model selection, evaluation plateaus      | Model marketplace, on-demand fine-tuning integrations  |
+| Telemetry        | OpenTelemetry + Prometheus baseline                           | Optional hosted telemetry backend                  | Predictive alerts, anomaly detection, AI ops copilot   |
+| Experience       | Wizard v1, stack explorer beta, copilot interactions          | Collaboration (comments, bookmarks), scenario diff | Real-time scaffold preview, modernization workflows    |
+| Release          | Deterministic builds, signed artefacts, SBOM/provenance       | Resilience suite, selective tests                  | Automated release train, downstream integrations       |
+| Distributed      | Devcontainer/Nix parity, remote retrieval adapters            | Sharded orchestrators, remote planner execution    | Federated orchestrator mesh, multi-tenant control plane|
 
 ## AI-Guided Authoring & Scaffolding
 
-Stack Composer is evolving into a fully AI-guided, end-to-end project authoring and scaffolding platform. See [ai-wizard-roadmap.md](../architecture-and-component-guides/ai-wizard-roadmap.md) for the full vision and phased implementation plan.
+Stack Composer is evolving into a fully AI-guided, end-to-end project authoring
+and scaffolding platform. See
+[ai-wizard-roadmap.md](../architecture-and-component-guides/ai-wizard-roadmap.md)
+for the detailed product vision and phased implementation plan.
 
-- Hybrid conversational-form wizard for discovery and planning
-- Interactive tech stack exploration and “what-if” analysis
-- Real-time directory tree and scaffold preview (tree/graph views)
-- Chat-based copilot, rationale tooltips, and decision history
-- Context-aware recommendations, security risk surfacing, and best practice updates
+- Hybrid conversational wizard for discovery and planning
+- Interactive stack exploration and “what-if” analysis
+- Real-time directory tree and scaffold preview (graph + timeline)
+- Copilot with rationale tooltips and decision history
+- Context-aware recommendations, risk surfacing, and best-practice updates
 - One-click project generation, export, and cloud deployment hooks
-- Template projects, import/modernization, and project history
+- Template packs, modernization flows, and project history
 
 ---
 
 **Next Steps:**
 
-- Review [Component Details](../extensibility/component-details.md)
-- See [Operations Guide](../operations-security/ops-guide.md)
+- Review [Migration Playbook](migration.md)
+- Align the [Observability stack](observability.md) with upcoming telemetry work
+- Update [Component Details](../extensibility/component-details.md)
 - Join the [Community](../contributing/README.md)

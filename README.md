@@ -137,7 +137,10 @@ export COPYFILE_DISABLE=1
 export COPY_EXTENDED_ATTRIBUTES_DISABLE=1
 ```
 
-See [macOS Build Issues](docs/MACOS_BUILD_ISSUES.md) for detailed troubleshooting.
+All contributors share the same Rust toolchain (`rust-toolchain.toml`) and pnpm
+version (`package.json#packageManager`). If builds deviate, run
+`just reproduce-build` to reset the environment. See
+[macOS Build Issues](docs/MACOS_BUILD_ISSUES.md) for detailed troubleshooting.
 
 ---
 

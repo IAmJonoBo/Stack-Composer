@@ -50,10 +50,23 @@ clean:
 book:
 	mdbook serve docs
 
+# Reproducible build check (cleans, installs, and rebuilds with locked deps)
+reproduce-build:
+	cargo clean
+	pnpm install --frozen-lockfile
+	cargo fetch --locked
+	cargo build --workspace --locked
+	pnpm build
+
+# Lightweight smoke test suite (fast validation before PRs)
+smoke:
+	cargo check --workspace
+	pnpm vitest run --runInBand
+
 # Preview the hybrid wizard UI (React Flow + Arborist demo)
 preview-wizard:
 	pnpm run preview-wizard
 
 # Default
 @default:
-	@echo "Available recipes: bootstrap, check, test, build, run, security, fmt, clean, book"
+	@echo "Available recipes: bootstrap, check, test, build, run, security, fmt, clean, book, reproduce-build, smoke"

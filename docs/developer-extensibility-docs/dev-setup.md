@@ -43,7 +43,8 @@ Stack Composer is designed for a reproducible, fast, and modern developer experi
 
 ## Editor Setup
 
-- VS Code is recommended (settings enable Copilot Chat, Vale lint-on-save, and workspace tasks)
+- VS Code is recommended (settings enable GitHub Copilot, Copilot Chat, Vale lint-on-save, and workspace tasks)
+- Extension recommendations include GitHub Copilot, Rust Analyzer, and development tools
 - Codespaces and Fleet are supported for cloud and JetBrains workflows
 
 ## Python & Conda Workflows

@@ -2,5 +2,5 @@
 // See https://ui.shadcn.com/docs/installation for details
 
 module.exports = {
-  // Add your shadcn/ui config here as needed
+	// Add your shadcn/ui config here as needed
 };

@@ -8,10 +8,10 @@ set -euo pipefail
 # - jq installed
 
 # Accept USER_LOGIN and PROJECT_NUMBER from environment or command-line arguments
-USER_LOGIN="${USER_LOGIN:-${1:-}}"
-PROJECT_NUMBER="${PROJECT_NUMBER:-${2:-}}"
+USER_LOGIN="${USER_LOGIN:-${1-}}"
+PROJECT_NUMBER="${PROJECT_NUMBER:-${2-}}"
 
-if [[ -z "${USER_LOGIN}" || -z "${PROJECT_NUMBER}" ]]; then
+if [[ -z ${USER_LOGIN} || -z ${PROJECT_NUMBER} ]]; then
   echo "Usage: USER_LOGIN=<github_user> PROJECT_NUMBER=<number> $0 [USER_LOGIN] [PROJECT_NUMBER]" >&2
   echo "Either set USER_LOGIN and PROJECT_NUMBER as environment variables, or pass them as arguments." >&2
   exit 1

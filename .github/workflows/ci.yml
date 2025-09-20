@@ -86,6 +86,10 @@ jobs:
         run: |
           cd stack-ui
           pnpm install
+      - name: Typecheck UI (TypeScript)
+        run: |
+          cd stack-ui
+          pnpm dlx typescript -p tsconfig.json --noEmit
       - name: Build UI
         run: |
           cd stack-ui

@@ -1,394 +1,269 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html lang="en" class="light sidebar-visible" dir="ltr">
-  <head>
-    <!-- Book generated using mdBook -->
-    <meta charset="UTF-8" />
-    <title>Plugin Host</title>
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Plugin Host</title>
 
-    <!-- Custom HTML head -->
 
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#ffffff" />
+        <!-- Custom HTML head -->
 
-    <link rel="icon" href="../favicon.svg" />
-    <link rel="shortcut icon" href="../favicon.png" />
-    <link rel="stylesheet" href="../css/variables.css" />
-    <link rel="stylesheet" href="../css/general.css" />
-    <link rel="stylesheet" href="../css/chrome.css" />
-    <link rel="stylesheet" href="../css/print.css" media="print" />
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="../fonts/fonts.css" />
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
-    <!-- Highlight.js Stylesheets -->
-    <link rel="stylesheet" id="highlight-css" href="../highlight.css" />
-    <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css" />
-    <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css" />
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
-    <!-- Custom theme stylesheets -->
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
-    <!-- Provide site root and default themes to javascript -->
-    <script>
-      const path_to_root = '../';
-      const default_light_theme = 'light';
-      const default_dark_theme = 'navy';
-    </script>
-    <!-- Start loading toc.js asap -->
-    <script src="../toc.js"></script>
-  </head>
-  <body>
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
     <div id="mdbook-help-container">
-      <div id="mdbook-help-popup">
-        <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
-        <div>
-          <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
-          <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
-          <p>Press <kbd>?</kbd> to show this help</p>
-          <p>Press <kbd>Esc</kbd> to hide this help</p>
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
         </div>
-      </div>
     </div>
     <div id="body-container">
-      <!-- Work around some values being stored in localStorage wrapped in quotes -->
-      <script>
-        try {
-          let theme = localStorage.getItem('mdbook-theme');
-          let sidebar = localStorage.getItem('mdbook-sidebar');
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
-          if (theme.startsWith('"') && theme.endsWith('"')) {
-            localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
-          }
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
 
-          if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
-            localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
-          }
-        } catch (e) {}
-      </script>
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
 
-      <!-- Set the theme before any content is loaded, prevents flash -->
-      <script>
-        const default_theme = window.matchMedia('(prefers-color-scheme: dark)').matches
-          ? default_dark_theme
-          : default_light_theme;
-        let theme;
-        try {
-          theme = localStorage.getItem('mdbook-theme');
-        } catch (e) {}
-        if (theme === null || theme === undefined) {
-          theme = default_theme;
-        }
-        const html = document.documentElement;
-        html.classList.remove('light');
-        html.classList.add(theme);
-        html.classList.add('js');
-      </script>
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
 
-      <input type="checkbox" id="sidebar-toggle-anchor" class="hidden" />
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
-      <!-- Hide / unhide sidebar before it is displayed -->
-      <script>
-        let sidebar = null;
-        const sidebar_toggle = document.getElementById('sidebar-toggle-anchor');
-        if (document.body.clientWidth >= 1080) {
-          try {
-            sidebar = localStorage.getItem('mdbook-sidebar');
-          } catch (e) {}
-          sidebar = sidebar || 'visible';
-        } else {
-          sidebar = 'hidden';
-        }
-        sidebar_toggle.checked = sidebar === 'visible';
-        html.classList.remove('sidebar-visible');
-        html.classList.add('sidebar-' + sidebar);
-      </script>
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
 
-      <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-        <!-- populated by js -->
-        <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
-        <noscript>
-          <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
-        </noscript>
-        <div id="sidebar-resize-handle" class="sidebar-resize-handle">
-          <div class="sidebar-resize-indicator"></div>
-        </div>
-      </nav>
-
-      <div id="page-wrapper" class="page-wrapper">
-        <div class="page">
-          <div id="menu-bar-hover-placeholder"></div>
-          <div id="menu-bar" class="menu-bar sticky">
-            <div class="left-buttons">
-              <label
-                id="sidebar-toggle"
-                class="icon-button"
-                for="sidebar-toggle-anchor"
-                title="Toggle Table of Contents"
-                aria-label="Toggle Table of Contents"
-                aria-controls="sidebar"
-              >
-                <i class="fa fa-bars"></i>
-              </label>
-              <button
-                id="theme-toggle"
-                class="icon-button"
-                type="button"
-                title="Change theme"
-                aria-label="Change theme"
-                aria-haspopup="true"
-                aria-expanded="false"
-                aria-controls="theme-list"
-              >
-                <i class="fa fa-paint-brush"></i>
-              </button>
-              <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                <li role="none">
-                  <button role="menuitem" class="theme" id="default_theme">Auto</button>
-                </li>
-                <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
-              </ul>
-              <button
-                id="search-toggle"
-                class="icon-button"
-                type="button"
-                title="Search (`/`)"
-                aria-label="Toggle Searchbar"
-                aria-expanded="false"
-                aria-keyshortcuts="/ s"
-                aria-controls="searchbar"
-              >
-                <i class="fa fa-search"></i>
-              </button>
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
             </div>
+        </nav>
 
-            <h1 class="menu-title"></h1>
+        <div id="page-wrapper" class="page-wrapper">
 
-            <div class="right-buttons">
-              <a href="../print.html" title="Print this book" aria-label="Print this book">
-                <i id="print-button" class="fa fa-print"></i>
-              </a>
-            </div>
-          </div>
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
 
-          <div id="search-wrapper" class="hidden">
-            <form id="searchbar-outer" class="searchbar-outer">
-              <input
-                type="search"
-                id="searchbar"
-                name="searchbar"
-                placeholder="Search this book ..."
-                aria-controls="searchresults-outer"
-                aria-describedby="searchresults-header"
-              />
-            </form>
-            <div id="searchresults-outer" class="searchresults-outer hidden">
-              <div id="searchresults-header" class="searchresults-header"></div>
-              <ul id="searchresults"></ul>
-            </div>
-          </div>
+                    <h1 class="menu-title"></h1>
 
-          <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-          <script>
-            document
-              .getElementById('sidebar-toggle')
-              .setAttribute('aria-expanded', sidebar === 'visible');
-            document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-            Array.from(document.querySelectorAll('#sidebar a')).forEach(function (link) {
-              link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
-            });
-          </script>
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
 
-          <div id="content" class="content">
-            <main>
-              <blockquote>
-                <p><em>Status: Draft — last updated 2025‑06‑20</em></p>
-              </blockquote>
-              <h1 id="wasi-plugin-host">
-                <a class="header" href="#wasi-plugin-host">WASI Plugin Host</a>
-              </h1>
-              <h2 id="responsibilities">
-                <a class="header" href="#responsibilities">Responsibilities</a>
-              </h2>
-              <ul>
-                <li>Host and manage WASI plugins</li>
-                <li>Enforce capability tokens and sandboxing</li>
-                <li>Provide host functions for plugin interaction</li>
-                <li>Verify plugin signatures (Ed25519)</li>
-                <li>Enforce per-plugin permissions (filesystem/network)</li>
-              </ul>
-              <h2 id="public-apis"><a class="header" href="#public-apis">Public APIs</a></h2>
-              <ul>
-                <li><code>load_plugin(path: str)</code></li>
-                <li><code>call_plugin(func: str, args: List)</code></li>
-              </ul>
-              <h2 id="extension-hooks">
-                <a class="header" href="#extension-hooks">Extension Hooks</a>
-              </h2>
-              <ul>
-                <li>Support for new plugin types (REST, gRPC, future adapters)</li>
-                <li>Custom host functions</li>
-              </ul>
-              <h2 id="roadmap--enhancements">
-                <a class="header" href="#roadmap--enhancements">Roadmap &amp; Enhancements</a>
-              </h2>
-              <ul>
-                <li>OCI-based plugin registry</li>
-                <li>In-app plugin discovery UI</li>
-                <li>Security templates &amp; SDKs for plugin authoring</li>
-                <li>Sample plugins with docs and best practices</li>
-                <li>Registry/discovery UI for plugin management</li>
-              </ul>
-              <h2 id="open-questions">
-                <a class="header" href="#open-questions">Open Questions</a>
-              </h2>
-              <ul>
-                <li>How to manage plugin permissions securely?</li>
-                <li>What is the best way to version plugins?</li>
-                <li>How to support new plugin transports (GraphRAG, telemetry)?</li>
-              </ul>
-              <h2 id="how-to-extendcustomize">
-                <a class="header" href="#how-to-extendcustomize">How to Extend/Customize</a>
-              </h2>
-              <ul>
-                <li>Add new host functions via the plugin API</li>
-                <li>Register new plugin types in the registry</li>
-                <li>Configure plugin permissions in the config file</li>
-              </ul>
-              <h2 id="real-world-usage-example">
-                <a class="header" href="#real-world-usage-example">Real-World Usage Example</a>
-              </h2>
-              <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <blockquote>
+<p><em>Status: Draft — last updated 2025‑06‑20</em></p>
+</blockquote>
+<h1 id="wasi-plugin-host"><a class="header" href="#wasi-plugin-host">WASI Plugin Host</a></h1>
+<h2 id="responsibilities"><a class="header" href="#responsibilities">Responsibilities</a></h2>
+<ul>
+<li>Host and manage WASI plugins</li>
+<li>Enforce capability tokens and sandboxing</li>
+<li>Provide host functions for plugin interaction</li>
+<li>Verify plugin signatures (Ed25519)</li>
+<li>Enforce per-plugin permissions (filesystem/network)</li>
+</ul>
+<h2 id="public-apis"><a class="header" href="#public-apis">Public APIs</a></h2>
+<ul>
+<li><code>load_plugin(path: str)</code></li>
+<li><code>call_plugin(func: str, args: List)</code></li>
+</ul>
+<h2 id="extension-hooks"><a class="header" href="#extension-hooks">Extension Hooks</a></h2>
+<ul>
+<li>Support for new plugin types (REST, gRPC, future adapters)</li>
+<li>Custom host functions</li>
+</ul>
+<h2 id="roadmap--enhancements"><a class="header" href="#roadmap--enhancements">Roadmap &amp; Enhancements</a></h2>
+<ul>
+<li>OCI-based plugin registry</li>
+<li>In-app plugin discovery UI</li>
+<li>Security templates &amp; SDKs for plugin authoring</li>
+<li>Sample plugins with docs and best practices</li>
+<li>Registry/discovery UI for plugin management</li>
+</ul>
+<h2 id="open-questions"><a class="header" href="#open-questions">Open Questions</a></h2>
+<ul>
+<li>How to manage plugin permissions securely?</li>
+<li>What is the best way to version plugins?</li>
+<li>How to support new plugin transports (GraphRAG, telemetry)?</li>
+</ul>
+<h2 id="how-to-extendcustomize"><a class="header" href="#how-to-extendcustomize">How to Extend/Customize</a></h2>
+<ul>
+<li>Add new host functions via the plugin API</li>
+<li>Register new plugin types in the registry</li>
+<li>Configure plugin permissions in the config file</li>
+</ul>
+<h2 id="real-world-usage-example"><a class="header" href="#real-world-usage-example">Real-World Usage Example</a></h2>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>plugin_host.load_plugin("my_plugin.wasm");
 <span class="boring">}</span></code></pre></pre>
-              <hr />
-              <ul>
-                <li>
-                  Plugins are auto-discovered from
-                  <code>~/.local/share/stack-composer/plugins/</code>.
-                </li>
-                <li>
-                  Only plugins with valid Ed25519 signatures are loaded (see
-                  <a href="../plugin-sdk/README.html">Plugin SDK</a>).
-                </li>
-                <li>
-                  Per-plugin permissions (filesystem/network) are enforced as configured (see
-                  <a href="../configuration.html">Configuration Guide</a>).
-                </li>
-              </ul>
-              <p>
-                See
-                <a href="../architecture/architecture-questions.html">architecture-questions.md</a>
-                for open questions and strategic direction.
-              </p>
-              <p>
-                <em
-                  >See also: <a href="llm-runtime.html">LLM Runtime</a>,
-                  <a href="telemetry.html">Telemetry Pipeline</a></em
-                >
-              </p>
-              <hr />
-              <p>
-                The <strong>Plugin Host</strong> lets Stack Composer load, execute and sandbox
-                untrusted extensions compiled to WebAssembly System Interface
-                (<strong>WASI</strong>). It provides an API surface that mirrors native host
-                functions (retrieval, LLM, planner, log, network) while enforcing capability‑based
-                security and signature verification.
-              </p>
-              <hr />
-              <h2 id="1-responsibilities">
-                <a class="header" href="#1-responsibilities">1 Responsibilities</a>
-              </h2>
-              <div class="table-wrapper">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Task</th>
-                      <th>Implementation</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Discover plugins in user + system dirs</td>
-                      <td>
-                        <code>~/.local/share/stack-composer/plugins/</code> and
-                        <code>/opt/stack-composer/plugins/</code>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Verify <strong>Ed25519</strong> signatures</td>
-                      <td>
-                        <code>ed25519-dalek</code> crate; trust store in
-                        <code>trusted_keys.toml</code>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Instantiate Wasm via <strong>Wasmtime</strong></td>
-                      <td>WasiCtx builder restricts FS &amp; net according to capability token</td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Expose host functions</td>
-                      <td>
-                        <code>retrieval_search</code>, <code>llm_chat</code>,
-                        <code>plan_solve</code>, <code>log</code>, <code>network_fetch*</code>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>Enforce per‑plugin runtime limits</td>
-                      <td>Fuel metering (10 M ops), 256 MiB mem cap, 5 s wall‑time</td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>Hot‑reload on file change</td>
-                      <td>Notify watcher ⇒ unload → verify → reload</td>
-                    </tr>
-                    <tr>
-                      <td>7</td>
-                      <td>Telemetry &amp; audit</td>
-                      <td>
-                        Emit <code>plugin.load</code>, <code>plugin.call</code>,
-                        <code>plugin.panic</code> OTLP spans
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <hr />
-              <h2 id="2-directory-layout--discovery">
-                <a class="header" href="#2-directory-layout--discovery"
-                  >2 Directory Layout &amp; Discovery</a
-                >
-              </h2>
-              <pre><code class="language-text">plugins/
+<hr />
+<ul>
+<li>Plugins are auto-discovered from <code>~/.local/share/stack-composer/plugins/</code>.</li>
+<li>Only plugins with valid Ed25519 signatures are loaded (see <a href="../plugin-sdk/README.html">Plugin SDK</a>).</li>
+<li>Per-plugin permissions (filesystem/network) are enforced as configured (see <a href="../configuration.html">Configuration Guide</a>).</li>
+</ul>
+<p>See <a href="../architecture/architecture-questions.html">architecture-questions.md</a> for open questions and strategic direction.</p>
+<p><em>See also: <a href="llm-runtime.html">LLM Runtime</a>, <a href="telemetry.html">Telemetry Pipeline</a></em></p>
+<hr />
+<p>The <strong>Plugin Host</strong> lets Stack Composer load, execute and sandbox untrusted
+extensions compiled to WebAssembly System Interface (<strong>WASI</strong>). It provides an
+API surface that mirrors native host functions (retrieval, LLM, planner, log,
+network) while enforcing capability‑based security and signature verification.</p>
+<hr />
+<h2 id="1-responsibilities"><a class="header" href="#1-responsibilities">1 Responsibilities</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>#</th><th>Task</th><th>Implementation</th></tr></thead><tbody>
+<tr><td>1</td><td>Discover plugins in user + system dirs</td><td><code>~/.local/share/stack-composer/plugins/</code> and <code>/opt/stack-composer/plugins/</code></td></tr>
+<tr><td>2</td><td>Verify <strong>Ed25519</strong> signatures</td><td><code>ed25519-dalek</code> crate; trust store in <code>trusted_keys.toml</code></td></tr>
+<tr><td>3</td><td>Instantiate Wasm via <strong>Wasmtime</strong></td><td>WasiCtx builder restricts FS &amp; net according to capability token</td></tr>
+<tr><td>4</td><td>Expose host functions</td><td><code>retrieval_search</code>, <code>llm_chat</code>, <code>plan_solve</code>, <code>log</code>, <code>network_fetch*</code></td></tr>
+<tr><td>5</td><td>Enforce per‑plugin runtime limits</td><td>Fuel metering (10 M ops), 256 MiB mem cap, 5 s wall‑time</td></tr>
+<tr><td>6</td><td>Hot‑reload on file change</td><td>Notify watcher ⇒ unload → verify → reload</td></tr>
+<tr><td>7</td><td>Telemetry &amp; audit</td><td>Emit <code>plugin.load</code>, <code>plugin.call</code>, <code>plugin.panic</code> OTLP spans</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="2-directory-layout--discovery"><a class="header" href="#2-directory-layout--discovery">2 Directory Layout &amp; Discovery</a></h2>
+<pre><code class="language-text">plugins/
 ├─ hello-plugin.wasm
 ├─ hello-plugin.sig
 ├─ hello-plugin.toml
 └─ readme.md
 </code></pre>
-              <ul>
-                <li><code>.wasm</code> – compiled WASI module</li>
-                <li><code>.sig</code> – Ed25519 signature file (hex)</li>
-                <li><code>.toml</code> – manifest (see § 3)</li>
-                <li>Extra docs are ignored at runtime but shown in Marketplace UI.</li>
-              </ul>
-              <hr />
-              <h2 id="3-plugin-manifest-schema-plugintoml">
-                <a class="header" href="#3-plugin-manifest-schema-plugintoml"
-                  >3 Plugin Manifest Schema (<code>plugin.toml</code>)</a
-                >
-              </h2>
-              <pre><code class="language-toml">[plugin]
+<ul>
+<li><code>.wasm</code> – compiled WASI module</li>
+<li><code>.sig</code> – Ed25519 signature file (hex)</li>
+<li><code>.toml</code> – manifest (see § 3)</li>
+<li>Extra docs are ignored at runtime but shown in Marketplace UI.</li>
+</ul>
+<hr />
+<h2 id="3-plugin-manifest-schema-plugintoml"><a class="header" href="#3-plugin-manifest-schema-plugintoml">3 Plugin Manifest Schema (<code>plugin.toml</code>)</a></h2>
+<pre><code class="language-toml">[plugin]
 id          = "org.example.hello"
 version     = "0.1.0"
 wasm_target = "wasm32-wasi"
@@ -402,62 +277,22 @@ description = "Echo back the user input."
 license     = "MIT"
 authors     = ["Jane Dev &lt;jane@example.org&gt;"]
 </code></pre>
-              <hr />
-              <h2 id="4-capability-model">
-                <a class="header" href="#4-capability-model">4 Capability Model</a>
-              </h2>
-              <div class="table-wrapper">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Capability</th>
-                      <th>Host Function(s)</th>
-                      <th>Notes</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><code>log</code></td>
-                      <td><code>host_log(level: i32, ptr: *, len: usize)</code></td>
-                      <td>Always enabled</td>
-                    </tr>
-                    <tr>
-                      <td><code>retrieval</code></td>
-                      <td><code>host_retrieval_search(q_ptr, q_len, k)</code></td>
-                      <td>RAG chunks returned</td>
-                    </tr>
-                    <tr>
-                      <td><code>llm</code></td>
-                      <td><code>host_llm_chat(req_ptr, len)</code></td>
-                      <td>Stream tokens</td>
-                    </tr>
-                    <tr>
-                      <td><code>plan</code></td>
-                      <td><code>host_plan(domain_ptr, prob_ptr)</code></td>
-                      <td>Planner JSON</td>
-                    </tr>
-                    <tr>
-                      <td><code>network</code></td>
-                      <td><code>host_fetch(url_ptr, len, body_ptr, body_len)</code></td>
-                      <td>Disabled offline</td>
-                    </tr>
-                    <tr>
-                      <td><code>fs_read</code></td>
-                      <td>WASI <code>path_open</code> read‑only</td>
-                      <td>Sandboxed dir <code>/plugin/data</code></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <p>
-                Plugins request caps in manifest; orchestrator grants or denies. Denied caps result
-                in trap on call.
-              </p>
-              <hr />
-              <h2 id="5-runtime-flow">
-                <a class="header" href="#5-runtime-flow">5 Runtime Flow</a>
-              </h2>
-              <pre><code class="language-mermaid">sequenceDiagram
+<hr />
+<h2 id="4-capability-model"><a class="header" href="#4-capability-model">4 Capability Model</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Capability</th><th>Host Function(s)</th><th>Notes</th></tr></thead><tbody>
+<tr><td><code>log</code></td><td><code>host_log(level: i32, ptr: *, len: usize)</code></td><td>Always enabled</td></tr>
+<tr><td><code>retrieval</code></td><td><code>host_retrieval_search(q_ptr, q_len, k)</code></td><td>RAG chunks returned</td></tr>
+<tr><td><code>llm</code></td><td><code>host_llm_chat(req_ptr, len)</code></td><td>Stream tokens</td></tr>
+<tr><td><code>plan</code></td><td><code>host_plan(domain_ptr, prob_ptr)</code></td><td>Planner JSON</td></tr>
+<tr><td><code>network</code></td><td><code>host_fetch(url_ptr, len, body_ptr, body_len)</code></td><td>Disabled offline</td></tr>
+<tr><td><code>fs_read</code></td><td>WASI <code>path_open</code> read‑only</td><td>Sandboxed dir <code>/plugin/data</code></td></tr>
+</tbody></table>
+</div>
+<p>Plugins request caps in manifest; orchestrator grants or denies. Denied caps
+result in trap on call.</p>
+<hr />
+<h2 id="5-runtime-flow"><a class="header" href="#5-runtime-flow">5 Runtime Flow</a></h2>
+<pre><code class="language-mermaid">sequenceDiagram
   participant Host
   participant Wasm
   Host-&gt;&gt;Wasm: instantiate(module, CapToken)
@@ -466,30 +301,20 @@ authors     = ["Jane Dev &lt;jane@example.org&gt;"]
   Host--&gt;&gt;Wasm: ChunkVec
   Wasm--&gt;&gt;Host: result ptr
 </code></pre>
-              <p>
-                Fuel metering decrements per Wasm op; exhaustion traps with
-                <code>PluginError::FuelExhausted</code>.
-              </p>
-              <hr />
-              <h2 id="6-security--sandboxing">
-                <a class="header" href="#6-security--sandboxing">6 Security &amp; Sandboxing</a>
-              </h2>
-              <ul>
-                <li>
-                  <strong>Wasmtime 18</strong> with <code>Config::new().consume_fuel(true)</code>
-                </li>
-                <li>Memory cap 256 MiB (<code>StoreLimiterAsync</code>).</li>
-                <li>No <code>fd_write</code> unless <code>log</code> cap is granted.</li>
-                <li><code>network</code> cap subject to proxy &amp; offline mode.</li>
-                <li>SHA‑256 hash of <code>.wasm</code> and <code>.sig</code> logged for SBOM.</li>
-              </ul>
-              <hr />
-              <h2 id="7-public-host-apis-wit--v1">
-                <a class="header" href="#7-public-host-apis-wit--v1"
-                  >7 Public Host APIs (WIT ≥ v1)</a
-                >
-              </h2>
-              <pre><code class="language-wit">package stack-composer:plugin;
+<p>Fuel metering decrements per Wasm op; exhaustion traps with
+<code>PluginError::FuelExhausted</code>.</p>
+<hr />
+<h2 id="6-security--sandboxing"><a class="header" href="#6-security--sandboxing">6 Security &amp; Sandboxing</a></h2>
+<ul>
+<li><strong>Wasmtime 18</strong> with <code>Config::new().consume_fuel(true)</code></li>
+<li>Memory cap 256 MiB (<code>StoreLimiterAsync</code>).</li>
+<li>No <code>fd_write</code> unless <code>log</code> cap is granted.</li>
+<li><code>network</code> cap subject to proxy &amp; offline mode.</li>
+<li>SHA‑256 hash of <code>.wasm</code> and <code>.sig</code> logged for SBOM.</li>
+</ul>
+<hr />
+<h2 id="7-public-host-apis-wit--v1"><a class="header" href="#7-public-host-apis-wit--v1">7 Public Host APIs (WIT ≥ v1)</a></h2>
+<pre><code class="language-wit">package stack-composer:plugin;
 
 interface host {
   log: func(level: s32, msg: string);
@@ -499,14 +324,10 @@ interface host {
   network-fetch: func(url: string, body: option&lt;string&gt;) -&gt; string;
 }
 </code></pre>
-              <p>Generated bindings via <code>wit-bindgen</code> for Rust, TinyGo, Zig, JS.</p>
-              <hr />
-              <h2 id="8-configuration-plugin-hosttoml">
-                <a class="header" href="#8-configuration-plugin-hosttoml"
-                  >8 Configuration (<code>plugin-host.toml</code>)</a
-                >
-              </h2>
-              <pre><code class="language-toml">[limits]
+<p>Generated bindings via <code>wit-bindgen</code> for Rust, TinyGo, Zig, JS.</p>
+<hr />
+<h2 id="8-configuration-plugin-hosttoml"><a class="header" href="#8-configuration-plugin-hosttoml">8 Configuration (<code>plugin-host.toml</code>)</a></h2>
+<pre><code class="language-toml">[limits]
 fuel_units   = 10000000
 mem_bytes    = 268435456
 wall_timeout_ms = 5000
@@ -515,159 +336,99 @@ wall_timeout_ms = 5000
 user_dir  = "~/.local/share/stack-composer/plugins"
 system_dir = "/opt/stack-composer/plugins"
 </code></pre>
-              <hr />
-              <h2 id="9-marketplace-workflow">
-                <a class="header" href="#9-marketplace-workflow">9 Marketplace Workflow</a>
-              </h2>
-              <div class="table-wrapper">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Phase</th>
-                      <th>Detail</th>
-                      <th>Version</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Discovery</td>
-                      <td>Scan directories, parse manifests</td>
-                      <td>0.5</td>
-                    </tr>
-                    <tr>
-                      <td>Rating</td>
-                      <td>User can star/rate; data stored locally</td>
-                      <td>0.8</td>
-                    </tr>
-                    <tr>
-                      <td>Registry</td>
-                      <td>OCI registry backend (<code>crates/registry</code>)</td>
-                      <td>0.8</td>
-                    </tr>
-                    <tr>
-                      <td>Auto‑update</td>
-                      <td>Check new version → verify sig → hot‑swap</td>
-                      <td>1.1</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <hr />
-              <h2 id="10-testing"><a class="header" href="#10-testing">10 Testing</a></h2>
-              <ul>
-                <li>
-                  Unit tests use
-                  <code>wasmtime::Module::new(&amp;engine, wasm_bytes)</code> fixtures.
-                </li>
-                <li>Integration tests load sample plugin and assert host func round‑trips.</li>
-                <li>
-                  Fuzzing (<code>cargo fuzz</code>) targets signature parser &amp; capability
-                  deserializer.
-                </li>
-              </ul>
-              <hr />
-              <h2 id="11-open-questions">
-                <a class="header" href="#11-open-questions">11 Open Questions</a>
-              </h2>
-              <ol>
-                <li>Support WASI‑NN interface for on‑device model inference?</li>
-                <li>Version negotiation for host functions beyond v1?</li>
-                <li>Should plugin logs pipe to centralized UI pane?</li>
-              </ol>
-              <hr />
-              <h2 id="12-usage-snippet">
-                <a class="header" href="#12-usage-snippet">12 Usage Snippet</a>
-              </h2>
-              <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+<hr />
+<h2 id="9-marketplace-workflow"><a class="header" href="#9-marketplace-workflow">9 Marketplace Workflow</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Phase</th><th>Detail</th><th>Version</th></tr></thead><tbody>
+<tr><td>Discovery</td><td>Scan directories, parse manifests</td><td>0.5</td></tr>
+<tr><td>Rating</td><td>User can star/rate; data stored locally</td><td>0.8</td></tr>
+<tr><td>Registry</td><td>OCI registry backend (<code>crates/registry</code>)</td><td>0.8</td></tr>
+<tr><td>Auto‑update</td><td>Check new version → verify sig → hot‑swap</td><td>1.1</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="10-testing"><a class="header" href="#10-testing">10 Testing</a></h2>
+<ul>
+<li>Unit tests use <code>wasmtime::Module::new(&amp;engine, wasm_bytes)</code> fixtures.</li>
+<li>Integration tests load sample plugin and assert host func round‑trips.</li>
+<li>Fuzzing (<code>cargo fuzz</code>) targets signature parser &amp; capability deserializer.</li>
+</ul>
+<hr />
+<h2 id="11-open-questions"><a class="header" href="#11-open-questions">11 Open Questions</a></h2>
+<ol>
+<li>Support WASI‑NN interface for on‑device model inference?</li>
+<li>Version negotiation for host functions beyond v1?</li>
+<li>Should plugin logs pipe to centralized UI pane?</li>
+</ol>
+<hr />
+<h2 id="12-usage-snippet"><a class="header" href="#12-usage-snippet">12 Usage Snippet</a></h2>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let ph = PluginHost::default();
 ph.load_plugin("/path/to/hello-plugin.wasm").await?;
 let res = ph.call_plugin("run", &amp;["hello"]).await?;
 println!("Plugin said: {}", res);
 <span class="boring">}</span></code></pre></pre>
-              <hr />
-              <h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
-              <ul>
-                <li>
-                  <a href="plugin-example.html">Plugin Example</a>: Concrete WASI plugin/extension
-                  example for Stack Composer extensibility.
-                </li>
-              </ul>
-              <p>See also:</p>
-              <ul>
-                <li><a href="../plugin-sdk/README.html">Plugin SDK</a></li>
-                <li><a href="llm-runtime.html">LLM Runtime</a></li>
-                <li><a href="telemetry.html">Telemetry Pipeline</a></li>
-              </ul>
-            </main>
+<hr />
+<h2 id="see-also"><a class="header" href="#see-also">See Also</a></h2>
+<ul>
+<li><a href="../architecture/component-details/plugin-example.html">Plugin Example</a>: Concrete WASI plugin/extension example for Stack Composer extensibility.</li>
+</ul>
+<p>See also:</p>
+<ul>
+<li><a href="../plugin-sdk/README.html">Plugin SDK</a></li>
+<li><a href="llm-runtime.html">LLM Runtime</a></li>
+<li><a href="telemetry.html">Telemetry Pipeline</a></li>
+</ul>
 
-            <nav class="nav-wrapper" aria-label="Page navigation">
-              <!-- Mobile navigation buttons -->
-              <a
-                rel="prev"
-                href="../components/planner-adapter.html"
-                class="mobile-nav-chapters previous"
-                title="Previous chapter"
-                aria-label="Previous chapter"
-                aria-keyshortcuts="Left"
-              >
-                <i class="fa fa-angle-left"></i>
-              </a>
+                    </main>
 
-              <a
-                rel="next prefetch"
-                href="../components/report-agent.html"
-                class="mobile-nav-chapters next"
-                title="Next chapter"
-                aria-label="Next chapter"
-                aria-keyshortcuts="Right"
-              >
-                <i class="fa fa-angle-right"></i>
-              </a>
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../components/planner-adapter.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
-              <div style="clear: both"></div>
+                            <a rel="next prefetch" href="../components/report-agent.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../components/planner-adapter.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../components/report-agent.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
-          </div>
+
         </div>
 
-        <nav class="nav-wide-wrapper" aria-label="Page navigation">
-          <a
-            rel="prev"
-            href="../components/planner-adapter.html"
-            class="nav-chapters previous"
-            title="Previous chapter"
-            aria-label="Previous chapter"
-            aria-keyshortcuts="Left"
-          >
-            <i class="fa fa-angle-left"></i>
-          </a>
 
-          <a
-            rel="next prefetch"
-            href="../components/report-agent.html"
-            class="nav-chapters next"
-            title="Next chapter"
-            aria-label="Next chapter"
-            aria-keyshortcuts="Right"
-          >
-            <i class="fa fa-angle-right"></i>
-          </a>
-        </nav>
-      </div>
 
-      <script>
-        window.playground_copyable = true;
-      </script>
 
-      <script src="../elasticlunr.min.js"></script>
-      <script src="../mark.min.js"></script>
-      <script src="../searcher.js"></script>
+        <script>
+            window.playground_copyable = true;
+        </script>
 
-      <script src="../clipboard.min.js"></script>
-      <script src="../highlight.js"></script>
-      <script src="../book.js"></script>
 
-      <!-- Custom JS scripts -->
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
     </div>
-  </body>
+    </body>
 </html>

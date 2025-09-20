@@ -1,52 +1,52 @@
 {
-  "name": "Stack Composer DevContainer",
-  "image": "mcr.microsoft.com/devcontainers/rust:1-ubuntu",
-  "features": {
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "latest"
-    },
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/devcontainers-extra/features/pnpm:2": {
-      "version": "latest"
-    },
-    "ghcr.io/devcontainers/features/python:1": {
-      "version": "latest"
-    }
-  },
-  "postCreateCommand": "just bootstrap && just check",
-  "customizations": {
-    "vscode": {
-      "settings": {
-        "editor.formatOnSave": true,
-        "editor.codeActionsOnSave": {
-          "source.fixAll": true
-        },
-        "markdownlint": {
-          "config": ".markdownlint.json"
-        },
-        "vale.configPath": ".vale.ini",
-        "github.copilot.enable": {
-          "*": true,
-          "plaintext": true,
-          "markdown": true,
-          "scminput": false
-        },
-        "editor.inlineSuggest.enabled": true
-      },
-      "extensions": [
-        "github.copilot",
-        "github.copilot-chat",
-        "rust-lang.rust-analyzer",
-        "esbenp.prettier-vscode",
-        "streetsidesoftware.code-spell-checker",
-        "davidanson.vscode-markdownlint",
-        "bierner.markdown-mermaid",
-        "stylelint.vscode-stylelint",
-        "valentjn.vscode-ltex",
-        "yoavbls.pretty-ts-errors",
-        "vitest.explorer",
-        "ms-python.python"
-      ]
-    }
-  }
+	"name": "Stack Composer DevContainer",
+	"image": "mcr.microsoft.com/devcontainers/rust:1-ubuntu",
+	"features": {
+		"ghcr.io/devcontainers/features/node:1": {
+			"version": "latest"
+		},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+		"ghcr.io/devcontainers-extra/features/pnpm:2": {
+			"version": "latest"
+		},
+		"ghcr.io/devcontainers/features/python:1": {
+			"version": "latest"
+		}
+	},
+	"postCreateCommand": "just bootstrap && just check",
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"editor.formatOnSave": true,
+				"editor.codeActionsOnSave": {
+					"source.fixAll": true
+				},
+				"markdownlint": {
+					"config": ".markdownlint.json"
+				},
+				"vale.configPath": ".vale.ini",
+				"github.copilot.enable": {
+					"*": true,
+					"plaintext": true,
+					"markdown": true,
+					"scminput": false
+				},
+				"editor.inlineSuggest.enabled": true
+			},
+			"extensions": [
+				"github.copilot",
+				"github.copilot-chat",
+				"rust-lang.rust-analyzer",
+				"esbenp.prettier-vscode",
+				"streetsidesoftware.code-spell-checker",
+				"davidanson.vscode-markdownlint",
+				"bierner.markdown-mermaid",
+				"stylelint.vscode-stylelint",
+				"valentjn.vscode-ltex",
+				"yoavbls.pretty-ts-errors",
+				"vitest.explorer",
+				"ms-python.python"
+			]
+		}
+	}
 }

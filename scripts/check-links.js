@@ -8,9 +8,9 @@
  * - If unresolved, looks up link-map.json
  * - Reports broken links or (optionally) rewrites files
  */
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -89,7 +89,7 @@ markdownFiles.forEach((filePath) => {
 
 			// Check if we have a mapping for this target
 			if (linkMap[target]) {
-				const newTarget = linkMap[target] + (anchor ? "#" + anchor : "");
+				const newTarget = linkMap[target] + (anchor ? `#${anchor}` : "");
 				console.log(`  ✏️  ${relativePath}: ${target} → ${newTarget}`);
 				hasChanges = true;
 				fixes++;
@@ -98,7 +98,7 @@ markdownFiles.forEach((filePath) => {
 
 			// Check if we have a mapping for just the path part
 			if (linkMap[targetPath]) {
-				const newTarget = linkMap[targetPath] + (anchor ? "#" + anchor : "");
+				const newTarget = linkMap[targetPath] + (anchor ? `#${anchor}` : "");
 				console.log(`  ✏️  ${relativePath}: ${target} → ${newTarget}`);
 				hasChanges = true;
 				fixes++;
@@ -123,7 +123,7 @@ console.log(`  ❌ Broken: ${errors.length} links`);
 
 if (errors.length > 0) {
 	console.error(`\n💥 ${errors.length} broken link(s) found:\n`);
-	errors.forEach((e) => console.error("  • " + e));
+	errors.forEach((e) => console.error(`  • ${e}`));
 	process.exit(1);
 } else {
 	console.log("\n🎉 All links are valid or have been fixed!");

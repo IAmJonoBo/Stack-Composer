@@ -20,7 +20,7 @@
 		"test:ui": "vitest --ui",
 		"tauri:build": "COPYFILE_DISABLE=1 pnpm run clean:macos && COPYFILE_DISABLE=1 pnpm tauri build # Use Yarn only for edge cases (see README)",
 		"tauri:dev": "COPYFILE_DISABLE=1 pnpm run clean:macos && COPYFILE_DISABLE=1 pnpm tauri dev # Use Yarn only for edge cases (see README)",
-		"biome": "biome check . && biome format --check .",
+		"biome": "biome check .",
 		"check-links": "node scripts/check-links.js",
 		"postinstall": "pnpm biome migrate --write"
 	},

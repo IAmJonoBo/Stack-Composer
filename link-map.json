@@ -101,7 +101,6 @@
 	"_comment_architecture_questions": "Architecture questions",
 	"architecture-and-component-guides/architecture-questions.md": "../architecture-and-component-guides/architecture-questions.md",
 	"../architecture-and-component-guides/architecture-questions.md": "../architecture-and-component-guides/architecture-questions.md",
-	"../Architecture & Component Guides/architecture-questions.md": "../architecture-and-component-guides/architecture-questions.md",
 
 	"_comment_plugin_example": "Plugin example",
 	"plugin-example.md": "../architecture/component-details/plugin-example.md",
@@ -142,7 +141,6 @@
 	"component-details/orchestrator.md": "../components/orchestrator.md",
 	"component-details/ontology-crawler.md": "../components/ontology-crawler.md",
 	"../ai-sub-system-docs/rl-critic.md": "../ai-sub-system-docs/rl-critic.md",
-	"../Architecture & Component Guides/architecture-questions.md": "../architecture-and-component-guides/architecture-questions.md",
 	"telemetry-privacy.md": "../operations/telemetry-privacy.md",
 	"release-process.md": "../release-engineering/release-process.md",
 	"../Architecture%20&%20Component%20Guides/architecture-questions.md": "../architecture-and-component-guides/architecture-questions.md",

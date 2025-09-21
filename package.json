@@ -4,10 +4,10 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"clean:macos": "find . -name '.DS_Store' -type f -delete && find . -name '._*' -type f -delete && find ./target -name '._*' -type f -delete",
+		"clean:macos": "find . -name '.DS_Store' -type f -delete && find . -name '._*' -type f -delete && ([ ! -d ./target ] || find ./target -name '._*' -type f -delete)",
 		"lint": "pnpm run clean:macos && pnpm run biome && pnpm run mdlint",
 		"lint:ci": "pnpm run lint && pnpm run lint:trunk",
-		"lint:trunk": "trunk check --no-progress --filter actionlint,yamllint,taplo,shellcheck,shfmt,git-diff-check",
+		"lint:trunk": "bash scripts/trunk-check.sh",
 		"lint:trunk:local": "bash scripts/trunk-check.sh",
 		"trunk:reset": "bash scripts/trunk-reset.sh",
 		"mdlint": "markdownlint-cli2",

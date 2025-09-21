@@ -1,7 +1,64 @@
-# Ignore all files for Vale except markdown
+---
+# Global ignore patterns for Trunk to avoid scanning large/generated content
+# Docs: https://docs.trunk.io/check/trunk-ignore
+paths:
+  - 'book/**'
+  - 'docs/book/**'
+  - 'stack-ui/dist/**'
+  - 'node_modules/**'
+  - 'target/**'
+  - 'src-tauri/target/**'
+  - 'rust-backend/target/**'
+
+# You can still add linter-specific ignores below if needed later, e.g.:
+# linters:
+#   - name: yamllint
+#     ignore:
+#       - 'docs/**/*.yml'---
+# Ignore all files for Vale except markdown; scope other linters to reduce overlap
 linters:
   - name: vale
     ignore:
       - '**'
       - '!**/*.md'
       - '!**/*.markdown'
+  - name: stylelint
+    ignore:
+      - '**/*.min.css'
+      - 'book/**'
+      - 'docs/book/**'
+      - 'stack-ui/dist/**'
+  - name: trufflehog
+    ignore:
+      - 'book/**'
+      - 'docs/book/**'
+      - 'stack-ui/dist/**'
+      - 'target/**'
+      - 'src-tauri/target/**'
+      - 'rust-backend/target/**'
+      - 'node_modules/**'
+  - name: svgo
+    ignore:
+      - 'book/**'
+      - 'docs/book/**'
+      - 'stack-ui/dist/**'
+      - 'node_modules/**'
+  - name: oxipng
+    ignore:
+      - 'book/**'
+      - 'docs/book/**'
+      - 'stack-ui/dist/**'
+      - 'node_modules/**'
+  - name: markdownlint
+    ignore:
+      - 'book/**'
+      - 'docs/book/**'
+      - 'stack-ui/dist/**'
+      - 'target/**'
+      - 'src-tauri/target/**'
+      - 'rust-backend/target/**'
+  - name: yamllint
+    ignore:
+      - 'book/**'
+      - 'docs/book/**'
+      - 'stack-ui/dist/**'

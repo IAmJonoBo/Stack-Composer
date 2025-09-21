@@ -1,8 +1,73 @@
-# Copilot Coding Agent: Repository Instructions
+## Stack Composer — AI agent instructions
 
-This file teaches GitHub Copilot’s coding agent how to work effectively in this repository. It captures the build/test/lint/run commands, environments, and conventions the agent must follow. Keep it up to date as the project evolves.
+Use this as your operating manual when proposing edits or generating code in this repo. Keep changes small, type-safe, and aligned with the conventions below.
+
+### Big picture (mental model)
+
+- Desktop-first app: Rust + Tauri runtime, React/Vite UI. Local-first by default.
+- Orchestrator (Axum) exposes a thin REST surface at http://127.0.0.1:5174:
+  - POST `/api/v1/command` routes to agents by `{ "agent": "ingestion|retrieval|critic|telemetry" }`.
+  - GET `/api/v1/events` (stub). See `agents/orchestrator/src/main.rs`.
+- Agents live in `agents/*` crates with an async `run()` entrypoint; the orchestrator dispatches on a string key.
+- UI lives in `stack-ui/` (canonical). Tauri config in `src-tauri/` wires the desktop shell to a dev server on 3010.
+- Extensibility: WASI plugins (Wasmtime). See `crates/plugin-host/wit/` and `examples/plugins/plugin.toml`.
+
+### Where to make changes
+
+- Backend logic: create/modify an agent crate under `agents/<name>/` and export `pub async fn run(...)`.
+- Orchestrator wiring: add a new match arm in `agents/orchestrator/src/main.rs` for your agent key.
+- UI: `stack-ui/src/**` (React + Tailwind + shadcn). Typecheck with `pnpm --filter stack-ui run typecheck`.
+- Tauri app shell: `src-tauri/**` (config in `tauri.conf.json`).
+- Docs-as-code: `docs/src/**` (mdBook). ADRs under `docs/src/architecture/adr/`.
+
+### Project-specific conventions
+
+- Package manager: pnpm only (Yarn only for rare edge cases explicitly documented).
+- macOS builds: always set `COPYFILE_DISABLE=1` (Tauri and Rust builds trip on `._*` files). Prefer `./build-tauri.sh` for Tauri.
+- Type boundaries: Rust↔TS contracts generated via tauri-specta; after adding/changing Rust commands, regenerate types (see `docs/src/architecture/migration.md`).
+- Commits/PRs: Conventional Commits titles; update ADRs when changing architecture or public APIs; docs required for user-facing changes.
+
+### Common workflows (fast path)
+
+- Install, lint, test:
+  - `just bootstrap` → pnpm install, cargo fetch, start Qdrant + Meilisearch in Docker.
+  - `just check` → clippy, eslint, markdownlint, vale.
+  - `just test` → Rust (nextest) + `pnpm vitest run`.
+  - `just smoke` → quick pre-PR validation.
+- UI dev/build (canonical UI is `stack-ui/`):
+  - `cd stack-ui && pnpm dev | build | preview`.
+  - CI also builds `stack-ui` specifically.
+- Tauri dev/build: root scripts `pnpm tauri:dev` / `pnpm tauri:build` (honor macOS env vars).
+- Reproducible build: `just reproduce-build` (locked deps, deterministic build check).
+
+### Integration points & patterns
+
+- REST from UI/CLI to orchestrator: prefer small JSON payloads with an `agent` discriminator matching orchestrator routing.
+- Adding a new agent end-to-end:
+  1) Scaffold `agents/foo/` crate, export `pub async fn run() -> anyhow::Result<…>`.
+  2) Wire in `orchestrator/src/main.rs` `match "foo" => run_foo().await …`.
+  3) Add minimal tests (`cargo nextest run -p foo`) and a smoke path.
+  4) If UI consumes it, update TS types (tauri-specta) and add a minimal UI action.
+- Plugins (WASI): define capability needs via manifest (`examples/plugins/plugin.toml`), keep to sandbox; host interfaces live under `crates/plugin-host/wit/`.
+
+### What CI expects (keep green)
+
+- `trunk check` across repo, cargo fmt/clippy, `cargo deny`, link checker (Lychee), mdBook build/tests, UI typecheck/build, basic Axe accessibility on `stack-ui/dist`.
+- PR title validated against Conventional Commits; docs/ADR updates are part of review.
+
+### Pointers (read before big edits)
+
+- Architecture overview: `docs/src/architecture/architecture-overview.md` (system/data flows, component boundaries).
+- Roadmap & sprint shape: `PROJECT_BRIEF.md`, `ROADMAP.md`, `TASK_GRAPH.md`.
+- macOS build guidance: `docs/MACOS_BUILD_ISSUES.md`, `build-tauri.sh`.
+
+If anything here is ambiguous (e.g., tauri-specta type generation command, or which UI to touch when files exist in both root and `stack-ui/`), prefer `stack-ui/` and reference the docs above. Ask to clarify and we’ll tighten this file.
 
 ---
+
+# Copilot Coding Agent: Repository Instructions (detailed)
+
+This section captures the build/test/lint/run commands, environments, and conventions the agent must follow.
 
 ## Quick facts
 
@@ -13,118 +78,37 @@ This file teaches GitHub Copilot’s coding agent how to work effectively in thi
 - Desktop app: Tauri v2
 - Docs: mdBook under `docs/` (sources in `docs/src`)
 
----
+## Build, run, test
 
-## What to build and how
-
-- Install JS deps (root): `pnpm install`
-- Install UI deps (stack-ui): `cd stack-ui && pnpm install`
-- Rust build (workspace): `cargo build --workspace --all-targets`
-- UI build: `pnpm build` (root) or `cd stack-ui && pnpm build`
-- Tauri dev: `pnpm tauri dev` (root script `tauri:dev` exists)
-- Tauri build: `pnpm tauri build` (root script `tauri:build` exists)
-- Full build via Just: `just build` (if `just` is installed)
-
-Preferred scripts (root `package.json`):
-- Dev web: `pnpm dev`
-- Build web: `pnpm build`
-- Preview web: `pnpm preview`
-- Rust only: `pnpm run rust:build` | `rust:run` | `rust:test`
-
-Docs:
-- Build & test docs: `cd docs && mdbook build && mdbook test`
-
----
-
-## How to test
-
-- JS/TS unit tests: `pnpm test` (Vitest; config in `vite.config.ts` and `vitest.setup.ts`)
-- UI test UI: `pnpm test:ui`
-- Rust tests: `cargo test --workspace --all-targets` (CI uses this)
-- End-to-end/security/a11y (CI):
-  - Axe-core CLI against `stack-ui/dist` (after UI build)
-  - `dep-scan` for dependency vulnerabilities
-  - `cargo deny check` and `cargo audit`
-
-Where possible, prefer running via Just:
-- `just check` (clippy, eslint, markdownlint, vale)
-- `just test` (cargo-nextest + vitest) if nextest is available
-
----
+- Install deps: root `pnpm install`; UI `cd stack-ui && pnpm install`
+- Build: root `pnpm build`; UI `cd stack-ui && pnpm build`; Rust `cargo build --workspace --all-targets`
+- Test: JS/TS `pnpm test`; Rust `cargo test --workspace --all-targets`
+- Dev: Web `pnpm dev` (Vite); Tauri `pnpm tauri:dev`; Build app `pnpm tauri:build`
 
 ## Linting & formatting
 
-- JS/TS lint: `eslint . --ext .js,.ts,.tsx` (configured in `eslint.config.js`)
-- Biome quick check: `pnpm biome check ...` (root script `biome`)
-- Markdown lint: `pnpm mdlint` (or `mdlint:fix`)
+- JS/TS: `pnpm lint` (Trunk), Biome quick check `pnpm biome`
+- Markdown: `pnpm mdlint` (or `mdlint:fix`)
 - Docs prose: `vale docs/`
-- Rust: `cargo clippy --all-targets --all-features -- -D warnings`
-- Format: `prettier --write .` and `cargo fmt --all`
+- Rust: `cargo clippy --all-targets --all-features -- -D warnings`; `cargo fmt --all`
 
-The CI also runs `trunk check --all` for aggregated quality gates.
+## Runtime services
 
----
+- Optional: Qdrant + Meilisearch via `just bootstrap` (Docker)
+- macOS: ensure `COPYFILE_DISABLE=1` in scripts
 
-## Runtime services & environment
+## Repo layout
 
-- Local services (optional for some features): Qdrant + Meilisearch
-  - Use `just bootstrap` to start: `docker compose up -d qdrant meilisearch`
-- macOS builds: Set `COPYFILE_DISABLE=1` to avoid resource fork issues (root scripts already do this).
-- Dev server: Vite on port 5173 (see `stack-ui/vite.config.ts`).
+- Root JS: `src/`, Vite tests only at root
+- UI app: `stack-ui/`
+- Desktop app: `src-tauri/`
+- Rust agents/backend: `agents/*`, `rust-backend/`
+- Docs: `docs/src/` (mdBook sources)
 
----
-
-## Repository layout
-
-- Root JS app (hybrid wizard, tests): `src/`, Vite config in `vite.config.ts`
-- UI playground app: `stack-ui/` (own `package.json`, Vite config)
-- Desktop app: `src-tauri/` (separate Cargo project for Tauri)
-- Rust backend & agents: `rust-backend/`, `agents/*` (in root Rust workspace)
-- Docs-as-code: `docs/` with sources in `docs/src` and built book in `docs/book`
-
-pnpm workspace (`pnpm-workspace.yaml`) includes: `stack-ui`, `src-tauri`, `agents/*`, `rust-backend`, `docs`.
-
----
-
-## What to ignore / avoid
-
-- Do not use Yarn unless explicitly necessary; default to pnpm.
-- Avoid writing or committing to `book/` or `docs/book/` (generated).
-- Don’t place build outputs in Git; keep them artefacts only.
-- Don’t introduce incompatible licences; CI enforces via `cargo-deny` and dep-scan.
-- Respect ignore lists in `biome.json` and ESLint ignores.
-
----
-
-## Pull request expectations
-
-- Add/update docs for user-facing or architectural changes (see `docs/src/...`).
-- Update ADRs if public APIs or architecture are affected (`docs/src/architecture/adr/`).
-- Ensure CI passes across Linux/macOS/Windows.
-- Accessibility check passes on built UI (`stack-ui/dist`).
-
----
-
-## Typical agent tasks
-
-- Add a new UI component: place in `src/` (or `stack-ui/src/` for the playground), export as needed, add unit tests in `tests/` or alongside the component, run `pnpm test`.
-- Add a Rust crate or module: update the root `Cargo.toml` workspace members if needed, implement code in `agents/*` or `rust-backend/`, and run `cargo test`.
-- Update docs: edit under `docs/src/`, rebuild locally with mdBook if necessary.
-
----
-
-## Minimal acceptance check (local)
+## Acceptance checklist
 
 1. `pnpm install` at root and in `stack-ui/`
 2. `pnpm build` at root and `stack-ui/`
 3. `cargo build --workspace`
 4. `pnpm test` and `cargo test --workspace`
-5. For UI changes: run `pnpm preview` (or `cd stack-ui && pnpm preview`) and smoke test.
-
----
-
-## References
-
-- See `.github/workflows/ci.yml` for the authoritative CI matrix and tools.
-- macOS notes: `QUICK_START_MACOS.md` and `build-tauri.sh` for Tauri specifics.
-- Docs toolchain: `docs/src/toolchain.md`.
+5. For UI changes: `pnpm preview` (or `cd stack-ui && pnpm preview`)

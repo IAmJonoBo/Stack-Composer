@@ -2,7 +2,10 @@
 
 > **Note:** This is the detailed technical index for all Stack Composer components. For the main component overview and quick links, see [../components/README.md](../components/README.md).
 
-This page is a placeholder for component details documentation. Add summaries and links to each component's documentation here.
+This index tracks the authoritative component folders. Update it whenever a
+component doc changes status so contributors can find the latest specs quickly.
+Run `just ls-components` from the repo root to print the annotated tree that
+mirrors this table.
 
 # Component Details Index
 

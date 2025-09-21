@@ -6,26 +6,33 @@
 		"dev": "vite",
 		"build": "vite build",
 		"preview": "vite preview",
-		"tauri": "tauri dev"
+		"tauri": "tauri dev",
+		"typecheck": "pnpm -w exec tsc -p tsconfig.json --noEmit",
+		"lint": "pnpm -w run lint",
+		"lint:ci": "pnpm -w run lint:ci",
+		"format": "pnpm -w run format",
+		"format:trunk": "pnpm -w run format:trunk",
+		"lint:trunk:local": "pnpm -w run lint:trunk:local",
+		"trunk:reset": "pnpm -w run trunk:reset"
 	},
 	"dependencies": {
-		"react": "^19.1.0",
-		"react-dom": "^19.1.0",
-		"zustand": "^5.0.5"
+		"react": "^19.1.1",
+		"react-dom": "^19.1.1",
+		"zustand": "^5.0.8"
 	},
 	"devDependencies": {
-		"@tauri-apps/api": "^2.5.0",
-		"@tauri-apps/cli": "^2.5.0",
-		"@types/react": "^19.1.8",
-		"@types/react-dom": "^19.1.6",
+		"@tauri-apps/api": "^2.8.0",
+		"@tauri-apps/cli": "^2.8.4",
+		"@types/react": "^19.1.13",
+		"@types/react-dom": "^19.1.9",
 		"autoprefixer": "^10.4.21",
-		"htmlhint": "^1.6.3",
+		"htmlhint": "^1.7.1",
 		"postcss": "^8.5.6",
 		"shadcn-ui": "^0.9.5",
-		"stylelint": "^16.21.0",
+		"stylelint": "^16.24.0",
 		"stylelint-config-standard": "^39.0.0",
 		"stylelint-order": "^7.0.0",
-		"tailwindcss": "^4.1.10",
-		"vite": "^7.0.0"
+		"tailwindcss": "^4.1.13",
+		"vite": "^7.1.6"
 	}
 }

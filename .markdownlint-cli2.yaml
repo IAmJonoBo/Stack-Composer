@@ -1,0 +1,17 @@
+---
+globs:
+  - "**/*.md"
+
+ignores:
+  - "book/**"
+  - "docs/book/**"
+  - "stack-ui/dist/**"
+  - "node_modules/**"
+  - "target/**"
+  - "rust-backend/target/**"
+  - "src-tauri/target/**"
+
+config:
+  # You can add markdownlint rules overrides here if needed
+  # MD013 (line-length) can be noisy; keep default for now
+  MD013: false

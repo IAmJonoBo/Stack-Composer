@@ -1,0 +1,154 @@
+---
+name: Sync Project Status
+'on':
+  issues:
+    types: [closed, reopened]
+  pull_request_target:
+    types: [closed, reopened, ready_for_review, converted_to_draft]
+permissions:
+  pull-requests: read
+  issues: read
+  contents: read
+jobs:
+  sync_status:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Project Status
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          script: |
+            const login = 'IAmJonoBo';
+            const number = 2;
+            const STATUS_TYPE = 'ProjectV2SingleSelectField';
+            const isIssue = context.eventName === 'issues';
+            const isPR = context.eventName === 'pull_request_target';
+            let desired = '';
+            if (isIssue) {
+              desired = context.payload.action === 'closed' ? 'Done' : 'Selected';
+            } else if (isPR) {
+              if (context.payload.action === 'closed') {
+                desired = 'Done';
+              } else if (context.payload.action === 'reopened') {
+                desired = 'In Review';
+              } else if (context.payload.action === 'ready_for_review') {
+                desired = 'In Review';
+              } else if (context.payload.action === 'converted_to_draft') {
+                desired = 'In Progress';
+              }
+            }
+            if (!desired) {
+              core.info('No desired status for this event; skipping.');
+              return;
+            }
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const contentNumber = isIssue
+              ? context.payload.issue?.number
+              : context.payload.pull_request?.number;
+            if (!contentNumber) {
+              core.info('No content number; skipping.');
+              return;
+            }
+
+            const contentQuery = isIssue
+              ? `query($owner:String!,$repo:String!,$num:Int!){
+                  repository(owner:$owner,name:$repo){
+                    issue(number:$num){ id }
+                  }
+                }`
+              : `query($owner:String!,$repo:String!,$num:Int!){
+                  repository(owner:$owner,name:$repo){
+                    pullRequest(number:$num){ id }
+                  }
+                }`;
+            const contentRes = await github.graphql(contentQuery, {
+              owner,
+              repo,
+              num: contentNumber,
+            });
+            const contentId = isIssue
+              ? contentRes.repository?.issue?.id
+              : contentRes.repository?.pullRequest?.id;
+            if (!contentId) {
+              core.info('Could not resolve content ID; skipping.');
+              return;
+            }
+
+            const projRes = await github.graphql(
+              `query($login: String!, $number: Int!) {
+                user(login: $login) {
+                  projectV2(number: $number) {
+                    id
+                    items(first: 100) {
+                      nodes {
+                        id
+                        content {
+                          __typename
+                          ... on Issue { id }
+                          ... on PullRequest { id }
+                        }
+                      }
+                    }
+                    fields(first: 50) {
+                      nodes {
+                        __typename
+                        ... on ProjectV2FieldCommon { id name }
+                        ... on ProjectV2SingleSelectField { id name options { id name } }
+                      }
+                    }
+                  }
+                }
+              }`,
+              { login, number }
+            );
+
+            const project = projRes.user?.projectV2;
+            if (!project) {
+              core.info('Project not found; skipping.');
+              return;
+            }
+
+            const itemNode = project.items.nodes.find((n) => {
+              const c = n.content;
+              if (!c) return false;
+              if (c.__typename === 'Issue') return c.id === contentId;
+              if (c.__typename === 'PullRequest') return c.id === contentId;
+              return false;
+            });
+            if (!itemNode) {
+              core.info('Project item not found; skipping.');
+              return;
+            }
+
+            const statusField = project.fields.nodes.find((f) => {
+              return f.name === 'Status' && f.__typename === STATUS_TYPE;
+            });
+            if (!statusField) {
+              core.info('No Status field; skipping.');
+              return;
+            }
+
+            const option = statusField.options.find((o) => o.name === desired);
+            if (!option) {
+              core.info(`Option '${desired}' not found; skipping.`);
+              return;
+            }
+
+            await github.graphql(
+              `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $optionId: String!) {
+                updateProjectV2ItemFieldValue(input: {
+                  projectId: $projectId,
+                  itemId: $itemId,
+                  fieldId: $fieldId,
+                  value: { singleSelectOptionId: $optionId }
+                }) { clientMutationId }
+              }`,
+              {
+                projectId: project.id,
+                itemId: itemNode.id,
+                fieldId: statusField.id,
+                optionId: option.id,
+              }
+            );
+            core.info(`Set Status to '${desired}'.`);

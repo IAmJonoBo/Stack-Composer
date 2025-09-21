@@ -14,6 +14,8 @@
 	],
 	"unwantedRecommendations": [
 		// Disable Code Spell Checker (cspell) in this workspace
-		"streetsidesoftware.code-spell-checker"
+		"streetsidesoftware.code-spell-checker",
+		// Disable LTeX in this workspace
+		"valentjn.vscode-ltex"
 	]
 }

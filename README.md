@@ -32,6 +32,13 @@ Optional helpers
 
 ---
 
+## Project Brief and Roadmap
+
+For the authoritative sprint plan and governance, see the new Project Brief:
+
+- Project Brief: [PROJECT_BRIEF.md](./PROJECT_BRIEF.md)
+- High-level Roadmap: [ROADMAP.md](./ROADMAP.md)
+
 ---
 
 ## Using pnpm and Yarn
@@ -93,7 +100,6 @@ For a full breakdown of the developer toolchain and how to get a reproducible, f
 ## 4 Boot-up checklist
 
 1. Install all required tools (see [Toolchain & DX Pipeline](docs/src/toolchain.md) for install commands):
-
    - Rust (rustup), Node.js (≥ v20), pnpm, just, tauri CLI, biome, vale, mdbook, cargo-nextest, stryker, cargo-audit, cargo-deny, cargo-udeps, wasmtime, trivy, nix (restart terminal after install), Qdrant (via Docker), Meilisearch, Renovate, gh (GitHub CLI)
    - Qdrant is run via Docker for local development. Mutagen is a Rust library, not a CLI tool.
 
@@ -139,6 +145,16 @@ Great docs are the #1 predictor of OSS success – see Django’s origin story.
 4. Review – at least one maintainer sign-off; Vale + markdownlint pass.
 5. Merge – squash commit; CI auto-publishes dry-run artefact.
 
+### 6.2 Trunk (linters) notes
+
+We use Trunk for some quick checks in CI, but heavy linters (Biome, markdownlint) run directly.
+
+- Upgrade Trunk locally: `pnpm run trunk:upgrade` (falls back to the official installer)
+- Ensure repo uses local hooks (to avoid interactive pre-push prompts): `pnpm run hooks:local`
+- If a commit/push appears to hang with a “Press spacebar to skip checks” prompt, use `--no-verify` or switch hooks locally as above.
+
+For local usage and troubleshooting, see the Trunk guide at `docs/src/tooling/trunk.md`.
+
 ### 6.1 macOS Development Notes
 
 **⚠️ macOS developers:** Due to resource fork file issues with Tauri builds, use these commands:
@@ -156,7 +172,10 @@ export COPYFILE_DISABLE=1
 export COPY_EXTENDED_ATTRIBUTES_DISABLE=1
 ```
 
-See [macOS Build Issues](docs/MACOS_BUILD_ISSUES.md) for detailed troubleshooting.
+All contributors share the same Rust toolchain (`rust-toolchain.toml`) and pnpm
+version (`package.json#packageManager`). If builds deviate, run
+`just reproduce-build` to reset the environment. See
+[macOS Build Issues](docs/MACOS_BUILD_ISSUES.md) for detailed troubleshooting.
 
 ---
 

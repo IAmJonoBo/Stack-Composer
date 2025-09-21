@@ -2,17 +2,14 @@
 	"compilerOptions": {
 		"target": "ESNext",
 		"module": "ESNext",
-		"moduleResolution": "Node",
-		"jsx": "react-jsx",
+		"moduleResolution": "bundler",
 		"strict": true,
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
 		"types": ["node", "vitest/globals", "@testing-library/jest-dom"],
 		"baseUrl": ".",
-		"paths": {
-			"@/*": ["src/*"]
-		}
+		"paths": { "@/*": ["src/*"] }
 	},
 	"include": ["src", "tests", "vitest.setup.ts"],
 	"exclude": ["node_modules", "dist"]

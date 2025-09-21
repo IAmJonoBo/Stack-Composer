@@ -6,7 +6,33 @@
 - [ ] I have added or updated **documentation** as needed (see [Contributing](../docs/src/contributing/contributing.md))
 - [ ] I have added or updated tests as needed
 - [ ] I have updated the [ADR log](../docs/src/architecture/adr/README.md) if this PR impacts architecture or public APIs
+- [ ] I referenced all relevant ADR numbers in the **ADR Links** section below
 - [ ] All CI checks pass (lint, test, linkcheck)
+
+---
+
+## Summary
+
+Describe the change. Link issues.
+
+## ADR Links
+
+List the ADR(s) that cover this change (e.g., `ADR-0002`), or write `N/A` if
+not applicable.
+
+## Type
+
+- [ ] Bug fix
+- [ ] Feature
+- [ ] Docs
+- [ ] Refactor/Chore
+
+## Checklist
+
+- [ ] Tests added/updated (if applicable)
+- [ ] Docs updated (README/docs/ADR)
+- [ ] Conventional Commit (squash title)
+- [ ] Changeset added (if user-visible)
 
 ---
 

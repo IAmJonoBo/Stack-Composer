@@ -123,7 +123,9 @@ console.log(`  ❌ Broken: ${errors.length} links`);
 
 if (errors.length > 0) {
 	console.error(`\n💥 ${errors.length} broken link(s) found:\n`);
-	errors.forEach((e) => console.error(`  • ${e}`));
+	errors.forEach((e) => {
+		console.error(`  • ${e}`);
+	});
 	process.exit(1);
 } else {
 	console.log("\n🎉 All links are valid or have been fixed!");

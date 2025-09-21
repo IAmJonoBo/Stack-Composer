@@ -23,7 +23,7 @@ jobs:
           github-token: ${{ env.ADD_TO_PROJECT_PAT }}
 
       - name: Set Project Status to Triage
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           github-token: ${{ env.ADD_TO_PROJECT_PAT }}
           script: |

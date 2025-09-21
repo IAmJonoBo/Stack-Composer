@@ -20,6 +20,9 @@
     "config": ".markdownlint.json"
   },
 
+  // Disable LTeX (grammar/spell checker) for this workspace
+  "ltex.enabled": false,
+
   // GitHub Copilot configuration
   "github.copilot.enable": {
     "*": true,

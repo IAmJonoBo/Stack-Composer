@@ -41,7 +41,11 @@ coverage/
 
 # Editor/OS
 .idea/
-.vscode/
+# Keep workspace VS Code settings under version control for consistent tooling
+!.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
 *.swp
 
 # Misc

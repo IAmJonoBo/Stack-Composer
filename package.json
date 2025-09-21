@@ -5,12 +5,14 @@
 	"type": "module",
 	"scripts": {
 		"clean:macos": "find . -name '.DS_Store' -type f -delete && find . -name '._*' -type f -delete && find ./target -name '._*' -type f -delete",
-		"lint": "pnpm run clean:macos && pnpm run biome && pnpm run mdlint && pnpm run lint:trunk",
+		"lint": "pnpm run clean:macos && pnpm run biome && pnpm run mdlint",
+		"lint:ci": "pnpm run lint && pnpm run lint:trunk",
 		"lint:trunk": "trunk check --no-progress --filter actionlint,yamllint,taplo,shellcheck,shfmt,git-diff-check",
 		"mdlint": "markdownlint-cli2",
 		"mdlint:fix": "markdownlint-cli2 --fix",
 		"test": "vitest run",
-		"format": "trunk fmt",
+		"format": "biome format stack-ui/src scripts",
+		"format:trunk": "trunk fmt",
 		"preview-wizard": "vite --config vite.wizard.config.ts",
 		"rust:build": "COPYFILE_DISABLE=1 pnpm run clean:macos && COPYFILE_DISABLE=1 cargo build --manifest-path rust-backend/Cargo.toml",
 		"rust:test": "COPYFILE_DISABLE=1 pnpm run clean:macos && COPYFILE_DISABLE=1 cargo test --manifest-path rust-backend/Cargo.toml",
@@ -27,7 +29,7 @@
 		"hooks:local": "git config --local core.hooksPath .git/hooks",
 		"hooks:trunk": "trunk install",
 		"trunk:upgrade": "trunk upgrade || (curl -fsSL https://get.trunk.io -o install-trunk.sh && bash install-trunk.sh -y)",
-		"trunk:doctor": "trunk version && trunk check --version"
+		"trunk:doctor": "trunk version"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.2.4",

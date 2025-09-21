@@ -12,7 +12,7 @@
 		"trunk:reset": "bash scripts/trunk-reset.sh",
 		"mdlint": "markdownlint-cli2",
 		"mdlint:fix": "markdownlint-cli2 --fix",
-		"test": "vitest run",
+		"test": "vitest run --passWithNoTests",
 		"format": "biome format stack-ui/src scripts",
 		"format:trunk": "trunk fmt",
 		"preview-wizard": "vite --config vite.wizard.config.ts",

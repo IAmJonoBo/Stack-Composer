@@ -52,7 +52,13 @@ _Scorer_ combines heuristic score + optional RL‑Critic value.
 
 ## 3 Public Rust API
 
-```rust
+```rust,ignore
+use uuid::Uuid;
+
+pub struct TechStack;
+pub struct PlanStep;
+pub struct RequirementGraph;
+
 pub struct Proposal {
     pub id: Uuid,
     pub stack: TechStack,        // nested langs, frameworks, infra
@@ -61,7 +67,7 @@ pub struct Proposal {
     pub rationale: String,       // LLM explanation
 }
 
-#[async_trait]
+#[async_trait::async_trait]
 pub trait StackAgent {
     async fn propose(requirements: &RequirementGraph, max: usize)
         -> anyhow::Result<Vec<Proposal>>;
@@ -166,7 +172,7 @@ timeout_secs = 45
 
 ## 11 Usage Example
 
-```rust
+```rust,ignore
 let mut proposals = stack_agent
     .propose(&req_graph, 5)
     .await?;

@@ -10,7 +10,7 @@
 			"version": "10"
 		},
 		"ghcr.io/devcontainers/features/python:1": {
-			"version": "3.11"
+			"version": "3.13"
 		}
 	},
 	"postCreateCommand": "just bootstrap && just check",

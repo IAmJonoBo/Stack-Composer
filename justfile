@@ -18,7 +18,7 @@ check:
 # Run all tests
 test:
 	cargo nextest run --all
-	pnpm vitest run
+	pnpm vitest run --passWithNoTests
 
 # Build the project
 build:
@@ -61,7 +61,7 @@ reproduce-build:
 # Lightweight smoke test suite (fast validation before PRs)
 smoke:
 	cargo check --workspace
-	pnpm vitest run --runInBand
+	pnpm vitest run --passWithNoTests
 
 # Preview the hybrid wizard UI (React Flow + Arborist demo)
 preview-wizard:

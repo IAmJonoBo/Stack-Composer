@@ -113,6 +113,7 @@ jobs:
         run: |
           cargo test --workspace --all-targets
       - name: Lint docs
+        timeout-minutes: 10
         run: |
           cd docs
           mdbook build
@@ -247,6 +248,7 @@ jobs:
           cargo test --workspace --all-targets
       - name: Lint docs
         if: ${{ matrix.os == 'ubuntu-22.04' }}
+        timeout-minutes: 10
         run: |
           cd docs
           mdbook build
@@ -278,6 +280,7 @@ jobs:
       - name: Link Checker (Lychee)
         if: ${{ matrix.os == 'ubuntu-22.04' }}
         uses: lycheeverse/lychee-action@v2
+        timeout-minutes: 10
         with:
           args: --config lychee.toml '**/*.md'
           fail: true
@@ -289,3 +292,28 @@ jobs:
           path: |
             target/
             stack-ui/dist/
+
+  lint-fast:
+    name: Fast Linters
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 20
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Run Biome
+        timeout-minutes: 5
+        run: pnpm run biome
+      - name: Run markdownlint-cli2
+        timeout-minutes: 5
+        run: pnpm run mdlint
+      - name: Trunk fast checks
+        timeout-minutes: 5
+        run: pnpm run lint:trunk

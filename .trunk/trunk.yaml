@@ -13,56 +13,15 @@ plugins:
 # This is the section where you manage your linters. (https://docs.trunk.io/check/configuration)
 lint:
   enabled:
-    - biome@2.2.4
-    - stylelint@16.24.0
-    - clippy@1.87.0
-    - rustfmt@1.87.0
-    - taplo@0.10.0
     - actionlint@1.7.7
-    - git-diff-check
-    - markdownlint@0.45.0
+    - taplo@0.10.0
+    - yamllint@1.37.1
     - shellcheck@0.11.0
     - shfmt@3.6.0
-    - yamllint@1.37.1
-    - vale@3.12.0
+    - git-diff-check
 actions:
   enabled:
     - trunk-announce
     - trunk-check-pre-push
     - trunk-fmt-pre-commit
     - trunk-upgrade-available
-
-runner:
-  linter_timeout: 600s
-
-  definitions:
-    - linters: [biome]
-      files:
-        - stack-ui/src/**
-        - scripts/**
-        - vite.config.ts
-        - vitest.setup.ts
-        - package.json
-    - linters: [stylelint]
-      files:
-        - stack-ui/src/**/*.css
-        - stack-ui/src/**/*.scss
-      config:
-        arguments: ["--allow-empty-input"]
-    - linters: [markdownlint, vale]
-      files:
-        - "**/*.md"
-        - "docs/**/*.md"
-        - README.md
-        - QUICK_START_MACOS.md
-    - linters: [yamllint, actionlint]
-      files:
-        - ".github/**/*.yml"
-        - ".github/**/*.yaml"
-    - linters: [shellcheck, shfmt]
-      files:
-        - "**/*.sh"
-    - linters: [taplo]
-      files:
-        - "**/Cargo.toml"
-        - "**/Cargo.lock"

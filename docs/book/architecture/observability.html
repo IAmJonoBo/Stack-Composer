@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Roadmap</title>
+        <title>Observability</title>
 
 
         <!-- Custom HTML head -->
@@ -175,73 +175,45 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="roadmap"><a class="header" href="#roadmap">Roadmap</a></h1>
-<p>This architecture roadmap mirrors <code>ROADMAP.md</code> with a focus on system
-capabilities and long-term bets. Use it when aligning component design docs or
-preparing RFCs.</p>
-<h2 id="frontier-milestones"><a class="header" href="#frontier-milestones">Frontier Milestones</a></h2>
-<div class="table-wrapper"><table><thead><tr><th>Horizon</th><th>Focus</th><th>Target Timeline</th></tr></thead><tbody>
-<tr><td>Now</td><td>Toolchain pinning, agent baselines, wizard v1, eval harness</td><td>Sprints S-01–S-02</td></tr>
-<tr><td>Next</td><td>Planner repair, plugin SDK v1 GA, stack explorer, resilience</td><td>Sprints S-03–S-06</td></tr>
-<tr><td>Later</td><td>Federated orchestration, GraphRAG, marketplace GA</td><td>Post S-06</td></tr>
+                        <h1 id="observability-stack"><a class="header" href="#observability-stack">Observability Stack</a></h1>
+<p>This page tracks recommended tooling for metrics, traces, and evaluation. All
+options are open source or free for commercial redistribution.</p>
+<h2 id="core-signals"><a class="header" href="#core-signals">Core Signals</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Signal</th><th>Tooling</th><th>Notes</th></tr></thead><tbody>
+<tr><td>Traces</td><td>OpenTelemetry SDK + SigNoz (Apache 2.0)</td><td>Collect spans from orchestrator/agents; SigNoz ships in Docker compose.</td></tr>
+<tr><td>Metrics</td><td>Prometheus (Apache 2.0)</td><td>Export orchestrator/agent metrics; dashboards built in Grafana (AGPL 3).</td></tr>
+<tr><td>Logs</td><td>Vector/Fluent Bit (Apache 2.0)</td><td>Optional centralised log shipping.</td></tr>
+<tr><td>UX</td><td>Playwright traces + Visual Regression</td><td>Already wired through CI (S-01 deliverable).</td></tr>
 </tbody></table>
 </div>
-<h2 id="migration-tracker"><a class="header" href="#migration-tracker">Migration Tracker</a></h2>
-<div class="table-wrapper"><table><thead><tr><th>Area</th><th>Task</th><th>Status</th></tr></thead><tbody>
-<tr><td>Tooling</td><td>Commit <code>rust-toolchain.toml</code>, pin pnpm/Tauri versions</td><td>TODO</td></tr>
-<tr><td>Docs</td><td>Migration playbook, navigation cleanup, ADR links in PRs</td><td>In Progress</td></tr>
-<tr><td>Agents</td><td>Baseline ingestion/retrieval/critic/telemetry pipelines</td><td>TODO</td></tr>
-<tr><td>Evaluation</td><td>Harness (nDCG/P/R/faithfulness) + dashboard</td><td>TODO</td></tr>
-<tr><td>Wizard</td><td>shadcn/Radix tokens, citations, reduced-motion support</td><td>In Progress</td></tr>
-<tr><td>Telemetry</td><td>OpenTelemetry spans + Prometheus exporter</td><td>TODO</td></tr>
-</tbody></table>
-</div>
-<p>Update this table as migration tasks land. It should reflect the current state
-of the main branch.</p>
-<h2 id="strategic-roadmap-20252026"><a class="header" href="#strategic-roadmap-20252026">Strategic Roadmap (2025–2026)</a></h2>
-<div class="table-wrapper"><table><thead><tr><th>Area</th><th>Short-Term (0–3 mo)</th><th>Mid-Term (3–6 mo)</th><th>Long-Term (6–12 mo+)</th></tr></thead><tbody>
-<tr><td>Plugin Ecosystem</td><td>SDK v1, signing CLI, marketplace staging</td><td>Marketplace GA, revenue/share models</td><td>Community moderation, automated trust scores</td></tr>
-<tr><td>Retrieval</td><td>Eval harness, ONNX reranker, ontology freshness</td><td>GraphRAG enrichment, latency budgets</td><td>Hierarchical/Graph retrievers, active learning loops</td></tr>
-<tr><td>Planning</td><td>Partial repair, timeline UI, constraint diffing</td><td>Cooperative planning (planner + critic)</td><td>Autonomous remediation, DSL planner options</td></tr>
-<tr><td>LLM Runtime</td><td>Typed IPC, model adapters (Ollama/vLLM)</td><td>Adaptive model selection, evaluation plateaus</td><td>Model marketplace, on-demand fine-tuning integrations</td></tr>
-<tr><td>Telemetry</td><td>OpenTelemetry + Prometheus baseline</td><td>Optional hosted telemetry backend</td><td>Predictive alerts, anomaly detection, AI ops copilot</td></tr>
-<tr><td>Experience</td><td>Wizard v1, stack explorer beta, copilot interactions</td><td>Collaboration (comments, bookmarks), scenario diff</td><td>Real-time scaffold preview, modernization workflows</td></tr>
-<tr><td>Release</td><td>Deterministic builds, signed artefacts, SBOM/provenance</td><td>Resilience suite, selective tests</td><td>Automated release train, downstream integrations</td></tr>
-<tr><td>Distributed</td><td>Devcontainer/Nix parity, remote retrieval adapters</td><td>Sharded orchestrators, remote planner execution</td><td>Federated orchestrator mesh, multi-tenant control plane</td></tr>
-</tbody></table>
-</div>
-<h2 id="ai-guided-authoring--scaffolding"><a class="header" href="#ai-guided-authoring--scaffolding">AI-Guided Authoring &amp; Scaffolding</a></h2>
-<p>Stack Composer is evolving into a fully AI-guided, end-to-end project authoring
-and scaffolding platform. See
-<a href="../architecture-and-component-guides/ai-wizard-roadmap.html">ai-wizard-roadmap.md</a>
-for the detailed product vision and phased implementation plan.</p>
+<h2 id="recommended-setup"><a class="header" href="#recommended-setup">Recommended Setup</a></h2>
+<ol>
+<li>Launch SigNoz locally (Docker compose) or point to an existing deployment.</li>
+<li>Configure the telemetry agent to export OpenTelemetry traces/metrics to
+SigNoz/Prometheus; document endpoints in <code>docs/src/components/telemetry.md</code>.</li>
+<li>Add Grafana dashboards for retrieval nDCG, planner solve latency, and wizard
+activation metrics. Link dashboards in ADRs/OKRs.</li>
+<li>Ensure CI uploads traces for failing tests (<code>ROADMAP.md</code> requirement).</li>
+</ol>
+<h2 id="evaluation-harness"><a class="header" href="#evaluation-harness">Evaluation Harness</a></h2>
 <ul>
-<li>Hybrid conversational wizard for discovery and planning</li>
-<li>Interactive stack exploration and “what-if” analysis</li>
-<li>Real-time directory tree and scaffold preview (graph + timeline)</li>
-<li>Copilot with rationale tooltips and decision history</li>
-<li>Context-aware recommendations, risk surfacing, and best-practice updates</li>
-<li>One-click project generation, export, and cloud deployment hooks</li>
-<li>Template packs, modernization flows, and project history</li>
+<li>Use <strong>RagaS</strong> (Apache 2.0) or <strong>DeepEval</strong> (Apache 2.0) to power the retrieval
+evaluation harness. Store results as JSONL and publish summary dashboards.</li>
+<li>The harness should run nightly and on-demand (<code>just smoke</code> remains the fast
+check; a future <code>just eval</code> recipe will wrap the longer run).</li>
 </ul>
-<hr />
-<p><strong>Next Steps:</strong></p>
-<ul>
-<li>Review <a href="migration.html">Migration Playbook</a></li>
-<li>Align the <a href="observability.html">Observability stack</a> with upcoming telemetry work</li>
-<li>Update <a href="../extensibility/component-details.html">Component Details</a></li>
-<li>Join the <a href="../contributing/README.html">Community</a></li>
-</ul>
+<p>Update this document as the observability stack evolves (e.g., adding SigNoz
+compose files or hosted backends).</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../architecture/extensibility.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../architecture/roadmap.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../architecture/observability.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../architecture/ai-platform-overview-alt.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -251,11 +223,11 @@ for the detailed product vision and phased implementation plan.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../architecture/extensibility.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../architecture/roadmap.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../architecture/observability.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../architecture/ai-platform-overview-alt.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

@@ -6,7 +6,7 @@ cli:
 plugins:
   sources:
     - id: trunk
-      ref: v1.7.2
+      ref: v1.10.0
       uri: https://github.com/trunk-io/plugins
 # Rely on system runtimes to reduce setup/download time and avoid network hangs.
 # If a specific linter requires a runtime, ensure it's available on the host/CI image.
@@ -22,6 +22,4 @@ lint:
 actions:
   enabled:
     - trunk-announce
-    - trunk-check-pre-push
-    - trunk-fmt-pre-commit
     - trunk-upgrade-available

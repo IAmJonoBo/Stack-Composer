@@ -23,7 +23,11 @@
 		"tauri:dev": "COPYFILE_DISABLE=1 pnpm run clean:macos && COPYFILE_DISABLE=1 pnpm tauri dev # Use Yarn only for edge cases (see README)",
 		"biome": "biome check --no-errors-on-unmatched stack-ui/src scripts vite.config.ts vitest.setup.ts package.json",
 		"check-links": "node scripts/check-links.js",
-		"postinstall": ""
+		"postinstall": "",
+		"hooks:local": "git config --local core.hooksPath .git/hooks",
+		"hooks:trunk": "trunk install",
+		"trunk:upgrade": "trunk upgrade || (curl -fsSL https://get.trunk.io -o install-trunk.sh && bash install-trunk.sh -y)",
+		"trunk:doctor": "trunk version && trunk check --version"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.2.4",

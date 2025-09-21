@@ -145,6 +145,14 @@ Great docs are the #1 predictor of OSS success – see Django’s origin story.
 4. Review – at least one maintainer sign-off; Vale + markdownlint pass.
 5. Merge – squash commit; CI auto-publishes dry-run artefact.
 
+### 6.2 Trunk (linters) notes
+
+We use Trunk for some quick checks in CI, but heavy linters (Biome, markdownlint) run directly.
+
+- Upgrade Trunk locally: `pnpm run trunk:upgrade` (falls back to the official installer)
+- Ensure repo uses local hooks (to avoid interactive pre-push prompts): `pnpm run hooks:local`
+- If a commit/push appears to hang with a “Press spacebar to skip checks” prompt, use `--no-verify` or switch hooks locally as above.
+
 ### 6.1 macOS Development Notes
 
 **⚠️ macOS developers:** Due to resource fork file issues with Tauri builds, use these commands:

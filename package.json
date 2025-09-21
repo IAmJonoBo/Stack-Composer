@@ -8,6 +8,8 @@
 		"lint": "pnpm run clean:macos && pnpm run biome && pnpm run mdlint",
 		"lint:ci": "pnpm run lint && pnpm run lint:trunk",
 		"lint:trunk": "trunk check --no-progress --filter actionlint,yamllint,taplo,shellcheck,shfmt,git-diff-check",
+		"lint:trunk:local": "bash scripts/trunk-check.sh",
+		"trunk:reset": "bash scripts/trunk-reset.sh",
 		"mdlint": "markdownlint-cli2",
 		"mdlint:fix": "markdownlint-cli2 --fix",
 		"test": "vitest run",

@@ -153,6 +153,8 @@ We use Trunk for some quick checks in CI, but heavy linters (Biome, markdownlint
 - Ensure repo uses local hooks (to avoid interactive pre-push prompts): `pnpm run hooks:local`
 - If a commit/push appears to hang with a “Press spacebar to skip checks” prompt, use `--no-verify` or switch hooks locally as above.
 
+For local usage and troubleshooting, see the Trunk guide at `docs/src/tooling/trunk.md`.
+
 ### 6.1 macOS Development Notes
 
 **⚠️ macOS developers:** Due to resource fork file issues with Tauri builds, use these commands:

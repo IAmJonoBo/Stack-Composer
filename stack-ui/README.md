@@ -18,6 +18,28 @@ This directory contains the Tauri + React + Vite frontend for Stack Composer.
    pnpm tauri dev
    ```
 
+## Lint & Format
+
+- Lint (runs workspace linters):
+
+   ```sh
+   pnpm lint
+   ```
+
+- Quick Trunk check (local, fast subset):
+
+   ```sh
+   pnpm lint:trunk:local
+   ```
+
+- Reset Trunk if it hangs:
+
+   ```sh
+   pnpm trunk:reset
+   ```
+
+See the Trunk guide for details: `docs/src/tooling/trunk.md` in the repo root.
+
 ## Tech Stack
 
 - [Tauri](https://tauri.app/)

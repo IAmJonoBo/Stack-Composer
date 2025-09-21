@@ -49,5 +49,6 @@ This is the new root for your mdBook documentation. Please use the navigation to
   - [Contributing Guide](contributing/contributing.md)
   - [Code of Conduct](contributing/code-of-conduct.md)
   - [Maintainers](contributing/MAINTAINERS.md)
+- [Tooling](tooling/trunk.md)
 - [Reference](reference/glossary.md)
 - [ADR Log](adr/0000-template.md)

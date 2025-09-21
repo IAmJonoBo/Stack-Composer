@@ -1,0 +1,14 @@
+{
+	// Explicit globs and ignores to keep linting fast and avoid scanning dependencies
+	"globs": ["**/*.{md,markdown}"],
+	"ignores": [
+		"**/node_modules/**",
+		"book/**",
+		"docs/book/**",
+		"**/dist/**",
+		"target/**",
+		"src-tauri/target/**",
+		"crates/**/target/**",
+		"**/.trunk/**"
+	]
+}

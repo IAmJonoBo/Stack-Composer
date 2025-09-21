@@ -1,7 +1,17 @@
+---
 # This file controls the behavior of Trunk: https://docs.trunk.io/cli
-# To learn more about the format of this file, see https://docs.trunk.io/reference/trunk-yaml
 version: 0.1
 cli:
   version: 1.25.0
-# Local usage minimizes Trunk to version reporting only; plugins are disabled to prevent
-# network fetches that may hang in some environments. CI runs fast checks separately.
+
+plugins:
+  sources:
+    - id: trunk
+      uri: https://github.com/trunk-io/plugins
+      ref: v1.7.2
+
+lint:
+  enabled:
+    - biome
+    - markdownlint-cli2
+    - git-diff-check

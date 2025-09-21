@@ -89,6 +89,7 @@ jobs:
             cargo install cargo-deny
           fi
       - name: Run Trunk code quality checks
+        timeout-minutes: 15
         run: trunk check --all --no-progress
       - name: Log Fast Downward SHA-256
         run: |
@@ -118,6 +119,7 @@ jobs:
           mdbook test
       - name: Run Axe-core accessibility check
         continue-on-error: true
+        timeout-minutes: 5
         run: |
           if [ -d "stack-ui/dist" ]; then
             npx @axe-core/cli "file://$PWD/stack-ui/dist/index.html" --exit
@@ -127,12 +129,14 @@ jobs:
           fi
       - name: Run dep-scan
         if: ${{ github.event_name == 'push' }}
+        timeout-minutes: 10
         run: |
           npx dep-scan --src . \
             --report-format sarif \
             --fail-on-severity HIGH,CRITICAL
       - name: Run cargo-deny
         if: ${{ github.event_name == 'push' }}
+        timeout-minutes: 10
         run: |
           cargo \
             deny \
@@ -218,6 +222,7 @@ jobs:
             cargo install cargo-deny
           fi
       - name: Run Trunk code quality checks
+        timeout-minutes: 15
         run: trunk check --all --no-progress
       - name: Log Fast Downward SHA-256
         run: |
@@ -248,6 +253,7 @@ jobs:
           mdbook test
       - name: Run Axe-core accessibility check
         if: ${{ matrix.os == 'ubuntu-22.04' }}
+        timeout-minutes: 5
         run: |
           if [ -d "stack-ui/dist" ]; then
             npx @axe-core/cli "file://$PWD/stack-ui/dist/index.html" --exit
@@ -257,12 +263,14 @@ jobs:
           fi
       - name: Run dep-scan
         if: ${{ matrix.os == 'ubuntu-22.04' }}
+        timeout-minutes: 10
         run: |
           npx dep-scan --src . \
             --report-format sarif \
             --fail-on-severity HIGH,CRITICAL
       - name: Run cargo-deny
         if: ${{ matrix.os == 'ubuntu-22.04' }}
+        timeout-minutes: 10
         run: |
           cargo \
             deny \

@@ -1,25 +1,16 @@
 {
-	"compilerOptions": {
-		"target": "ESNext",
-		"module": "ESNext",
-<<<<<<< HEAD
-<<<<<<< HEAD
-		"moduleResolution": "Bundler",
-=======
-		"moduleResolution": "Bundler",
->>>>>>> 2cda2ed (chore(tsconfig): switch to moduleResolution=bundler and add ignoreDeprecations in UI to silence TS 6.x deprecation warnings)
-=======
-		"moduleResolution": "bundler",
-		"strict": true,
-		"esModuleInterop": true,
-		"skipLibCheck": true,
-		"forceConsistentCasingInFileNames": true,
-		"types": ["node", "vitest/globals", "@testing-library/jest-dom"],
-		"baseUrl": ".",
-		"paths": {
-			"@/*": ["src/*"]
-		}
-	},
-	"include": ["src", "tests", "vitest.setup.ts"],
-	"exclude": ["node_modules", "dist"]
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+            "types": ["node", "vitest/globals", "@testing-library/jest-dom"],
+        "baseUrl": ".",
+            "paths": {"@/*": ["src/*"]}
+    },
+        "include": ["src", "tests", "vitest.setup.ts"],
+        "exclude": ["node_modules", "dist"]
 }

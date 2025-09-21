@@ -1,0 +1,15 @@
+globs:
+  - "**/*.md"
+ignores:
+  - "node_modules/**"
+  - "book/**"
+  - "docs/book/**"
+  - "stack-ui/dist/**"
+  - "target/**"
+  - "rust-backend/target/**"
+  - "src-tauri/target/**"
+  - ".trunk/**"
+  - ".git/**"
+config:
+  MD013: false # line length
+  MD033: false # inline HTML

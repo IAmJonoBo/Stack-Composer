@@ -47,7 +47,10 @@
 		"rules": {
 			"recommended": true,
 			"complexity": {},
-			"style": {}
+			"style": {},
+			"suspicious": {
+				"noUnknownAtRules": "off"
+			}
 		}
 	},
 	"formatter": {

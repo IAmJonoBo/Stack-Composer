@@ -1,0 +1,39 @@
+name: Sprint Task
+description: Track a sprint task with acceptance criteria and evidence
+labels:
+  - type:chore
+  - priority:medium
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Link this issue to the Sprint (sprint:S-XX) and relevant area labels (area:ui, area:agents, etc.).
+  - type: input
+    id: objective
+    attributes:
+      label: Objective
+      description: What is the goal of this task?
+      placeholder: e.g., Wire Changesets and PR title checks
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: Bullet list of testable outcomes
+      placeholder: |
+        - Criteria 1
+        - Criteria 2
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence / Validation Steps
+      description: How will we verify this is done?
+      placeholder: Links to CI runs, artefacts, screenshots
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: Link any issues/PRs this depends on

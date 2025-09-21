@@ -1012,9 +1012,13 @@ for user review and report generation.</p>
 <em>Scorer</em> combines heuristic score + optional RL‑Critic value.</p>
 <hr />
 <h2 id="3-public-rust-api"><a class="header" href="#3-public-rust-api">3 Public Rust API</a></h2>
-<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>pub struct Proposal {
+<pre><code class="language-rust ignore">use uuid::Uuid;
+
+pub struct TechStack;
+pub struct PlanStep;
+pub struct RequirementGraph;
+
+pub struct Proposal {
     pub id: Uuid,
     pub stack: TechStack,        // nested langs, frameworks, infra
     pub score: f32,
@@ -1022,14 +1026,13 @@ for user review and report generation.</p>
     pub rationale: String,       // LLM explanation
 }
 
-#[async_trait]
+#[async_trait::async_trait]
 pub trait StackAgent {
     async fn propose(requirements: &amp;RequirementGraph, max: usize)
         -&gt; anyhow::Result&lt;Vec&lt;Proposal&gt;&gt;;
 
     async fn score(proposal: &amp;mut Proposal) -&gt; anyhow::Result&lt;()&gt;;
-}
-<span class="boring">}</span></code></pre></pre>
+}</code></pre>
 <p><code>TechStack</code> defined in <code>schema/tech_stack.rs</code>.</p>
 <hr />
 <h2 id="4-scoring-function"><a class="header" href="#4-scoring-function">4 Scoring Function</a></h2>
@@ -1113,15 +1116,12 @@ plan timeline, and licence/security matrix.</li>
 </ul>
 <hr />
 <h2 id="11-usage-example"><a class="header" href="#11-usage-example">11 Usage Example</a></h2>
-<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>let mut proposals = stack_agent
+<pre><code class="language-rust ignore">let mut proposals = stack_agent
     .propose(&amp;req_graph, 5)
     .await?;
 for p in &amp;mut proposals {
     stack_agent.score(p).await?;
-}
-<span class="boring">}</span></code></pre></pre>
+}</code></pre>
 <hr />
 <p>See also:</p>
 <ul>
@@ -2388,9 +2388,12 @@ metrics and traces are kept <strong>locally</strong> as JSON files and auto‑pu
 <p>Project identifiers are SHA‑256 hashed before writing.</p>
 <hr />
 <h2 id="4-public-api-1"><a class="header" href="#4-public-api-1">4 Public API</a></h2>
-<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>pub enum TelemetryEvent {
+<pre><code class="language-rust ignore">use std::path::PathBuf;
+use std::collections::HashMap;
+
+pub type Labels = HashMap&lt;String, String&gt;;
+
+pub enum TelemetryEvent {
     Metric { name: &amp;'static str, value: f64, labels: Labels },
     SpanStart { name: &amp;'static str },
     SpanEnd,
@@ -2399,8 +2402,7 @@ metrics and traces are kept <strong>locally</strong> as JSON files and auto‑pu
 pub trait Telemetry {
     fn record_event(&amp;self, ev: TelemetryEvent);
     fn flush(&amp;self) -&gt; anyhow::Result&lt;PathBuf&gt;;  // returns path of flushed file
-}
-<span class="boring">}</span></code></pre></pre>
+}</code></pre>
 <p>A global <code>TELEMETRY</code> sink is set up during orchestrator bootstrap.</p>
 <hr />
 <h2 id="5-configuration-telemetrytoml"><a class="header" href="#5-configuration-telemetrytoml">5 Configuration (<code>telemetry.toml</code>)</a></h2>
@@ -2456,11 +2458,8 @@ compression = "gzip"
 <hr />
 <h2 id="10-usage-examples"><a class="header" href="#10-usage-examples">10 Usage Examples</a></h2>
 <h3 id="101-record-span"><a class="header" href="#101-record-span">10.1 Record Span</a></h3>
-<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>let _span = telemetry::span!("planner.solve");
-planner.solve(...).await?;
-<span class="boring">}</span></code></pre></pre>
+<pre><code class="language-rust ignore">let _span = telemetry::span!("planner.solve");
+planner.solve().await?;</code></pre>
 <h3 id="102-manual-upload"><a class="header" href="#102-manual-upload">10.2 Manual Upload</a></h3>
 <pre><code class="language-bash">stack-composer telemetry upload --since 7d
 </code></pre>

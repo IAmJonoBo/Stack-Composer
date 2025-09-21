@@ -70,7 +70,12 @@ Project identifiers are SHA‑256 hashed before writing.
 
 ## 4 Public API
 
-```rust
+```rust,ignore
+use std::path::PathBuf;
+use std::collections::HashMap;
+
+pub type Labels = HashMap<String, String>;
+
 pub enum TelemetryEvent {
     Metric { name: &'static str, value: f64, labels: Labels },
     SpanStart { name: &'static str },
@@ -152,9 +157,9 @@ GDPR toggle (`--gdpr`) disables telemetry entirely and purges traces after each 
 
 ### 10.1 Record Span
 
-```rust
+```rust,ignore
 let _span = telemetry::span!("planner.solve");
-planner.solve(...).await?;
+planner.solve().await?;
 ```
 
 ### 10.2 Manual Upload

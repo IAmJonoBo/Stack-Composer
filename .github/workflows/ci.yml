@@ -13,7 +13,7 @@ permissions:
 jobs:
   build-pr:
     if: ${{ github.event_name == 'pull_request' }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
       - name: Lint GitHub Actions workflows
@@ -297,7 +297,7 @@ jobs:
 
   lint-fast:
     name: Fast Linters
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
       - name: Set up Node.js

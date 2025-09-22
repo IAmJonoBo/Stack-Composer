@@ -9,7 +9,7 @@ permissions:
   pull-requests: write
 jobs:
   size:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Label PR by size
         uses: actions/github-script@v8

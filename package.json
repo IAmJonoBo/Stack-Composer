@@ -34,7 +34,7 @@
 		"trunk:doctor": "trunk version"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.2.4",
+		"@biomejs/biome": "2.2.5",
 		"@stryker-mutator/core": "9.1.1",
 		"@tauri-apps/cli": "^2.8.4",
 		"@testing-library/jest-dom": "6.8.0",

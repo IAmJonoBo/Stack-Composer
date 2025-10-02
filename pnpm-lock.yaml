@@ -86,13 +86,13 @@ importers:
         version: 11.11.4(@types/react@19.1.13)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       stylelint-config-standard:
         specifier: ^39.0.0
-        version: 39.0.0(stylelint@16.24.0(typescript@5.9.2))
+        version: 39.0.0(stylelint@16.24.0(typescript@5.9.3))
       stylelint-config-tailwindcss:
         specifier: ^1.0.0
-        version: 1.0.0(stylelint@16.24.0(typescript@5.9.2))(tailwindcss@4.1.13)
+        version: 1.0.0(stylelint@16.24.0(typescript@5.9.3))(tailwindcss@4.1.13)
       stylelint-order:
         specifier: ^7.0.0
-        version: 7.0.0(stylelint@16.24.0(typescript@5.9.2))
+        version: 7.0.0(stylelint@16.24.0(typescript@5.9.3))
       svgo:
         specifier: ^4.0.0
         version: 4.0.0
@@ -104,7 +104,7 @@ importers:
         version: 1.1.0
       typescript:
         specifier: ^5.9.2
-        version: 5.9.2
+        version: 5.9.3
       vite:
         specifier: 7.1.8
         version: 7.1.8(@types/node@24.6.2)
@@ -153,13 +153,13 @@ importers:
         version: 0.9.5
       stylelint:
         specifier: ^16.24.0
-        version: 16.24.0(typescript@5.9.2)
+        version: 16.24.0(typescript@5.9.3)
       stylelint-config-standard:
         specifier: ^39.0.0
-        version: 39.0.0(stylelint@16.24.0(typescript@5.9.2))
+        version: 39.0.0(stylelint@16.24.0(typescript@5.9.3))
       stylelint-order:
         specifier: ^7.0.0
-        version: 7.0.0(stylelint@16.24.0(typescript@5.9.2))
+        version: 7.0.0(stylelint@16.24.0(typescript@5.9.3))
       tailwindcss:
         specifier: ^4.1.13
         version: 4.1.13
@@ -3022,8 +3022,8 @@ packages:
     resolution: {integrity: sha512-Nel9aPbgSzRxfs1+4GoSB4wexCF+4Axlk7OSGVQCMa+4fWcyxIsN/YNmkp0xTT2iQzMD98h8yFLav/cNaULmRA==}
     engines: {node: '>= 16.0.0'}
 
-  typescript@5.9.2:
-    resolution: {integrity: sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==}
+  typescript@5.9.3:
+    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -4700,14 +4700,14 @@ snapshots:
 
   convert-source-map@2.0.0: {}
 
-  cosmiconfig@9.0.0(typescript@5.9.2):
+  cosmiconfig@9.0.0(typescript@5.9.3):
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.1
       js-yaml: 4.1.0
       parse-json: 5.2.0
     optionalDependencies:
-      typescript: 5.9.2
+      typescript: 5.9.3
 
   cross-spawn@7.0.6:
     dependencies:
@@ -6227,27 +6227,27 @@ snapshots:
     dependencies:
       js-tokens: 9.0.1
 
-  stylelint-config-recommended@17.0.0(stylelint@16.24.0(typescript@5.9.2)):
+  stylelint-config-recommended@17.0.0(stylelint@16.24.0(typescript@5.9.3)):
     dependencies:
-      stylelint: 16.24.0(typescript@5.9.2)
+      stylelint: 16.24.0(typescript@5.9.3)
 
-  stylelint-config-standard@39.0.0(stylelint@16.24.0(typescript@5.9.2)):
+  stylelint-config-standard@39.0.0(stylelint@16.24.0(typescript@5.9.3)):
     dependencies:
-      stylelint: 16.24.0(typescript@5.9.2)
-      stylelint-config-recommended: 17.0.0(stylelint@16.24.0(typescript@5.9.2))
+      stylelint: 16.24.0(typescript@5.9.3)
+      stylelint-config-recommended: 17.0.0(stylelint@16.24.0(typescript@5.9.3))
 
-  stylelint-config-tailwindcss@1.0.0(stylelint@16.24.0(typescript@5.9.2))(tailwindcss@4.1.13):
+  stylelint-config-tailwindcss@1.0.0(stylelint@16.24.0(typescript@5.9.3))(tailwindcss@4.1.13):
     dependencies:
-      stylelint: 16.24.0(typescript@5.9.2)
+      stylelint: 16.24.0(typescript@5.9.3)
       tailwindcss: 4.1.13
 
-  stylelint-order@7.0.0(stylelint@16.24.0(typescript@5.9.2)):
+  stylelint-order@7.0.0(stylelint@16.24.0(typescript@5.9.3)):
     dependencies:
       postcss: 8.5.6
       postcss-sorting: 9.1.0(postcss@8.5.6)
-      stylelint: 16.24.0(typescript@5.9.2)
+      stylelint: 16.24.0(typescript@5.9.3)
 
-  stylelint@16.24.0(typescript@5.9.2):
+  stylelint@16.24.0(typescript@5.9.3):
     dependencies:
       '@csstools/css-parser-algorithms': 3.0.5(@csstools/css-tokenizer@3.0.4)
       '@csstools/css-tokenizer': 3.0.4
@@ -6256,7 +6256,7 @@ snapshots:
       '@dual-bundle/import-meta-resolve': 4.2.1
       balanced-match: 2.0.0
       colord: 2.9.3
-      cosmiconfig: 9.0.0(typescript@5.9.2)
+      cosmiconfig: 9.0.0(typescript@5.9.3)
       css-functions-list: 3.2.3
       css-tree: 3.1.0
       debug: 4.4.3
@@ -6389,7 +6389,7 @@ snapshots:
       tunnel: 0.0.6
       underscore: 1.13.7
 
-  typescript@5.9.2: {}
+  typescript@5.9.3: {}
 
   uc.micro@2.1.0: {}
 

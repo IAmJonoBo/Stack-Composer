@@ -15,8 +15,8 @@ importers:
   .:
     dependencies:
       '@supabase/functions-js':
-        specifier: 2.5.0
-        version: 2.5.0
+        specifier: 2.75.0
+        version: 2.75.0
       '@tauri-apps/api':
         specifier: ^2.8.0
         version: 2.8.0
@@ -1028,8 +1028,8 @@ packages:
   '@stryker-mutator/util@9.1.1':
     resolution: {integrity: sha512-F2LR61gWgxBj0dUnkmGS0XydIapIRu+ii2X7Tt+FrcyfQrpykCvV3TZqQJ2aRkg8VFn5dkjtL9cQKEepWHoBFg==}
 
-  '@supabase/functions-js@2.5.0':
-    resolution: {integrity: sha512-SXBx6Jvp+MOBekeKFu+G11YLYPeVeGQl23eYyAG9+Ro0pQ1aIP0UZNIBxHKNHqxzR0L0n6gysNr2KT3841NATw==}
+  '@supabase/functions-js@2.75.0':
+    resolution: {integrity: sha512-18yk07Moj/xtQ28zkqswxDavXC3vbOwt1hDuYM3/7xPnwwpKnsmPyZ7bQ5th4uqiJzQ135t74La9tuaxBR6e7w==}
 
   '@supabase/node-fetch@2.6.15':
     resolution: {integrity: sha512-1ibVeYUacxWYi9i0cf5efil6adJ9WRyZBLivgjs+AUpewx1F3xPi7gLgaASI2SmIQxPoCEjAsLAzKPgMJVgOUQ==}
@@ -4121,7 +4121,7 @@ snapshots:
 
   '@stryker-mutator/util@9.1.1': {}
 
-  '@supabase/functions-js@2.5.0':
+  '@supabase/functions-js@2.75.0':
     dependencies:
       '@supabase/node-fetch': 2.6.15
 

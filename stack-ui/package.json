@@ -33,6 +33,6 @@
 		"stylelint-config-standard": "^39.0.0",
 		"stylelint-order": "^7.0.0",
 		"tailwindcss": "^4.1.13",
-		"vite": "^7.1.6"
+		"vite": "^7.1.11"
 	}
 }

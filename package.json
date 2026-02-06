@@ -61,7 +61,7 @@
 		"zod": "4.1.11"
 	},
 	"dependencies": {
-		"@supabase/functions-js": "2.5.0",
+		"@supabase/functions-js": "2.95.3",
 		"@tauri-apps/api": "^2.8.0",
 		"axios": "1.12.2",
 		"inquirer": "12.9.6",

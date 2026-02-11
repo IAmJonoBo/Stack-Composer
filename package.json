@@ -66,9 +66,9 @@
 		"axios": "1.12.2",
 		"inquirer": "12.9.6",
 		"node-fetch": "3.3.2",
-		"react": "19.2.0",
+		"react": "19.2.4",
 		"react-d3-tree": "3.6.6",
-		"react-dom": "19.2.0"
+		"react-dom": "19.2.4"
 	},
 	"husky": {
 		"deprecated": false

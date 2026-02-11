@@ -1,14 +1,14 @@
 [workspace]
 members = [
-  "agents/orchestrator",
-  "agents/ingestion",
-  "agents/retrieval",
-  "agents/critic",
-  "agents/telemetry",
-  "agents/planner-adapter",
-  "rust-backend",
+  "packages/agents/orchestrator",
+  "packages/agents/ingestion",
+  "packages/agents/retrieval",
+  "packages/agents/critic",
+  "packages/agents/telemetry",
+  "packages/agents/planner-adapter",
+  "packages/rust-backend",
 ]
 exclude = [
-  "src-tauri",
+  "app/src-tauri",
 ]
 resolver = "2"

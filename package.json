@@ -71,5 +71,5 @@
 	"husky": {
 		"deprecated": false
 	},
-	"packageManager": "pnpm@10.18.0"
+	"packageManager": "pnpm@10.29.3"
 }
